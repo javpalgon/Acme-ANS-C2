@@ -8,7 +8,10 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-master.welcome.title = Welcome!
+master.welcome.title = Welcome to Acme ANS, Inc.!
 master.welcome.text = \
-	Hello World! Never before has it been easier to get your \
-	project up and running!
+	Welcome to Acme AirNav Solutions, Inc. (Acme ANS, Inc.), your trusted partner in \
+	airport logistics and operations management. We specialize in developing \
+	cutting-edge software solutions to help airports streamline their resources and \
+	optimize charter flight logistics, including flight scheduling, booking management, \
+	crew coordination, incident reporting, and aircraft maintenance.
