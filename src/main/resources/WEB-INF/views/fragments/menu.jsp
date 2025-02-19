@@ -19,10 +19,18 @@
 <acme:menu-bar>
 	<acme:menu-left>
 		<acme:menu-option code="master.menu.anonymous" access="isAnonymous()">
-			<acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/"/>
-			<acme:menu-suboption code="master.menu.anonymous.student2-favourite-link" action="https://lapalabradeldia.com/"/>
-			<acme:menu-suboption code="master.menu.anonymous.student3-favourite-link" action="https://www.realbetisbalompie.es/"/>
+    		<acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/"/>
+    		<acme:menu-suboption code="master.menu.anonymous.student2-favourite-link" action="https://lapalabradeldia.com/"/>
+    		<acme:menu-suboption code="master.menu.anonymous.student3-favourite-link" action="https://www.realbetisbalompie.es/"/>
 		</acme:menu-option>
+		<acme:menu-option code="master.menu.company" access="isAnonymous()"/>
+		<acme:menu-option code="master.menu.products" access="isAnonymous()"/>
+		<acme:menu-option code="master.menu.news" access="isAnonymous()"/>
+		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
+		<acme:menu-option code="master.menu.contact" access="isAnonymous()"/>
+		
+	
+		
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>

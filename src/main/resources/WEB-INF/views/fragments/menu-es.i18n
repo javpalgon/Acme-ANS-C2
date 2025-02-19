@@ -14,6 +14,11 @@ master.menu.anonymous = Anónimo
 master.menu.anonymous.favourite-link = Enlace favorito
 master.menu.anonymous.student2-favourite-link = 296502686B: García Hortal, Raquel
 master.menu.anonymous.student3-favourite-link = 23880253C: Linares Borrego, Guillermo
+master.menu.company = Empresa
+master.menu.products = Productos
+master.menu.news = Noticias
+master.menu.events = Eventos
+master.menu.contact = Contáctenos
 
 # master.menu.administrator ###################################################
 
