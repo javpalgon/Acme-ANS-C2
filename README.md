@@ -31,4 +31,5 @@ Additionally, you can check the planning and tasks assigned to the members:
 **Guillermo Linares (guilinbor)**(https://github.com/users/javpalgon/projects/1/views/11)
 🔗 [Guillermo Linares' Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/11)
 
- 
+**Darío Rodríguez (darrodssas)**(https://github.com/users/javpalgon/projects/1/views/13)
+🔗 [Darío Rodríguez's Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/13)
