@@ -26,5 +26,9 @@ You can review the current status of tasks, their progress, and the project sche
 🔗 [Planning Dashboard on GitHub](https://github.com/users/javpalgon/projects/1/views/1)
 (https://github.com/users/javpalgon/projects/1/views/1)
 
+Additionally, you can check the planning and tasks assigned to the members:
+
+**Guillermo Linares (guilinbor)**(https://github.com/users/javpalgon/projects/1/views/11)
+🔗 [Guillermo Linares' Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/11)
 
  
