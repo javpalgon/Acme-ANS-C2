@@ -23,6 +23,7 @@
 			<acme:menu-suboption code="master.menu.anonymous.student1-favourite-link" action="https://www.ubereats.com/es-en"/>
 			<acme:menu-suboption code="master.menu.anonymous.student2-favourite-link" action="https://lapalabradeldia.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.student3-favourite-link" action="https://www.realbetisbalompie.es/"/>
+			<acme:menu-suboption code="master.menu.anonymous.student4-favourite-link" action="https://premierpadel.com/es/tournaments"/>
 			<acme:menu-suboption code="master.menu.anonymous.student5-favourite-link" action="https://www.oscars.org/"/>
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.company" access="isAnonymous()"/>
