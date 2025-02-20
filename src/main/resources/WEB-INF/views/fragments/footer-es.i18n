@@ -16,6 +16,11 @@ master.footer.url.linkedin = http://www.linkedin.com
 master.footer.label.linked-in = Linked-In
 master.footer.url.twitter = http://www.twitter.com
 master.footer.label.twitter = Twitter
+master.footer.title.airlines = Airlines
+master.footer.label.ryanair = Ryanair
+master.footer.url.ryanair = https://www.ryanair.com/es/es
+master.footer.label.iberia = Iberia
+master.footer.url.iberia = https://www.iberia.com/es/?cq_src=google_ads&cq_cmp=206334386&cq_con=11273681546&cq_term=iberia&cq_med=&cq_plac=&cq_net=g&cq_plt=gp&esl-k=google-ads|ng|c679405423166|me|kiberia|p|t|dc|a11273681546|g206334386&utm_source=google&utm_medium=cpc&utm_campaign=search-206334386&gad_source=1&gclid=Cj0KCQiAwtu9BhC8ARIsAI9JHallvJDiWJSjqevbILetYC-9gluqNv6FTTBrkfE2KzoGV-jBQqm48FAaAj_MEALw_wcB
 master.footer.title.languages = Lenguajes
 master.footer.label.english = Inglés
 master.footer.label.spanish = Español

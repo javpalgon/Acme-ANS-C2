@@ -33,6 +33,11 @@
 		<acme:footer-option icon="fa fa-language" code="master.footer.label.english" action="/?locale=en"/>
 		<acme:footer-option icon="fa fa-language" code="master.footer.label.spanish" action="/?locale=es"/>
 	</acme:footer-subpanel>
+	
+	<acme:footer-subpanel code="master.footer.title.airlines">
+    	<acme:footer-option icon="fa fa-plane" code="master.footer.label.ryanair" action="https://www.ryanair.com/es/es"/>
+    	<acme:footer-option icon="fa fa-plane" code="master.footer.label.iberia" action="https://www.iberia.com/es/?cq_src=google_ads&cq_cmp=206334386&cq_con=11273681546&cq_term=iberia&cq_med=&cq_plac=&cq_net=g&cq_plt=gp&esl-k=google-ads|ng|c679405423166|me|kiberia|p|t|dc|a11273681546|g206334386&utm_source=google&utm_medium=cpc&utm_campaign=search-206334386&gad_source=1&gclid=Cj0KCQiAwtu9BhC8ARIsAI9JHallvJDiWJSjqevbILetYC-9gluqNv6FTTBrkfE2KzoGV-jBQqm48FAaAj_MEALw_wcB"/>
+	</acme:footer-subpanel>
 
 	<acme:footer-logo logo="images/logo.png" alt="master.company.name">
 		<acme:footer-copyright code="master.company.name"/>
