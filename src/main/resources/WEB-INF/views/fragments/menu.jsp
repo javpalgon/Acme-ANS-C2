@@ -26,7 +26,7 @@
 			<acme:menu-suboption code="master.menu.anonymous.student4-favourite-link" action="https://premierpadel.com/es/tournaments"/>
 			<acme:menu-suboption code="master.menu.anonymous.student5-favourite-link" action="https://www.oscars.org/"/>
 		</acme:menu-option>
-		<acme:menu-option code="master.menu.company" access="isAnonymous()"/>
+		<acme:menu-option code="master.menu.company" access="isAnonymous()" action="/any/system/company"/>
 		<acme:menu-option code="master.menu.products" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.news" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
