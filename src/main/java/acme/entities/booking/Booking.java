@@ -32,7 +32,6 @@ public class Booking extends AbstractEntity {
 	@NotBlank
 	@ValidString(pattern = "^[A-Z0-9]{6,8}$")
 	@Column(unique = true)
-	@Automapped
 	private String				locatorCode;
 
 	@Mandatory
