@@ -1,13 +1,14 @@
 
 package acme.entities.technician;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.Size;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,16 +21,18 @@ public class Technician extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
-	//Crear Validación
+	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
+	@Column(unique = true)
 	private String				licenseNumber;
 
 	@Mandatory
 	@Automapped
-	//Crear Validación
+	@ValidString(pattern = "^+?\\d{6,15}$")
+	@Column(unique = true)
 	private String				phoneNumber;
 
 	@Mandatory
-	@Size(min = 0, max = 50)
+	@ValidString(max = 50)
 	@Automapped
 	private String				specialisation;
 
@@ -42,7 +45,7 @@ public class Technician extends AbstractEntity {
 	private Integer				yearsOfExperience;
 
 	@Optional
-	@Size(min = 0, max = 255)
+	@ValidString(max = 255)
 	@Automapped
 	private String				certifications;
 
