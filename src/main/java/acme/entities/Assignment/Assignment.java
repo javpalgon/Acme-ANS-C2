@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -27,16 +28,9 @@ public class Assignment extends AbstractEntity {
 
 	// Attributes --------------------------------------------------------
 
-	/*
-	 * FALTA LA RELACIÓN CON LEG
-	 * SERÍA ASÍ LA RELACIÓN: Assignment 4..N -> 1 Leg
-	 * 
-	 * @ManyToOne
-	 * private Set<Leg> legs;
-	 */
-
 	@Mandatory
 	@Automapped
+	@Valid
 	private Role				role;
 
 	@Mandatory
@@ -46,11 +40,34 @@ public class Assignment extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
+	@Valid
 	private AssignmentStatus	status;
 
 	@Optional
 	@ValidString(max = 255)
 	@Automapped
 	private String				remarks;
+
+	// Relations --------------------------------------------
+
+	/*
+	 * -- Assignment 4..N -> 1 Leg
+	 * 
+	 * @Mandatory
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @Valid
+	 * private Leg leg;
+	 * 
+	 * -- Assignment N -> 0..1 Flight Crew Member
+	 * 
+	 * @Optional
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @Valid
+	 * private FlightCrewMember flightCrewMember;
+	 */
 
 }
