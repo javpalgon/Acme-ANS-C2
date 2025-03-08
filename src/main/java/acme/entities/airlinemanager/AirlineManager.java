@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.airlinemanager;
 
 import java.util.Date;
 
@@ -11,6 +11,7 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class AirlineManager extends AbstractRole {
 
 	@Mandatory
 	@Automapped
+	@ValidNumber
 	private Integer				yearsOfExperience;
 
 	@Mandatory
@@ -40,5 +42,5 @@ public class AirlineManager extends AbstractRole {
 	@Optional
 	@ValidUrl
 	@Automapped
-	private String				pictureUrl; // Optional link to picture
+	private String				pictureUrl;
 }
