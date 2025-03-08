@@ -4,7 +4,6 @@ package acme.entities.ActivityLog;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
@@ -15,7 +14,6 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.entities.Assignment.Assignment;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,8 +52,13 @@ public class ActivityLog extends AbstractEntity {
 
 	// Relationships -----------------------------------------------------
 
-	@Mandatory
-	@ManyToOne
-	private Assignment			assignment;
+	/*
+	 * @Mandatory
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @Valid
+	 * private Assignment assignment;
+	 */
 
 }
