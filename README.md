@@ -50,5 +50,5 @@ Additionally, you can check the planning and tasks assigned to the members:
 **Javier Pallarés (Student #4)**
 🔗 [Javier Pallarés' Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/12)
 
-**Darío Rodríguez (darrodssas)**
+**Darío Rodríguez (Student #5)**
 🔗 [Darío Rodríguez's Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/13)
