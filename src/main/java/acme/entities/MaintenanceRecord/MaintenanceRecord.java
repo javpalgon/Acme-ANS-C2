@@ -38,7 +38,7 @@ public class MaintenanceRecord extends AbstractEntity {
 	private MaintenanceStatus	maintenanceStatus;
 
 	@Mandatory
-	@ValidMoment(past = false)
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				nextInspectionDate;
 
@@ -48,7 +48,7 @@ public class MaintenanceRecord extends AbstractEntity {
 	private Money				estimatedCost;
 
 	@Optional
-	@ValidString(min = 0, max = 255)
+	@ValidString(max = 255)
 	@Automapped
 	private String				notes;
 
