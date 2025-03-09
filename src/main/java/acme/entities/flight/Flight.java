@@ -1,8 +1,12 @@
 
 package acme.entities.flight;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import acme.client.components.basis.AbstractEntity;
-import acme.client.components.datatypes.Moment;
 import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -40,12 +44,14 @@ public class Flight extends AbstractEntity {
 	@ValidMoment
 	@Mandatory
 	@Automapped
-	private Moment				departure;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				departure;
 
 	@ValidMoment
 	@Mandatory
 	@Automapped
-	private Moment				arrival;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				arrival;
 
 	@Mandatory
 	@ValidString(max = 50)
