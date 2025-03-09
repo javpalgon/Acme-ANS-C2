@@ -4,12 +4,15 @@ package acme.entities.passenger;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
+import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +40,8 @@ public class Passenger extends AbstractRole {
 	private String				passport;
 
 	@Mandatory
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				birth;
 
 	@Optional
@@ -44,10 +49,6 @@ public class Passenger extends AbstractRole {
 	@ValidString(min = 1, max = 51)
 	private String				specialNeeds;
 
-	// HACER CUANDO CREE LA ENTIDAD DE BOOKING
-	//@Mandatory
-	//@Automapped
-	//@ManyToOne
-	//private Booking				booking;
+	// Faltan las relaciones
 
 }
