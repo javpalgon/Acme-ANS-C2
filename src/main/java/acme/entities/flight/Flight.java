@@ -3,8 +3,11 @@ package acme.entities.flight;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
@@ -15,18 +18,25 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
+	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
 	private String				tag;
 
 	@Mandatory
 	@Automapped
+	@Valid
 	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
@@ -65,16 +75,5 @@ public class Flight extends AbstractEntity {
 	@Mandatory
 	@Automapped
 	private Integer				layovers;
-
-	// Relations --------------------------------------------------------
-
-	/*
-	 * (Flight N -> 1 AirlineManager)
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @
-	 * private AirlineManager manager;
-	 */
 
 }

@@ -4,6 +4,7 @@ package acme.entities.claim;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -15,6 +16,8 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.entities.assistanceagent.AssistanceAgent;
+import acme.entities.leg.Leg;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,24 +56,17 @@ public class Claim extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
+	@Valid
 	private Boolean				accepted;
 
-	// Relationships ----------------------------------------
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private AssistanceAgent		assistanceAgent;
 
-	/*
-	 * @Mandatory
-	 * 
-	 * @Valid
-	 * 
-	 * @ManyToOne
-	 * private AssistanceAgent assistanceAgent;
-	 * 
-	 * @Mandatory
-	 * 
-	 * @Valid
-	 * 
-	 * @ManyToOne
-	 * private Leg leg;
-	 */
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Leg					leg;
 
 }

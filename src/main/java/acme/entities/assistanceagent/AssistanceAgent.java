@@ -1,7 +1,7 @@
 
-package acme.entities.booking;
+package acme.entities.assistanceagent;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import acme.client.components.basis.AbstractEntity;
+import acme.client.components.basis.AbstractRole;
 import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
@@ -19,52 +19,58 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
-import acme.entities.customer.Customer;
-import acme.entities.flight.Flight;
+import acme.client.components.validation.ValidUrl;
+import acme.entities.airline.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Booking extends AbstractEntity {
+public class AssistanceAgent extends AbstractRole {
+
+	// Serialisation version --------------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
 
+	// Attributes -------------------------------------------------------------
+
+	//TODO: Add validation class
 	@Mandatory
 	@NotBlank
-	@ValidString(pattern = "^[A-Z0-9]{6,8}$")
 	@Column(unique = true)
-	private String				locatorCode;
+	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
+	private String				employeeCode;
+
+	@Mandatory
+	@NotBlank
+	@Automapped
+	@ValidString(max = 255)
+	private String				spokenLanguages;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				purchaseMoment;
-
-	@Mandatory
-	@Valid
-	@Automapped
-	private Travelclass			travelClass;
-
-	@Mandatory
-	@ValidMoney(min = 0.0, max = 100000.0)
-	@Automapped
-	private Money				price;
+	private Date				momentBeginToWork;
 
 	@Optional
-	@ValidString(max = 4)
+	@ValidString(max = 255)
 	@Automapped
-	private String				lastNibble;
+	private String				briefBio;
+
+	@Optional
+	@ValidMoney(min = 1.0, max = 1000000.0)
+	@Automapped
+	private Money				salary;
+
+	@Optional
+	@ValidUrl
+	@Automapped
+	private String				pictureUrl;
 
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Flight				flight;
-
-	@Mandatory
-	@ManyToOne(optional = false)
-	@Valid
-	private Customer			customer;
+	private Airline				airline;
 
 }

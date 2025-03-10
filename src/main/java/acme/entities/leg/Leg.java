@@ -4,6 +4,8 @@ package acme.entities.leg;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -14,11 +16,20 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.airport.Airport;
+import acme.entities.flight.Flight;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
 public class Leg extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
 	private static final long	serialVersionUID	= 1L;
+
+	//TODO: Add validation class
 
 	@ValidString(pattern = "^[A-Z]{2,3}\\d{4}$")
 	@Column(unique = true)
@@ -45,33 +56,19 @@ public class Leg extends AbstractEntity {
 	@Valid
 	private LegStatus			status;
 
-	// Relations --------------------------------------------------------
+	@Mandatory
+	@ManyToOne(optional = false)
+	@Valid
+	private Airport				departureAP;
 
-	/*
-	 * (Leg N -> 1 (departure) Airport )
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @
-	 * private Airport departureAP;
-	 */
+	@Mandatory
+	@ManyToOne(optional = false)
+	@Valid
+	private Airport				arrivalAP;
 
-	/*
-	 * (Leg N -> 1 (arrival) Airport )
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @
-	 * private Airport arrivalAP;
-	 */
-
-	/*
-	 * (Leg 1 -> 1 Aircraft )
-	 * 
-	 * @OneToOne
-	 * 
-	 * @
-	 * private Aircraft aircraft;
-	 */
+	@Mandatory
+	@ManyToOne(optional = false)
+	@Valid
+	private Flight				flight;
 
 }
