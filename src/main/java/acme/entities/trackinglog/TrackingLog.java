@@ -1,9 +1,8 @@
 
-package acme.entities.booking;
+package acme.entities.trackinglog;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -12,59 +11,55 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
-import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidMoney;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.entities.customer.Customer;
-import acme.entities.flight.Flight;
+import acme.entities.claim.Claim;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Booking extends AbstractEntity {
+public class TrackingLog extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@NotBlank
-	@ValidString(pattern = "^[A-Z0-9]{6,8}$")
-	@Column(unique = true)
-	private String				locatorCode;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				purchaseMoment;
+	private Date				lastUpdate;
+
+	@Mandatory
+	@NotBlank
+	@ValidString(max = 50)
+	@Automapped
+	private String				step;
+
+	@Mandatory
+	@ValidNumber(min = 0., max = 100.)
+	@Automapped
+	private Double				resolutionPercentage;
 
 	@Mandatory
 	@Valid
 	@Automapped
-	private Travelclass			travelClass;
-
-	@Mandatory
-	@ValidMoney(min = 0.0, max = 100000.0)
-	@Automapped
-	private Money				price;
+	private TrackingLogStatus	status;
 
 	@Optional
-	@ValidString(max = 4)
 	@Automapped
-	private String				lastNibble;
+	@ValidString(max = 255)
+	private String				resolution;
+
+	//	  Si status == PENDING, resolution tiene que ser null y resolutionPercentage!== 100 y cuando status !== PENDING,
+	//	  resolution tiene q ser mandatory y ademas resolutionPercentage==100
 
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Flight				flight;
-
-	@Mandatory
-	@ManyToOne(optional = false)
-	@Valid
-	private Customer			customer;
+	private Claim				claim;
 
 }

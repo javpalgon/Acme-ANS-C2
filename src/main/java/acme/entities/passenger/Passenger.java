@@ -3,9 +3,11 @@ package acme.entities.passenger;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
@@ -25,30 +27,30 @@ public class Passenger extends AbstractRole {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
+	@NotBlank
 	@Automapped
 	@ValidString(min = 1, max = 255)
 	private String				fullName;
 
 	@Mandatory
+	@NotBlank
 	@Automapped
 	@ValidEmail
 	private String				email;
 
 	@Mandatory
-	@Automapped
+	@Column(unique = true)
 	@ValidString(pattern = "^[A-Z0-9]{6,9}$")
 	private String				passport;
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date				birth;
 
 	@Optional
 	@Automapped
-	@ValidString(min = 1, max = 51)
+	@ValidString(min = 1, max = 50)
 	private String				specialNeeds;
-
-	// Faltan las relaciones
 
 }

@@ -1,31 +1,26 @@
 
-package acme.entities.airline;
-
-import java.util.Date;
+package acme.entities.service;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import acme.client.components.basis.AbstractRealm;
+import acme.client.components.basis.AbstractEntity;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidEmail;
-import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidMoney;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
-import acme.constraints.ValidIATACode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Airline extends AbstractRealm {
+public class Service extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
 
@@ -40,33 +35,26 @@ public class Airline extends AbstractRealm {
 	private String				name;
 
 	@Mandatory
-	@ValidIATACode
-	@Column(unique = true)
-	private String				IATACode;
-
-	@Mandatory
+	@NotBlank
 	@ValidUrl
 	@Automapped
-	private String				website;
+	private String				pictureLink;
 
 	@Mandatory
-	@Valid
+	@ValidNumber(min = 0.0)
 	@Automapped
-	private Type				type;
+	private Double				averageDwellTime;
 
-	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				foundationMoment;
-
+	//TODO: Add validation class
 	@Optional
-	@ValidEmail
-	@Automapped
-	private String				email;
+	@Column(unique = true)
+	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
+	private String				promotionCode;
 
+	//TODO: Add validation class
 	@Optional
-	@ValidString(pattern = "^\\+?\\d{6,15}$")
+	@ValidMoney(min = 0.0, max = 1000000.0)
 	@Automapped
-	private String				phoneNumber;
+	private Money				discount;
 
 }

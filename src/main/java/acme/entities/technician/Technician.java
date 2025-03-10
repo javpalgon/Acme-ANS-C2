@@ -1,14 +1,12 @@
 
-package acme.entities.customer;
-
-import java.util.Set;
+package acme.entities.technician;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractRole;
-import acme.client.components.basis.AbstractSquad;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
@@ -20,49 +18,42 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Customer extends AbstractSquad {
+public class Technician extends AbstractRole {
+
+	//TODO: Add validation class
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@NotBlank
-	@Column(unique = true)
 	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
-	private String				idientifier;
+	@Column(unique = true)
+	private String				licenseNumber;
 
 	@Mandatory
-	@ValidString(pattern = "^\\+?\\d{6,15}$")
-	@Automapped
+	@NotBlank
+	@ValidString(pattern = "^+?\\d{6,15}$")
+	@Column(unique = true)
 	private String				phoneNumber;
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 255)
-	@Automapped
-	private String				physicalAddress;
-
-	@Mandatory
-	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
-	private String				city;
+	private String				specialisation;
 
 	@Mandatory
-	@NotBlank
-	@ValidString(max = 50)
+	@Valid
 	@Automapped
-	private String				country;
+	private Boolean				passedHealthTest;
+
+	@Mandatory
+	@ValidNumber(min = 0, max = 100)
+	@Automapped
+	private Integer				yearsOfExperience;
 
 	@Optional
-	@ValidNumber(min = 0, max = 500000)
+	@ValidString(max = 255)
 	@Automapped
-	private Integer				earnedPoints;
-
-
-	@Override
-	public Set<Class<? extends AbstractRole>> getMembers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	private String				certifications;
 }

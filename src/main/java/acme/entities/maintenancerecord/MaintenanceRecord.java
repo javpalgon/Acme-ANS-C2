@@ -1,15 +1,13 @@
 
-package acme.entities.booking;
+package acme.entities.maintenancerecord;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
@@ -19,52 +17,52 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
-import acme.entities.customer.Customer;
-import acme.entities.flight.Flight;
+import acme.entities.aircraft.Aircraft;
+import acme.entities.technician.Technician;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Booking extends AbstractEntity {
+public class MaintenanceRecord extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@NotBlank
-	@ValidString(pattern = "^[A-Z0-9]{6,8}$")
-	@Column(unique = true)
-	private String				locatorCode;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				purchaseMoment;
+	private Date				maintenanceTimestamp;
 
 	@Mandatory
 	@Valid
 	@Automapped
-	private Travelclass			travelClass;
+	private MaintenanceStatus	maintenanceStatus;
+
+	//TODO: Add validation nextIns > maintenanceTimstamp
+	@Mandatory
+	@ValidMoment
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				nextInspectionDate;
 
 	@Mandatory
-	@ValidMoney(min = 0.0, max = 100000.0)
+	@ValidMoney(min = 0.0)
 	@Automapped
-	private Money				price;
+	private Money				estimatedCost;
 
 	@Optional
-	@ValidString(max = 4)
+	@ValidString(max = 255)
 	@Automapped
-	private String				lastNibble;
+	private String				notes;
 
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Flight				flight;
+	private Aircraft			aircraft;
 
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Customer			customer;
+	private Technician			technician;
 
 }

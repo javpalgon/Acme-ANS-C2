@@ -1,31 +1,29 @@
 
-package acme.entities.airline;
+package acme.entities.activitylog;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import acme.client.components.basis.AbstractRealm;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
-import acme.constraints.ValidIATACode;
+import acme.entities.assignment.Assignment;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Airline extends AbstractRealm {
+public class ActivityLog extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
 
@@ -34,39 +32,30 @@ public class Airline extends AbstractRealm {
 	// Attributes --------------------------------------------------------
 
 	@Mandatory
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				registeredAt;
+
+	@Mandatory
 	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
-	private String				name;
+	private String				incidentType;
 
 	@Mandatory
-	@ValidIATACode
-	@Column(unique = true)
-	private String				IATACode;
-
-	@Mandatory
-	@ValidUrl
+	@NotBlank
+	@ValidString(max = 255)
 	@Automapped
-	private String				website;
+	private String				description;
 
 	@Mandatory
+	@ValidNumber(min = 0, max = 10, integer = 2, fraction = 0)
+	@Automapped
+	private Integer				severityLevel;
+
+	@Mandatory
+	@ManyToOne(optional = false)
 	@Valid
-	@Automapped
-	private Type				type;
-
-	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				foundationMoment;
-
-	@Optional
-	@ValidEmail
-	@Automapped
-	private String				email;
-
-	@Optional
-	@ValidString(pattern = "^\\+?\\d{6,15}$")
-	@Automapped
-	private String				phoneNumber;
+	private Assignment			assignment;
 
 }
