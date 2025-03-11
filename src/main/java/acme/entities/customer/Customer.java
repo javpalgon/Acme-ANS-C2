@@ -1,14 +1,11 @@
 
 package acme.entities.customer;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractRole;
-import acme.client.components.basis.AbstractSquad;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
@@ -20,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Customer extends AbstractSquad {
+public class Customer extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
 
@@ -57,12 +54,5 @@ public class Customer extends AbstractSquad {
 	@ValidNumber(min = 0, max = 500000)
 	@Automapped
 	private Integer				earnedPoints;
-
-
-	@Override
-	public Set<Class<? extends AbstractRole>> getMembers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
