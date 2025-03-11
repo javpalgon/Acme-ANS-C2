@@ -7,3 +7,10 @@ user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза 
 user-account-provider-03,true,"UserIdentity{name: 'Antonia', surname: 'אבטיח Æløzå', email: 'antonia@acme.com'}",provider3,provider3
 user-account-administrator1,true,"UserIdentity{name: 'Administrator1', surname: 'Acme', email: 'administrator1@acme.com'}",administrator1,administrator1
 user-account-administrator2,true,"UserIdentity{name: 'Administrator2', surname: 'Acme', email: 'administrator2@acme.com'}",administrator2,administrator2
+
+# FLIGHT CREW MEMBERS
+user-account-member-01,true,"UserIdentity{name: 'Juan', surname: 'Pérez García', email: 'juan@iberia.com'}",member1,member1
+user-account-member-02,true,"UserIdentity{name: 'Ana', surname: 'Gómez', email: 'ana@vueling.com'}",member2,member2
+user-account-member-03,true,"UserIdentity{name: 'Carlos', surname: 'Rodríguez Martínez', email: 'carlos@iberia.com'}",member3,member3
+user-account-member-04,true,"UserIdentity{name: 'Laura', surname: 'Martínez', email: 'laura@vueling.com'}",member4,member4
+user-account-member-05,true,"UserIdentity{name: 'José', surname: 'Fernández Rodríguez', email: 'jose@iberia.com'}",member5,member5

@@ -1,0 +1,5 @@
+key,name,IATACode,operationalScope,city,country,website,emailAddress,phoneNumber
+airport-01,Adolfo Suárez Madrid–Barajas Airport,MAD,INTERNATIONAL,Madrid,Spain,www.aena.es,madinfo@aena.es,+34913222000
+airport-02,Barcelona El Prat Airport,BCN,INTERNATIONAL,Barcelona,Spain,www.aena.es,info.bcn@aena.es,+34932480411
+airport-03,Palma de Mallorca Airport,PMI,INTERNATIONAL,Palma de Mallorca,Spain,www.aena.es,pmi.info@aena.es,+34971715600
+airport-04,Seville Airport,SVQ,DOMESTIC,Seville,Spain,www.aena.es,svq.info@aena.es,+34954230111
