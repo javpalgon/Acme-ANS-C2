@@ -1,5 +1,5 @@
 
-package acme.entities.claim;
+package acme.entities.activitylog;
 
 import java.util.Date;
 
@@ -13,24 +13,23 @@ import javax.validation.constraints.NotBlank;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.entities.assistanceagent.AssistanceAgent;
-import acme.entities.leg.Leg;
+import acme.entities.assignment.Assignment;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Claim extends AbstractEntity {
+public class ActivityLog extends AbstractEntity {
 
-	// Serialisation version --------------------------------------------------
+	// Serialisation version -------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
 
-	// Attributes -------------------------------------------------------------
+	// Attributes --------------------------------------------------------
 
 	@Mandatory
 	@ValidMoment(past = true)
@@ -38,35 +37,25 @@ public class Claim extends AbstractEntity {
 	private Date				registeredAt;
 
 	@Mandatory
-	@ValidEmail
-	@Automapped
 	@NotBlank
-	private String				passengerEmail;
+	@ValidString(max = 50)
+	@Automapped
+	private String				incidentType;
 
 	@Mandatory
+	@NotBlank
 	@ValidString(max = 255)
 	@Automapped
-	@NotBlank
 	private String				description;
 
-	@Valid
 	@Mandatory
+	@ValidNumber(min = 0, max = 10, integer = 2, fraction = 0)
 	@Automapped
-	private ClaimType			type;
+	private Integer				severityLevel;
 
 	@Mandatory
-	@Automapped
-	@Valid
-	private Boolean				accepted;
-
-	@Mandatory
-	@Valid
 	@ManyToOne(optional = false)
-	private AssistanceAgent		assistanceAgent;
-
-	@Mandatory
 	@Valid
-	@ManyToOne(optional = false)
-	private Leg					leg;
+	private Assignment			assignment;
 
 }

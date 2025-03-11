@@ -1,11 +1,10 @@
 
-package acme.entities.Airport;
+package acme.entities.airport;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -68,6 +67,8 @@ public class Airport extends AbstractEntity {
 	private String				emailAddress;
 
 	@Optional
-	@Pattern(regexp = "^\\+?\\d{6,15}$")
+	@ValidString(pattern = "^\\+?\\d{6,15}$")
+	@Automapped
 	private String				phoneNumber;
+
 }

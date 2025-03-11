@@ -1,27 +1,26 @@
 
-package acme.entities.Review;
+package acme.entities.service;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.client.components.validation.ValidUrl;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Review extends AbstractEntity {
+public class Service extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
 
@@ -33,31 +32,29 @@ public class Review extends AbstractEntity {
 	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
-	private String				alias;
-
-	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				postedAt;
+	private String				name;
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidUrl
 	@Automapped
-	private String				subject;
+	private String				pictureLink;
 
 	@Mandatory
-	@NotBlank
-	@ValidString(max = 255)
+	@ValidNumber(min = 0.0)
 	@Automapped
-	private String				text;
+	private Double				averageDwellTime;
 
+	//TODO: Add validation class
 	@Optional
-	@ValidNumber(min = 0, max = 10, integer = 2, fraction = 2)
-	@Automapped
-	private Double				score;
+	@Column(unique = true)
+	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
+	private String				promotionCode;
 
+	//TODO: Add validation class
 	@Optional
+	@ValidMoney(min = 0.0, max = 1000000.0)
 	@Automapped
-	private Boolean				recommended;
+	private Money				discount;
+
 }

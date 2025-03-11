@@ -1,12 +1,11 @@
 
-package acme.entities.trackingLog;
+package acme.entities.review;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
@@ -22,41 +21,43 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class TrackingLog extends AbstractEntity {
+public class Review extends AbstractEntity {
 
-	@Mandatory
-	@ValidMoment(past = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date				lastUpdate;
+	// Serialisation version -------------------------------------------
+
+	private static final long	serialVersionUID	= 1L;
+
+	// Attributes --------------------------------------------------------
 
 	@Mandatory
 	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
-	private String				step;
+	private String				alias;
 
 	@Mandatory
-	@ValidNumber(min = 0., max = 100.)
-	@Automapped
-	private Double				resolutionPercentage;
+	@ValidMoment(past = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				postedAt;
 
 	@Mandatory
-	@Valid
+	@NotBlank
+	@ValidString(max = 50)
 	@Automapped
-	private TrackingLogStatus	status;
+	private String				subject;
+
+	@Mandatory
+	@NotBlank
+	@ValidString(max = 255)
+	@Automapped
+	private String				text;
+
+	@Optional
+	@ValidNumber(min = 0, max = 10, integer = 2, fraction = 2)
+	@Automapped
+	private Double				score;
 
 	@Optional
 	@Automapped
-	@ValidString(max = 255)
-	private String				resolution;
-
-	// Relationships --------------------------------------------------------
-
-	// RELACION CON CLAIM
-
-	/*
-	 * IMPLEMENTAR RESTRICCIÓN:
-	 * Si status == PENDING, resolution tiene que ser null y resolutionPercentage!== 100 y cuando status !== PENDING,
-	 * resolution tiene q ser mandatory y ademas resolutionPercentage==100
-	 */
+	private Boolean				recommended;
 }

@@ -1,5 +1,5 @@
 
-package acme.entities.claim;
+package acme.entities.trackinglog;
 
 import java.util.Date;
 
@@ -13,60 +13,53 @@ import javax.validation.constraints.NotBlank;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.ValidEmail;
+import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.entities.assistanceagent.AssistanceAgent;
-import acme.entities.leg.Leg;
+import acme.entities.claim.Claim;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Claim extends AbstractEntity {
-
-	// Serialisation version --------------------------------------------------
+public class TrackingLog extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
-
-	// Attributes -------------------------------------------------------------
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				registeredAt;
+	private Date				lastUpdate;
 
 	@Mandatory
-	@ValidEmail
-	@Automapped
 	@NotBlank
-	private String				passengerEmail;
+	@ValidString(max = 50)
+	@Automapped
+	private String				step;
 
 	@Mandatory
+	@ValidNumber(min = 0., max = 100.)
+	@Automapped
+	private Double				resolutionPercentage;
+
+	@Mandatory
+	@Valid
+	@Automapped
+	private TrackingLogStatus	status;
+
+	@Optional
+	@Automapped
 	@ValidString(max = 255)
-	@Automapped
-	@NotBlank
-	private String				description;
+	private String				resolution;
 
-	@Valid
-	@Mandatory
-	@Automapped
-	private ClaimType			type;
+	//	  Si status == PENDING, resolution tiene que ser null y resolutionPercentage!== 100 y cuando status !== PENDING,
+	//	  resolution tiene q ser mandatory y ademas resolutionPercentage==100
 
 	@Mandatory
-	@Automapped
-	@Valid
-	private Boolean				accepted;
-
-	@Mandatory
-	@Valid
 	@ManyToOne(optional = false)
-	private AssistanceAgent		assistanceAgent;
-
-	@Mandatory
 	@Valid
-	@ManyToOne(optional = false)
-	private Leg					leg;
+	private Claim				claim;
 
 }

@@ -1,5 +1,5 @@
 
-package acme.entities.claim;
+package acme.entities.maintenancerecord;
 
 import java.util.Date;
 
@@ -8,65 +8,61 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
+import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.ValidEmail;
+import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
-import acme.entities.assistanceagent.AssistanceAgent;
-import acme.entities.leg.Leg;
+import acme.entities.aircraft.Aircraft;
+import acme.entities.technician.Technician;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Claim extends AbstractEntity {
-
-	// Serialisation version --------------------------------------------------
+public class MaintenanceRecord extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
-
-	// Attributes -------------------------------------------------------------
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				registeredAt;
+	private Date				maintenanceTimestamp;
 
 	@Mandatory
-	@ValidEmail
+	@Valid
 	@Automapped
-	@NotBlank
-	private String				passengerEmail;
+	private MaintenanceStatus	maintenanceStatus;
+
+	//TODO: Add validation nextIns > maintenanceTimstamp
+	@Mandatory
+	@ValidMoment
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				nextInspectionDate;
 
 	@Mandatory
+	@ValidMoney(min = 0.0)
+	@Automapped
+	private Money				estimatedCost;
+
+	@Optional
 	@ValidString(max = 255)
 	@Automapped
-	@NotBlank
-	private String				description;
-
-	@Valid
-	@Mandatory
-	@Automapped
-	private ClaimType			type;
+	private String				notes;
 
 	@Mandatory
-	@Automapped
-	@Valid
-	private Boolean				accepted;
-
-	@Mandatory
-	@Valid
 	@ManyToOne(optional = false)
-	private AssistanceAgent		assistanceAgent;
+	@Valid
+	private Aircraft			aircraft;
 
 	@Mandatory
-	@Valid
 	@ManyToOne(optional = false)
-	private Leg					leg;
+	@Valid
+	private Technician			technician;
 
 }

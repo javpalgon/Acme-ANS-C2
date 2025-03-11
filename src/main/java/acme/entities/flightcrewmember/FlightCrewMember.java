@@ -1,8 +1,9 @@
 
-package acme.entities.FlightCrewMember;
+package acme.entities.flightcrewmember;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -13,6 +14,8 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.airline.Airline;
+import acme.entities.assignment.Assignment;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +29,7 @@ public class FlightCrewMember extends AbstractEntity {
 
 	// Attributes --------------------------------------------------------
 
+	//TODO: Add validation class
 	@Mandatory
 	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	@Automapped
@@ -47,24 +51,23 @@ public class FlightCrewMember extends AbstractEntity {
 	private AvailabilityStatus	availabilityStatus;
 
 	@Mandatory
-	@ValidMoney
+	@ValidMoney(min = 1., max = 1000000.0)
 	@Automapped
 	private Money				salary;
 
 	@Optional
 	@Automapped
-	@ValidNumber
+	@ValidNumber(min = 0, max = 60)
 	private Integer				yearsOfExperience;
 
-	// Relations --------------------------------------------------------
+	@Mandatory
+	@ManyToOne(optional = false)
+	@Valid
+	private Airline				airline;
 
-	/*
-	 * (FlightCrewMember N -> 1 Airline)
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @
-	 * private Airline airline;
-	 */
+	@Optional
+	@Valid
+	@ManyToOne(optional = true)
+	private Assignment			assignment;
 
 }

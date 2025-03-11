@@ -1,26 +1,31 @@
 
-package acme.entities.Assignment;
+package acme.entities.airline;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
-import acme.client.components.basis.AbstractEntity;
+import acme.client.components.basis.AbstractRealm;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidIATACode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Assignment extends AbstractEntity {
+public class Airline extends AbstractRealm {
 
 	// Serialisation version -------------------------------------------
 
@@ -29,45 +34,39 @@ public class Assignment extends AbstractEntity {
 	// Attributes --------------------------------------------------------
 
 	@Mandatory
+	@NotBlank
+	@ValidString(max = 50)
 	@Automapped
+	private String				name;
+
+	@Mandatory
+	@ValidIATACode
+	@Column(unique = true)
+	private String				IATACode;
+
+	@Mandatory
+	@ValidUrl
+	@Automapped
+	private String				website;
+
+	@Mandatory
 	@Valid
-	private Role				role;
+	@Automapped
+	private Type				type;
 
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				lastUpdate;
-
-	@Mandatory
-	@Automapped
-	@Valid
-	private AssignmentStatus	status;
+	private Date				foundationMoment;
 
 	@Optional
-	@ValidString(max = 255)
+	@ValidEmail
 	@Automapped
-	private String				remarks;
+	private String				email;
 
-	// Relations --------------------------------------------
-
-	/*
-	 * -- Assignment 4..N -> 1 Leg
-	 * 
-	 * @Mandatory
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @Valid
-	 * private Leg leg;
-	 * 
-	 * -- Assignment N -> 0..1 Flight Crew Member
-	 * 
-	 * @Optional
-	 * 
-	 * @ManyToOne
-	 * 
-	 * @Valid
-	 * private FlightCrewMember flightCrewMember;
-	 */
+	@Optional
+	@ValidString(pattern = "^\\+?\\d{6,15}$")
+	@Automapped
+	private String				phoneNumber;
 
 }

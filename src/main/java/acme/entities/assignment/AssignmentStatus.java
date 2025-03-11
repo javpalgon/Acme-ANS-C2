@@ -1,5 +1,5 @@
 
-package acme.entities.Assignment;
+package acme.entities.assignment;
 
 public enum AssignmentStatus {
 	CONFIRMED, PENDING, CANCELLED

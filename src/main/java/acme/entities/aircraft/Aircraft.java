@@ -1,59 +1,64 @@
 
-package acme.entities.Service;
+package acme.entities.aircraft;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 import acme.client.components.basis.AbstractEntity;
-import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
-import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
-import acme.client.components.validation.ValidUrl;
+import acme.entities.airline.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Service extends AbstractEntity {
-
-	// Serialisation version -------------------------------------------
+public class Aircraft extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
-
-	// Attributes --------------------------------------------------------
 
 	@Mandatory
 	@NotBlank
 	@ValidString(max = 50)
 	@Automapped
-	private String				name;
+	private String				model;
 
 	@Mandatory
 	@NotBlank
-	@ValidUrl
-	@Automapped
-	private String				pictureLink;
+	@ValidString(max = 50)
+	@Column(unique = true)
+	private String				regitrationNumber;
 
 	@Mandatory
-	@Positive
+	@ValidNumber(min = 0, max = 900)
 	@Automapped
-	private Double				averageDwellTime;
+	private Integer				capacity;
+
+	@Mandatory
+	@ValidNumber(min = 2000, max = 50000)
+	@Automapped
+	private Integer				cargoWeight;
+
+	@Mandatory
+	@Valid
+	@Automapped
+	private AircraftStatus		aircraftStatus;
 
 	@Optional
-	@Column(unique = true)
-	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
-	private String				promotionCode;
-
-	@Optional
-	@ValidMoney
+	@ValidString(max = 255)
 	@Automapped
-	private Money				money;
+	private String				details;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 
 }
