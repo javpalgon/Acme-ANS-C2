@@ -118,8 +118,8 @@ public class Flight extends AbstractEntity {
 	}
 
 
-	@Optional
-	@ManyToOne(optional = true)
+	@Mandatory
+	@ManyToOne(optional = false)
 	@Valid
 	private Manager manager;
 
