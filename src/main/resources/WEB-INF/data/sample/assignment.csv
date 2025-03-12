@@ -1,0 +1,5 @@
+key,key:flightCrewMember,key:leg,role,lastUpdate,status,remarks
+assignment-01,member-01,leg-01,PILOT,2025-01-10T00:00:00,CONFIRMED,First flight of the day
+assignment-02,member-02,leg-02,CO_PILOT,2025-01-10T00:00:00,PENDING,Waiting for confirmation
+assignment-03,member-03,leg-03,LEAD_ATTENDANT,2025-01-10T00:00:00,CANCELLED,Flight cancelled due to weather
+assignment-04,member-04,leg-04,CABIN_ATTENDANT,2025-01-10T00:00:00,CONFIRMED,On standby
