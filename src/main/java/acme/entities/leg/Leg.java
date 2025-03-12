@@ -16,10 +16,10 @@ import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.MomentHelper;
 import acme.constraints.ValidLeg;
+import acme.entities.aircraft.Aircraft;
 import acme.entities.airline.Airline;
 import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
@@ -35,9 +35,7 @@ public class Leg extends AbstractEntity {
 	// Serialisation version -------------------------------------------
 	private static final long	serialVersionUID	= 1L;
 
-	//TODO: Add validation class
-
-	@ValidString(pattern = "^[A-Z]{3}\\d{4}$")
+	@ValidString(pattern = "^[A-Z]{3}\\d{4}$", min = 7, max = 7)
 	@Column(unique = true)
 	@Mandatory
 	private String				flightNumber;
@@ -52,34 +50,34 @@ public class Leg extends AbstractEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				arrival;
 
-	@ValidNumber(min = 0.1, max = 30.)
-	@Mandatory
-	@Automapped
-	private Double				duration;
-
-	@Mandatory
-	@Automapped
 	@Valid
+	@Mandatory
+	@Automapped
 	private LegStatus			status;
 
+	@Valid
 	@Mandatory
 	@ManyToOne(optional = false)
-	@Valid
 	private Airport				departureAP;
 
+	@Valid
 	@Mandatory
 	@ManyToOne(optional = false)
-	@Valid
 	private Airport				arrivalAP;
 
+	@Valid
 	@Mandatory
 	@ManyToOne(optional = false)
-	@Valid
 	private Flight				flight;
 
+	@Valid
 	@Mandatory
 	@ManyToOne(optional = false)
+	private Aircraft			aircraft;
+
 	@Valid
+	@Mandatory
+	@ManyToOne(optional = false)
 	private Airline				airline;
 
 

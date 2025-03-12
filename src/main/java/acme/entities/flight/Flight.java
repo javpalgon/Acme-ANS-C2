@@ -4,6 +4,7 @@ package acme.entities.flight;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -19,6 +20,7 @@ import acme.client.helpers.SpringHelper;
 import acme.constraints.ValidFlight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegRepository;
+import acme.realms.Manager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,26 +34,24 @@ public class Flight extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				tag;
 
 	@Mandatory
-	@Automapped
 	@Valid
+	@Automapped
 	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
+	@ValidMoney(min = 0, max = 10000000)
 	@Automapped
-	@ValidMoney
 	private Money				cost;
 
 	@Optional
-	@ValidString(max = 255)
+	@ValidString(min = 0, max = 255)
 	@Automapped
 	private String				description;
-
-	// the rest are derived attributes, we need the repository
 
 
 	@Transient
@@ -116,5 +116,11 @@ public class Flight extends AbstractEntity {
 
 		return result;
 	}
+
+
+	@Optional
+	@ManyToOne(optional = true)
+	@Valid
+	private Manager manager;
 
 }
