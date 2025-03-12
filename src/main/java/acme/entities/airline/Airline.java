@@ -10,7 +10,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-import acme.client.components.basis.AbstractRealm;
+import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Airline extends AbstractRealm {
+public class Airline extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
 
