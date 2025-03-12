@@ -35,48 +35,48 @@ public class Leg extends AbstractEntity {
 	// Serialisation version -------------------------------------------
 	private static final long	serialVersionUID	= 1L;
 
+	@Mandatory
 	@ValidString(pattern = "^[A-Z]{3}\\d{4}$", min = 7, max = 7)
 	@Column(unique = true)
-	@Mandatory
 	private String				flightNumber;
 
-	@ValidMoment
 	@Mandatory
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				departure;
 
-	@ValidMoment
 	@Mandatory
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				arrival;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@Automapped
 	private LegStatus			status;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@ManyToOne(optional = false)
 	private Airport				departureAP;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@ManyToOne(optional = false)
 	private Airport				arrivalAP;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@ManyToOne(optional = false)
 	private Flight				flight;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@ManyToOne(optional = false)
 	private Aircraft			aircraft;
 
-	@Valid
 	@Mandatory
+	@Valid
 	@ManyToOne(optional = false)
 	private Airline				airline;
 

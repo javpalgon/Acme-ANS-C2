@@ -37,8 +37,8 @@ public class Manager extends AbstractRole {
 	private String				identifier;
 
 	@Mandatory
-	@Automapped
 	@ValidNumber(min = 0, max = 50)
+	@Automapped
 	private Integer				yearsOfExperience;
 
 	@Mandatory
@@ -51,8 +51,8 @@ public class Manager extends AbstractRole {
 	@Automapped
 	private String				pictureUrl;
 
-	@Optional
-	@ManyToOne(optional = true)
+	@Mandatory
+	@ManyToOne(optional = false)
 	@Valid
 	private Airline				airline;
 }
