@@ -23,16 +23,13 @@ public class PromotionCodeValidator extends AbstractValidator<ValidPromotionCode
 			return true;
 		else {
 			if (!promotionCode.matches("^[A-Z]{4}-[0-9]{2}$")) {
-				context.disableDefaultConstraintViolation();
-				context.buildConstraintViolationWithTemplate("acme.validation.Service.invalid-promotionCode.message").addConstraintViolation();
+				super.state(context, false, "promotionCode", "acme.validation.Service.invalid-promotionCode.message " + promotionCode);
 				return false;
 			}
-
 			String currentYear = String.valueOf(LocalDate.now().getYear()).substring(2);
 			String last2digits = promotionCode.substring(promotionCode.length() - 2);
 			if (!currentYear.equals(last2digits)) {
-				context.disableDefaultConstraintViolation();
-				context.buildConstraintViolationWithTemplate("acme.validation.Service.invalid-promotionCode.message").addConstraintViolation();
+				super.state(context, false, "promotionCode", "acme.validation.Service.invalid-promotionCode.message " + promotionCode);
 				return false;
 			}
 		}
