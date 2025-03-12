@@ -20,3 +20,7 @@ user-account-member-03,true,"UserIdentity{name: 'Carlos', surname: 'Rodríguez M
 user-account-member-04,true,"UserIdentity{name: 'Laura', surname: 'Martínez', email: 'laura@vueling.com'}",member4,member4
 user-account-member-05,true,"UserIdentity{name: 'José', surname: 'Fernández Rodríguez', email: 'jose@iberia.com'}",member,member
 
+# TECHNICIANS
+user-account-technician-01,true,"UserIdentity{name: 'Javier', surname: 'Santos Martín', email:'javsan@acme.com'}",technician1,technician1
+user-account-technician-02,true,"UserIdentity{name: 'João', surname: 'Da Eça', email:'joaodaeca@acme.com'}",technician2,technician2
+user-account-technician-03,true,"UserIdentity{name: 'Николай', surname: 'Иванов Петров', email:'nikolayivanov@acme.com'}",technician3,technician3
