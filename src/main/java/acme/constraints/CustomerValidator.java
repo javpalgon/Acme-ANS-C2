@@ -7,7 +7,7 @@ import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.StringHelper;
-import acme.entities.customer.Customer;
+import acme.realms.Customer;
 
 @Validator
 public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer> {
