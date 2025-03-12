@@ -31,8 +31,8 @@ public class Assignment extends AbstractEntity {
 	// Attributes --------------------------------------------------------
 
 	@Mandatory
-	@Automapped
 	@Valid
+	@Automapped
 	private Role				role;
 
 	@Mandatory
@@ -41,8 +41,8 @@ public class Assignment extends AbstractEntity {
 	private Date				lastUpdate;
 
 	@Mandatory
-	@Automapped
 	@Valid
+	@Automapped
 	private AssignmentStatus	status;
 
 	@Optional
@@ -51,8 +51,8 @@ public class Assignment extends AbstractEntity {
 	private String				remarks;
 
 	@Mandatory
-	@ManyToOne(optional = false)
 	@Valid
+	@ManyToOne(optional = false)
 	private Leg					leg;
 
 }

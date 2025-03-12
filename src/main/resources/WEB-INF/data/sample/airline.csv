@@ -1,3 +1,3 @@
 key,name,IATACode,website,type,foundationMoment,email,phoneNumber
-airline-00,Iberia,IB,www.iberia.com,COMMERCIAL,1927-06-28T00:00:00,contact@iberia.com,+34910222222
-airline-01,Vueling,VY,www.vueling.com,COMMERCIAL,2004-03-01T00:00:00,contact@vueling.com,+34910330330
+airline-00,Iberia,IBV,https://www.iberia.com,STANDARD,2007/06/28 00:00,contact@iberia.com,+34910222222
+airline-01,Vueling,VYB,https://www.vueling.com,LUXURY,2004/03/01 00:00,contact@vueling.com,+34910330330

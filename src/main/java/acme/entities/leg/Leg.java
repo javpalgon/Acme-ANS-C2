@@ -36,7 +36,7 @@ public class Leg extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{3}\\d{4}$", min = 7, max = 7)
+	@ValidString(min = 7, max = 7, pattern = "^[A-Z]{3}\\d{4}$")
 	@Column(unique = true)
 	private String				flightNumber;
 

@@ -54,8 +54,8 @@ public class ActivityLog extends AbstractEntity {
 	private Integer				severityLevel;
 
 	@Mandatory
-	@ManyToOne(optional = false)
 	@Valid
+	@ManyToOne(optional = false)
 	private Assignment			assignment;
 
 }

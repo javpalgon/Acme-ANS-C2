@@ -1,3 +1,3 @@
-key,tag,requiresSelfTransfer,cost,description,departure,arrival,originCity,destinationCity,layovers
-flight-01,IB100,true,EUR 400.00,Flight from Madrid to Barcelona,2025-01-10T10:00:00,2025-01-10T12:00:00,Madrid,Barcelona,1
-flight-02,VY200,false,EUR 350.00,Flight from Barcelona to Madrid,2025-01-10T14:00:00,2025-01-10T16:00:00,Barcelona,Madrid,0
+key,tag,requiresSelfTransfer,cost,description,key:manager
+flight-01,IB100,true,EUR 400.00,Comfortable flight with great seating,manager-01
+flight-02,VY200,false,EUR 350.00,Direct flight with excellent service,manager-02
