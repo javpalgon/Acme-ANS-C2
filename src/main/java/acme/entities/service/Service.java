@@ -14,6 +14,7 @@ import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
+import acme.constraints.ValidPromotionCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,14 +42,14 @@ public class Service extends AbstractEntity {
 	private String				pictureLink;
 
 	@Mandatory
-	@ValidNumber(min = 0.0)
+	@ValidNumber(min = 0.0, max = 100.0, fraction = 2)
 	@Automapped
 	private Double				averageDwellTime;
 
-	//TODO: Add validation class
 	@Optional
-	@Column(unique = true)
 	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
+	@ValidPromotionCode
+	@Column(unique = true)
 	private String				promotionCode;
 
 	//TODO: Add validation class
