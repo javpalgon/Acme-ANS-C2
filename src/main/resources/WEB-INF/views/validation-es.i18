@@ -1,0 +1,7 @@
+# validation-es.i18n
+
+acme.validation.flight.invalid-schedule-legs.message = Los tramos del vuelo no deben solaparse  
+acme.validation.leg.invalid-schedule.message = La hora de llegada debe ser posterior a la de salida  
+acme.validation.leg.invalid-flight-number.message = El número de vuelo debe comenzar con el código IATA de la aerolínea  
+acme.validation.manager.wrong-initials.message = El identificador del gerente debe empezar con las iniciales correctas  
+acme.validation.manager.null-identity.message = Falta la información de identidad del gerente  
