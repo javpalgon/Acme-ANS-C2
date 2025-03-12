@@ -1,0 +1,6 @@
+key,key:userAccount,key:airline,key:assignment,employeeCode,phoneNumber,languageSkills,yearsOfExperience,availabilityStatus,salary
+member-01,user-account-member-01,airline-00,assignment-01,JPG123456,+9876543210,Spanish,10,AVAILABLE,EUR 6000.00
+member-02,user-account-member-02,airline-00,assignment-02,AGL789012,+9876543211,English,8,AVAILABLE,EUR 5800.00
+member-03,user-account-member-03,airline-01,assignment-03,CRM345678,+9876543212,Spanish,6,AVAILABLE,EUR 5500.00
+member-04,user-account-member-04,airline-00,assignment-04,LMP901234,+9876543213,French,7,AVAILABLE,EUR 5700.00
+member-05,user-account-member-05,airline-01,NULL,JFR567890,+9876543214,None,0,AVAILABLE,EUR 5000.00
