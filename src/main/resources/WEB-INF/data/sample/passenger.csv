@@ -1,0 +1,4 @@
+key,key:userAccount,fullName,email,passport,birth,specialNeeds
+passenger-01,user-account-passenger-01, Cristina Cuevas Garcia,cristinuchi133@example.com,BAC19845,2004/06/11 00:00,None
+passenger-02,user-account-passenger-02, Lola Romero Díaz,lola3@example.com,PAL19945,2004/09/22 00:00,None
+passenger-03,user-account-passenger-03, Silvia Lama ,silvido@example.com,ANR13045,2005/12/29 00:00,None
