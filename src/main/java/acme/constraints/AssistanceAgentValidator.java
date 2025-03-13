@@ -42,7 +42,7 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 				initials += initial;
 			}
 			res = initials.substring(0, Math.min(3, initials.length()));
-			super.state(context, !StringHelper.startsWith(value.getEmployeeCode(), res, false), "employeeCode", "acme.validation.AssistanceAgent.employeeCode-initials");
+			super.state(context, StringHelper.startsWith(value.getEmployeeCode(), res, false), "employeeCode", "acme.validation.AssistanceAgent.employeeCode-initials");
 		}
 		result = !super.hasErrors(context);
 		return result;
