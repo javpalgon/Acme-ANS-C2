@@ -34,3 +34,8 @@ user-account-customer-03,true,"UserIdentity{name: 'Raquel', surname: 'López Ram
 user-account-passenger-01,true,"UserIdentity{name: 'Cristina', surname: 'Cuevas García', email:'cristinuchi133@acme.com'}",passenger1,passenger1
 user-account-passenger-02,true,"UserIdentity{name: 'Lola', surname: 'Romero Díaz', email:'loloasilva@acme.com'}",passenger2,passenger2
 user-account-passenger-03,true,"UserIdentity{name: 'Silvia', surname: 'Lama', email:'nova22@acme.com'}",passenger3,passenger3
+
+# ASSISTANCE AGENTS
+user-account-agent-01,true, "UserIdentity{name: 'José María', surname: 'Silva Guzmán', email:'makinon12@acme.com'}",agent1,agent1
+user-account-agent-02,true, "UserIdentity{name: 'Santia', surname: 'Bregu', email:'sanbre@acme.com'}",agent2,agent2
+user-account-agent-03,true, "UserIdentity{name: '伟杰', surname: '李伟杰', email:'伟杰_李伟杰@acme.com'}",agent3,agent3

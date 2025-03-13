@@ -41,7 +41,7 @@ public class AssistanceAgent extends AbstractRole {
 	@Mandatory
 	@NotBlank
 	@Column(unique = true)
-	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
 	private String				employeeCode;
 
 	@Mandatory
