@@ -1,5 +1,5 @@
 
-package acme.entities.passenger;
+package acme.realms;
 
 import java.util.Date;
 
@@ -28,29 +28,29 @@ public class Passenger extends AbstractRole {
 
 	@Mandatory
 	@NotBlank
-	@Automapped
 	@ValidString(min = 1, max = 255)
+	@Automapped
 	private String				fullName;
 
 	@Mandatory
 	@NotBlank
-	@Automapped
 	@ValidEmail
+	@Automapped
 	private String				email;
 
 	@Mandatory
+	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
 	@Column(unique = true)
-	@ValidString(pattern = "^[A-Z0-9]{6,9}$")
 	private String				passport;
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				birth;
 
 	@Optional
+	@ValidString(min = 0, max = 50)
 	@Automapped
-	@ValidString(min = 1, max = 50)
 	private String				specialNeeds;
 
 }

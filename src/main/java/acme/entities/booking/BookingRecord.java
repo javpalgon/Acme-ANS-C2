@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.validation.Mandatory;
-import acme.entities.passenger.Passenger;
+import acme.realms.Passenger;
 import lombok.Getter;
 import lombok.Setter;
 
