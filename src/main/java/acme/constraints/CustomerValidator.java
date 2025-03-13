@@ -40,7 +40,7 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 			if (surnameParts.length > 1)
 				initials += surnameParts[1].charAt(0);
 
-			boolean identifierValid = StringHelper.startsWith(customer.getIdientifier(), initials, true);
+			boolean identifierValid = StringHelper.startsWith(customer.getIdentifier(), initials, true);
 
 			super.state(context, identifierValid, "identifier", "acme.validation.manager.wrong-initials.message");
 		}
