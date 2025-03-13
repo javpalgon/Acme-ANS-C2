@@ -41,10 +41,7 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 				char initial = surnamePart.charAt(0);
 				initials += initial;
 			}
-			if (initials.length() > 2)
-				res = initials.substring(0, 3);
-			else
-				res = initials.substring(0, 2);
+			res = initials.substring(0, Math.min(3, initials.length()));
 			super.state(context, !StringHelper.startsWith(value.getEmployeeCode(), res, false), "employeeCode", "acme.validation.AssistanceAgent.employeeCode-initials");
 		}
 		result = !super.hasErrors(context);

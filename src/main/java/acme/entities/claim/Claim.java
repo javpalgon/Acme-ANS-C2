@@ -39,14 +39,14 @@ public class Claim extends AbstractEntity {
 
 	@Mandatory
 	@ValidEmail
-	@Automapped
 	@NotBlank
+	@Automapped
 	private String				passengerEmail;
 
 	@Mandatory
 	@ValidString(max = 255)
-	@Automapped
 	@NotBlank
+	@Automapped
 	private String				description;
 
 	@Valid

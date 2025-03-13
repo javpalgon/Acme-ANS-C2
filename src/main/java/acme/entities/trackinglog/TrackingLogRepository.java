@@ -11,6 +11,6 @@ import acme.client.repositories.AbstractRepository;
 @Repository
 public interface TrackingLogRepository extends AbstractRepository {
 
-	@Query("select * from tracking_log t where t.claim.id = :claimId")
+	@Query("select t from TrackingLog t where t.claim.id = :claimId")
 	List<TrackingLog> findAllByClaimId(int claimId);
 }
