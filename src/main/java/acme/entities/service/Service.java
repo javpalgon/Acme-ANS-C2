@@ -52,7 +52,6 @@ public class Service extends AbstractEntity {
 	@Column(unique = true)
 	private String				promotionCode;
 
-	//TODO: Add validation class
 	@Optional
 	@ValidMoney(min = 0.0, max = 1000000.0)
 	@Automapped
