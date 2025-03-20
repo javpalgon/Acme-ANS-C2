@@ -1,0 +1,6 @@
+key,alias,postedAt,subject,text,score,recommended
+review-01,John Doe,2024/03/15 10:30,"Positive feedback","This was an excellent experience. The service was top-notch, and the overall atmosphere was great. Highly recommend this place to everyone!",9.5,true
+review-02,Jane Smith,2023/11/22 14:00,"Satisfactory experience","The service was good, but there were a few minor issues with the timing. Overall, it was a decent experience, and I would consider coming again.",7.0,false
+review-03,Mike Johnson,2024/01/05 16:45,"Great product","The product exceeded my expectations. The quality is outstanding, and it works perfectly. I am extremely happy with my purchase.",10.0,true
+review-04,Emily Davis,2022/12/10 09:00,"Not satisfied","I had high hopes for this service, but unfortunately, it didn't meet my expectations. The customer service was unhelpful and slow.",4.5,false
+review-05,David Lee,2024/02/10 13:15,"Average experience","The experience was average. Some good points, but also several areas for improvement. I hope they can address the issues I encountered.",6.5,true

@@ -49,7 +49,7 @@ public class ActivityLog extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 10, integer = 2, fraction = 0)
+	@ValidNumber(min = 0, max = 10)
 	@Automapped
 	private Integer				severityLevel;
 
