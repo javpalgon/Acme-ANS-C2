@@ -1,7 +1,6 @@
 
 package acme.entities.leg;
 
-import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -20,7 +19,6 @@ import acme.client.components.validation.ValidString;
 import acme.client.helpers.MomentHelper;
 import acme.constraints.ValidLeg;
 import acme.entities.aircraft.Aircraft;
-import acme.entities.airline.Airline;
 import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import lombok.Getter;
@@ -58,12 +56,12 @@ public class Leg extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Airport				departureAP;
+	private Airport				departureAirport;
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Airport				arrivalAP;
+	private Airport				arrivalAirport;
 
 	@Mandatory
 	@Valid
@@ -75,17 +73,10 @@ public class Leg extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Aircraft			aircraft;
 
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airline				airline;
-
 
 	@Transient
-	private Double getDuration() {
-		Duration duration = MomentHelper.computeDuration(this.getDeparture(), this.getArrival());
-
-		return duration.getSeconds() / 3600.;
+	private Long getDuration() {
+		return MomentHelper.computeDuration(this.getDeparture(), this.getArrival()).toHours();
 	}
 
 }

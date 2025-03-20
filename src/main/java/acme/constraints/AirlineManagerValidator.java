@@ -31,23 +31,19 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 		}
 
 		DefaultUserIdentity userIdentity = manager.getIdentity();
-		boolean identityIsValid = userIdentity != null && userIdentity.getName() != null && userIdentity.getSurname() != null;
 
-		super.state(context, identityIsValid, "identifierNumber", "acme.validation.manager.null-identity.message");
+		String[] surnameParts = userIdentity.getSurname().trim().split("\\s+");
+		String initials = userIdentity.getName().trim().substring(0, 1);
 
-		if (identityIsValid) {
-			String[] surnameParts = userIdentity.getSurname().trim().split("\\s+");
-			String initials = userIdentity.getName().trim().substring(0, 1);
+		if (surnameParts.length > 0)
+			initials += surnameParts[0].charAt(0);
+		if (surnameParts.length > 1)
+			initials += surnameParts[1].charAt(0);
+		//PREGUNTA si hace falta la segunda letra del apellido
 
-			if (surnameParts.length > 0)
-				initials += surnameParts[0].charAt(0);
-			if (surnameParts.length > 1)
-				initials += surnameParts[1].charAt(0);
+		boolean identifierValid = StringHelper.startsWith(manager.getIdentifier(), initials, true);
 
-			boolean identifierValid = StringHelper.startsWith(manager.getIdentifier(), initials, true);
-
-			super.state(context, identifierValid, "identifier", "acme.validation.manager.wrong-initials.message");
-		}
+		super.state(context, identifierValid, "identifier", "acme.validation.manager.wrong-initials.message");
 
 		// Retornar si hay errores en la validación
 		return !super.hasErrors(context);
