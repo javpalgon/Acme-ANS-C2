@@ -48,7 +48,7 @@ public class Review extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 255)
+	@ValidString()
 	@Automapped
 	private String				text;
 

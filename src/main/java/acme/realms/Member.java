@@ -1,7 +1,6 @@
 
 package acme.realms;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
@@ -39,11 +38,11 @@ public class Member extends AbstractRole {
 
 	@Mandatory
 	@ValidString(pattern = "^\\+?\\d{6,15}$")
-	@Column(unique = true)
+	@Automapped
 	private String				phoneNumber;
 
 	@Mandatory
-	@ValidString(max = 255)
+	@ValidString()
 	@Automapped
 	private String				languageSkills;
 
@@ -58,7 +57,7 @@ public class Member extends AbstractRole {
 	private Money				salary;
 
 	@Optional
-	@ValidNumber(min = 0, max = 60)
+	@ValidNumber(min = 0, max = 200)
 	@Automapped
 	private Integer				yearsOfExperience;
 

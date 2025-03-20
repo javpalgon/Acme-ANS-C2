@@ -17,7 +17,6 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
-import acme.constraints.ValidFlight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegRepository;
 import acme.realms.Manager;
@@ -27,7 +26,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@ValidFlight
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
@@ -61,8 +59,7 @@ public class Flight extends AbstractEntity {
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		leg = repository.findFirstLegByFlightId(this.getId());
-		result = leg.getDeparture();
+		result = repository.findDepartureByFlightId(this.getId()).get(0);
 
 		return result;
 	}
@@ -74,8 +71,7 @@ public class Flight extends AbstractEntity {
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		leg = repository.findLastLegByFlightId(this.getId());
-		result = leg.getArrival();
+		result = repository.findArrivalByFlightId(this.getId()).get(0);
 
 		return result;
 	}
@@ -87,8 +83,7 @@ public class Flight extends AbstractEntity {
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		leg = repository.findFirstLegByFlightId(this.getId());
-		result = leg.getDepartureAP().getCity();
+		result = repository.findOriginCityByFlightId(this.getId()).get(0);
 
 		return result;
 	}
@@ -100,8 +95,7 @@ public class Flight extends AbstractEntity {
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		leg = repository.findLastLegByFlightId(this.getId());
-		result = leg.getArrivalAP().getCity();
+		result = repository.findDestinationCityByFlightId(this.getId()).get(0);
 
 		return result;
 	}
@@ -112,7 +106,7 @@ public class Flight extends AbstractEntity {
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.numLegsByFlightId(this.getId()) - 1;
+		result = repository.findNumberOfLayovers(this.getId()) - 1;
 
 		return result;
 	}

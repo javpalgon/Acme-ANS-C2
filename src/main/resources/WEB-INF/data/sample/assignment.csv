@@ -1,5 +1,5 @@
 key,key:leg,role,lastUpdate,status,remarks
-assignment-01,leg-01,PILOT,2015/01/10 00:00,CONFIRMED,First flight of the day
-assignment-02,leg-02,CO_PILOT,2015/01/10 00:00,PENDING,Waiting for confirmation
-assignment-03,leg-03,LEAD_ATTENDANT,2012/01/10 00:00,CANCELLED,Flight cancelled due to weather
-assignment-04,leg-04,CABIN_ATTENDANT,2016/01/10 00:00,CONFIRMED,On standby
+assignment-01,leg-01,PILOT,2024/12/31 00:00,CONFIRMED,
+assignment-02,leg-02,CO_PILOT,2019/01/10 00:00,PENDING,Waiting for confirmation
+assignment-03,leg-03,LEAD_ATTENDANT,2022/01/10 00:00,CANCELLED,Flight cancelled due to weather
+assignment-04,leg-04,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,On standby; awaiting further instructions from operations team. Flight crew members must remain available for potential reassignment based on flight demand and scheduling needs. Final confirmation will be communicated via internal system before departure.
