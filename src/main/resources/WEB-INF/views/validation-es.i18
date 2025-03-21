@@ -7,3 +7,5 @@ acme.validation.manager.wrong-initials.message = El identificador del gerente de
 acme.validation.manager.null-identity.message = Falta la información de identidad del gerente
 acme.validation.technician.wrong-initials.message = El identificador del técnico debe empezar con las iniciales correctas
 acme.validation.technician.null-identity.message = Falta la información de identidad del técnico 
+acme.validation.Birthday.invalid-age.message = Es menor de edad
+acme.validation.Experience.invalid-experience.message = No puede tener mas años de experiencia que años de vida
