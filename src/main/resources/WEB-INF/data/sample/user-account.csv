@@ -7,35 +7,34 @@ user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза 
 user-account-provider-03,true,"UserIdentity{name: 'Antonia', surname: 'אבטיח Æløzå', email: 'antonia@acme.com'}",provider3,provider3
 user-account-administrator1,true,"UserIdentity{name: 'Administrator1', surname: 'Acme', email: 'administrator1@acme.com'}",administrator1,administrator1
 user-account-administrator2,true,"UserIdentity{name: 'Administrator2', surname: 'Acme', email: 'administrator2@acme.com'}",administrator2,administrator2
-
 # MANAGERS
 user-account-manager-01,true,"UserIdentity{name: 'Tom', surname: 'Jones', email: 'tommie@acme.com'}",manager1,manager1
 user-account-manager-02,true,"UserIdentity{name: 'Peter', surname: 'Griffin', email: 'familyguy@acme.com'}",manager2,manager2
 user-account-manager-03,true,"UserIdentity{name: 'Cilian', surname: 'Murphy', email: 'britain@acme.com'}",manager3,manager3
-
+user-account-manager-04,true,"UserIdentity{name: 'Alfred', surname: 'Smith', email: 'alfred@acme.com'}",manager4,manager4
+user-account-manager-05,true,"UserIdentity{name: 'Mary', surname: 'Brown', email: 'mary.brown@acme.com'}",manager5,manager5
+user-account-manager-06,true,"UserIdentity{name: 'John', surname: 'Smith Anderson', email: 'john.smith.anderson@acme.com'}",manager6,manager6
+user-account-manager-07,true,"UserIdentity{name: 'Laura', surname: 'Martinez', email: 'laura.martinez@acme.com'}",manager7,manager7
+user-account-manager-08,true,"UserIdentity{name: 'Sarah', surname: 'Lee Long', email: 'sarah.lee.long@acme.com'}",manager8,manager8
+user-account-manager-09,true,"UserIdentity{name: 'Alex', surname: 'Adams Apple', email: 'alex.adams.apple@acme.com'}",manager9,manager9
+user-account-manager-10,true,"UserIdentity{name: 'Zachary', surname: 'Zimmer Zorro', email: 'zachary.zimmer.zorro@acme.com'}",manager10,manager10
+user-account-manager-11,true,"UserIdentity{name: 'Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', surname: 'Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', email: 'allA@acme.com'}",manager11,manager11
+user-account-manager-12,true,"UserIdentity{name: 'C', surname: 'D', email: 'OneC@acme.com'}",manager12,manager12
 # FLIGHT CREW MEMBERS
 user-account-member-01,true,"UserIdentity{name: 'Juan', surname: 'Pérez García', email: 'juan@iberia.com'}",member1,member1
 user-account-member-02,true,"UserIdentity{name: 'Ana', surname: 'Gómez', email: 'ana@vueling.com'}",member2,member2
 user-account-member-03,true,"UserIdentity{name: 'Carlos', surname: 'Rodríguez Martínez', email: 'carlos@iberia.com'}",member3,member3
 user-account-member-04,true,"UserIdentity{name: 'Laura', surname: 'Martínez', email: 'laura@vueling.com'}",member4,member4
 user-account-member-05,true,"UserIdentity{name: 'José', surname: 'Fernández Rodríguez', email: 'jose@iberia.com'}",member,member
-
 # TECHNICIANS
 user-account-technician-01,true,"UserIdentity{name: 'Javier', surname: 'Santos Martín', email:'javsan@acme.com'}",technician1,technician1
 user-account-technician-02,true,"UserIdentity{name: 'João', surname: 'Da Eça', email:'joaodaeca@acme.com'}",technician2,technician2
 user-account-technician-03,true,"UserIdentity{name: 'Николай', surname: 'Иванов Петров', email:'nikolayivanov@acme.com'}",technician3,technician3
-
 # CUSTOMERS
 user-account-customer-01,true,"UserIdentity{name: 'Cristina', surname: 'Cuevas García', email:'cristinuchi133@acme.com'}",customer1,customer1
 user-account-customer-02,true,"UserIdentity{name: 'Silvia', surname: 'Lama', email:'silvido@acme.com'}",customer2,customer2
 user-account-customer-03,true,"UserIdentity{name: 'Raquel', surname: 'López Ramírez', email:'nova22@acme.com'}",customer3,customer3
-
-# CUSTOMERS
-user-account-passenger-01,true,"UserIdentity{name: 'Cristina', surname: 'Cuevas García', email:'cristinuchi133@acme.com'}",passenger1,passenger1
-user-account-passenger-02,true,"UserIdentity{name: 'Lola', surname: 'Romero Díaz', email:'loloasilva@acme.com'}",passenger2,passenger2
-user-account-passenger-03,true,"UserIdentity{name: 'Silvia', surname: 'Lama', email:'nova22@acme.com'}",passenger3,passenger3
-
 # ASSISTANCE AGENTS
-user-account-agent-01,true, "UserIdentity{name: 'José María', surname: 'Silva Guzmán', email:'makinon12@acme.com'}",agent1,agent1
-user-account-agent-02,true, "UserIdentity{name: 'Santia', surname: 'Bregu', email:'sanbre@acme.com'}",agent2,agent2
-user-account-agent-03,true, "UserIdentity{name: '伟杰', surname: '李伟杰', email:'伟杰_李伟杰@acme.com'}",agent3,agent3
+user-account-agent-01,true,"UserIdentity{name: 'José María', surname: 'Silva Guzmán', email:'makinon12@acme.com'}",agent1,agent1
+user-account-agent-02,true,"UserIdentity{name: 'Santia', surname: 'Bregu', email:'sanbre@acme.com'}",agent2,agent2
+user-account-agent-03,true,"UserIdentity{name: '伟杰', surname: '李伟杰', email:'伟杰_李伟杰@acme.com'}",agent3,agent3
