@@ -15,7 +15,6 @@ import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.constraints.ValidMember;
 import acme.entities.airline.Airline;
-import acme.entities.assignment.Assignment;
 import acme.entities.flightcrewmember.AvailabilityStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,10 +64,5 @@ public class Member extends AbstractRole {
 	@Valid
 	@ManyToOne(optional = false)
 	private Airline				airline;
-
-	@Optional
-	@Valid
-	@ManyToOne(optional = true)
-	private Assignment			assignment;
 
 }
