@@ -1,7 +1,7 @@
 
 package acme.features.manager.flight;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,8 +46,8 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description");
-		Collection<Leg> userStories = this.repository.findLegsByFlightId(object.getId()).stream().toList();
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
+		List<Leg> userStories = this.repository.findLegsByFlightId(object.getId()).stream().toList();
 		dataset.put("hasUserStories", !userStories.isEmpty());
 		super.getResponse().addData(dataset);
 	}

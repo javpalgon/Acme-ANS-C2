@@ -37,9 +37,6 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		flights = this.repository.findFlightsByManagerId(managerId);
-
-		//	int userAccountId = super.getRequest().getPrincipal().getAccountId();
-
 		super.getBuffer().addData(flights);
 	}
 
@@ -48,7 +45,7 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		assert object != null;
 
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description");
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
 		super.getResponse().addData(dataset);
 	}
 }

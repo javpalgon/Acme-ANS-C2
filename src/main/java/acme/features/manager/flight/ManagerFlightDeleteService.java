@@ -48,23 +48,18 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		final Manager manager = this.repository.findOneManagerById(managerId);
 		object.setManager(manager);
-		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
+		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
 	}
 
 	@Override
 	public void validate(final Flight object) {
 		assert object != null;
+		if (!object.getIsDraftMode())
+			super.state(object.getIsDraftMode(), "*", "manager.flight.form.error.notDraft", "isDraftMode");
 	}
 	@Override
 	public void perform(final Flight object) {
 		assert object != null;
-
-		// Step 1: Fetch all legs linked to the flight
-		// Assignments depending on Legs
-		// Claims depending on legs
-		// Tracking Logs depending on claims
-		// Bookings depending on flights
-		// Booking records that have the bookings that depend on flight
 
 		Collection<Leg> allLegs = this.repository.findLegsByFlightId(object.getId());
 		Collection<Booking> allbookings = this.repository.findBookingsByFlightId(object.getId());
@@ -101,7 +96,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
 		super.getResponse().addData(dataset);
 	}
 

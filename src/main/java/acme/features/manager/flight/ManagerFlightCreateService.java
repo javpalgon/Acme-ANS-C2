@@ -43,7 +43,7 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		final Manager manager = this.repository.findOneManagerById(managerId);
 		object.setManager(manager);
-		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
+		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
 		super.getResponse().addData(dataset);
 	}
 }

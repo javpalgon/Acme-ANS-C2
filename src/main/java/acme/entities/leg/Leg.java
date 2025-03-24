@@ -68,6 +68,10 @@ public class Leg extends AbstractEntity {
 	private Flight				flight;
 
 	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
+	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
 	private Aircraft			aircraft;

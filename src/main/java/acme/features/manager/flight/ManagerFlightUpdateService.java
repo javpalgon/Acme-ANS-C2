@@ -51,17 +51,9 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight object) {
-		//		assert object != null;
-		//				if (!super.getBuffer().getErrors().hasErrors("cost")) {
-		//					super.state(this.service.validateLegSchedule(object.getCost()), "cost", "manager.project.form.error.cost");
-		//				}
-		//
-		//		if (!super.getBuffer().getErrors().hasErrors("code")) {
-		//			Flight exist;
-		//			exist = this.repository.findProjectByCode(object.getCode());
-		//			final Project p = object.getCode().equals("") || object.getCode().equals(null) ? null : this.repository.findProjectById(object.getId());
-		//			super.state(p.equals(exist) || exist == null, "code", "manager.project.form.error.code");
-		//		}
+		assert object != null;
+		if (!object.getIsDraftMode())
+			super.state(object.getIsDraftMode(), "*", "manager.flight.form.error.notDraft", "isDraftMode");
 
 	}
 
@@ -75,7 +67,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description");
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
 		super.getResponse().addData(dataset);
 	}
 }
