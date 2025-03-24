@@ -44,7 +44,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				super.state(context, false, "legs", "acme.validation.leg.invalid-schedule.message");
 			else {
 				boolean correctLeg = true;
-				List<Leg> legs = this.repository.findAllLegsByFlightId(leg.getFlight().getId());
+				List<Leg> legs = this.repository.findAllLegsByFlightId(leg.getFlight().getId()).stream().toList();
 				legs.add(leg);
 				legs = LegValidator.sortLegsByDeparture(legs);
 				for (int i = 0; i < legs.size() - 1 && correctLeg && legs.size() < 2; i++) {

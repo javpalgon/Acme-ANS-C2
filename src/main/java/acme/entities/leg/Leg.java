@@ -49,7 +49,6 @@ public class Leg extends AbstractEntity {
 	private Date				arrival;
 
 	@Mandatory
-	@Valid
 	@Automapped
 	private LegStatus			status;
 
