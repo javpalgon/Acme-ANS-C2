@@ -1,5 +1,5 @@
 
-package acme.entities.assistanceagent;
+package acme.realms;
 
 import java.util.Date;
 
@@ -70,8 +70,8 @@ public class AssistanceAgent extends AbstractRole {
 	@Automapped
 	private String				pictureUrl;
 
-	@Mandatory
-	@ManyToOne(optional = false)
+	@Optional
+	@ManyToOne(optional = true)
 	@Valid
 	private Airline				airline;
 
