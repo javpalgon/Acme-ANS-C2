@@ -49,7 +49,6 @@ public class Leg extends AbstractEntity {
 	private Date				arrival;
 
 	@Mandatory
-	@Valid
 	@Automapped
 	private LegStatus			status;
 
@@ -67,6 +66,10 @@ public class Leg extends AbstractEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Flight				flight;
+
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
 
 	@Mandatory
 	@Valid

@@ -32,9 +32,10 @@
 		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.contact" access="isAnonymous()"/>
 		
-	
+		<acme:menu-option code="master.menu.manager" access="hasRealm('Manager')">
+			<acme:menu-suboption code="master.menu.manager.list-my-flights" action="/manager/flight/list"/>
+		</acme:menu-option>
 		
-
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
 			<acme:menu-separator/>
