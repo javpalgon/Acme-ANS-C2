@@ -1,4 +1,4 @@
 key,tag,requiresSelfTransfer,cost,description,key:manager,isDraftMode
-flight-01,IB100,true,EUR 400.00,Comfortable flight with great seating,manager-01,true
-flight-02,VY200,false,EUR 350.00,Direct flight with excellent service,manager-02,true
-flight-03,IB100,true,EUR 400.00,Newest in town,manager-01,true
+flight-01,IB100,true,EUR 400.00,Comfortable flight with great seating,manager-01,false
+flight-02,VY200,false,EUR 350.00,Direct flight with excellent service,manager-02,false
+flight-03,IB100,true,EUR 400.00,Newest in town,manager-01,false
