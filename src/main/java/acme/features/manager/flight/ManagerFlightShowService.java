@@ -28,7 +28,10 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		object = this.repository.findFlightById(id);
 		final Principal principal = super.getRequest().getPrincipal();
 		final int userAccountId = principal.getAccountId();
-		super.getResponse().setAuthorised(object.getManager().getUserAccount().getId() == userAccountId);
+		if (object.getIsDraftMode())
+			super.getResponse().setAuthorised(object.getManager().getUserAccount().getId() == userAccountId);
+		else
+			super.getResponse().setAuthorised(true);
 	}
 
 	@Override

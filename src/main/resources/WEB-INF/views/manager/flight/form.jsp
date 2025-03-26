@@ -8,10 +8,9 @@
 	<acme:input-money code="manager.flight.form.label.cost" path="cost"/>	
 	<acme:input-textarea code="manager.flight.form.label.description" path="description"/>	
 	<acme:input-checkbox code="manager.flight.form.label.requiresSelfTransfer" path="requiresSelfTransfer"/>
-	<acme:input-checkbox code="manager.flight.form.label.isDraftMode" path="isDraftMode"/>	
 	<jstl:choose>	 
 		<jstl:when test="${_command == 'show' && isDraftMode == false}">
-			<acme:button code="manager.flight.legs" action="/manager/flight/list?masterId=${id}"/>
+			<acme:button code="manager.flight.legs" action="/manager/leg/list?masterId=${id}"/>
 		</jstl:when>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish')  && isDraftMode == true}">
 			<acme:button code="manager.flight.legs" action="/manager/leg/list?masterId=${id}"/>
