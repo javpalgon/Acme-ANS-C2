@@ -1,9 +1,0 @@
-# member.assignment.list.completed ##########################################################
-
-member.assignment.list.title = Lista de tus asignaciones  
-
-member.assignment.list.label.role = Rol  
-member.assignment.list.label.lastUpdate = Última actualización  
-member.assignment.list.label.status = Estado  
-member.assignment.list.label.remarks = Observaciones  
-member.assignment.list.label.leg = Número de vuelo  

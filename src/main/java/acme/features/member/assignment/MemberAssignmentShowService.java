@@ -18,30 +18,40 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 
 	@Override
 	public void authorise() {
-		// Solo los miembros de la tripulación pueden ver detalles de una asignación
 		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Member.class);
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		// Cargar la asignación de vuelo solicitada
 		int assignmentId = super.getRequest().getData("id", int.class);
 		super.getBuffer().addData(this.repository.findOneById(assignmentId));
 	}
 
 	@Override
-	public void unbind(final Assignment assignment) {
-		Dataset dataset;
+	public void unbind(final Assignment object) {
+		assert object != null;
 
-		// Desvincular los atributos de la entidad Assignment
-		dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks");
+		Dataset dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
 
-		// Desvincular atributos relacionados (leg y member)
-		dataset.put("leg", assignment.getLeg());
-		dataset.put("member", assignment.getMember());
+		// Leg (Flight) information
+		dataset.put("flightNumber", object.getLeg().getFlightNumber());
+		dataset.put("departure", object.getLeg().getDeparture());
+		dataset.put("arrival", object.getLeg().getArrival());
+		dataset.put("legStatus", object.getLeg().getStatus());
+		dataset.put("departureAirport", object.getLeg().getDepartureAirport().getCity());
+		dataset.put("arrivalAirport", object.getLeg().getArrivalAirport().getCity());
+		dataset.put("aircraft", object.getLeg().getAircraft().getModel());
 
-		// Agregar el Dataset a la respuesta
+		// Member information
+		dataset.put("employeeCode", object.getMember().getEmployeeCode());
+		dataset.put("phoneNumber", object.getMember().getPhoneNumber());
+		dataset.put("languageSkills", object.getMember().getLanguageSkills());
+		dataset.put("yearsOfExperience", object.getMember().getYearsOfExperience());
+		dataset.put("salary", object.getMember().getSalary());
+		dataset.put("availabilityStatus", object.getMember().getAvailabilityStatus());
+		dataset.put("memberName", object.getMember().getUserAccount().getUsername());
+
 		super.getResponse().addData(dataset);
 	}
 }

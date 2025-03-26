@@ -1,0 +1,36 @@
+# member.assignment.list.completed ##########################################################
+
+member.assignment.list.title = Lista de tus asignaciones  
+member.assignment.form.title = Detalle de la asignación elegida  
+
+member.assignment.list.label.role = Rol  
+member.assignment.list.label.lastUpdate = Última actualización  
+member.assignment.list.label.status = Estado  
+member.assignment.list.label.remarks = Observaciones  
+member.assignment.list.label.leg = Número de vuelo  
+
+# Assignment Info
+member.assignment.form.label.role=Rol
+member.assignment.form.label.lastUpdate=Última actualización
+member.assignment.form.label.status=Estado
+member.assignment.form.label.remarks=Observaciones
+
+# Flight Leg Info
+member.assignment.form.label.flightInfo=Información de la etapa del vuelo
+member.assignment.form.label.flightNumber=Número de vuelo
+member.assignment.form.label.departure=Salida
+member.assignment.form.label.arrival=Llegada
+member.assignment.form.label.legStatus=Estado de la etapa del vuelo
+member.assignment.form.label.departureAirport=Aeropuerto de salida
+member.assignment.form.label.arrivalAirport=Aeropuerto de llegada
+member.assignment.form.label.aircraft=Aeronave
+
+# Member Info
+member.assignment.form.label.memberInfo=Información del Miembro
+member.assignment.form.label.memberName=Nombre
+member.assignment.form.label.employeeCode=Código de empleado
+member.assignment.form.label.phoneNumber=Teléfono
+member.assignment.form.label.languageSkills=Idiomas
+member.assignment.form.label.yearsOfExperience=Años de experiencia
+member.assignment.form.label.salary=Salario
+member.assignment.form.label.availabilityStatus=Disponibilidad

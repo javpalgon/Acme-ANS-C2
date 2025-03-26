@@ -4,7 +4,6 @@
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 
 <acme:list>
