@@ -1,9 +1,0 @@
-# member.assignment.list.completed ##########################################################
-
-member.assignment.list.completed.title = Lista de asignaciones  
-
-member.assignment.list.completed.label.role = Rol  
-member.assignment.list.completed.label.lastUpdate = Última actualización  
-member.assignment.list.completed.label.status = Estado  
-member.assignment.list.completed.label.remarks = Observaciones  
-member.assignment.list.completed.label.member = Miembro  

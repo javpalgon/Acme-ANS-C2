@@ -10,6 +10,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
+import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -32,7 +33,7 @@ public class MemberAssignmentListCompletedService extends AbstractGuiService<Mem
 		int memberId;
 
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		assignments = this.repository.findAllAsignments();
+		assignments = this.repository.findByLegStatusAndMemberId(LegStatus.LANDED, memberId);
 
 		super.getBuffer().addData(assignments);
 	}

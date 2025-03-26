@@ -41,8 +41,9 @@ public class MemberAssignmentController extends AbstractGuiController<Member, As
 		assert this.listCompletedService != null : "listCompletedService no debe ser nulo";
 		assert this.listPlannedService != null : "listPlannedService no debe ser nulo";
 
-		super.addCustomCommand("completed", "list", this.listCompletedService);
-		super.addCustomCommand("planned", "list", this.listPlannedService);
+		super.addCustomCommand("list-completed", "list", this.listCompletedService);
+		//super.addBasicCommand("list", this.listCompletedService);
+		super.addCustomCommand("list-planned", "list", this.listPlannedService);
 		super.addBasicCommand("show", this.showService);
 		//super.addBasicCommand("create", this.createService);
 		//super.addBasicCommand("update", this.updateService);
