@@ -45,10 +45,9 @@ public class MemberAssignmentListCompletedService extends AbstractGuiService<Mem
 
 		Dataset dataset;
 
-		// Desvincular los atributos de la entidad Assignment
 		dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
+		dataset.put("leg.flightNumber", object.getLeg().getFlightNumber());
 
-		// Agregar el Dataset a la respuesta
 		super.getResponse().addData(dataset);
 	}
 

@@ -2,14 +2,14 @@ key,key:leg,role,lastUpdate,status,key:member,remarks
 assignment-01,leg-01,PILOT,2024/12/31 00:00,CONFIRMED,member-01,
 assignment-02,leg-05,CO_PILOT,2019/01/10 00:00,PENDING,member-01,Waiting for confirmation
 assignment-03,leg-08,PILOT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather
-assignment-04,leg-04,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,member-01,On standby
+assignment-04,leg-06,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,member-01,On standby
 assignment-05,leg-09,PILOT,2023/05/15 12:30,CONFIRMED,member-01,Flight reassigned to alternate crew
 assignment-06,leg-07,CABIN_ATTENDANT,2021/08/21 14:00,PENDING,member-01,Pending final approval
 
 assignment-07,leg-04,PILOT,2020/06/11 08:45,CONFIRMED,member-02,
 assignment-08,leg-02,CO_PILOT,2019/09/19 13:20,PENDING,member-02,Awaiting clearance
 assignment-09,leg-01,CABIN_ATTENDANT,2024/02/22 18:10,CANCELLED,member-02,Cancelled due to operational changes
-assignment-10,leg-04,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment
+assignment-10,leg-06,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment
 assignment-11,leg-03,CO_PILOT,2022/04/05 16:45,PENDING,member-02,Awaiting flight manifest updates
 
 assignment-12,leg-04,PILOT,2023/07/07 09:10,CONFIRMED,member-03,

@@ -29,10 +29,10 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT a FROM Assignment a")
 	Collection<Assignment> findAllAsignments();
 
-	@Query("SELECT a FROM Assignment a WHERE a.leg.status = :status AND a.member.id = :memberId")
+	@Query("SELECT a FROM Assignment a WHERE a.leg.status = :status AND a.member.id = :memberId AND a.leg.isDraftMode = false")
 	Collection<Assignment> findByLegStatusAndMemberId(@Param("status") LegStatus status, @Param("memberId") int memberId);
 
-	@Query("SELECT a FROM Assignment a WHERE a.leg.status != :status AND a.member.id = :memberId")
+	@Query("SELECT a FROM Assignment a WHERE a.leg.status != :status AND a.member.id = :memberId AND a.leg.isDraftMode = false")
 	Collection<Assignment> findByLegStatusNotAndMemberId(@Param("status") LegStatus status, @Param("memberId") int memberId);
 
 }

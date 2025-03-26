@@ -33,14 +33,15 @@ public class MemberAssignmentListPlannedService extends AbstractGuiService<Membe
 	}
 
 	@Override
-	public void unbind(final Assignment assignment) {
+	public void unbind(final Assignment object) {
+
+		assert object != null;
+
 		Dataset dataset;
 
-		dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks");
+		dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
+		dataset.put("leg.flightNumber", object.getLeg().getFlightNumber());
 
-		dataset.put("leg.flightNumber", assignment.getLeg().getFlightNumber());
-
-		// Agregar el Dataset a la respuesta
 		super.getResponse().addData(dataset);
 	}
 }

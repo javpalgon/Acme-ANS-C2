@@ -1,5 +1,11 @@
 key,flightNumber,departure,arrival,status,key:departureAirport,key:arrivalAirport,key:flight,key:aircraft,isDraftMode
-leg-01,IBV0000,2025/01/10 08:00,2025/01/10 10:00,ON_TIME,airport-01,airport-02,flight-01,aircraft-01,true
-leg-02,VYB0001,2025/01/10 12:00,2025/01/10 14:00,DELAYED,airport-02,airport-01,flight-02,aircraft-02,true
-leg-03,IBV3003,2025/01/10 16:00,2025/01/10 18:00,CANCELLED,airport-01,airport-03,flight-02,aircraft-03,true
-leg-04,VYB4004,2025/01/10 20:00,2025/01/10 22:00,ON_TIME,airport-03,airport-04,flight-01,aircraft-04,false
+leg-01,IBV0000,2025/01/10 08:00,2025/01/10 10:00,ON_TIME,airport-01,airport-02,flight-01,aircraft-01,false
+leg-02,VYB0001,2025/01/10 12:00,2025/01/10 14:00,DELAYED,airport-02,airport-01,flight-02,aircraft-02,false
+leg-03,AEX0002,2025/01/10 16:00,2025/01/10 18:00,CANCELLED,airport-01,airport-03,flight-02,aircraft-03,false
+leg-04,LNA0003,2025/01/10 20:00,2025/01/10 22:00,ON_TIME,airport-03,airport-04,flight-01,aircraft-04,true
+leg-05,IBV0004,2025/01/11 09:00,2025/01/11 11:30,LANDED,airport-04,airport-01,flight-01,aircraft-01,false
+leg-06,VYB0005,2025/01/11 13:15,2025/01/11 15:45,LANDED,airport-02,airport-01,flight-02,aircraft-02,false
+leg-07,AEX0006,2025/01/12 07:30,2025/01/12 10:00,LANDED,airport-03,airport-02,flight-01,aircraft-03,false
+leg-08,LNA0007,2025/01/12 14:00,2025/01/12 16:20,CANCELLED,airport-01,airport-02,flight-01,aircraft-04,true
+leg-09,IBV0008,2025/01/13 11:00,2025/01/13 13:15,LANDED,airport-01,airport-03,flight-02,aircraft-01,false
+leg-10,VYB0009,2025/01/13 17:45,2025/01/13 20:30,LANDED,airport-01,airport-03,flight-01,aircraft-02,true
