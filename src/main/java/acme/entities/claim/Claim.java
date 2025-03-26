@@ -13,11 +13,12 @@ import javax.validation.constraints.NotBlank;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
+import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
-import acme.entities.assistanceagent.AssistanceAgent;
 import acme.entities.leg.Leg;
+import acme.realms.AssistanceAgent;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,9 +59,9 @@ public class Claim extends AbstractEntity {
 	@Automapped
 	private Boolean				accepted;
 
-	@Mandatory
+	@Optional
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private AssistanceAgent		assistanceAgent;
 
 	@Mandatory

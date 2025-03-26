@@ -54,7 +54,7 @@ public class Assignment extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Leg					leg;
 
-	@Optional
+	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
 	private Member				member;

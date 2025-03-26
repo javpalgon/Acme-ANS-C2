@@ -17,7 +17,6 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
-import acme.entities.leg.Leg;
 import acme.entities.leg.LegRepository;
 import acme.realms.Manager;
 import lombok.Getter;
@@ -37,9 +36,12 @@ public class Flight extends AbstractEntity {
 	private String				tag;
 
 	@Mandatory
-	@Valid
 	@Automapped
 	private Boolean				requiresSelfTransfer;
+
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
 
 	@Mandatory
 	@ValidMoney(min = 0, max = 10000000)
@@ -55,11 +57,10 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public Date getDeparture() {
 		Date result;
-		Leg leg;
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findDepartureByFlightId(this.getId()).get(0);
+		result = repository.findDepartureByFlightId(this.getId()).stream().toList().get(0);
 
 		return result;
 	}
@@ -67,23 +68,20 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public Date getArrival() {
 		Date result;
-		Leg leg;
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findArrivalByFlightId(this.getId()).get(0);
-
+		result = repository.findArrivalByFlightId(this.getId()).stream().toList().get(0);
 		return result;
 	}
 
 	@Transient
 	public String getOriginCity() {
 		String result;
-		Leg leg;
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findOriginCityByFlightId(this.getId()).get(0);
+		result = repository.findOriginCityByFlightId(this.getId()).stream().toList().get(0);
 
 		return result;
 	}
@@ -91,11 +89,10 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public String getDestinationCity() {
 		String result;
-		Leg leg;
 		LegRepository repository;
 
 		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findDestinationCityByFlightId(this.getId()).get(0);
+		result = repository.findDestinationCityByFlightId(this.getId()).stream().toList().get(0);
 
 		return result;
 	}
@@ -112,8 +109,8 @@ public class Flight extends AbstractEntity {
 	}
 
 
-	@Mandatory
-	@ManyToOne(optional = false)
+	@Optional
+	@ManyToOne(optional = true)
 	@Valid
 	private Manager manager;
 
