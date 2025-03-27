@@ -8,6 +8,11 @@
 	<acme:input-money code="manager.flight.form.label.cost" path="cost"/>	
 	<acme:input-textarea code="manager.flight.form.label.description" path="description"/>	
 	<acme:input-checkbox code="manager.flight.form.label.requiresSelfTransfer" path="requiresSelfTransfer"/>
+	<acme:input-moment code="manager.flight.form.label.departure" path="departure" readonly="true"/>
+	<acme:input-moment code="manager.flight.form.label.arrival" path="arrival" readonly="true"/>
+	<acme:input-textbox code="manager.flight.form.label.originCity" path="originCity" readonly="true"/>
+	<acme:input-textbox code="manager.flight.form.label.destinationCity" path="destinationCity" readonly="true"/>
+	<acme:input-textbox code="manager.flight.form.label.layovers" path="layovers" readonly="true"/>
 	<jstl:choose>	 
 		<jstl:when test="${_command == 'show' && isDraftMode == false}">
 			<acme:button code="manager.flight.leg" action="/manager/leg/list?masterId=${id}"/>

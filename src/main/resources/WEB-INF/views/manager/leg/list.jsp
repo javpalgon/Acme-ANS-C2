@@ -11,4 +11,4 @@
 	<acme:list-column code="manager.leg.list.label.departureAirport" path="departureAirport" width="10%" />	
 	<acme:list-column code="manager.leg.list.label.arrivalAirport" path="arrivalAirport" width="10%" />		
 </acme:list>
-<acme:button code="manager.leg.create" action="/manager/leg/create?masterId=${id}"/>
+<acme:button code="manager.leg.create" action="/manager/leg/create?masterId=${masterId}"/>

@@ -49,4 +49,7 @@ public interface ManagerLegRepository extends AbstractRepository {
 	@Query("select a from Aircraft a")
 	Collection<Aircraft> findAllAircrafts();
 
+	@Query("select a from Airport a where a.id = :id")
+	Airport findAirportById(int id);
+
 }

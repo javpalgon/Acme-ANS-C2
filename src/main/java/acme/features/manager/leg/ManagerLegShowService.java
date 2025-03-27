@@ -75,9 +75,8 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		aircrafts = this.repository.findAllAircrafts();
 		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
 		// Add findAllAvailableAircrafts
-		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
+		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival", "isDraftMode");
 		dataset.put("masterId", leg.getFlight().getId());
-		dataset.put("isDraftMode", leg.getFlight().getIsDraftMode());
 		dataset.put("status", choices);
 		dataset.put("departureAirports", departureAirportChoices);
 		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());

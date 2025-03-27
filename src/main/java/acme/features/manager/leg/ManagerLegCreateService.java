@@ -14,7 +14,6 @@ import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegStatus;
-import acme.features.manager.flight.ManagerFlightRepository;
 import acme.realms.Manager;
 
 @GuiService
@@ -23,10 +22,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerLegRepository	repository;
-
-	@Autowired
-	private ManagerFlightRepository	repositoryFlight;
+	private ManagerLegRepository repository;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -38,7 +34,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		Flight flight;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		flight = this.repositoryFlight.findFlightById(masterId);
+		flight = this.repository.findFlightById(masterId);
 		status = flight != null && (!flight.getIsDraftMode() || super.getRequest().getPrincipal().hasRealm(flight.getManager()));
 
 		super.getResponse().setAuthorised(status);
@@ -51,18 +47,36 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		Flight flight;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		flight = this.repositoryFlight.findFlightById(masterId);
+		flight = this.repository.findFlightById(masterId);
 
 		leg = new Leg();
-		leg.setStatus(LegStatus.ON_TIME);
 		leg.setFlight(flight);
+		leg.setIsDraftMode(true);
 
 		super.getBuffer().addData(leg);
 	}
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "isDraft");
+		int aircraftId;
+		Aircraft aircraft;
+		aircraftId = super.getRequest().getData("aircraft", int.class);
+		aircraft = this.repository.findAircraftById(aircraftId);
+
+		int departureAirportId;
+		Airport departureAirport;
+		departureAirportId = super.getRequest().getData("departureAirport", int.class);
+		departureAirport = this.repository.findAirportById(departureAirportId);
+
+		int arrivalAirportId;
+		Airport arrivalAirport;
+		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
+		arrivalAirport = this.repository.findAirportById(arrivalAirportId);
+
+		super.bindObject(leg, "flightNumber", "departure", "arrival", "status");
+		leg.setAircraft(aircraft);
+		leg.setDepartureAirport(departureAirport);
+		leg.setArrivalAirport(arrivalAirport);
 	}
 
 	@Override
@@ -77,7 +91,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void unbind(final Leg leg) {
-		assert leg != null;
 		Dataset dataset;
 
 		SelectChoices choices;
@@ -87,17 +100,17 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		SelectChoices arrivalAirportChoices;
 		Collection<Airport> airports;
 		airports = this.repository.findAllAirports();
-		departureAirportChoices = SelectChoices.from(airports, "IATAcode", leg.getDepartureAirport());
-		arrivalAirportChoices = SelectChoices.from(airports, "IATAcode", leg.getArrivalAirport());
+		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
+		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
 
 		SelectChoices selectedAircraft;
 		Collection<Aircraft> aircrafts;
 		aircrafts = this.repository.findAllAircrafts();
-		selectedAircraft = SelectChoices.from(aircrafts, "registrationNumber", leg.getAircraft());
+		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival");
-		dataset.put("masterId", leg.getFlight().getId());
-		dataset.put("isDraftMode", leg.getFlight().getIsDraftMode());
+		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
+		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
+		dataset.put("isDraftMode", true);
 		dataset.put("status", choices);
 		dataset.put("departureAirports", departureAirportChoices);
 		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());

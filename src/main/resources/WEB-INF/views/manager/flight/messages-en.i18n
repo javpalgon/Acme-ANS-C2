@@ -3,6 +3,11 @@ manager.flight.form.label.cost = Cost
 manager.flight.form.label.description = Description
 manager.flight.form.label.requiresSelfTransfer = Does it require self transfer?
 manager.flight.form.label.isDraftMode = Draft Mode
+manager.flight.form.label.departure = Departure
+manager.flight.form.label.arrival = Arrival
+manager.flight.form.label.originCity = Origin City
+manager.flight.form.label.destinationCity = Destination City
+manager.flight.form.label.layovers = Lay Overs
 
 manager.flight.create = Create
 manager.flight.form.button.delete = Delete
