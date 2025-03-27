@@ -53,6 +53,10 @@ public class Booking extends AbstractEntity {
 	@Automapped
 	private String				lastNibble;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
 
 	@Transient
 	public Money getPrice() {
