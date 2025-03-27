@@ -1,7 +1,10 @@
 
 package acme.features.manager.flight;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,13 +62,19 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		super.state(!legs.isEmpty(), "*", "manager.project.form.error.legsEmpty");
 
 		for (Leg leg : legs) {
-			boolean isPublished = true;
-			if (leg.getIsDraftMode()) {
-				isPublished = false;
-				super.state(isPublished, "*", "manager.flight.form.error.LegsNotPublished");
-			}
+			boolean isPublished = !leg.getIsDraftMode();
+			super.state(isPublished, "*", "manager.flight.form.error.LegsNotPublished");
+			if (leg.getArrival().before(leg.getDeparture()))
+				super.state(false, "legs", "acme.validation.leg.invalid-schedule.message");
 		}
 
+		List<Leg> sortedLegs = new ArrayList<>(legs);
+		sortedLegs.sort(Comparator.comparing(Leg::getDeparture));
+		boolean correctLeg = true;
+		for (int i = 0; i < sortedLegs.size() - 1 && correctLeg; i++)
+			if (sortedLegs.get(i).getArrival().after(sortedLegs.get(i + 1).getDeparture()) || !sortedLegs.get(i).getArrivalAirport().getCity().equals(sortedLegs.get(i + 1).getDepartureAirport().getCity()))
+				correctLeg = false;
+		super.state(correctLeg, "legs", "acme.validation.leg.invalid-legs.message");
 	}
 
 	@Override

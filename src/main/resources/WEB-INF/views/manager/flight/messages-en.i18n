@@ -11,6 +11,7 @@ manager.flight.form.button.publish = Publish
 manager.flight.form.button.create = Create
 manager.flight.form.title = Flight
 manager.flight.list.title = My flights
+manager.flight.leg = Legs
 
 manager.flight.form.error.notDraft = You have already published this flight.
 manager.flight.form.error.LegsNotPublished = Not all legs are published.

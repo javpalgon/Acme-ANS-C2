@@ -1,5 +1,5 @@
 
-package acme.features.manager.flight;
+package acme.features.manager.leg;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,16 +9,17 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.components.ValidatorService;
 import acme.entities.flight.Flight;
+import acme.entities.leg.Leg;
 import acme.realms.Manager;
 
 @GuiService
-public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flight> {
+public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Autowired
-	protected ManagerFlightRepository	repository;
+	protected ManagerLegRepository	repository;
 
 	@Autowired
-	protected ValidatorService			service;
+	protected ValidatorService		service;
 
 
 	@Override
@@ -44,25 +45,26 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 	}
 
 	@Override
-	public void bind(final Flight object) {
+	public void bind(final Leg object) {
 		assert object != null;
 		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
-	public void validate(final Flight object) {
+	public void validate(final Leg object) {
 		assert object != null;
+		;
 
 	}
 
 	@Override
-	public void perform(final Flight object) {
+	public void perform(final Leg object) {
 		assert object != null;
 		this.repository.save(object);
 	}
 
 	@Override
-	public void unbind(final Flight object) {
+	public void unbind(final Leg object) {
 		assert object != null;
 		Dataset dataset;
 		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
