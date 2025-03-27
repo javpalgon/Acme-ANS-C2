@@ -6,3 +6,11 @@ customer.booking.list.label.travelClass = Clase de Viaje
 customer.booking.list.label.lastNibble = Ultimos Dígitos
 customer.booking.list.label.isDraftMode = Modo Borrador
 customer.booking.list.label.totalPrice= Precio total
+
+customer.booking.form.title = Reserva
+customer.booking.form.label.locatorCode = Codigo Localizador
+customer.booking.form.label.purchaseMoment = Momento de Compra
+customer.booking.form.label.travelClass = Clase de Viaje
+customer.booking.form.label.lastNibble = Ultimos Dígitos
+customer.booking.form.label.isDraftMode = Modo Borrador
+customer.booking.form.label.totalPrice= Precio total
