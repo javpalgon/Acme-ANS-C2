@@ -24,3 +24,6 @@ customer.booking.form.error.duplicate-locatorCode=Este código de localizador ya
 customer.booking.form.error.invalid-purchaseMoment=La fecha de compra debe estar en el pasado.
 customer.booking.form.error.travelClass-required=Debe seleccionar una clase de viaje.
 customer.booking.form.error.invalid-lastNibble=Los últimos dígitos deben ser exactamente 4 números.
+
+customer.booking.list.button.create=Crear reserva
+customer.booking.form.label.flight=Vuelo

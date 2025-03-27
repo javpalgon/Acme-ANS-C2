@@ -26,3 +26,7 @@ customer.booking.form.error.duplicate-locatorCode= This locator code is already 
 customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in the past.
 customer.booking.form.error.travelClass-required= You must select a travel class.
 customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
+
+customer.booking.list.button.create= Create Booking
+customer.booking.form.label.flight= Flight
+
