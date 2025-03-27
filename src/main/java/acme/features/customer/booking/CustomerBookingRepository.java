@@ -22,4 +22,7 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	@Query("select br.passenger from BookingRecord br where br.booking.id = :bookingId")
 	Collection<Passenger> findPassengersByBooking(int bookingId);
 
+	@Query("select count(b) > 0 from Booking b where b.locatorCode = :locatorCode and b.id != :id")
+	boolean existsByLocatorCode(String locatorCode, int id);
+
 }

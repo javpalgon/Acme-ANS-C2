@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.datatypes.Money;
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
+import acme.entities.booking.Travelclass;
 import acme.realms.Customer;
 
 @GuiService
@@ -47,7 +49,8 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	@Override
 	public void unbind(final Booking object) {
 		assert object != null;
-		CustomerBookingShowService.logger.info("📦 Entrando en unbind() de Booking");
+		SelectChoices choices;
+		choices = SelectChoices.from(Travelclass.class, object.getTravelClass());
 
 		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
 
@@ -55,11 +58,10 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 		Money totalPrice = object.getPrice();
 		dataset.put("totalPrice", totalPrice);
-		CustomerBookingShowService.logger.info("💰 Precio total: {}", totalPrice);
+		dataset.put("travelClasses", choices);
 
 		dataset.put("hasPassengers", !passengers.isEmpty());
 		dataset.put("passengers", passengers);
-		CustomerBookingShowService.logger.info("🧍 Pasajeros: {}", passengers);
 
 		super.getResponse().addData(dataset);
 	}
