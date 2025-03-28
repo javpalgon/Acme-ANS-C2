@@ -64,7 +64,7 @@ public class Booking extends AbstractEntity {
 		Integer totalPassengers;
 		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
 
-		res = bookingRepository.findPriceByBookingId(this.flight.getId());
+		res = bookingRepository.findPriceByFlightId(this.flight.getId());
 		totalPassengers = bookingRepository.findNumberPassengersByBooking(this.getId());
 		Double totalPrice = res.getAmount() * totalPassengers;
 
