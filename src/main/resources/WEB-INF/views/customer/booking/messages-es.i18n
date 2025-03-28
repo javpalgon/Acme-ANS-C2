@@ -27,3 +27,7 @@ customer.booking.form.error.invalid-lastNibble=Los últimos dígitos deben ser e
 
 customer.booking.list.button.create=Crear reserva
 customer.booking.form.label.flight=Vuelo
+
+customer.booking.form.button.publish=Publicar reserva
+customer.booking.form.error.last-nibble-required=Debes introducir los 4 últimos dígitos de la tarjeta para publicar la reserva.
+acme.validation.length=El valor no tiene una longitud válida.

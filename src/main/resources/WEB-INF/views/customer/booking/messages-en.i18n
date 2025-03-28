@@ -27,6 +27,10 @@ customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in
 customer.booking.form.error.travelClass-required= You must select a travel class.
 customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
 
+customer.booking.form.button.create= Create Booking
 customer.booking.list.button.create= Create Booking
 customer.booking.form.label.flight= Flight
 
+customer.booking.form.button.publish= Publish Booking
+customer.booking.form.error.last-nibble-required= You must enter the last 4 digits of the card to publish the booking.
+acme.validation.length= The value does not have a valid length.

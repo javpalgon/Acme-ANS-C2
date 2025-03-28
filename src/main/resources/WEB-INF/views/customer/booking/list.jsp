@@ -9,7 +9,6 @@
 	<acme:list-column code="customer.booking.list.label.travelClass" path="travelClass" width="20%" />
 	<acme:list-column code="customer.booking.list.label.totalPrice" path="totalPrice" />
 	<acme:list-column code="customer.booking.list.label.lastNibble" path="lastNibble" width="20%" />
-	<acme:list-column code="customer.booking.list.label.isDraftMode" path="isDraftMode" width="20%" />
 </acme:list>
 
 <acme:button code="customer.booking.list.button.create" action="/customer/booking/create"/>

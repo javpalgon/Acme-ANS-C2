@@ -9,10 +9,9 @@
 	<acme:input-select code="customer.booking.form.label.travelClass" path="travelClass" choices="${travelClasses}"/>
 	<acme:input-money code="customer.booking.form.label.totalPrice" path="totalPrice" readonly="true"/>
 	<acme:input-textbox code="customer.booking.form.label.lastNibble" path="lastNibble"/>
-	<acme:input-checkbox code="customer.booking.form.label.isDraftMode" path="isDraftMode"/>
-<jstl:if test="${_command == 'create'}">
-    <acme:input-select 
-        code="customer.booking.form.label.flight" 
+	<jstl:if test="${_command == 'create'}">
+    	<acme:input-select 
+ code="customer.booking.form.label.flight" 
         path="flight" 
         choices="${flights}" />
 </jstl:if>
@@ -27,8 +26,10 @@
 	</jstl:if>	
 
 	<jstl:choose>
-	    <jstl:when test="${(_command == 'update' || _command == 'show') && isDraftMode}">
+	    <jstl:when test="${(_command == 'update' || _command == 'show' || _command == 'publish') && isDraftMode}">
 	        <acme:submit code="customer.booking.form.button.save" action="/customer/booking/update"/>
+	    	<acme:submit code="customer.booking.form.button.publish" action="/customer/booking/publish"/>
+	    	
 	    </jstl:when>
 	</jstl:choose>
 		

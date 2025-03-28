@@ -24,7 +24,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true); // Cualquiera con rol Customer puede crear
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void bind(final Booking object) {
 		assert object != null;
-		super.bindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode", "flight");
+		super.bindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "flight");
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking object) {
 		Dataset dataset;
-		dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
+		dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
 
 		Collection<Flight> flights = this.repository.findPublishedFlights();
 		SelectChoices flightChoices = SelectChoices.from(flights, "tag", object.getFlight());
