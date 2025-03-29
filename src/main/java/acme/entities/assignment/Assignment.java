@@ -50,6 +50,10 @@ public class Assignment extends AbstractEntity {
 	private String				remarks;
 
 	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
+	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
 	private Leg					leg;

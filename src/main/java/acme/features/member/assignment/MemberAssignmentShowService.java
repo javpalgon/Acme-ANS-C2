@@ -52,6 +52,8 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 		dataset.put("availabilityStatus", object.getMember().getAvailabilityStatus());
 		dataset.put("memberName", object.getMember().getUserAccount().getUsername());
 
+		dataset.put("readonly", true);
+
 		super.getResponse().addData(dataset);
 	}
 }

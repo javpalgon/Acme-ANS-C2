@@ -47,6 +47,7 @@ public class MemberAssignmentListCompletedService extends AbstractGuiService<Mem
 
 		dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
 		dataset.put("leg.flightNumber", object.getLeg().getFlightNumber());
+		dataset.put("readonly", true);
 
 		super.getResponse().addData(dataset);
 	}

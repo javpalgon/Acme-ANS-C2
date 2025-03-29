@@ -1,5 +1,5 @@
 key,key:userAccount,key:airline,employeeCode,phoneNumber,languageSkills,yearsOfExperience,availabilityStatus,salary
-member-01,user-account-member-01,airline-00,JPG123456,+3476543210,"Fluent in Spanish with native proficiency; advanced English comprehension and conversation skills; basic French for professional communication; beginner-level German; very familiarity with Italian pronunciation and some expressions for daily interactions.",199,AVAILABLE,EUR 1.00
+member-01,user-account-member-01,airline-00,JPG123456,+3476543210,"Fluent in Spanish with native proficiency; advanced English comprehension and conversation skills; basic French for professional communication; beginner-level German; very familiarity with Italian pronunciation and some expressions for daily interactions.",199,ON_VACATION,EUR 1.00
 member-02,user-account-member-02,airline-00,AGL789012,+3476543211,"Only native American English.",,AVAILABLE,EUR 999999.00
 member-03,user-account-member-03,airline-01,CRM345678,+3476543212,"Native Spanish; proficient English; basic Portuguese and Italian; limited French exposure.",200,AVAILABLE,EUR 5500.00
 member-04,user-account-member-04,airline-00,LM901234,+3476543213,"Fluent French; advanced Spanish; intermediate English; basic German.",7,AVAILABLE,EUR 5700.00

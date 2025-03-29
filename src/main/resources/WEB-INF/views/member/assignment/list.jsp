@@ -13,3 +13,5 @@
     <acme:list-column code="member.assignment.list.label.remarks" path="remarks" width="25%"/>
     <acme:list-column code="member.assignment.list.label.leg" path="leg.flightNumber" width="20%"/>
 </acme:list>
+
+<acme:button code="member.assignment.list.button.create" action="/member/assignment/create"/>

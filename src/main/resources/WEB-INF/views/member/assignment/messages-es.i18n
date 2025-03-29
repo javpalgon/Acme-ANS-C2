@@ -7,7 +7,8 @@ member.assignment.list.label.role = Rol
 member.assignment.list.label.lastUpdate = Última actualización  
 member.assignment.list.label.status = Estado  
 member.assignment.list.label.remarks = Observaciones  
-member.assignment.list.label.leg = Número de vuelo  
+member.assignment.list.label.leg = Número de vuelo
+member.assignment.list.button.create=Crear nueva asignación  
 
 # Assignment Info
 member.assignment.form.label.role=Rol
@@ -34,3 +35,17 @@ member.assignment.form.label.languageSkills=Idiomas
 member.assignment.form.label.yearsOfExperience=Años de experiencia
 member.assignment.form.label.salary=Salario
 member.assignment.form.label.availabilityStatus=Disponibilidad
+
+member.assignment.form.label.leg=Etapa
+member.assignment.form.label.member=Miembro
+member.assignment.form.label.isDraftMode=Modo borrador
+member.assignment.form.button.create=Crear nueva asignación
+
+# Errores
+member.assignment.form.error.lastUpdate-future=La fecha de última actualización no puede ser futura
+member.assignment.form.error.leg-occurred=El vuelo seleccionado ya ha ocurrido y no puede ser asignado
+member.assignment.form.error.member-unavailable=Solo se pueden asignar miembros de tripulación disponibles
+member.assignment.form.error.pilot-exists=Cada vuelo solo puede tener un piloto
+member.assignment.form.error.copilot-exists=Cada vuelo solo puede tener un copiloto
+member.assignment.form.error.duplicate-assignment=Un miembro no puede ser asignado múltiples veces a la misma etapa
+member.assignment.form.error.schedule-conflict=El miembro ya tiene una asignación activa que se solapa con este horario
