@@ -1,0 +1,7 @@
+customer.passenger.list.title=My Passengers
+
+customer.passenger.list.label.fullName=Full Name
+customer.passenger.list.label.passport=Passport
+customer.passenger.list.label.email=Email
+customer.passenger.list.label.birth=Birth Date
+customer.passenger.list.label.specialNeeds=Special Needs

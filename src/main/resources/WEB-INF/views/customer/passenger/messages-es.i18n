@@ -1,0 +1,7 @@
+customer.passenger.list.title=Mis Pasajeros
+
+customer.passenger.list.label.fullName=Nombre Completo
+customer.passenger.list.label.passport=Pasaporte
+customer.passenger.list.label.email=Correo Electrónico
+customer.passenger.list.label.birth=Fecha de Nacimiento
+customer.passenger.list.label.specialNeeds=Necesidades Especiales
