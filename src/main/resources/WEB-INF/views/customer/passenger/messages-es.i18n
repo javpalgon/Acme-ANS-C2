@@ -5,3 +5,5 @@ customer.passenger.list.label.passport=Pasaporte
 customer.passenger.list.label.email=Correo Electrónico
 customer.passenger.list.label.birth=Fecha de Nacimiento
 customer.passenger.list.label.specialNeeds=Necesidades Especiales
+
+customer.passenger.form.title= Pasajero
