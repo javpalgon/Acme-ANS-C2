@@ -20,13 +20,13 @@ public class CustomerPassengerListService extends AbstractGuiService<Customer, P
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true); // El usuario ya está autenticado como Customer
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		int customerId = super.getRequest().getPrincipal().getAccountId();
-		Collection<Passenger> passengers = this.repository.findPassengersByCustomerId(customerId);
+		int bookingId = super.getRequest().getData("bookingId", int.class);
+		Collection<Passenger> passengers = this.repository.findPassengersByBookingId(bookingId);
 		super.getBuffer().addData(passengers);
 	}
 

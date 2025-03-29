@@ -18,7 +18,10 @@
 	
 
 	<jstl:if test="${hasPassengers}">
-		<acme:input-textarea code="customer.booking.form.label.passengers" path="passengers" readonly="true"/>
+		<acme:input-textarea code="customer.booking.form.label.passengers2" path="passengers" readonly="true"/>
+		<acme:button 
+        code="customer.booking.show.button.passengers" 
+        action="/customer/passenger/list?bookingId=${id}" />
 	</jstl:if>
 
 	<jstl:if test="${!hasPassengers}">

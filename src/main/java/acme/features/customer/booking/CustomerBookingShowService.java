@@ -62,6 +62,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 		dataset.put("hasPassengers", !passengers.isEmpty());
 		dataset.put("passengers", passengers);
+		dataset.put("id", object.getId());
 
 		super.getResponse().addData(dataset);
 	}

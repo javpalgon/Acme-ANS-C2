@@ -53,7 +53,6 @@ master.menu.customer.list-my-bookings = List my bookings
 
 master.menu.manager = Manager
 master.menu.manager.list-my-flights = List my flights
-master.menu.customer.list-my-passengers = List my passengers
 
 # master.menu.user-account ####################################################
 

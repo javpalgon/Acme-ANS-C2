@@ -10,6 +10,4 @@
 	<acme:input-textbox code="customer.passenger.list.label.birth" path="birth"/>
 	<acme:input-textbox code="customer.passenger.list.label.specialNeeds" path="specialNeeds"/>
 
-
-
 </acme:form>
