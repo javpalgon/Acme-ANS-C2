@@ -57,6 +57,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 
 		assignment.setLeg(this.repository.findLegById(legId));
 		assignment.setMember(this.repository.findMemberById(memberId));
+		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 	}
 
 	@Override
@@ -69,12 +70,10 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 			super.state(assignment.getIsDraftMode(), "*", "member.assignment.form.error.notDraft", "isDraftMode");
 
 		if (assignment.getRole() == Role.PILOT && !original.getRole().equals(assignment.getRole()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT), "role", "member.assignment.form.error.pilot-exists");
+			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
 
 		if (assignment.getRole() == Role.CO_PILOT && !original.getRole().equals(assignment.getRole()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT), "role", "member.assignment.form.error.copilot-exists");
-
-		super.state(assignment.getLastUpdate() == null || !assignment.getLastUpdate().after(MomentHelper.getCurrentMoment()), "lastUpdate", "member.assignment.form.error.lastUpdate-future");
+			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
 
 		super.state(assignment.getLeg() == null || !this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
 
@@ -85,7 +84,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 			Integer legId = assignment.getLeg().getId();
 			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
 
-			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId);
+			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
 
 			super.state(!duplicateAssignment, "member", "member.assignment.form.error.duplicate-assignment");
 
@@ -99,10 +98,10 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	}
 
 	@Override
-	public void perform(final Assignment object) {
-		assert object != null;
-
-		this.repository.save(object);
+	public void perform(final Assignment assignment) {
+		assert assignment != null;
+		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		this.repository.save(assignment);
 	}
 
 	@Override

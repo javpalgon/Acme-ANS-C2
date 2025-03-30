@@ -50,21 +50,22 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Leg l WHERE l.id = :legId AND l.departure < :currentDate")
 	boolean hasLegOccurred(@Param("legId") int legId, @Param("currentDate") Date currentDate);
 
-	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE a.leg.id = :legId AND a.role = :role")
-	boolean legHasPilot(int legId, Role role);
+	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus")
+	boolean legHasPilot(@Param("legId") int legId, @Param("role") Role role, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE a.leg.id = :legId AND a.role = :role")
-	boolean legHasCoPilot(int legId, Role role);
+	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus")
+	boolean legHasCoPilot(@Param("legId") int legId, @Param("role") Role role, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.member.id = :memberId AND " + "a.leg.id = :legId AND " + "a.id <> :excludeAssignmentId")
-	boolean existsByMemberAndLeg(@Param("memberId") Integer memberId, @Param("legId") Integer legId, @Param("excludeAssignmentId") Integer excludeAssignmentId);
+	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.member.id = :memberId AND a.leg.id = :legId AND " + "a.id <> :excludeAssignmentId AND a.status != :cancelledStatus")
+	boolean existsByMemberAndLeg(@Param("memberId") Integer memberId, @Param("legId") Integer legId, @Param("excludeAssignmentId") Integer excludeAssignmentId, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.member.id = :memberId AND " + "a.status <> :cancelledStatus AND " + "a.id <> :excludeAssignmentId AND " + "((a.leg.departure < :arrival AND a.leg.arrival > :departure))")
+	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.member.id = :memberId AND a.status <> :cancelledStatus AND " + "a.id <> :excludeAssignmentId AND " + "((a.leg.departure < :arrival AND a.leg.arrival > :departure))")
 	boolean hasScheduleConflict(@Param("memberId") Integer memberId, @Param("departure") Date departure, @Param("arrival") Date arrival, @Param("excludeAssignmentId") Integer excludeAssignmentId, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE a.leg.id = :legId AND a.role = 'PILOT' AND a.id != :excludeId")
-	boolean legHasOtherPilot(@Param("legId") Integer legId, @Param("excludeId") Integer excludeId);
+	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = 'PILOT' AND " + "a.id != :excludeId AND a.status != :cancelledStatus")
+	boolean legHasOtherPilot(@Param("legId") Integer legId, @Param("excludeId") Integer excludeId, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE a.leg.id = :legId AND a.role = 'CO_PILOT' AND a.id != :excludeId")
-	boolean legHasOtherCoPilot(@Param("legId") Integer legId, @Param("excludeId") Integer excludeId);
+	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = 'CO_PILOT' AND " + "a.id != :excludeId AND a.status != :cancelledStatus")
+	boolean legHasOtherCoPilot(@Param("legId") Integer legId, @Param("excludeId") Integer excludeId, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
+
 }

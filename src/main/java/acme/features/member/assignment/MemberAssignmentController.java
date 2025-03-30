@@ -44,7 +44,7 @@ public class MemberAssignmentController extends AbstractGuiController<Member, As
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
-		//super.addBasicCommand("publish", this.publishService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 
 }

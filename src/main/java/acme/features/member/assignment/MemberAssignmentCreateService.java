@@ -24,16 +24,13 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		//Member member = this.repository.findMemberById(super.getRequest().getPrincipal().getActiveRealm().getId());
-		//boolean isLeadAttendant = member != null && !this.repository.findByMemberAndRole(member, Role.LEAD_ATTENDANT).isEmpty();
 		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Member.class));
 	}
 
 	@Override
 	public void load() {
 		Assignment assignment = new Assignment();
-		assignment.setIsDraftMode(true);
-		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+
 		super.getBuffer().addData(assignment);
 	}
 
@@ -45,14 +42,12 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		Integer legId = super.getRequest().getData("leg", Integer.class);
 		Leg leg = legId != null ? this.repository.findLegById(legId) : null;
 		assignment.setLeg(leg);
-
+		assignment.setIsDraftMode(true);
 	}
 
 	@Override
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
-
-		super.state(assignment.getLastUpdate() == null || !assignment.getLastUpdate().after(MomentHelper.getCurrentMoment()), "lastUpdate", "member.assignment.form.error.lastUpdate-future");
 
 		super.state(assignment.getLeg() == null || !this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
 
@@ -63,7 +58,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 			Integer legId = assignment.getLeg().getId();
 			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
 
-			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId);
+			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
 
 			super.state(!duplicateAssignment, "member", "member.assignment.form.error.duplicate-assignment");
 
@@ -75,10 +70,10 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		}
 
 		if (assignment.getRole() == Role.PILOT)
-			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT), "role", "member.assignment.form.error.pilot-exists");
+			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
 
 		if (assignment.getRole() == Role.CO_PILOT)
-			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT), "role", "member.assignment.form.error.copilot-exists");
+			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
 	}
 
 	@Override
