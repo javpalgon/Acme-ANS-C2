@@ -24,7 +24,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		Member member = this.repository.findMemberById(super.getRequest().getPrincipal().getActiveRealm().getId());
+		//Member member = this.repository.findMemberById(super.getRequest().getPrincipal().getActiveRealm().getId());
 		//boolean isLeadAttendant = member != null && !this.repository.findByMemberAndRole(member, Role.LEAD_ATTENDANT).isEmpty();
 		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Member.class));
 	}
@@ -84,6 +84,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
+		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		this.repository.save(assignment);
 	}
 
@@ -93,8 +94,8 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
 
-		dataset.put("roles", SelectChoices.from(Role.class, assignment.getRole()));
-		dataset.put("statuses", SelectChoices.from(AssignmentStatus.class, assignment.getStatus()));
+		dataset.put("role", SelectChoices.from(Role.class, assignment.getRole()));
+		dataset.put("status", SelectChoices.from(AssignmentStatus.class, assignment.getStatus()));
 		dataset.put("legs", SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg()));
 		dataset.put("members", SelectChoices.from(this.repository.findAllMembers(), "employeeCode", assignment.getMember()));
 

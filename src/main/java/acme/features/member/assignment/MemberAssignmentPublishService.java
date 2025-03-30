@@ -8,7 +8,6 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
-import acme.entities.assignment.Role;
 import acme.realms.Member;
 
 @GuiService
@@ -29,11 +28,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		// Obtener el Member actual desde el repositorio
 		Member member = this.repository.findMemberById(memberId);
 
-		// Verificar si el Member tiene el rol "LEAD_ATTENDANT"
-		boolean isLeadAttendant = !this.repository.findByMemberAndRole(member, Role.LEAD_ATTENDANT).isEmpty();
-
-		// Autorizar si el Member tiene el rol
-		super.getResponse().setAuthorised(isLeadAttendant);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override

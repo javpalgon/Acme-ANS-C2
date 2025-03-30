@@ -4,9 +4,12 @@ package acme.features.member.assignment;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
+import acme.entities.assignment.AssignmentStatus;
+import acme.entities.assignment.Role;
 import acme.realms.Member;
 
 @GuiService
@@ -52,7 +55,19 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 		dataset.put("availabilityStatus", object.getMember().getAvailabilityStatus());
 		dataset.put("memberName", object.getMember().getUserAccount().getUsername());
 
-		dataset.put("readonly", true);
+		dataset.put("isDraftMode", object.getIsDraftMode());
+
+		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, object.getStatus());
+		SelectChoices roleChoices = SelectChoices.from(Role.class, object.getRole());
+		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", object.getLeg());
+		SelectChoices memberChoices = SelectChoices.from(this.repository.findAllMembers(), "employeeCode", object.getMember());
+
+		dataset.put("role", roleChoices);
+		dataset.put("status", statusChoices);
+		dataset.put("leg", legChoices.getSelected().getKey());
+		dataset.put("legs", legChoices);
+		dataset.put("member", memberChoices.getSelected().getKey());
+		dataset.put("members", memberChoices);
 
 		super.getResponse().addData(dataset);
 	}
