@@ -32,7 +32,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 
 		status = assignment.getIsDraftMode();
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override

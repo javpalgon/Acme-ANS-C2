@@ -1,0 +1,78 @@
+
+package acme.features.member.assignment;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acme.client.components.models.Dataset;
+import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
+import acme.entities.assignment.Assignment;
+import acme.realms.Member;
+
+@GuiService
+public class MemberAssignmentDeleteService extends AbstractGuiService<Member, Assignment> {
+
+	@Autowired
+	private MemberAssignmentRepository repository;
+
+
+	@Override
+	public void authorise() {
+		boolean status;
+		int assignmentId;
+		Assignment assignment;
+
+		assignmentId = super.getRequest().getData("id", int.class);
+		assignment = this.repository.findOneById(assignmentId);
+		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class);
+
+		super.getResponse().setAuthorised(status);
+	}
+
+	@Override
+	public void load() {
+		Assignment assignment;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		assignment = this.repository.findOneById(id);
+
+		super.getBuffer().addData(assignment);
+	}
+
+	@Override
+	public void bind(final Assignment assignment) {
+		assert assignment != null;
+
+		super.bindObject(assignment, "role", "status", "remarks", "leg", "member");
+	}
+
+	@Override
+	public void validate(final Assignment assignment) {
+		assert assignment != null;
+
+		if (!assignment.getIsDraftMode())
+			super.state(false, "*", "member.assignment.form.error.notDraft");
+	}
+
+	@Override
+	public void perform(final Assignment assignment) {
+		assert assignment != null;
+
+		this.repository.deleteActivityLogsByAssignmentId(assignment.getId());
+
+		this.repository.delete(assignment);
+
+	}
+
+	@Override
+	public void unbind(final Assignment assignment) {
+		assert assignment != null;
+
+		Dataset dataset;
+		dataset = super.unbindObject(assignment, "role", "status", "remarks", "isDraftMode", "leg", "member");
+
+		super.getResponse().addData(dataset);
+	}
+
+}

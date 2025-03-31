@@ -35,7 +35,7 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 	public void unbind(final Assignment object) {
 		assert object != null;
 
-		Dataset dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
+		Dataset dataset = super.unbindObject(object, "role", "isDraftMode", "lastUpdate", "status", "remarks");
 
 		// Leg (Flight) information
 		dataset.put("flightNumber", object.getLeg().getFlightNumber());
@@ -54,8 +54,6 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 		dataset.put("salary", object.getMember().getSalary());
 		dataset.put("availabilityStatus", object.getMember().getAvailabilityStatus());
 		dataset.put("memberName", object.getMember().getUserAccount().getUsername());
-
-		dataset.put("isDraftMode", object.getIsDraftMode());
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, object.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, object.getRole());

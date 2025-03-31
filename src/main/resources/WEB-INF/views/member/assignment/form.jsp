@@ -48,16 +48,17 @@
         
         <acme:input-money code="member.assignment.form.label.salary" path="salary" readonly="true"/>
         
-                <acme:input-integer code="member.assignment.form.label.yearsOfExperience" path="yearsOfExperience" readonly="true"/>
+        <acme:input-textbox code="member.assignment.form.label.yearsOfExperience" path="yearsOfExperience" readonly="true"/>
         
         <acme:input-textbox code="member.assignment.form.label.availabilityStatus" path="availabilityStatus" readonly="true"/>
     </jstl:if>
     
     <!-- Conditional buttons -->
 	<jstl:choose>
-	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish') && isDraftMode == true}">
+	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete') && isDraftMode == true}">
 	        <acme:submit code="member.assignment.form.button.update" action="/member/assignment/update"/>
 	        <acme:submit code="member.assignment.form.button.publish" action="/member/assignment/publish"/>
+	        <acme:submit code="member.assignment.form.button.delete" action="/member/assignment/delete"/>
 	    </jstl:when>
 	    <jstl:when test="${_command == 'create'}">
 	        <acme:submit code="member.assignment.form.button.create" action="/member/assignment/create"/>

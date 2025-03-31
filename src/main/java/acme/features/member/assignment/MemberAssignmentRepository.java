@@ -5,9 +5,11 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.assignment.Assignment;
@@ -68,4 +70,8 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = 'CO_PILOT' AND " + "a.id != :excludeId AND a.status != :cancelledStatus")
 	boolean legHasOtherCoPilot(@Param("legId") Integer legId, @Param("excludeId") Integer excludeId, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
+	@Modifying
+	@Transactional
+	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId")
+	void deleteActivityLogsByAssignmentId(int assignmentId);
 }

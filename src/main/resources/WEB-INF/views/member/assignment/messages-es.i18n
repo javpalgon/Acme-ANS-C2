@@ -58,4 +58,4 @@ member.assignment.form.error.flight-already-landed=No se puede editar la asignac
 # Botones adicionales
 member.assignment.form.button.update=Actualizar asignación
 member.assignment.form.button.publish=Publicar asignación
-
+member.assignment.form.button.delete=Eliminar asignación

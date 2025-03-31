@@ -30,7 +30,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	@Override
 	public void load() {
 		Assignment assignment = new Assignment();
-
+		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		super.getBuffer().addData(assignment);
 	}
 
