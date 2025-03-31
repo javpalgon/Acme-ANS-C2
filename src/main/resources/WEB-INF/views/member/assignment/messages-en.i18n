@@ -1,0 +1,61 @@
+# member.assignment.list.completed ##########################################################
+
+member.assignment.list.title = Your Assignments List  
+member.assignment.form.title = Selected Assignment Details  
+
+member.assignment.list.label.role = Role  
+member.assignment.list.label.lastUpdate = Last Update  
+member.assignment.list.label.status = Status  
+member.assignment.list.label.remarks = Remarks  
+member.assignment.list.label.leg = Flight Number  
+member.assignment.list.button.create = Create New Assignment  
+
+# Assignment Info
+member.assignment.form.label.role = Role
+member.assignment.form.label.lastUpdate = Last Update
+member.assignment.form.label.status = Status
+member.assignment.form.label.remarks = Remarks
+
+# Flight Leg Info
+member.assignment.form.label.flightInfo = Flight Leg Information
+member.assignment.form.label.flightNumber = Flight Number
+member.assignment.form.label.departure = Departure
+member.assignment.form.label.arrival = Arrival
+member.assignment.form.label.legStatus = Flight Leg Status
+member.assignment.form.label.departureAirport = Departure Airport
+member.assignment.form.label.arrivalAirport = Arrival Airport
+member.assignment.form.label.aircraft = Aircraft
+
+# Member Info
+member.assignment.form.label.memberInfo = Member Information
+member.assignment.form.label.memberName = Name
+member.assignment.form.label.employeeCode = Employee Code
+member.assignment.form.label.phoneNumber = Phone Number
+member.assignment.form.label.languageSkills = Languages
+member.assignment.form.label.yearsOfExperience = Years of Experience
+member.assignment.form.label.salary = Salary
+member.assignment.form.label.availabilityStatus = Availability
+
+member.assignment.form.label.leg = Leg
+member.assignment.form.label.member = Member
+member.assignment.form.label.isDraftMode = Draft Mode
+member.assignment.form.button.create = Create New Assignment
+
+# Errors
+member.assignment.form.error.lastUpdate-future = The last update date cannot be in the future
+member.assignment.form.error.leg-occurred = The selected flight has already occurred and cannot be assigned
+member.assignment.form.error.member-unavailable = Only available crew members can be assigned
+member.assignment.form.error.pilot-exists = Each flight can only have one pilot
+member.assignment.form.error.copilot-exists = Each flight can only have one copilot
+member.assignment.form.error.duplicate-assignment = A member cannot be assigned multiple times to the same leg
+member.assignment.form.error.schedule-conflict = The member already has an active assignment that overlaps with this schedule
+
+# Additional validation messages
+member.assignment.form.error.notDraft = Only draft assignments can be edited
+member.assignment.form.error.cannot-be-cancelled = The status cannot be set to Cancelled
+member.assignment.form.error.flight-already-landed = The assignment cannot be edited because the flight has already landed
+
+# Additional buttons
+member.assignment.form.button.update = Update Assignment
+member.assignment.form.button.publish = Publish Assignment
+member.assignment.form.button.delete = Delete Assignment

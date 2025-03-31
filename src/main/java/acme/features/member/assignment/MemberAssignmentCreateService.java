@@ -1,6 +1,8 @@
 
 package acme.features.member.assignment;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -24,24 +26,14 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int assignmentId;
-		Assignment assignment;
-		int memberId;
-
-		assignmentId = super.getRequest().getData("id", int.class);
-		assignment = this.repository.findOneById(assignmentId);
-		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Member.class));
 	}
 
 	@Override
 	public void load() {
 		Assignment assignment = new Assignment();
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		assignment.setIsDraftMode(true);
 		super.getBuffer().addData(assignment);
 	}
 
@@ -49,11 +41,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
-		super.bindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode", "member");
-		Integer legId = super.getRequest().getData("leg", Integer.class);
-		Leg leg = legId != null ? this.repository.findLegById(legId) : null;
-		assignment.setLeg(leg);
-		assignment.setIsDraftMode(true);
+		super.bindObject(assignment, "role", "status", "remarks", "leg", "member");
 	}
 
 	@Override
@@ -90,7 +78,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
-		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+
 		this.repository.save(assignment);
 	}
 
@@ -100,9 +88,11 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
 
+		List<Leg> validLegs = this.repository.findAllLegs();
+
 		dataset.put("role", SelectChoices.from(Role.class, assignment.getRole()));
 		dataset.put("status", SelectChoices.from(AssignmentStatus.class, assignment.getStatus()));
-		dataset.put("legs", SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg()));
+		dataset.put("legs", SelectChoices.from(validLegs, "flightNumber", assignment.getLeg()));
 		dataset.put("members", SelectChoices.from(this.repository.findAllMembers(), "employeeCode", assignment.getMember()));
 
 		super.getResponse().addData(dataset);

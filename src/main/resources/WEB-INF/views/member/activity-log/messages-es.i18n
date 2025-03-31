@@ -1,0 +1,7 @@
+# Activity Log
+member.activityLog.list.label.incidentType = Tipo de incidente
+member.activityLog.list.label.description = Descripción
+member.activityLog.list.label.severityLevel = Nivel de severidad
+member.activityLog.list.label.registeredAt = Fecha de registro
+
+member.activityLog.list.button.create = Crear nuevo registro de actividad

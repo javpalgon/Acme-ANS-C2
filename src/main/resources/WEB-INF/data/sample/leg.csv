@@ -4,7 +4,7 @@ leg-02,VYB0001,2024/11/22 14:20,2024/11/22 17:45,DELAYED,airport-02,airport-01,f
 leg-03,AEX0002,2023/08/05 21:10,2023/08/06 00:30,CANCELLED,airport-01,airport-03,flight-02,aircraft-03,false
 leg-04,LNA0003,2025/06/30 08:45,2025/06/30 12:00,ON_TIME,airport-03,airport-04,flight-01,aircraft-04,true
 leg-05,IBV0004,2024/02/14 11:15,2024/02/14 14:30,LANDED,airport-04,airport-01,flight-01,aircraft-01,false
-leg-06,VYB0005,2025/09/18 19:30,2025/09/18 22:45,LANDED,airport-02,airport-01,flight-02,aircraft-02,false
+leg-06,VYB0005,2025/09/18 19:30,2025/09/18 22:45,ON_TIME,airport-02,airport-01,flight-02,aircraft-02,false
 leg-07,AEX0006,2023/12/24 05:20,2023/12/24 08:40,LANDED,airport-03,airport-02,flight-01,aircraft-03,false
 leg-08,LNA0007,2025/04/01 16:10,2025/04/01 19:25,CANCELLED,airport-01,airport-02,flight-01,aircraft-04,true
 leg-09,IBV0008,2024/07/07 13:45,2024/07/07 17:00,LANDED,airport-01,airport-03,flight-02,aircraft-01,false

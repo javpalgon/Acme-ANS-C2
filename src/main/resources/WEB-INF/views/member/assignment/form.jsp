@@ -59,9 +59,14 @@
 	        <acme:submit code="member.assignment.form.button.update" action="/member/assignment/update"/>
 	        <acme:submit code="member.assignment.form.button.publish" action="/member/assignment/publish"/>
 	        <acme:submit code="member.assignment.form.button.delete" action="/member/assignment/delete"/>
+	        <acme:submit code="member.activityLog.form.button.list" action="/member/activity-log/list"/>
+	        
 	    </jstl:when>
 	    <jstl:when test="${_command == 'create'}">
 	        <acme:submit code="member.assignment.form.button.create" action="/member/assignment/create"/>
+	    </jstl:when>
+	    <jstl:when test="${_command == 'show'}">
+	        <acme:submit code="member.activityLog.form.button.list" action="/member/activity-log/list"/>
 	    </jstl:when>
 	</jstl:choose>
 </acme:form>
