@@ -13,7 +13,8 @@ manager.flight.form.title = Flight
 manager.flight.list.title = My flights
 
 manager.flight.form.error.notDraft = You have already published this flight.
-manager.flight.form.error.LegsNotPublished = Not all legs are published!
+manager.flight.form.error.LegsNotPublished = Not all legs are published.
+manager.project.form.error.legsEmpty = Flight has no legs.
 
 manager.flight.list.label.tag = Tag
 manager.flight.list.label.cost = Cost
