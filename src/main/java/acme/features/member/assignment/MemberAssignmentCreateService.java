@@ -24,7 +24,18 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Member.class));
+		boolean status;
+		int assignmentId;
+		Assignment assignment;
+		int memberId;
+
+		assignmentId = super.getRequest().getData("id", int.class);
+		assignment = this.repository.findOneById(assignmentId);
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

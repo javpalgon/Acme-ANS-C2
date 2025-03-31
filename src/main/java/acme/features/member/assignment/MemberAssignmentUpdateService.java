@@ -24,15 +24,17 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	@Override
 	public void authorise() {
 		boolean status;
-		int masterId;
+		int assignmentId;
+		int memberId;
 		Assignment assignment;
 
-		masterId = super.getRequest().getData("id", int.class);
-		assignment = this.repository.findOneById(masterId);
+		assignmentId = super.getRequest().getData("id", int.class);
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		assignment = this.repository.findOneById(assignmentId);
 
-		status = assignment.getIsDraftMode();
+		status = assignment.getIsDraftMode() && assignment.getMember().getId() == memberId;
 
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

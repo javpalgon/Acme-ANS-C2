@@ -21,7 +21,15 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 
 	@Override
 	public void authorise() {
-		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Member.class);
+		int assignmentId;
+		int memberId;
+		Assignment assignment;
+
+		assignmentId = super.getRequest().getData("id", int.class);
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		assignment = this.repository.findOneById(assignmentId);
+
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 		super.getResponse().setAuthorised(status);
 	}
 

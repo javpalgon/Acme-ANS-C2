@@ -21,10 +21,13 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 		boolean status;
 		int assignmentId;
 		Assignment assignment;
+		int memberId;
 
 		assignmentId = super.getRequest().getData("id", int.class);
 		assignment = this.repository.findOneById(assignmentId);
-		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class);
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 
 		super.getResponse().setAuthorised(status);
 	}
