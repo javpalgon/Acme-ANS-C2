@@ -4,10 +4,16 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="customer.passenger.list.label.fullName" path="fullName"/>	
-	<acme:input-textbox code="customer.passenger.list.label.passport" path="passport"/>	
-	<acme:input-textbox code="customer.passenger.list.label.email" path="email"/>
-	<acme:input-textbox code="customer.passenger.list.label.birth" path="birth"/>
-	<acme:input-textbox code="customer.passenger.list.label.specialNeeds" path="specialNeeds"/>
+	<acme:input-textbox code="customer.passenger.form.label.fullName" path="fullName"/>	
+	<acme:input-textbox code="customer.passenger.form.label.passport" path="passport"/>	
+	<acme:input-textbox code="customer.passenger.form.label.email" path="email"/>
+	<acme:input-textbox code="customer.passenger.form.label.birth" path="birth"/>
+	<acme:input-textbox code="customer.passenger.form.label.specialNeeds" path="specialNeeds"/>
 
+	<jstl:choose>
+	    <jstl:when test="${(_command == 'update' ||  _command == 'show') && isDraftMode}">
+	        <acme:submit code="customer.passenger.form.button.save" action="/customer/passenger/update"/>    	
+	    </jstl:when>
+	</jstl:choose>
 </acme:form>
+

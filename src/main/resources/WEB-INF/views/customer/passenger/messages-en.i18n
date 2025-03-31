@@ -7,3 +7,18 @@ customer.passenger.list.label.birth=Birth Date
 customer.passenger.list.label.specialNeeds=Special Needs
 
 customer.passenger.form.title= Passenger
+customer.passenger.form.label.fullName= Full Name
+customer.passenger.form.label.passport= Passport
+customer.passenger.form.label.email= Email
+customer.passenger.form.label.birth= Birth Date
+customer.passenger.form.label.specialNeeds= Special Needs
+
+customer.passenger.form.error.not-draft=This passenger cannot be updated because it is not in draft mode.
+customer.passenger.form.error.fullName.required=Full name is required and cannot be blank.
+customer.passenger.form.error.email.invalid=Please enter a valid email address.
+customer.passenger.form.error.passport.invalid=Passport must contain 6 to 9 characters (uppercase letters or digits).
+customer.passenger.form.error.birth.past=Birth date must be in the past.
+customer.passenger.form.error.specialNeeds.length=Special needs must not exceed 50 characters.
+customer.passenger.form.error.duplicate-passport=This passport is already in use by another passenger.
+
+customer.passenger.form.button.save = Save

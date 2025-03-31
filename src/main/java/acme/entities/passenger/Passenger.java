@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -50,5 +49,9 @@ public class Passenger extends AbstractEntity {
 	@ValidString(min = 0, max = 50)
 	@Automapped
 	private String				specialNeeds;
+
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
 
 }
