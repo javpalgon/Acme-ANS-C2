@@ -1,3 +1,4 @@
-key,key:flight,key:customer,locatorCode,purchaseMoment,travelClass,price,lastNibble
-booking-01,flight-01,customer-01,ABC123,2020/01/29 00:00,ECONOMY,EUR 800.00,2454
-booking-02,flight-02,customer-02,LOL893,2020/08/19 00:00,BUSINESS,EUR 350.00,1454
+key,key:flight,key:customer,locatorCode,purchaseMoment,travelClass,lastNibble,isDraftMode
+booking-01,flight-01,customer-01,ABC123,2020/01/29 00:00,ECONOMY,2454,true
+booking-02,flight-02,customer-02,LOL893,2020/08/19 00:00,BUSINESS,1454,false
+booking-03,flight-01,customer-01,ABC244,2020/01/29 00:00,ECONOMY,2454,true

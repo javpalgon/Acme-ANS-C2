@@ -1,6 +1,7 @@
 
 package acme.entities.booking;
 
+import java.beans.Transient;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,8 +18,8 @@ import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.SpringHelper;
 import acme.entities.flight.Flight;
 import acme.realms.Customer;
 import lombok.Getter;
@@ -47,24 +48,39 @@ public class Booking extends AbstractEntity {
 	@Automapped
 	private Travelclass			travelClass;
 
-	@Mandatory
-	@ValidMoney(min = 0.0, max = 100000.0)
-	@Automapped
-	private Money				price;
-
 	@Optional
 	@ValidString(min = 4, max = 4, pattern = "[0-9]{4}")
 	@Automapped
 	private String				lastNibble;
 
 	@Mandatory
-	@ManyToOne(optional = false)
-	@Valid
-	private Flight				flight;
+	@Automapped
+	private Boolean				isDraftMode;
+
+
+	@Transient
+	public Money getPrice() {
+		Money res;
+		Integer totalPassengers;
+		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
+
+		res = bookingRepository.findPriceByFlightId(this.flight.getId());
+		totalPassengers = bookingRepository.findNumberPassengersByBooking(this.getId());
+		Double totalPrice = res.getAmount() * totalPassengers;
+
+		res.setAmount(totalPrice);
+		return res;
+	}
+
 
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Customer			customer;
+	private Flight		flight;
+
+	@Mandatory
+	@ManyToOne(optional = false)
+	@Valid
+	private Customer	customer;
 
 }

@@ -32,7 +32,10 @@
 		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.contact" access="isAnonymous()"/>
 		
-	
+		<acme:menu-option code="master.menu.agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.agent.list-completed-claims" action="/assistance-agent/claim/list-completed"/>
+			<acme:menu-suboption code="master.menu.agent.list-pending-claims" action="/assistance-agent/claim/list-pending"/>
+		</acme:menu-option>
 		
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">

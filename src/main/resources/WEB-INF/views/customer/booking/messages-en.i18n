@@ -1,0 +1,36 @@
+customer.booking.list.title = My Bookings
+
+customer.booking.list.label.locatorCode = Locator Code
+customer.booking.list.label.purchaseMoment = Purchase Moment
+customer.booking.list.label.travelClass = Travel Class
+customer.booking.list.label.lastNibble = Last Nibble
+customer.booking.list.label.isDraftMode = Draft Mode
+customer.booking.list.label.totalPrice= Total Price
+
+
+customer.booking.form.title = Booking
+customer.booking.form.label.locatorCode = Locator Code
+customer.booking.form.label.purchaseMoment = Purchase Moment
+customer.booking.form.label.travelClass = Travel Class
+customer.booking.form.label.lastNibble = Last Nibble
+customer.booking.form.label.isDraftMode = Draft Mode
+customer.booking.form.label.totalPrice= Total Price
+customer.booking.form.label.passengers = Passengers
+
+customer.booking.form.error.not-draft= Only draft bookings can be updated.
+customer.booking.form.button.save= Save changes
+
+customer.booking.form.error.blank-locatorCode= The locator code cannot be blank.
+customer.booking.form.error.invalid-locatorCode= The locator code must be between 6 and 8 characters in uppercase or numbers.
+customer.booking.form.error.duplicate-locatorCode= This locator code is already in use.
+customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in the past.
+customer.booking.form.error.travelClass-required= You must select a travel class.
+customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
+
+customer.booking.form.button.create= Create Booking
+customer.booking.list.button.create= Create Booking
+customer.booking.form.label.flight= Flight
+
+customer.booking.form.button.publish= Publish Booking
+customer.booking.form.error.last-nibble-required= You must enter the last 4 digits of the card to publish the booking.
+acme.validation.length= The value does not have a valid length.

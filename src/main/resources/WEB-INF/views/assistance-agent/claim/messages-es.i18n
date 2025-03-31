@@ -1,0 +1,27 @@
+assistance-agent.claim.list.title = Lista de reclamaciones
+
+agents.claim.application.list.label.registeredAt = Fecha de registro
+agents.claim.application.list.label.passengerEmail = Correo del pasajero
+agents.claim.application.list.label.description = Descripción
+agents.claim.application.list.label.type = Tipo de reclamación
+agents.claim.application.list.label.accepted = Aceptada
+
+assistance-agent.claim.list.button.create = Create
+
+## FORM ################################################################3
+
+assistance-agent.claim.form.title = Formulario de Reclamaciones
+
+assistance-agent.claim.form.label.registeredAt = Fecha de registro 
+assistance-agent.claim.form.label.passengerEmail = Correo del pasajero 
+assistance-agent.claim.form.label.description = Descripción  
+assistance-agent.claim.form.label.type = Tipo de reclamación  
+assistance-agent.claim.form.label.accepted = Aceptada
+assistance-agent.claim.form.label.isDraftMode = Modo borrador
+
+assistance-agent.claim.form.label.leg.flightNumber = Número de vuelo
+assistance-agent.claim.form.label.leg.arrival = Fecha de salida
+assistance-agent.claim.form.label.leg.departure = Fecha de llegada
+assistance-agent.claim.form.label.leg.status = Estado de la escala
+
+assistance-agent.claim.form.button.trackingLogs = Ver registros de seguimientos
