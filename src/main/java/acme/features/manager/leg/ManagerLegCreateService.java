@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
+import acme.entities.aircraft.AircraftStatus;
 import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
@@ -105,7 +106,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		SelectChoices selectedAircraft;
 		Collection<Aircraft> aircrafts;
-		aircrafts = this.repository.findAllAircrafts();
+		aircrafts = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
+		//	aircrafts = this.repository.findAllAircrafts();
 		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
 
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");

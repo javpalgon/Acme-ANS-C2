@@ -11,6 +11,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.components.ValidatorService;
 import acme.entities.aircraft.Aircraft;
+import acme.entities.aircraft.AircraftStatus;
 import acme.entities.airport.Airport;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegStatus;
@@ -101,9 +102,9 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 		SelectChoices selectedAircraft;
 		Collection<Aircraft> aircrafts;
-		aircrafts = this.repository.findAllAircrafts();
+		aircrafts = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
+		// aircrafts = this.repository.findAllAircrafts();
 		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
-		// Add findAllAvailableAircrafts
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", leg.getFlight().getId());
 		dataset.put("isDraftMode", leg.getFlight().getIsDraftMode());
@@ -116,15 +117,5 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
-		//		} else {
-		//			SelectChoices choices;
-		//
-		//			choices = SelectChoices.from(LegStatus.class, leg.getStatus());
-		//			Dataset dataset = super.unbindObject(leg, "departure", "arrival", "status", "departureAirport", "arrivalAirport", "aircraft", "published");
-		//			dataset.put("id", leg.getId());
-		//			dataset.put("statuses", choices);
-		//
-		//			super.getResponse().addData(dataset);
-		//		}
 	}
 }

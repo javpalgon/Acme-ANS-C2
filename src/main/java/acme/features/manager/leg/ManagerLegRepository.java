@@ -4,10 +4,12 @@ package acme.features.manager.leg;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import acme.client.repositories.AbstractRepository;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
+import acme.entities.aircraft.AircraftStatus;
 import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
@@ -36,6 +38,9 @@ public interface ManagerLegRepository extends AbstractRepository {
 
 	@Query("select a from Aircraft a where a.id = :id")
 	Aircraft findAircraftById(int id);
+
+	@Query("select a from Aircraft a where a.aircraftStatus = :status ")
+	Collection<Aircraft> findAllActiveAircrafts(@Param("status") AircraftStatus status);
 
 	@Query("select l.flight from Leg l where l.id = :legId")
 	Flight getFlightByLegId(int legId);
