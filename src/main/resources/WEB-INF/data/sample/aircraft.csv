@@ -1,5 +1,5 @@
 key,model,regitrationNumber,capacity,cargoWeight,aircraftStatus,details,key:airline
 aircraft-01,Airbus A320,EC-MXY,180,20000,ACTIVE,Standard passenger aircraft,airline-00
 aircraft-02,Boeing 737,EC-ABC,160,22000,ACTIVE,Used for domestic flights,airline-01
-aircraft-03,Airbus A330,EC-DEF,250,35000,UNDER_MAINTENANCE,Long-haul aircraft undergoing inspection,airline-00
-aircraft-04,Embraer E190,EC-GHI,100,15000,ACTIVE,Regional jet for short-haul routes,airline-01
+aircraft-03,Airbus A330,EC-DEF,250,35000,UNDER_MAINTENANCE,Long-haul aircraft undergoing inspection,airline-02
+aircraft-04,Embraer E190,EC-GHI,100,15000,ACTIVE,Regional jet for short-haul routes,airline-03
