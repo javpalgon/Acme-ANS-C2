@@ -25,3 +25,13 @@ assistance-agent.claim.form.label.leg.departure = Fecha de llegada
 assistance-agent.claim.form.label.leg.status = Estado de la escala
 
 assistance-agent.claim.form.button.trackingLogs = Ver registros de seguimientos
+
+assistance-agent.claim.form.button.update = Update
+assistance-agent.claim.form.button.delete = Delete
+assistance-agent.claim.form.button.publish = Publish  
+assistance-agent.claim.form.button.create = Crear
+
+assistance-agent.claim.form.error.registeredAt = La reclamación se está haciendo sobre un vuelo que no ha salido todavía
+assistance-agent.claim.form.error.leg-isDraftMode = Debes asignar un vuelo que se haya publicado
+
+assistance-agent.claim.trackingLogs = Listar registros de seguimiento

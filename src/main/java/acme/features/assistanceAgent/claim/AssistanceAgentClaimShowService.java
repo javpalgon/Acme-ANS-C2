@@ -4,9 +4,11 @@ package acme.features.assistanceAgent.claim;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
+import acme.entities.claim.ClaimType;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -39,11 +41,15 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 	@Override
 	public void unbind(final Claim claim) {
 		Dataset dataset;
-		dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type", "accepted", "isDraftMode");
-		dataset.put("leg.flightNumber", claim.getLeg().getFlightNumber());
-		dataset.put("leg.arrival", claim.getLeg().getArrival());
-		dataset.put("leg.departure", claim.getLeg().getDeparture());
-		dataset.put("leg.status", claim.getLeg().getStatus());
+		dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type", "accepted", "isDraftMode", "leg");
+		dataset.put("arrival", claim.getLeg().getArrival());
+		dataset.put("departure", claim.getLeg().getDeparture());
+		dataset.put("status", claim.getLeg().getStatus());
+
+		SelectChoices typeChoices = SelectChoices.from(ClaimType.class, claim.getType());
+		dataset.put("type", typeChoices);
+		dataset.put("leg", SelectChoices.from(this.repository.findAllPublishedLegs(), "flightNumber", claim.getLeg()));
+
 		super.getResponse().addData(dataset);
 	}
 }

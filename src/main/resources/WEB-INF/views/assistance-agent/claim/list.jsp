@@ -22,6 +22,6 @@
 	<acme:list-column code="agents.claim.application.list.label.accepted" path="accepted" width="10%"/>
 	<acme:list-payload path="payload"/>
 </acme:list>
-<acme:button code="assistance-agent.claim.list.button.create" action="/assistance-agent/trackingLog/create"/>
+<acme:button code="assistance-agent.claim.list.button.create" action="/assistance-agent/claim/create"/>
 
 

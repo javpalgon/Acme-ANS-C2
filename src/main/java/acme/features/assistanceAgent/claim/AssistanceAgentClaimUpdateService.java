@@ -7,17 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
-import acme.entities.claim.ClaimStatus;
 import acme.entities.claim.ClaimType;
 import acme.entities.leg.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimCreateService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimUpdateService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -27,42 +25,39 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	public void authorise() {
 		boolean status;
 		Claim claim;
-		int claimId;
-		int assistanceAgentId;
-		super.getResponse().setAuthorised(true);
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		claim = this.repository.findClaimById(id);
+		status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId();
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Claim claim = new Claim();
-		AssistanceAgent agent;
-
-		agent = (AssistanceAgent) super.getRequest().getPrincipal().getActiveRealm();
-		claim.setRegisteredAt(MomentHelper.getCurrentMoment());
-		claim.setAccepted(ClaimStatus.PENDING);
-		claim.setAssistanceAgent(agent);
-		claim.setIsDraftMode(true);
+		Claim claim;
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		claim = this.repository.findClaimById(id);
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
-		String flightNumber;
-		Leg leg;
+		assert claim != null;
 		super.bindObject(claim, "passengerEmail", "description", "type", "accepted", "leg");
-
-		//flightNumber = super.getRequest().getData("leg", String.class);
-		//		 leg = this.repository.findLegByFlightNumber(flightNumber);
-		//		 claim.setLeg(leg);
-
 	}
 
 	@Override
 	public void validate(final Claim claim) {
 		assert claim != null;
-		super.state(claim.getLeg() != null && claim.getLeg().getIsDraftMode().equals(false), "leg", "assistance-agent.claim.form.error.leg-isDraftMode");
-		super.state(claim.getLeg() != null && claim.getLeg().getDeparture().before(claim.getRegisteredAt()), "registeredAt", "assistance-agent.claim.form.error.registeredAt");
-		super.state(claim.getLeg() != null && !claim.getLeg().getIsDraftMode() && claim.getLeg().getFlight() != null && !claim.getLeg().getFlight().getIsDraftMode(), "leg", "assistance-agent.claim.form.error.leg.flight-isDraftMode");
+		Claim original = this.repository.findClaimById(claim.getId());
+		super.state(claim.getIsDraftMode(), "*", "assistance-agent.claim.form.error.notDraftMode", "isDraftMode");
+		if (claim.getLeg() != null) {
+			super.state(!claim.getLeg().getIsDraftMode(), "leg", "assistance-agent.claim.form.error.leg-isDraftMode");
+			super.state(claim.getLeg().getDeparture().before(claim.getRegisteredAt()), "registeredAt", "assistance-agent.claim.form.error.registeredAt");
+			if (claim.getLeg().getFlight() != null)
+				super.state(!claim.getLeg().getFlight().getIsDraftMode(), "leg", "assistance-agent.claim.form.error.leg.flight-isDraftMode");
+		}
 	}
 
 	@Override

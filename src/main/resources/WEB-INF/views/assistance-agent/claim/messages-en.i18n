@@ -27,4 +27,14 @@ assistance-agent.claim.form.label.leg.departure = Departure Date
 assistance-agent.claim.form.label.leg.status = Leg Status
 
 assistance-agent.claim.form.button.trackingLogs = Show tracking logs
-  
+
+assistance-agent.claim.form.button.update = Update
+assistance-agent.claim.form.button.delete = Delete
+assistance-agent.claim.form.button.publish = Publish  
+
+assistance-agent.claim.form.button.create = Create
+
+assistance-agent.claim.form.error.registeredAt= The claim is being made for a flight that has not departed yet.
+assistance-agent.claim.form.error.leg-isDraftMode = You must assign a leg that is published.
+
+assistance-agent.claim.trackingLogs = List tracking Logs
