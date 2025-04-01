@@ -1,26 +1,26 @@
-key,key:assignment,registeredAt,incidentType,description,severityLevel
-log-01,assignment-01,2024/03/15 08:30,"Avionics system failure during check","Unexpected failure in the avionics system detected. Immediate troubleshooting required to ensure safe operation and avoid delays or cancellations.",8
-log-02,assignment-02,2023/11/22 14:45,"Crew member late arrival due to traffic","One of the crew members reported a delay in arrival due to heavy traffic conditions. A contingency plan was put in place to accommodate the delay and avoid disruptions.",0
-log-03,assignment-01,2024/01/10 19:20,"Severe weather conditions","Severe weather conditions; including turbulence and storms; impacted the flight path significantly. Precautions were taken by the crew to ensure passenger safety and avoid risks. All measures were thoroughly executed to maintain a safe and smooth journey.",7
-log-04,assignment-01,2022/06/30 05:10,"Security breach attempt at restricted area","An individual unauthorized to access restricted areas attempted to bypass security measures. Security personnel promptly intervened, resolving the situation without incident.",10
-log-05,assignment-01,2024/02/17 12:00,"Minor delay due to landing gear maintenance","A minor technical issue was detected in the landing gear system during routine checks. The maintenance team performed diagnostics and confirmed the aircraft was safe to operate.",6
-log-06,assignment-04,2023/06/10 14:20,"Engine anomaly detected","Routine check revealed minor irregularities in engine performance. Engineers resolved the issue swiftly.",5
-log-07,assignment-01,2022/09/15 09:50,"Cabin pressure fluctuation","Detected fluctuations in cabin pressure. Adjustments were made to stabilize conditions.",6
-log-08,assignment-07,2021/03/27 17:30,"Navigation system recalibration","Unexpected deviation detected in navigation system. A recalibration was successfully performed.",4
-log-09,assignment-08,2020/07/14 11:10,"Flight clearance delay","Flight clearance was delayed due to temporary airspace congestion.",3
-log-10,assignment-09,2024/02/21 08:15,"Fuel contamination alert","Routine maintenance flagged a potential fuel contamination risk. Additional checks ensured fuel integrity.",7
-log-11,assignment-10,2023/12/01 10:40,"In-flight medical emergency","Passenger experienced a medical emergency. Crew responded swiftly, stabilizing the situation.",9
-log-12,assignment-11,2022/04/06 13:25,"Turbulence warning","Reports indicated potential turbulence along the route. Flight plan was adjusted accordingly.",2
-log-13,assignment-12,2023/07/08 18:05,"Cargo mismanagement","Cargo weight distribution issue detected. Reallocation was necessary before departure.",5
-log-14,assignment-13,2021/12/15 07:30,"Mechanical failure in auxiliary power unit","Detected failure in auxiliary power unit during pre-flight checks. Repaired before takeoff.",8
-log-15,assignment-14,2020/02/10 20:45,"Crew member unavailability","Crew scheduling conflict led to a temporary staff shortage. Alternative arrangements were made.",4
-log-16,assignment-15,2024/03/16 05:50,"Delayed boarding process","Boarding delayed due to additional security screenings.",3
-log-17,assignment-16,2023/09/10 14:30,"Incorrect fuel load estimate","Miscommunication resulted in incorrect fuel load estimate. Adjustments were made before departure.",6
-log-18,assignment-17,2022/05/21 16:40,"Severe icing conditions","Severe icing conditions detected on aircraft. De-icing procedures were applied.",7
-log-19,assignment-18,2024/01/06 12:20,"Passenger misconduct incident","Disruptive passenger required intervention from cabin crew and security.",9
-log-20,assignment-19,2018/11/12 21:15,"Aircraft substitution required","Original aircraft was deemed unfit for operation. Replacement was arranged.",6
-log-21,assignment-20,2021/03/30 22:05,"Delayed baggage handling","Baggage loading took longer than expected, causing a minor departure delay.",2
-log-22,assignment-21,2022/07/16 08:10,"Pre-flight system diagnostics alert","Automated system check flagged an alert requiring manual verification.",5
-log-23,assignment-22,2020/08/09 13:30,"Runway congestion","Heavy air traffic caused a temporary delay in takeoff clearance.",3
-log-24,assignment-23,2023/04/05 07:45,"Inconsistent weather reports","Differing weather reports required additional cross-checking before departure.",4
-log-25,assignment-14,2022/06/22 15:10,"Unexpected aircraft maintenance","Routine inspection led to an unscheduled minor maintenance task.",5
+key,key:assignment,registeredAt,incidentType,description,severityLevel,is_draft_mode
+log-01,assignment-01,2024/03/15 08:30,"Avionics system failure during check","Unexpected failure in the avionics system detected. Immediate troubleshooting required to ensure safe operation and avoid delays or cancellations.",8,false
+log-02,assignment-02,2023/11/22 14:45,"Crew member late arrival due to traffic","One of the crew members reported a delay in arrival due to heavy traffic conditions. A contingency plan was put in place to accommodate the delay and avoid disruptions.",0,true
+log-03,assignment-01,2024/01/10 19:20,"Severe weather conditions","Severe weather conditions; including turbulence and storms; impacted the flight path significantly. Precautions were taken by the crew to ensure passenger safety and avoid risks. All measures were thoroughly executed to maintain a safe and smooth journey.",7,false
+log-04,assignment-01,2022/06/30 05:10,"Security breach attempt at restricted area","An individual unauthorized to access restricted areas attempted to bypass security measures. Security personnel promptly intervened, resolving the situation without incident.",10,false
+log-05,assignment-01,2024/02/17 12:00,"Minor delay due to landing gear maintenance","A minor technical issue was detected in the landing gear system during routine checks. The maintenance team performed diagnostics and confirmed the aircraft was safe to operate.",6,true
+log-06,assignment-04,2023/06/10 14:20,"Engine anomaly detected","Routine check revealed minor irregularities in engine performance. Engineers resolved the issue swiftly.",5,true
+log-07,assignment-01,2022/09/15 09:50,"Cabin pressure fluctuation","Detected fluctuations in cabin pressure. Adjustments were made to stabilize conditions.",6,true
+log-08,assignment-07,2021/03/27 17:30,"Navigation system recalibration","Unexpected deviation detected in navigation system. A recalibration was successfully performed.",4,true
+log-09,assignment-08,2020/07/14 11:10,"Flight clearance delay","Flight clearance was delayed due to temporary airspace congestion.",3,true
+log-10,assignment-09,2024/02/21 08:15,"Fuel contamination alert","Routine maintenance flagged a potential fuel contamination risk. Additional checks ensured fuel integrity.",7,false
+log-11,assignment-10,2023/12/01 10:40,"In-flight medical emergency","Passenger experienced a medical emergency. Crew responded swiftly, stabilizing the situation.",9,false
+log-12,assignment-11,2022/04/06 13:25,"Turbulence warning","Reports indicated potential turbulence along the route. Flight plan was adjusted accordingly.",2,true
+log-13,assignment-12,2023/07/08 18:05,"Cargo mismanagement","Cargo weight distribution issue detected. Reallocation was necessary before departure.",5,true
+log-14,assignment-13,2021/12/15 07:30,"Mechanical failure in auxiliary power unit","Detected failure in auxiliary power unit during pre-flight checks. Repaired before takeoff.",8,false
+log-15,assignment-14,2020/02/10 20:45,"Crew member unavailability","Crew scheduling conflict led to a temporary staff shortage. Alternative arrangements were made.",4,true
+log-16,assignment-15,2024/03/16 05:50,"Delayed boarding process","Boarding delayed due to additional security screenings.",3,true
+log-17,assignment-16,2023/09/10 14:30,"Incorrect fuel load estimate","Miscommunication resulted in incorrect fuel load estimate. Adjustments were made before departure.",6,true
+log-18,assignment-17,2022/05/21 16:40,"Severe icing conditions","Severe icing conditions detected on aircraft. De-icing procedures were applied.",7,false
+log-19,assignment-18,2024/01/06 12:20,"Passenger misconduct incident","Disruptive passenger required intervention from cabin crew and security.",9,false
+log-20,assignment-19,2018/11/12 21:15,"Aircraft substitution required","Original aircraft was deemed unfit for operation. Replacement was arranged.",6,true
+log-21,assignment-20,2021/03/30 22:05,"Delayed baggage handling","Baggage loading took longer than expected, causing a minor departure delay.",2,true
+log-22,assignment-21,2022/07/16 08:10,"Pre-flight system diagnostics alert","Automated system check flagged an alert requiring manual verification.",5,true
+log-23,assignment-22,2020/08/09 13:30,"Runway congestion","Heavy air traffic caused a temporary delay in takeoff clearance.",3,true
+log-24,assignment-23,2023/04/05 07:45,"Inconsistent weather reports","Differing weather reports required additional cross-checking before departure.",4,true
+log-25,assignment-14,2022/06/22 15:10,"Unexpected aircraft maintenance","Routine inspection led to an unscheduled minor maintenance task.",5,true

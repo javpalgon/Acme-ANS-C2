@@ -88,13 +88,17 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
 
-		List<Leg> validLegs = this.repository.findAllLegs();
+		List<Member> availableMembers = this.repository.findAvailableMembers(AvailabilityStatus.AVAILABLE);
+
+		SelectChoices membersChoices = SelectChoices.from(availableMembers, "employeeCode", assignment.getMember());
+
+		dataset.put("members", membersChoices);
 
 		dataset.put("role", SelectChoices.from(Role.class, assignment.getRole()));
 		dataset.put("status", SelectChoices.from(AssignmentStatus.class, assignment.getStatus()));
-		dataset.put("legs", SelectChoices.from(validLegs, "flightNumber", assignment.getLeg()));
-		dataset.put("members", SelectChoices.from(this.repository.findAllMembers(), "employeeCode", assignment.getMember()));
 
+		List<Leg> validLegs = this.repository.findAllPublishedAndFutureLegs(MomentHelper.getCurrentMoment());
+		dataset.put("legs", SelectChoices.from(validLegs, "flightNumber", assignment.getLeg()));
 		super.getResponse().addData(dataset);
 	}
 }

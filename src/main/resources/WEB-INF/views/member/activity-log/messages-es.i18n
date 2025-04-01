@@ -1,6 +1,6 @@
 # Activity Log
 member.activityLog.list.label.incidentType = Tipo de incidente
-member.activityLog.list.label.description = Descripción
+member.activityLog.list.label.description = DescripciÃ³n
 member.activityLog.list.label.severityLevel = Nivel de severidad
 member.activityLog.list.label.registeredAt = Fecha de registro
 

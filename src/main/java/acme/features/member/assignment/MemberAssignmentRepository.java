@@ -29,6 +29,9 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT m FROM Member m")
 	List<Member> findAllMembers();
 
+	@Query("SELECT a FROM Assignment a")
+	List<Assignment> findAllAssignments();
+
 	@Query("SELECT l FROM Leg l")
 	List<Leg> findAllLegs();
 
@@ -51,7 +54,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	Leg findLegById(int legId);
 
 	@Query("SELECT m FROM Member m WHERE m.availabilityStatus = :status")
-	List<Member> findAllMembersByAvailabilityStatus(@Param("status") AvailabilityStatus status);
+	List<Member> findAvailableMembers(@Param("status") AvailabilityStatus status);
 
 	@Query("SELECT l FROM Leg l WHERE l.isDraftMode = false AND l.departure > :currentDate")
 	List<Leg> findAllPublishedAndFutureLegs(@Param("currentDate") Date currentDate);
@@ -79,7 +82,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 
 	@Modifying
 	@Transactional
-	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId")
+	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId AND al.isDraftMode = true")
 	void deleteActivityLogsByAssignmentId(int assignmentId);
 
 }

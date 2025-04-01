@@ -57,7 +57,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assignment.setMember(this.repository.findMemberById(memberId));
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 
-		super.bindObject(assignment, "role", "lastUpdate", "status", "remarks");
+		super.bindObject(assignment, "role", "status", "remarks");
 	}
 
 	@Override

@@ -1,19 +1,26 @@
 
 package acme.features.member.assignment;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
+import acme.features.member.activityLog.MemberActivityLogRepository;
 import acme.realms.Member;
 
 @GuiService
 public class MemberAssignmentDeleteService extends AbstractGuiService<Member, Assignment> {
 
 	@Autowired
-	private MemberAssignmentRepository repository;
+	private MemberAssignmentRepository	repository;
+
+	@Autowired
+	private MemberActivityLogRepository	ALrepository;
 
 
 	@Override
@@ -56,6 +63,14 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 
 		if (!assignment.getIsDraftMode())
 			super.state(false, "*", "member.assignment.form.error.notDraft");
+
+		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		List<ActivityLog> activityLogs = this.ALrepository.findByMemberIdAndAssignmentId(memberId, assignment.getId());
+		boolean allDraft = activityLogs.stream().allMatch(ActivityLog::getIsDraftMode);
+
+		if (!allDraft)
+			super.state(false, "*", "member.assignment.form.error.activityLogsNotDraft");
 	}
 
 	@Override

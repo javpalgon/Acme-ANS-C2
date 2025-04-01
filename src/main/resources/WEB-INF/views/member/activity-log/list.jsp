@@ -10,6 +10,10 @@
     <acme:list-column code="member.activityLog.list.label.description" path="description" width="40%"/>
     <acme:list-column code="member.activityLog.list.label.severityLevel" path="severityLevel" width="15%"/>
     <acme:list-column code="member.activityLog.list.label.registeredAt" path="registeredAt" width="20%"/>
-</acme:list>
 
-<acme:button code="member.activityLog.list.button.create" action="/member/activity-log/create"/>
+	<acme:list-payload path="payload"/>
+</acme:list>	
+ 
+ <jstl:if test="${showCreate}">
+ 	<acme:button code="member.activity-log.list.button.create" action="/member/activity-log/create?masterId=${masterId}"/>
+ </jstl:if>

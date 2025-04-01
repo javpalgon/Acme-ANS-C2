@@ -4,22 +4,22 @@
 
 <acme:form>
     <!-- Common fields for all views -->
-    <acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}"/>
+<acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}" readonly="${assignment.isDraftMode}"/>
 
-    <acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}"/>
+<acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}" readonly="${assignment.isDraftMode}"/>
 
-    <acme:input-textbox code="member.assignment.form.label.remarks" path="remarks"/>
-   
-    <acme:input-moment code="member.assignment.form.label.lastUpdate" path="lastUpdate" readonly="true"/>
-    
-    <acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}"/>
-    
-    <acme:input-select code="member.assignment.form.label.member" path="member" choices="${members}"/>
+<acme:input-textbox code="member.assignment.form.label.remarks" path="remarks" readonly="${assignment.isDraftMode}"/>
+
+<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
+
+<acme:input-select code="member.assignment.form.label.member" path="member" choices="${members}" readonly="${assignment.isDraftMode}"/>
+
 
 
     
     <!-- Display-only fields for show view -->
     <jstl:if test="${_command == 'show'}" >
+    	<acme:input-moment code="member.assignment.form.label.lastUpdate" path="lastUpdate" readonly="true"/>
         <!-- Flight Leg Info -->
         <h3><acme:print code="member.assignment.form.label.flightInfo"/></h3>
         <acme:input-textbox code="member.assignment.form.label.flightNumber" path="flightNumber" readonly="true"/>
@@ -59,14 +59,15 @@
 	        <acme:submit code="member.assignment.form.button.update" action="/member/assignment/update"/>
 	        <acme:submit code="member.assignment.form.button.publish" action="/member/assignment/publish"/>
 	        <acme:submit code="member.assignment.form.button.delete" action="/member/assignment/delete"/>
-	        <acme:submit code="member.activityLog.form.button.list" action="/member/activity-log/list"/>
-	        
+	        <acme:button code="member.assignment.form.button.activity-log" action="/member/activity-log/list?masterId=${id}"/>
 	    </jstl:when>
+	    
+	    <jstl:when test="${_command == 'show' && isDraftMode == false}">
+ 			<acme:button code="member.assignment.form.button.activity-log" action="/member/activity-log/list?masterId=${id}"/>			
+ 		</jstl:when>
+	    
 	    <jstl:when test="${_command == 'create'}">
 	        <acme:submit code="member.assignment.form.button.create" action="/member/assignment/create"/>
-	    </jstl:when>
-	    <jstl:when test="${_command == 'show'}">
-	        <acme:submit code="member.activityLog.form.button.list" action="/member/activity-log/list"/>
 	    </jstl:when>
 	</jstl:choose>
 </acme:form>
