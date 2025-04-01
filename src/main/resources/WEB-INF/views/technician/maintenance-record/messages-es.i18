@@ -1,0 +1,17 @@
+technician.maintenance-record.form.label.maintenanceTimestamp = Instante de mantenimiento
+technician.maintenance-record.form.label.maintenanceStatus = Estado
+technician.maintenance-record.form.label.nextInspectionDate = Próxima fecha de inspección
+technician.maintenance-record.form.label.estimatedCost = Coste aprox.
+technician.maintenance-record.form.label.notes = Notas (Opcional)
+technician.maintenance-record.form.label.isDraftMode = Modo Borrador
+technician.maintenance-record.form.title = Registro de mantenimiento
+
+technician.maintenance-record.list.title = Registro de mantenimiento
+technician.maintenance-record.list.button.create = Crear
+
+technician.maintenance-record.list.label.maintenanceTimestamp = Instante de mantenimiento
+technician.maintenance-record.list.label.maintenanceStatus = Estado
+technician.maintenance-record.list.label.nextInspectionDate = Próxima fecha de inspección
+technician.maintenance-record.list.label.estimatedCost = Coste aprox.
+technician.maintenance-record.list.label.notes = Notas (Opcional)
+technician.maintenance-record.list.label.isDraftMode = Modo Borrador
