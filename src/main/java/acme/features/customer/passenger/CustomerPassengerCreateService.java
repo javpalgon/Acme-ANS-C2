@@ -1,43 +1,44 @@
 
 package acme.features.customer.passenger;
 
-import java.util.Collection;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.booking.Booking;
+import acme.entities.booking.BookingRecord;
 import acme.entities.passenger.Passenger;
+import acme.features.customer.booking.CustomerBookingListService;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerPassengerUpdateService extends AbstractGuiService<Customer, Passenger> {
+public class CustomerPassengerCreateService extends AbstractGuiService<Customer, Passenger> {
+
+	private static final Logger				logger	= LoggerFactory.getLogger(CustomerBookingListService.class);
 
 	@Autowired
-	private CustomerPassengerRepository repository;
+	protected CustomerPassengerRepository	repository;
 
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Collection<Integer> customerIds = this.repository.findCustomerUserAccountIdsByPassengerId(id);
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-
-		super.getResponse().setAuthorised(customerIds.contains(userAccountId));
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		Passenger passenger;
-		int id = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(id);
+		Passenger passenger = new Passenger();
+		passenger.setIsDraftMode(true);
 		super.getBuffer().addData(passenger);
 	}
 
 	@Override
 	public void bind(final Passenger object) {
+		assert object != null;
 		super.bindObject(object, "fullName", "passport", "email", "birth", "specialNeeds");
 	}
 
@@ -60,24 +61,51 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 		boolean isDuplicate = this.repository.existsByPassport(object.getPassport(), object.getId());
 		super.state(!isDuplicate, "passport", "customer.passenger.form.error.duplicate-passport");
 
-		// Validación de birth (fecha en el pasado)
+		// Validación de birth
 		boolean isPast = object.getBirth() != null && MomentHelper.isBefore(object.getBirth(), MomentHelper.getCurrentMoment());
 		super.state(isPast, "birth", "customer.passenger.form.error.birth.past");
 
-		// Validación de specialNeeds (si se indica)
+		// Validación de specialNeeds
 		if (object.getSpecialNeeds() != null)
 			super.state(object.getSpecialNeeds().length() <= 50, "specialNeeds", "customer.passenger.form.error.specialNeeds.length");
+
 	}
 
 	@Override
 	public void perform(final Passenger object) {
-		this.repository.save(object);
+		assert object != null;
+
+		int bookingId = super.getRequest().getData("bookingId", int.class);
+		Booking booking = this.repository.findBookingById(bookingId);
+
+		Passenger existing = this.repository.findPassengerByPassport(object.getPassport());
+
+		if (existing != null) {
+			// Ya existe: asociamos a esta booking si no lo está ya
+			boolean alreadyLinked = this.repository.existsRecordByBookingIdAndPassengerId(bookingId, existing.getId());
+			if (!alreadyLinked) {
+				BookingRecord record = new BookingRecord();
+				record.setBooking(booking);
+				record.setPassenger(existing);
+				this.repository.save(record);
+			}
+		} else {
+			// No existe: lo creamos y lo asociamos
+			this.repository.save(object);
+
+			BookingRecord record = new BookingRecord();
+			record.setBooking(booking);
+			record.setPassenger(object);
+			this.repository.save(record);
+		}
 	}
 
 	@Override
 	public void unbind(final Passenger object) {
 		Dataset dataset = super.unbindObject(object, "fullName", "passport", "email", "birth", "specialNeeds");
 		dataset.put("isDraftMode", object.getIsDraftMode());
+		int bookingId = super.getRequest().getData("bookingId", int.class);
+		dataset.put("bookingId", bookingId);
 
 		super.getResponse().addData(dataset);
 	}

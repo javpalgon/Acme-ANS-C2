@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.booking.Booking;
 import acme.entities.passenger.Passenger;
 
 @Repository
@@ -26,5 +27,20 @@ public interface CustomerPassengerRepository extends AbstractRepository {
 
 	@Query("select count(p) > 0 from Passenger p where p.passport = :passport and p.id != :id")
 	boolean existsByPassport(String passport, int id);
+
+	@Query("select b from Booking b where b.customer.userAccount.id = :accountId and b.isDraftMode = true")
+	Collection<Booking> findBookingsInDraftModeByCustomerAccountId(int accountId);
+
+	@Query("select b from Booking b where b.id = :id")
+	Booking findBookingById(int id);
+
+	@Query("select p from Passenger p where p.passport = :passport")
+	Passenger findPassengerByPassport(String passport);
+
+	@Query("select count(br) > 0 from BookingRecord br where br.booking.id = :bookingId and br.passenger.id = :passengerId")
+	boolean existsBookingRecord(int bookingId, int passengerId);
+
+	@Query("select count(br) > 0 from BookingRecord br where br.booking.id = :bookingId and br.passenger.id = :passengerId")
+	boolean existsRecordByBookingIdAndPassengerId(int bookingId, int passengerId);
 
 }

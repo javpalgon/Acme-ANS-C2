@@ -36,3 +36,4 @@ customer.booking.form.error.last-nibble-required= You must enter the last 4 digi
 acme.validation.length= The value does not have a valid length.
 
 customer.booking.show.button.passengers= See Passengers
+customer.passenger.list.button.create = Create Passenger

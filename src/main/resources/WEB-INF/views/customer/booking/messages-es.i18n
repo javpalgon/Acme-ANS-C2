@@ -34,3 +34,4 @@ customer.booking.form.error.last-nibble-required=Debes introducir los 4 últimos
 acme.validation.length=El valor no tiene una longitud válida.
 
 customer.booking.show.button.passengers= Ver Pasajeros
+customer.passenger.list.button.create = Crear Pasajero

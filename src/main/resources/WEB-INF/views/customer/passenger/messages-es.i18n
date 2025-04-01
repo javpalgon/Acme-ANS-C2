@@ -15,6 +15,7 @@ customer.passenger.form.label.specialNeeds=Necesidades especiales
 
 customer.passenger.form.error.not-draft= Este pasajero no puede ser actualizado porque no está en modo borrador.
 customer.passenger.form.error.fullName.required= El nombre completo es obligatorio y no puede estar en blanco.
+customer.passenger.form.error.fullName.length = El nombre completo no debe exceder los 255 caracteres.
 customer.passenger.form.error.email.invalid= Por favor, introduzca una dirección de correo electrónico válida.
 customer.passenger.form.error.passport.invalid= El pasaporte debe contener de 6 a 9 caracteres (letras mayúsculas o dígitos).
 customer.passenger.form.error.birth.past= La fecha de nacimiento debe ser en el pasado.
@@ -22,3 +23,4 @@ customer.passenger.form.error.specialNeeds.length= Las necesidades especiales no
 customer.passenger.form.error.duplicate-passport= Este pasaporte ya está en uso por otro pasajero.
 
 customer.passenger.form.button.save = Guardar
+customer.passenger.list.form.create = Crear Pasajero

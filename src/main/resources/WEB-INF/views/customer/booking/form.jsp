@@ -22,7 +22,10 @@
 	</jstl:if>
 
 	<jstl:if test="${!hasPassengers}">
-	        <p><em>No passengers for this booking.</em></p>
+	        <p><em>No passengers for this booking.</em></p>	   
+	        <acme:button 
+        code="customer.booking.show.button.passengers" 
+        action="/customer/passenger/list?bookingId=${id}" />     
 	</jstl:if>	
 
 	<jstl:choose>
@@ -35,6 +38,9 @@
 	<jstl:if test="${_command == 'create'}">
 		  <acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 	</jstl:if>
-
-
+	<jstl:if test="${_command == 'show' && isDraftMode}">
+    	<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create?bookingId=${id}" />  
+    	
+	</jstl:if>
 </acme:form>
+

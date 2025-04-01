@@ -3,7 +3,6 @@ package acme.entities.passenger;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +36,7 @@ public class Passenger extends AbstractEntity {
 
 	@Mandatory
 	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
-	@Column(unique = true)
+	//@Column(unique = true)
 	private String				passport;
 
 	@Mandatory
