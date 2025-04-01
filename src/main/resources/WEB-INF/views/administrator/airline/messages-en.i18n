@@ -1,0 +1,22 @@
+administrator.airline.label.name = Name
+administrator.airline.label.iata = IATA code
+administrator.airline.label.website = Website
+administrator.airline.label.type = Type
+administrator.airline.label.foundationMoment = Foundation Moment
+administrator.airline.label.email = Email
+administrator.airline.label.phoneNumber = Phone Number
+
+#########################################################################################
+
+administrator.airline.label.name = Name
+administrator.airline.label.iata = IATA Code
+administrator.airline.label.website = Website
+administrator.airline.label.type = Type
+administrator.airline.label.foundationMoment = Foundation Moment
+administrator.airline.label.email = Email
+administrator.airline.label.phoneNumber = Phone Number
+		
+administrator.airline.form.label.confirmation = Confirmation
+administrator.airline.button.update = Update
+administrator.airline.form.label = Label
+administrator.airline.button.create = Create
