@@ -27,6 +27,22 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 		assert annotation != null;
 	}
 
+	private String sanitizeInitials(final String initials) {
+		StringBuilder sanitized = new StringBuilder();
+
+		for (char c : initials.toCharArray())
+			if (Character.isLetter(c)) {
+				// Convert to uppercase Latin if possible
+				String upper = String.valueOf(c).toUpperCase();
+
+				// Only keep Latin letters A-Z
+				if (upper.matches("[A-Z]"))
+					sanitized.append(upper);
+			}
+
+		return sanitized.toString();
+	}
+
 	// Validation -------------------------------------------------------------
 
 	@Override
@@ -57,7 +73,11 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 		if (surnameParts.length > 1)
 			initials += surnameParts[1].charAt(0);
 
-		boolean identifierValid = StringHelper.startsWith(manager.getIdentifier(), initials, true);
+		// ✨ New line: sanitize to A-Z only
+		String sanitizedInitials = this.sanitizeInitials(initials);
+
+		// ✨ Now compare using sanitized version
+		boolean identifierValid = StringHelper.startsWith(manager.getIdentifier(), sanitizedInitials, true);
 		super.state(context, identifierValid, "identifier", "acme.validation.manager.wrong-initials.message");
 
 		// Return true if no errors

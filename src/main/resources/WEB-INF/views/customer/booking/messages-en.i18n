@@ -33,4 +33,4 @@ customer.booking.form.label.flight= Flight
 
 customer.booking.form.button.publish= Publish Booking
 customer.booking.form.error.last-nibble-required= You must enter the last 4 digits of the card to publish the booking.
-acme.validation.length= The value does not have a valid length.
+acme.validation.length= The value does not have a valid length

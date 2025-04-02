@@ -20,6 +20,8 @@ user-account-manager-09,true,"UserIdentity{name: 'Alex', surname: 'Adams Apple',
 user-account-manager-10,true,"UserIdentity{name: 'Zachary', surname: 'Zimmer Zorro', email: 'zachary.zimmer.zorro@acme.com'}",manager10,manager10
 user-account-manager-11,true,"UserIdentity{name: 'Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', surname: 'Bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', email: 'allA@acme.com'}",manager11,manager11
 user-account-manager-12,true,"UserIdentity{name: 'C', surname: 'D', email: 'OneC@acme.com'}",manager12,manager12
+user-account-manager-13,true,"UserIdentity{name: 'Bing', surname: '之乎路可良 ᏥᏲᏎᎭ', email: 'bing@acme.com'}",manager13,manager13
+user-account-manager-14,true,"UserIdentity{name: 'Susan', surname: '貸んい建濯よ芝弾テソ Λορεμ ιπσθμ', email: 'susan@acme.com'}",manager14,manager14
 # FLIGHT CREW MEMBERS
 user-account-member-01,true,"UserIdentity{name: 'Juan', surname: 'Pérez García', email: 'juan@iberia.com'}",member1,member1
 user-account-member-02,true,"UserIdentity{name: 'Ana', surname: 'Gómez', email: 'ana@vueling.com'}",member2,member2
