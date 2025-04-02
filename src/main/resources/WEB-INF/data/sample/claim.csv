@@ -1,0 +1,7 @@
+key,registeredAt,passengerEmail,description,type,accepted,isDraftMode,key:assistanceAgent,key:leg
+claim-01,2024/11/12 10:00,elquejica@hotmail.com,a,FLIGHT_ISSUES,PENDING,true,agent-01,leg-01
+claim-02,2021/03/01 9:00,canelita@gmail.com,Lorem ipsum dolor sit amet consectetur adipiscing elit Nullam vehicula nisi eget ultricies interdum felis lorem tincidunt justo ut tincidunt erat metus nec libero Integer vitae orci id mauris aliquet efficitur Proin sit amet sem et nulla pharetra vestibul,LUGGAGE_ISSUES,ACCEPTED,false,agent-02,leg-02
+claim-03,2023/05/03 22:31,d@gmail.com,Mi maleta se la quedó Ryanair,LUGGAGE_ISSUES,ACCEPTED,false,agent-01,leg-01
+claim-04,2024/05/03 20:31,boludo@gmail.com,Intentaron explotar el avión !!!,SECURITY_INCIDENT,REJECTED,false,agent-02,leg-02
+claim-05,2024/12/31 23:59,padel@us.es,Quiero robar el dinero de ACME-ANS!!!,OTHER_ISSUES,ACCEPTED,true,agent-01,leg-02
+claim-06,2024/05/03 20:31,lpallares@rtva.es.com,miedo??$&(!!!,SECURITY_INCIDENT,PENDING,true,agent-02,leg-01
