@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
@@ -44,37 +45,34 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 	}
 
 	@Override
-	public void unbind(final ActivityLog object) {
-		assert object != null;
+	public void unbind(final ActivityLog activityLog) {
+		Dataset dataset;
 
-		int masterId;
-		Assignment assignment;
-		final boolean showCreate;
+		int masterId = super.getRequest().getData("masterId", int.class);
+		Assignment assignment = this.repository.findAssignmentById(masterId);
+		final boolean showCreate = assignment.getLeg().getArrival().before(MomentHelper.getCurrentMoment());
 
-		Dataset dataset = super.unbindObject(object, "incidentType", "description", "severityLevel", "registeredAt");
+		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 
-		super.addPayload(dataset, object, "incidentType", "registeredAt");
-
-		masterId = super.getRequest().getData("masterId", int.class);
-		assignment = this.repository.findAssignmentById(masterId);
-		showCreate = assignment.getIsDraftMode();
-		super.getResponse().addGlobal("masterId", masterId);
+		super.addPayload(dataset, activityLog, "registeredAt", "incidentType");
 		super.getResponse().addGlobal("showCreate", showCreate);
-
+		super.getResponse().addGlobal("masterId", masterId);
 		super.getResponse().addData(dataset);
-	}
-
-	public void unbind(final List<ActivityLog> object) {
-		int masterId;
-		Assignment assignment;
-		final boolean showCreate;
-
-		masterId = super.getRequest().getData("masterId", int.class);
-		assignment = this.repository.findAssignmentById(masterId);
-		showCreate = assignment.getIsDraftMode();
-		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("showCreate", showCreate);
 
 	}
+
+	//	@Override
+	//	public void unbind(final Collection<ActivityLog> activityLog) {
+	//		int masterId;
+	//		Assignment assignment;
+	//		final boolean showCreate;
+	//
+	//		masterId = super.getRequest().getData("masterId", int.class);
+	//		assignment = this.repository.findAssignmentById(masterId);
+	//		showCreate = assignment.getIsDraftMode();
+	//		super.getResponse().addGlobal("masterId", masterId);
+	//		super.getResponse().addGlobal("showCreate", showCreate);
+	//
+	//	}
 
 }

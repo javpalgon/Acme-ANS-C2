@@ -34,6 +34,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		Assignment assignment = new Assignment();
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		assignment.setIsDraftMode(true);
+		assignment.setStatus(AssignmentStatus.PENDING);
 		super.getBuffer().addData(assignment);
 	}
 
@@ -41,7 +42,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
-		super.bindObject(assignment, "role", "status", "remarks", "leg", "member");
+		super.bindObject(assignment, "role", "remarks", "leg", "member");
 	}
 
 	@Override
@@ -79,6 +80,9 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
 
+		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		assignment.setStatus(AssignmentStatus.PENDING);
+
 		this.repository.save(assignment);
 	}
 
@@ -86,7 +90,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void unbind(final Assignment assignment) {
 		assert assignment != null;
 
-		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "remarks", "isDraftMode");
 
 		List<Member> availableMembers = this.repository.findAvailableMembers(AvailabilityStatus.AVAILABLE);
 
@@ -95,7 +99,6 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		dataset.put("members", membersChoices);
 
 		dataset.put("role", SelectChoices.from(Role.class, assignment.getRole()));
-		dataset.put("status", SelectChoices.from(AssignmentStatus.class, assignment.getStatus()));
 
 		List<Leg> validLegs = this.repository.findAllPublishedAndFutureLegs(MomentHelper.getCurrentMoment());
 		dataset.put("legs", SelectChoices.from(validLegs, "flightNumber", assignment.getLeg()));

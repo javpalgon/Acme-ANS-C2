@@ -4,16 +4,19 @@
 
 <acme:form>
     <!-- Common fields for all views -->
-<acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}" readonly="${assignment.isDraftMode}"/>
-
-<acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}" readonly="${assignment.isDraftMode}"/>
-
-<acme:input-textbox code="member.assignment.form.label.remarks" path="remarks" readonly="${assignment.isDraftMode}"/>
-
-<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
-
-<acme:input-select code="member.assignment.form.label.member" path="member" choices="${members}" readonly="${assignment.isDraftMode}"/>
-
+	<acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}" readonly="${assignment.isDraftMode}"/>
+	
+	<jstl:if test="${_command != 'create'}">
+	    <acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}" readonly="${assignment.isDraftMode}"
+	    />
+	</jstl:if>
+	
+	<acme:input-textbox code="member.assignment.form.label.remarks" path="remarks" readonly="${assignment.isDraftMode}"/>
+	
+	<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
+	
+	<acme:input-select code="member.assignment.form.label.member" path="member" choices="${members}" readonly="${assignment.isDraftMode}"/>
+	
 
 
     

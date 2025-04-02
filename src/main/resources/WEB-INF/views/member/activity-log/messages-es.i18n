@@ -1,7 +1,21 @@
 # Activity Log
-member.activityLog.list.label.incidentType = Tipo de incidente
-member.activityLog.list.label.description = Descripción
-member.activityLog.list.label.severityLevel = Nivel de severidad
-member.activityLog.list.label.registeredAt = Fecha de registro
+member.activity-log.form.label.incidentType = Tipo de incidente
+member.activity-log.form.label.description= Descripción
+member.activity-log.form.label.severityLevel = Nivel de severidad
+member.activity-log.form.label.registeredAt= Fecha de registro
 
-member.activityLog.list.button.create = Crear nuevo registro de actividad
+member.activityLog.list.label.incidentType = Tipo de incidente
+member.activityLog.list.label.description = Descriptción
+member.activityLog.list.label.severityLevel = Nivel de severidad
+member.activityLog.list.label.registeredAt= Fecha de registro
+
+member.activity-log.list.button.create = Crear nuevo registro de actividad
+member.activity-log.form.button.create=Crear
+member.activity-log.form.button.update=Actualizar
+member.activity-log.form.button.publish=Publicar
+member.activity-log.form.button.delete=Eliminar
+
+member.activity-log.list.title=Registros de Actividad
+member.activity-log.form.title=Formulario de registro de actividad
+
+member.activity-log.form.error.severity-range=El nivel de severidad debe ser entre 0 y 10

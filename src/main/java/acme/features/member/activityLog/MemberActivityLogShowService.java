@@ -39,7 +39,6 @@ public class MemberActivityLogShowService extends AbstractGuiService<Member, Act
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "isDraftMode");
 		dataset.put("masterId", activityLog.getAssignment().getId());
 		dataset.put("masterIsDraftMode", activityLog.getAssignment().getIsDraftMode());
-		dataset.put("isDraftMode", activityLog.getIsDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

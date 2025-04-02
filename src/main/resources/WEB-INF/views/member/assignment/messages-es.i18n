@@ -43,7 +43,7 @@ member.assignment.form.button.create=Crear nueva asignación
 
 # Errores
 member.assignment.form.error.lastUpdate-future=La fecha de última actualización no puede ser futura
-member.assignment.form.error.leg-occurred=El vuelo seleccionado ya ha ocurrido y no puedes crear un nuevo borrador de asignación de él
+member.assignment.form.error.leg-occurred=El vuelo seleccionado ya ha ocurrido y no puedes crear cambiar la asignación de él, solo eliminarlo
 member.assignment.form.error.member-unavailable=Solo se pueden asignar miembros de tripulación disponibles
 member.assignment.form.error.pilot-exists=Cada vuelo solo puede tener un piloto
 member.assignment.form.error.copilot-exists=Cada vuelo solo puede tener un copiloto
