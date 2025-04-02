@@ -51,11 +51,19 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		dataset = super.unbindObject(object, "tag", "requiresSelfTransfer", "cost", "description", "isDraftMode");
 		List<Leg> legs = this.repository.findLegsByFlightId(object.getId()).stream().toList();
 		dataset.put("legs", !legs.isEmpty());
-		dataset.put("departure", object.getDeparture());
-		dataset.put("arrival", object.getArrival());
-		dataset.put("originCity", object.getOriginCity());
-		dataset.put("destinationCity", object.getDestinationCity());
-		dataset.put("layovers", object.getNumOfLayovers());
+		if (!legs.isEmpty()) {
+			dataset.put("departure", object.getDeparture());
+			dataset.put("arrival", object.getArrival());
+			dataset.put("originCity", object.getOriginCity());
+			dataset.put("destinationCity", object.getDestinationCity());
+			dataset.put("layovers", object.getNumOfLayovers());
+		} else {
+			dataset.put("departure", "null");
+			dataset.put("arrival", "null");
+			dataset.put("originCity", "null");
+			dataset.put("destinationCity", "null");
+			dataset.put("layovers", "null");
+		}
 		super.getResponse().addData(dataset);
 	}
 
