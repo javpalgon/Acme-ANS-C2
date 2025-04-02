@@ -21,13 +21,12 @@
         action="/customer/passenger/list?bookingId=${id}" />
 	</jstl:if>
 
-	<jstl:if test="${!hasPassengers}">
-	        <p><em>No passengers for this booking.</em></p>	   
-	        <acme:button 
-        code="customer.booking.show.button.passengers" 
-        action="/customer/passenger/list?bookingId=${id}" />     
-	</jstl:if>	
+	<jstl:choose>
+		<jstl:when test="${!hasPassengers && _command != 'create'}">
+			 <div><acme:print code="customer.booking.form.label.nopassengers" /></div>   
+		</jstl:when>
 
+	</jstl:choose>
 	<jstl:choose>
 	    <jstl:when test="${(_command == 'update' || _command == 'show' || _command == 'publish') && isDraftMode}">
 	        <acme:submit code="customer.booking.form.button.save" action="/customer/booking/update"/>
@@ -36,6 +35,7 @@
 	</jstl:choose>
 		
 	<jstl:if test="${_command == 'create'}">
+	<div> <acme:print code="customer.booking.form.label.nopassengersCreate" /> </div>
 		  <acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 	</jstl:if>
 	<jstl:if test="${_command == 'show' && isDraftMode}">

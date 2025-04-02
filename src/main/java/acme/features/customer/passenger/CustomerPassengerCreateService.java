@@ -58,8 +58,9 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 
 		// Validación de passport
 		super.state(object.getPassport() != null && object.getPassport().matches("^[A-Z0-9]{6,9}$"), "passport", "customer.passenger.form.error.passport.invalid");
-		boolean isDuplicate = this.repository.existsByPassport(object.getPassport(), object.getId());
-		super.state(!isDuplicate, "passport", "customer.passenger.form.error.duplicate-passport");
+		Passenger existing = this.repository.findPassengerByPassport(object.getPassport());
+		if (existing != null)
+			super.state(false, "passport", "customer.passenger.form.error.duplicate-passport");
 
 		// Validación de birth
 		boolean isPast = object.getBirth() != null && MomentHelper.isBefore(object.getBirth(), MomentHelper.getCurrentMoment());

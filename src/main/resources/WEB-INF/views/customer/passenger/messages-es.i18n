@@ -23,4 +23,8 @@ customer.passenger.form.error.specialNeeds.length= Las necesidades especiales no
 customer.passenger.form.error.duplicate-passport= Este pasaporte ya está en uso por otro pasajero.
 
 customer.passenger.form.button.save = Guardar
+customer.passenger.form.button.create = Crear Pasajero
+
+customer.passenger.form.button.publish= Publicar Pasajero
+
 customer.passenger.list.form.create = Crear Pasajero

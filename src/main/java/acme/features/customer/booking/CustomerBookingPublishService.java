@@ -13,6 +13,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
 import acme.entities.flight.Flight;
+import acme.entities.passenger.Passenger;
 import acme.realms.Customer;
 
 @GuiService
@@ -55,6 +56,14 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 		boolean hasNibble = object.getLastNibble() != null && !object.getLastNibble().isEmpty();
 		super.state(hasNibble, "lastNibble", "customer.booking.form.error.last-nibble-required");
+
+		// Validar que todos los pasajeros estén publicados
+		Collection<Passenger> passengers = this.repository.findPassengersByBooking(object.getId());
+		boolean allPublished = passengers.stream().allMatch(p -> !p.getIsDraftMode());
+		super.state(allPublished, "*", "customer.booking.form.error.passenger-not-published");
+
+		boolean atLeastOnePassenger = passengers.size() > 0;
+		super.state(atLeastOnePassenger, "*", "customer.booking.form.error.booking-without-passenger");
 	}
 
 	@Override

@@ -24,3 +24,5 @@ customer.passenger.form.error.duplicate-passport=This passport is already in use
 
 customer.passenger.form.button.save = Save
 customer.passenger.form.button.create = Create Passenger
+
+customer.passenger.form.button.publish=Publish Passenger

@@ -15,7 +15,7 @@ import acme.realms.Customer;
 public class CustomerPassengerShowService extends AbstractGuiService<Customer, Passenger> {
 
 	@Autowired
-	protected CustomerPassengerRepository repository;
+	private CustomerPassengerRepository repository;
 
 
 	@Override
