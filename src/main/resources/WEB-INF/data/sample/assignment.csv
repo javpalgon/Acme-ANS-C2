@@ -66,15 +66,3 @@ assignment-67,leg-33,LEAD_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-03,VIP ser
 assignment-68,leg-34,PILOT,2023/06/06 09:00,CONFIRMED,member-04,Short turnaround,false
 assignment-69,leg-34,CO_PILOT,2023/06/06 09:00,CONFIRMED,member-01,Recurrent training,false
 assignment-70,leg-34,CABIN_ATTENDANT,2023/06/06 09:00,CONFIRMED,member-02,New uniform,false
-
-assignment-71,leg-35,PILOT,2023/07/12 14:00,CONFIRMED,member-03,Monsoon season,false
-assignment-72,leg-35,CO_PILOT,2023/07/12 14:00,CONFIRMED,member-04,Turbulence experience,false
-assignment-73,leg-35,CABIN_ATTENDANT,2023/07/12 14:00,CONFIRMED,member-01,Special meals,false
-
-assignment-74,leg-36,PILOT,2023/08/20 06:00,CONFIRMED,member-02,Early shift,false
-assignment-75,leg-36,CO_PILOT,2023/08/20 06:00,CONFIRMED,member-03,Check ride,false
-assignment-76,leg-36,LEAD_ATTENDANT,2023/08/20 06:00,CONFIRMED,member-04,Equipment check,false
-
-assignment-77,leg-37,PILOT,2023/09/03 11:00,CONFIRMED,member-01,New route,false
-assignment-78,leg-37,CO_PILOT,2023/09/03 11:00,CONFIRMED,member-02,Last minute change,false
-assignment-79,leg-37,CABIN_ATTENDANT,2023/09/03 11:00,CONFIRMED,member-03,Extra crew,false
