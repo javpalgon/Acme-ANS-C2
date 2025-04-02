@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.principals.Principal;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flight.Flight;
@@ -32,7 +31,6 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 	@Override
 	public void load() {
 		Collection<Flight> flights = new ArrayList<>();
-		Principal principal;
 		int managerId;
 
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();

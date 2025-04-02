@@ -52,7 +52,6 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 	@Override
 	public void validate(final Flight object) {
 		assert object != null;
-		;
 
 	}
 
