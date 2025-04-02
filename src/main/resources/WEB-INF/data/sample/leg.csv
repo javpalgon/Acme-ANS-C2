@@ -53,4 +53,26 @@ leg-49,IBV0048,2023/09/25 15:15,2023/09/25 18:00,LANDED,airport-04,airport-01,fl
 leg-50,VYB0049,2023/10/08 08:00,2023/10/08 10:45,LANDED,airport-01,airport-02,flight-02,aircraft-02,false
 leg-51,AEX0050,2023/11/12 21:45,2023/11/13 00:30,LANDED,airport-02,airport-03,flight-01,aircraft-03,false
 leg-52,LNA0051,2023/12/24 06:30,2023/12/24 09:15,LANDED,airport-03,airport-04,flight-02,aircraft-04,false
-leg-53,IBV0052,2024/01/20 11:15,2024/01/20 14:00,LANDED,airport-01,airport-02,flight-01,aircraft-01,false
+leg-53,IBV0052,2024/01/20 11:15,2024/01/20 14:00,LANDED,airport-01,airport-02,flight-01,aircraft-01,falseleg-12,IBV1001,2025/01/01 08:00,2025/01/01 10:00,ON_TIME,airport-01,airport-02,flight-03,aircraft-01,false
+leg-13,IBV6097,2025/04/01 06:00,2025/04/01 08:00,ON_TIME,airport-01,airport-02,flight-01,aircraft-01,False
+leg-14,VYB6847,2025/04/02 06:00,2025/04/02 08:00,ON_TIME,airport-02,airport-03,flight-02,aircraft-02,False
+leg-15,IBV1393,2025/04/03 06:00,2025/04/03 08:00,ON_TIME,airport-03,airport-04,flight-03,aircraft-01,False
+leg-16,AEX8190,2025/04/04 06:00,2025/04/04 08:00,ON_TIME,airport-04,airport-01,flight-04,aircraft-03,False
+leg-17,LNA2929,2025/04/05 06:00,2025/04/05 08:00,ON_TIME,airport-01,airport-02,flight-05,aircraft-04,False
+leg-18,SHY3393,2025/04/06 06:00,2025/04/06 08:00,ON_TIME,airport-02,airport-03,flight-06,aircraft-05,False
+leg-19,NEM9788,2025/04/07 06:00,2025/04/07 08:00,ON_TIME,airport-03,airport-04,flight-07,aircraft-06,False
+leg-20,INV2180,2025/04/08 06:00,2025/04/08 08:00,ON_TIME,airport-04,airport-01,flight-08,aircraft-08,False
+leg-21,FTA4686,2025/04/09 06:00,2025/04/09 08:00,ON_TIME,airport-01,airport-02,flight-09,aircraft-09,False
+leg-22,ABC2783,2025/04/10 06:00,2025/04/10 08:00,ON_TIME,airport-02,airport-03,flight-10,aircraft-10,False
+leg-23,FTA2991,2025/04/11 06:00,2025/04/11 08:00,ON_TIME,airport-03,airport-04,flight-11,aircraft-09,False
+leg-24,ABC9970,2025/04/12 06:00,2025/04/12 08:00,ON_TIME,airport-04,airport-01,flight-12,aircraft-10,False
+leg-25,VYB4071,2025/04/13 06:00,2025/04/13 08:00,ON_TIME,airport-01,airport-02,flight-13,aircraft-02,False
+leg-26,LNA2643,2025/04/14 06:00,2025/04/14 08:00,ON_TIME,airport-02,airport-03,flight-14,aircraft-04,False
+leg-27,AEX7597,2025/04/15 06:00,2025/04/15 08:00,ON_TIME,airport-03,airport-04,flight-15,aircraft-03,False
+leg-28,LNA1300,2025/04/16 06:00,2025/04/16 08:00,ON_TIME,airport-04,airport-01,flight-16,aircraft-04,False
+leg-29,IBV7393,2025/04/17 06:00,2025/04/17 08:00,ON_TIME,airport-01,airport-02,flight-17,aircraft-01,False
+leg-30,IBV4129,2025/04/18 06:00,2025/04/18 08:00,ON_TIME,airport-02,airport-03,flight-18,aircraft-01,False
+leg-31,IBV9363,2025/04/19 06:00,2025/04/19 08:00,ON_TIME,airport-03,airport-04,flight-19,aircraft-01,False
+leg-32,IBV1465,2025/04/20 06:00,2025/04/20 08:00,ON_TIME,airport-04,airport-01,flight-20,aircraft-01,False
+leg-33,IBV1749,2025/04/21 06:00,2025/04/21 08:00,ON_TIME,airport-01,airport-02,flight-21,aircraft-01,False
+leg-34,IBV9146,2025/04/22 06:00,2025/04/22 08:00,ON_TIME,airport-02,airport-03,flight-22,aircraft-01,False
