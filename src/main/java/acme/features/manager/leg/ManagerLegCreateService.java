@@ -1,6 +1,7 @@
 
 package acme.features.manager.leg;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,9 +107,12 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		SelectChoices selectedAircraft;
 		Collection<Aircraft> aircrafts;
+		Collection<Aircraft> finalAircrafts = new ArrayList<>();
 		aircrafts = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
-		//	aircrafts = this.repository.findAllAircrafts();
-		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
+		for (Aircraft aircraft : aircrafts)
+			if (aircraft.getAirline().getIATACode().equals(leg.getFlight().getManager().getAirline().getIATACode()))
+				finalAircrafts.add(aircraft);
+		selectedAircraft = SelectChoices.from(finalAircrafts, "regitrationNumber", leg.getAircraft());
 
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
@@ -119,6 +123,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("arrivalAirports", arrivalAirportChoices);
 		dataset.put("arrivalAirport", arrivalAirportChoices.getSelected().getKey());
 		dataset.put("aircrafts", selectedAircraft);
+		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 
 		super.getResponse().addData(dataset);

@@ -32,8 +32,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		int id = super.getRequest().getData("id", int.class);
 		Leg leg = this.repository.getLegById(id);
 
-		boolean authorised = leg != null && super.getRequest().getPrincipal().hasRealm(leg.getFlight().getManager()) && leg.getIsDraftMode();
-
+		boolean authorised = leg != null && super.getRequest().getPrincipal().hasRealm(leg.getFlight().getManager());
 		super.getResponse().setAuthorised(authorised);
 	}
 
@@ -48,34 +47,83 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		super.getBuffer().addData(leg);
 	}
 
+	//	@Override
+	//	public void bind(final Leg leg) {
+	//		int aircraftId;
+	//		Aircraft aircraft;
+	//		aircraftId = super.getRequest().getData("aircraft", int.class);
+	//		aircraft = this.repository.findAircraftById(aircraftId);
+	//
+	//		int departureAirportId;
+	//		Airport departureAirport;
+	//		departureAirportId = super.getRequest().getData("departureAirport", int.class);
+	//		departureAirport = this.repository.findAirportById(departureAirportId);
+	//
+	//		int arrivalAirportId;
+	//		Airport arrivalAirport;
+	//		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
+	//		arrivalAirport = this.repository.findAirportById(arrivalAirportId);
+	//
+	//		super.bindObject(leg, "flightNumber", "departure", "arrival", "status");
+	//		leg.setAircraft(aircraft);
+	//		leg.setDepartureAirport(departureAirport);
+	//		leg.setArrivalAirport(arrivalAirport);
+	//	}
+
 	@Override
 	public void bind(final Leg leg) {
-		int aircraftId;
-		Aircraft aircraft;
-		aircraftId = super.getRequest().getData("aircraft", int.class);
-		aircraft = this.repository.findAircraftById(aircraftId);
+		int id = super.getRequest().getData("id", int.class);
+		boolean isDraftMode = this.repository.getLegById(id).getIsDraftMode();
 
-		int departureAirportId;
-		Airport departureAirport;
-		departureAirportId = super.getRequest().getData("departureAirport", int.class);
-		departureAirport = this.repository.findAirportById(departureAirportId);
+		if (isDraftMode) {
+			// Si está en draft, bind completo
+			super.bindObject(leg, "flightNumber", "departure", "arrival", "status");
 
-		int arrivalAirportId;
-		Airport arrivalAirport;
-		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-		arrivalAirport = this.repository.findAirportById(arrivalAirportId);
+			int aircraftId = super.getRequest().getData("aircraft", int.class);
+			Aircraft aircraft = this.repository.findAircraftById(aircraftId);
+			leg.setAircraft(aircraft);
 
-		super.bindObject(leg, "flightNumber", "departure", "arrival", "status");
-		leg.setAircraft(aircraft);
-		leg.setDepartureAirport(departureAirport);
-		leg.setArrivalAirport(arrivalAirport);
+			int departureAirportId = super.getRequest().getData("departureAirport", int.class);
+			Airport departureAirport = this.repository.findAirportById(departureAirportId);
+			leg.setDepartureAirport(departureAirport);
+
+			int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
+			Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId);
+			leg.setArrivalAirport(arrivalAirport);
+		} else {
+			// Si ya está publicado, solo bind del status
+			super.bindObject(leg, "status");
+
+			// Cargar los valores originales para evitar que se pierdan (por si acaso)
+			Leg original = this.repository.getLegById(leg.getId());
+			leg.setFlightNumber(original.getFlightNumber());
+			leg.setDeparture(original.getDeparture());
+			leg.setArrival(original.getArrival());
+			leg.setAircraft(original.getAircraft());
+			leg.setDepartureAirport(original.getDepartureAirport());
+			leg.setArrivalAirport(original.getArrivalAirport());
+		}
 	}
 
 	@Override
-	public void validate(final Leg object) {
-		assert object != null;
-		;
+	public void validate(final Leg leg) {
+		assert leg != null;
 
+		Leg original = this.repository.getLegById(leg.getId());
+
+		if (!original.getIsDraftMode()) {
+			// Solo permitimos cambiar el status
+			if (!original.getStatus().equals(leg.getStatus())) {
+				// Está cambiando status, OK
+			} else
+				super.state(false, "status", "manager.leg.error.must-change-status");
+
+			// Bloqueamos cualquier otro cambio
+			if (!original.getFlightNumber().equals(leg.getFlightNumber()) || !original.getDeparture().equals(leg.getDeparture()) || !original.getArrival().equals(leg.getArrival()) || original.getAircraft().getId() != leg.getAircraft().getId()
+				|| original.getDepartureAirport().getId() != leg.getDepartureAirport().getId() || original.getArrivalAirport().getId() != leg.getArrivalAirport().getId())
+				super.state(false, "*", "manager.leg.error.only-status-can-change");
+
+		}
 	}
 
 	@Override
