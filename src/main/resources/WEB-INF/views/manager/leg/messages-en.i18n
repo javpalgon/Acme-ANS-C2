@@ -7,8 +7,8 @@ manager.leg.list.label.isDraftMode = Draft Mode
 manager.leg.list.label.arrival = Arrival time
 manager.leg.list.title = Legs of current flight
 
+manager.leg.form.title = Leg
 manager.leg.create = Create leg
-
 manager.leg.list.label.flightNumber = Flight Number
 manager.leg.list.label.departure = Departure Time
 manager.leg.list.label.arrival = Arrival Time
@@ -16,9 +16,7 @@ manager.leg.list.label.status = Status
 manager.leg.list.label.arrivalAirport = Arrival Airport
 manager.leg.list.label.departureAirport = Departure Airport
 manager.leg.list.label.aircraft = Aircraft
-
 manager.leg.form.button.update = Update
 manager.leg.form.button.delete = Delete
 manager.leg.form.button.publish = Publish
-
 manager.leg.create.button = Create
