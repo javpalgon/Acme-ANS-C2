@@ -55,11 +55,10 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		Integer legId = super.getRequest().getData("leg", int.class);
 		Integer memberId = super.getRequest().getData("member", int.class);
 
-		super.bindObject(assignment, "role", "lastUpdate", "status", "remarks");
+		super.bindObject(assignment, "role", "status", "remarks");
 
 		assignment.setLeg(this.repository.findLegById(legId));
 		assignment.setMember(this.repository.findMemberById(memberId));
-		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 	}
 
 	@Override
@@ -119,8 +118,6 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);
-
-		dataset.put("readonly", false);
 
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("legs", legChoices);

@@ -15,6 +15,7 @@ import acme.client.repositories.AbstractRepository;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
 import acme.entities.assignment.Role;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegStatus;
 import acme.realms.Member;
@@ -24,6 +25,15 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 
 	@Query("SELECT a FROM Assignment a WHERE a.id = :id")
 	Assignment findOneById(int id);
+
+	@Query("SELECT m FROM Member m")
+	List<Member> findAllMembers();
+
+	@Query("SELECT a FROM Assignment a")
+	List<Assignment> findAllAssignments();
+
+	@Query("SELECT l FROM Leg l")
+	List<Leg> findAllLegs();
 
 	@Query("SELECT a FROM Assignment a WHERE a.member = :member AND a.role = :role AND a.isDraftMode = false")
 	List<Assignment> findByMemberAndRole(Member member, Role role);
@@ -43,11 +53,11 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT l FROM Leg l WHERE l.id = :legId")
 	Leg findLegById(int legId);
 
-	@Query("SELECT m FROM Member m")
-	List<Member> findAllMembers();
+	@Query("SELECT m FROM Member m WHERE m.availabilityStatus = :status")
+	List<Member> findAvailableMembers(@Param("status") AvailabilityStatus status);
 
-	@Query("SELECT l FROM Leg l")
-	List<Leg> findAllLegs();
+	@Query("SELECT l FROM Leg l WHERE l.isDraftMode = false AND l.departure > :currentDate")
+	List<Leg> findAllPublishedAndFutureLegs(@Param("currentDate") Date currentDate);
 
 	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Leg l WHERE l.id = :legId AND l.departure < :currentDate")
 	boolean hasLegOccurred(@Param("legId") int legId, @Param("currentDate") Date currentDate);
@@ -72,6 +82,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 
 	@Modifying
 	@Transactional
-	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId")
+	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId AND al.isDraftMode = true")
 	void deleteActivityLogsByAssignmentId(int assignmentId);
+
 }

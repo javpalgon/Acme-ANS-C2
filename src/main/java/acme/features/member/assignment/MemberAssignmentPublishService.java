@@ -29,8 +29,9 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 
 		masterId = super.getRequest().getData("id", int.class);
 		assignment = this.repository.findOneById(masterId);
+		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment.getIsDraftMode();
+		status = assignment.getIsDraftMode() && assignment.getMember().getId() == memberId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -52,18 +53,18 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		Integer legId = super.getRequest().getData("leg", int.class);
 		Integer memberId = super.getRequest().getData("member", int.class);
 
-		super.bindObject(assignment, "role", "lastUpdate", "status", "remarks");
-
 		assignment.setLeg(this.repository.findLegById(legId));
 		assignment.setMember(this.repository.findMemberById(memberId));
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+
+		super.bindObject(assignment, "role", "status", "remarks");
 	}
 
 	@Override
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		Assignment original = this.repository.findOneById(assignment.getId());
+		Assignment original = (Integer) assignment.getId() != null ? this.repository.findOneById(assignment.getId()) : null;
 
 		if (!assignment.getIsDraftMode())
 			super.state(assignment.getIsDraftMode(), "*", "member.assignment.form.error.notDraft", "isDraftMode");
@@ -120,9 +121,12 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 
 		dataset.put("readonly", false);
 
-		dataset.put("leg", legChoices.getSelected().getKey());
+		String selectedLeg = legChoices.getSelected().getKey();
+		String selectedMember = memberChoices.getSelected().getKey();
+
+		dataset.put("leg", selectedLeg);
 		dataset.put("legs", legChoices);
-		dataset.put("member", memberChoices.getSelected().getKey());
+		dataset.put("member", selectedMember);
 		dataset.put("members", memberChoices);
 
 		super.getResponse().addData(dataset);

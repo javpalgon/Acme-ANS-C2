@@ -29,7 +29,6 @@ public class MemberAssignmentListCompletedService extends AbstractGuiService<Mem
 	@Override
 	public void load() {
 		Collection<Assignment> assignments = new ArrayList<>();
-		//Principal principal;
 		int memberId;
 
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();

@@ -1,26 +1,42 @@
-key,key:assignment,registeredAt,incidentType,description,severityLevel
-log-01,assignment-01,2024/03/15 08:30,"Avionics system failure during check","Unexpected failure in the avionics system detected. Immediate troubleshooting required to ensure safe operation and avoid delays or cancellations.",8
-log-02,assignment-02,2023/11/22 14:45,"Crew member late arrival due to traffic","One of the crew members reported a delay in arrival due to heavy traffic conditions. A contingency plan was put in place to accommodate the delay and avoid disruptions.",0
-log-03,assignment-01,2024/01/10 19:20,"Severe weather conditions","Severe weather conditions; including turbulence and storms; impacted the flight path significantly. Precautions were taken by the crew to ensure passenger safety and avoid risks. All measures were thoroughly executed to maintain a safe and smooth journey.",7
-log-04,assignment-01,2022/06/30 05:10,"Security breach attempt at restricted area","An individual unauthorized to access restricted areas attempted to bypass security measures. Security personnel promptly intervened, resolving the situation without incident.",10
-log-05,assignment-01,2024/02/17 12:00,"Minor delay due to landing gear maintenance","A minor technical issue was detected in the landing gear system during routine checks. The maintenance team performed diagnostics and confirmed the aircraft was safe to operate.",6
-log-06,assignment-04,2023/06/10 14:20,"Engine anomaly detected","Routine check revealed minor irregularities in engine performance. Engineers resolved the issue swiftly.",5
-log-07,assignment-01,2022/09/15 09:50,"Cabin pressure fluctuation","Detected fluctuations in cabin pressure. Adjustments were made to stabilize conditions.",6
-log-08,assignment-07,2021/03/27 17:30,"Navigation system recalibration","Unexpected deviation detected in navigation system. A recalibration was successfully performed.",4
-log-09,assignment-08,2020/07/14 11:10,"Flight clearance delay","Flight clearance was delayed due to temporary airspace congestion.",3
-log-10,assignment-09,2024/02/21 08:15,"Fuel contamination alert","Routine maintenance flagged a potential fuel contamination risk. Additional checks ensured fuel integrity.",7
-log-11,assignment-10,2023/12/01 10:40,"In-flight medical emergency","Passenger experienced a medical emergency. Crew responded swiftly, stabilizing the situation.",9
-log-12,assignment-11,2022/04/06 13:25,"Turbulence warning","Reports indicated potential turbulence along the route. Flight plan was adjusted accordingly.",2
-log-13,assignment-12,2023/07/08 18:05,"Cargo mismanagement","Cargo weight distribution issue detected. Reallocation was necessary before departure.",5
-log-14,assignment-13,2021/12/15 07:30,"Mechanical failure in auxiliary power unit","Detected failure in auxiliary power unit during pre-flight checks. Repaired before takeoff.",8
-log-15,assignment-14,2020/02/10 20:45,"Crew member unavailability","Crew scheduling conflict led to a temporary staff shortage. Alternative arrangements were made.",4
-log-16,assignment-15,2024/03/16 05:50,"Delayed boarding process","Boarding delayed due to additional security screenings.",3
-log-17,assignment-16,2023/09/10 14:30,"Incorrect fuel load estimate","Miscommunication resulted in incorrect fuel load estimate. Adjustments were made before departure.",6
-log-18,assignment-17,2022/05/21 16:40,"Severe icing conditions","Severe icing conditions detected on aircraft. De-icing procedures were applied.",7
-log-19,assignment-18,2024/01/06 12:20,"Passenger misconduct incident","Disruptive passenger required intervention from cabin crew and security.",9
-log-20,assignment-19,2018/11/12 21:15,"Aircraft substitution required","Original aircraft was deemed unfit for operation. Replacement was arranged.",6
-log-21,assignment-20,2021/03/30 22:05,"Delayed baggage handling","Baggage loading took longer than expected, causing a minor departure delay.",2
-log-22,assignment-21,2022/07/16 08:10,"Pre-flight system diagnostics alert","Automated system check flagged an alert requiring manual verification.",5
-log-23,assignment-22,2020/08/09 13:30,"Runway congestion","Heavy air traffic caused a temporary delay in takeoff clearance.",3
-log-24,assignment-23,2023/04/05 07:45,"Inconsistent weather reports","Differing weather reports required additional cross-checking before departure.",4
-log-25,assignment-14,2022/06/22 15:10,"Unexpected aircraft maintenance","Routine inspection led to an unscheduled minor maintenance task.",5
+key,key:assignment,registeredAt,incidentType,description,severityLevel,is_draft_mode
+log-01,assignment-02,2019/01/10 18:30,CREW,"Co-pilot training completed",3,true
+log-02,assignment-03,2022/01/10 20:15,WEATHER,"Flight cancelled due to severe weather",8,true
+log-03,assignment-04,2023/01/11 09:00,CABIN,"Standby crew performed well",1,true
+log-04,assignment-05,2023/05/15 18:45,OPERATIONAL,"Flight reassignment handled smoothly",4,true
+log-05,assignment-06,2021/08/22 10:00,ADMIN,"Pending approval due to new regulations",3,true
+log-06,assignment-07,2020/06/11 13:20,FLIGHT,"Standard flight operations",0,true
+log-07,assignment-08,2019/09/19 21:45,ADMIN,"Clearance delayed due to ATC issues",4,true
+log-08,assignment-09,2024/02/22 22:30,OPERATIONAL,"Operational changes communicated late",7,true
+log-09,assignment-10,2023/12/01 08:00,CABIN,"Lead attendant managed reassignment well",2,true
+log-10,assignment-11,2022/04/06 09:30,ADMIN,"Manifest updates completed post-flight",3,true
+log-11,assignment-12,2023/07/07 14:45,FLIGHT,"Routine flight with no incidents",0,true
+log-12,assignment-13,2021/12/14 18:20,MAINTENANCE,"Cancellation due to engine issues",7,true
+log-13,assignment-14,2020/01/26 09:00,SCHEDULING,"Crew scheduling confirmed last minute",4,true
+log-14,assignment-15,2024/03/17 12:45,CABIN,"Schedule changes accommodated",2,true
+log-15,assignment-16,2023/09/10 08:30,CREW,"Backup crew performed adequately",2,true
+log-16,assignment-17,2022/05/21 10:00,WEATHER,"Weather updates received late",5,true
+log-17,assignment-18,2024/01/05 11:30,FLIGHT,"Early morning flight completed",1,true
+log-18,assignment-19,2018/11/12 10:00,AIRCRAFT,"Aircraft assignment delayed",5,true
+log-19,assignment-20,2021/03/30 09:00,CREW,"Crew illness handled professionally",6,true
+log-20,assignment-21,2022/07/16 08:00,CABIN,"Standby crew ready but not needed",1,true
+log-21,assignment-22,2020/08/09 09:00,BRIEFING,"Final briefing completed successfully",1,true
+log-22,assignment-23,2023/04/05 10:00,SCHEDULING,"New flight time accommodated",3,true
+log-23,assignment-24,2022/06/22 09:00,DISPATCH,"Dispatch clearance obtained",3,true
+log-24,assignment-53,2023/01/15 12:00,FLIGHT,"Standard flight operations",0,true
+log-25,assignment-54,2023/01/15 12:05,CREW,"First officer performed well",1,true
+log-26,assignment-55,2023/01/15 12:10,CABIN,"Excellent passenger service",0,true
+log-27,assignment-56,2023/02/10 16:30,FLIGHT,"Seasonal route completed successfully",1,true
+log-28,assignment-57,2023/02/10 16:35,TRAINING,"Training objectives met",3,true
+log-29,assignment-58,2023/02/10 16:40,CABIN,"Medical training proved valuable",1,true
+log-30,assignment-59,2023/03/03 22:30,FLIGHT,"Night flight completed safely",3,true
+log-31,assignment-60,2023/03/03 22:35,CREW,"Instrument rating verified",2,true
+log-32,assignment-61,2023/03/03 22:40,CABIN,"New crew member orientation complete",1,true
+log-33,assignment-62,2023/04/10 13:30,FLIGHT,"Long-haul flight successful",1,true
+log-34,assignment-63,2023/04/10 13:35,CREW,"First international flight completed",3,true
+log-35,assignment-64,2023/04/10 13:40,CABIN,"Language skills utilized effectively",2,true
+log-36,assignment-65,2023/05/18 18:30,FLIGHT,"Weekend flight on time",0,true
+log-37,assignment-66,2023/05/18 18:35,CREW,"Extra hours logged correctly",1,true
+log-38,assignment-67,2023/05/18 18:40,CABIN,"VIP service well received",4,true
+log-39,assignment-68,2023/06/06 14:30,FLIGHT,"Short turnaround achieved",1,true
+log-40,assignment-69,2023/06/06 14:35,TRAINING,"Recurrent training completed",3,true
+log-41,assignment-70,2023/06/06 14:40,CABIN,"New uniform feedback positive",1,true
