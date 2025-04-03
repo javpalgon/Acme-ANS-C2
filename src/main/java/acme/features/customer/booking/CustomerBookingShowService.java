@@ -1,10 +1,8 @@
 
 package acme.features.customer.booking;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.datatypes.Money;
@@ -19,10 +17,8 @@ import acme.realms.Customer;
 @GuiService
 public class CustomerBookingShowService extends AbstractGuiService<Customer, Booking> {
 
-	private static final Logger			logger	= LoggerFactory.getLogger(CustomerBookingShowService.class);
-
 	@Autowired
-	protected CustomerBookingRepository	repository;
+	protected CustomerBookingRepository repository;
 
 
 	@Override
@@ -54,14 +50,16 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
 
-		List<String> passengers = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).toList();
+		String passengerList = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).collect(Collectors.joining(", ")); // Puedes usar \n si prefieres salto de línea
+
+		dataset.put("passengers", passengerList);
+		dataset.put("hasPassengers", !passengerList.isEmpty());
 
 		Money totalPrice = object.getPrice();
 		dataset.put("totalPrice", totalPrice);
 		dataset.put("travelClasses", choices);
 
-		dataset.put("hasPassengers", !passengers.isEmpty());
-		dataset.put("passengers", passengers);
+		dataset.put("id", object.getId());
 
 		super.getResponse().addData(dataset);
 	}

@@ -15,7 +15,9 @@ customer.booking.form.label.travelClass = Travel Class
 customer.booking.form.label.lastNibble = Last Nibble
 customer.booking.form.label.isDraftMode = Draft Mode
 customer.booking.form.label.totalPrice= Total Price
-customer.booking.form.label.passengers = Passengers
+customer.booking.form.label.passengers2= Passengers
+customer.booking.form.label.nopassengers = No passengers for this booking. You can create them below.
+customer.booking.form.label.nopassengersCreate= No passengers for this booking yet. You can create them once you have created the new booking.
 
 customer.booking.form.error.not-draft= Only draft bookings can be updated.
 customer.booking.form.button.save= Save changes
@@ -26,11 +28,19 @@ customer.booking.form.error.duplicate-locatorCode= This locator code is already 
 customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in the past.
 customer.booking.form.error.travelClass-required= You must select a travel class.
 customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
+customer.booking.form.error.passenger-not-published=All passengers must be published before publishing the booking.
+customer.booking.form.error.booking-without-passenger= You must add at least one passenger to publish a booking.
 
 customer.booking.form.button.create= Create Booking
 customer.booking.list.button.create= Create Booking
+
 customer.booking.form.label.flight= Flight
 
 customer.booking.form.button.publish= Publish Booking
 customer.booking.form.error.last-nibble-required= You must enter the last 4 digits of the card to publish the booking.
+
+acme.validation.length= The value does not have a valid length.
+
+customer.booking.show.button.passengers= See Passengers
+customer.passenger.list.button.create = Create Passenger
 acme.validation.length= The value does not have a valid length
