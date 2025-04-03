@@ -3,6 +3,11 @@ manager.flight.form.label.cost = Cost
 manager.flight.form.label.description = Description
 manager.flight.form.label.requiresSelfTransfer = Does it require self transfer?
 manager.flight.form.label.isDraftMode = Draft Mode
+manager.flight.form.label.departure = Departure
+manager.flight.form.label.arrival = Arrival
+manager.flight.form.label.originCity = Origin City
+manager.flight.form.label.destinationCity = Destination City
+manager.flight.form.label.layovers = Lay Overs
 
 manager.flight.create = Create
 manager.flight.form.button.delete = Delete
@@ -11,6 +16,7 @@ manager.flight.form.button.publish = Publish
 manager.flight.form.button.create = Create
 manager.flight.form.title = Flight
 manager.flight.list.title = My flights
+manager.flight.leg = Legs
 
 manager.flight.form.error.notDraft = You have already published this flight.
 manager.flight.form.error.LegsNotPublished = Not all legs are published.

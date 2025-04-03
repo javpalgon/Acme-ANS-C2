@@ -58,4 +58,8 @@ public class ActivityLog extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Assignment			assignment;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
 }

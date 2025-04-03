@@ -1,0 +1,64 @@
+# member.assignment.list.completed ##########################################################
+
+member.assignment.list.title = Lista de tus asignaciones  
+member.assignment.form.title = Detalle de la asignación elegida  
+
+member.assignment.list.label.role = Rol  
+member.assignment.list.label.lastUpdate = Última actualización  
+member.assignment.list.label.status = Estado  
+member.assignment.list.label.remarks = Observaciones  
+member.assignment.list.label.leg = Número de vuelo
+member.assignment.list.button.create=Crear nueva asignación  
+
+# Assignment Info
+member.assignment.form.label.role=Rol
+member.assignment.form.label.lastUpdate=Última actualización
+member.assignment.form.label.status=Estado
+member.assignment.form.label.remarks=Observaciones
+
+# Flight Leg Info
+member.assignment.form.label.flightInfo=Información de la etapa del vuelo
+member.assignment.form.label.flightNumber=Número de vuelo
+member.assignment.form.label.departure=Salida
+member.assignment.form.label.arrival=Llegada
+member.assignment.form.label.legStatus=Estado de la etapa del vuelo
+member.assignment.form.label.departureAirport=Aeropuerto de salida
+member.assignment.form.label.arrivalAirport=Aeropuerto de llegada
+member.assignment.form.label.aircraft=Aeronave
+
+# Member Info
+member.assignment.form.label.memberInfo=Información del Miembro
+member.assignment.form.label.memberName=Nombre
+member.assignment.form.label.employeeCode=Código de empleado
+member.assignment.form.label.phoneNumber=Teléfono
+member.assignment.form.label.languageSkills=Idiomas
+member.assignment.form.label.yearsOfExperience=Años de experiencia
+member.assignment.form.label.salary=Salario
+member.assignment.form.label.availabilityStatus=Disponibilidad
+
+member.assignment.form.label.leg=Etapa
+member.assignment.form.label.member=Miembro
+member.assignment.form.label.isDraftMode=Modo borrador
+member.assignment.form.button.create=Crear nueva asignación
+
+# Errores
+member.assignment.form.error.lastUpdate-future=La fecha de última actualización no puede ser futura
+member.assignment.form.error.leg-occurred=El vuelo seleccionado ya ha ocurrido y no puedes crear cambiar la asignación de él, solo eliminarlo
+member.assignment.form.error.member-unavailable=Solo se pueden asignar miembros de tripulación disponibles
+member.assignment.form.error.pilot-exists=Cada vuelo solo puede tener un piloto
+member.assignment.form.error.copilot-exists=Cada vuelo solo puede tener un copiloto
+member.assignment.form.error.duplicate-assignment=Un miembro no puede ser asignado múltiples veces a la misma etapa
+member.assignment.form.error.schedule-conflict=El miembro ya tiene una asignación activa que se solapa con este horario
+
+# Mensajes adicionales para validaciones
+member.assignment.form.error.notDraft=Solo se pueden editar asignaciones en modo borrador
+member.assignment.form.error.cannot-be-cancelled=No se puede establecer el estado como Cancelado
+member.assignment.form.error.flight-already-landed=No se puede editar la asignación porque el vuelo ya ha finalizado
+
+# Botones adicionales
+member.assignment.form.button.update=Actualizar asignación
+member.assignment.form.button.publish=Publicar asignación
+member.assignment.form.button.delete=Eliminar asignación
+
+
+member.assignment.form.button.activity-log=Ver registros de actividad

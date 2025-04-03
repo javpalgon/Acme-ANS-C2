@@ -38,7 +38,6 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	public void load() {
 		Flight flight;
 		int id;
-
 		id = super.getRequest().getData("id", int.class);
 		flight = this.repository.findFlightById(id);
 
@@ -49,9 +48,22 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
-		List<Leg> userStories = this.repository.findLegsByFlightId(object.getId()).stream().toList();
-		dataset.put("hasUserStories", !userStories.isEmpty());
+		dataset = super.unbindObject(object, "tag", "requiresSelfTransfer", "cost", "description", "isDraftMode");
+		List<Leg> legs = this.repository.findLegsByFlightId(object.getId()).stream().toList();
+		dataset.put("legs", !legs.isEmpty());
+		if (!legs.isEmpty()) {
+			dataset.put("departure", object.getDeparture());
+			dataset.put("arrival", object.getArrival());
+			dataset.put("originCity", object.getOriginCity());
+			dataset.put("destinationCity", object.getDestinationCity());
+			dataset.put("layovers", object.getNumOfLayovers());
+		} else {
+			dataset.put("departure", "null");
+			dataset.put("arrival", "null");
+			dataset.put("originCity", "null");
+			dataset.put("destinationCity", "null");
+			dataset.put("layovers", "null");
+		}
 		super.getResponse().addData(dataset);
 	}
 

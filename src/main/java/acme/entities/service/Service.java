@@ -1,7 +1,6 @@
 
 package acme.entities.service;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
@@ -49,7 +48,6 @@ public class Service extends AbstractEntity {
 	@Optional
 	@ValidString(pattern = "^[A-Z]{4}-[0-9]{2}$")
 	@ValidPromotionCode
-	@Column(unique = true)
 	private String				promotionCode;
 
 	@Optional

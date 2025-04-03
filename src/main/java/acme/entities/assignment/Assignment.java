@@ -15,6 +15,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidAssignment;
 import acme.entities.leg.Leg;
 import acme.realms.Member;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidAssignment
 public class Assignment extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
@@ -32,7 +34,6 @@ public class Assignment extends AbstractEntity {
 	// Attributes --------------------------------------------------------
 
 	@Mandatory
-	@Valid
 	@Automapped
 	private Role				role;
 
@@ -42,7 +43,6 @@ public class Assignment extends AbstractEntity {
 	private Date				lastUpdate;
 
 	@Mandatory
-	@Valid
 	@Automapped
 	private AssignmentStatus	status;
 
@@ -50,6 +50,10 @@ public class Assignment extends AbstractEntity {
 	@ValidString(max = 255)
 	@Automapped
 	private String				remarks;
+
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
 
 	@Mandatory
 	@Valid
