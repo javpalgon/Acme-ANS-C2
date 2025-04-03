@@ -1,0 +1,6 @@
+key,lastUpdate,step,resolutionPercentage,status,resolution,isDraftMode,key:claim
+tracking-01,2024/11/15 00:00,No se ha avanzado mucho,20.00,PENDING,null,true,claim-03
+tracking-02,2024/11/16 13:30,Por fin hemos acabado,100.00,REJECTED,Pal keli,true,claim-03
+tracking-03,2024/11/20 10:01,Otra vez el nota,100.00,REJECTED,Se le ha mandao al carajo,true,claim-03
+tracking-04,2024/06/04 20:30,VavavaBoludo va,50.00,PENDING,null,true,claim-04
+tracking-05,2024/06/05 20:35,VavavaBoludo2,100.00,REJECTED,Claro papaaaa,true,claim-04

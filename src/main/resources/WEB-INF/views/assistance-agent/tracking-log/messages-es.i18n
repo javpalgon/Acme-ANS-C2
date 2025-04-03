@@ -1,0 +1,5 @@
+agents.trackingLog.application.list.label.lastUpdate = Última actualización
+agents.trackingLog.application.list.label.step = Paso
+agents.trackingLog.application.list.label.resolutionPercentage = Porcentaje de resolución
+agents.trackingLog.application.list.label.status = Estado
+agents.trackingLog.application.list.label.resolution = Resolución
