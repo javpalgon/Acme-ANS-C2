@@ -1,0 +1,24 @@
+administrator.airport.list.title = Airports
+administrator.airport.list.label.name = Name
+administrator.airport.list.label.IATACode = IATA Code
+administrator.airport.list.label.operationalScope = Scope
+administrator.airport.list.label.city = City
+administrator.airport.list.label.country = Country
+administrator.airport.list.label.website = Website
+administrator.airport.list.label.emailAddress = Email
+administrator.airport.list.label.phoneNumber = Phone
+
+administrator.airport.form.title = Airport
+administrator.airport.form.label.name = Name
+administrator.airport.form.label.IATACode = IATA Code
+administrator.airport.form.label.operationalScope = Operational Scope
+administrator.airport.form.label.city = City
+administrator.airport.form.label.country = Country
+administrator.airport.form.label.website = Website
+administrator.airport.form.label.emailAddress = Email Address
+administrator.airport.form.label.phoneNumber = Phone Number
+
+administrator.airport.form.label.confirmation = Confirmation
+administrator.airport.button.create = Create Airport
+administrator.airport.button.update = Update Airport
+administrator.airport.form.error.duplicate-IATACode = IATA code already exists
