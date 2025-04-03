@@ -42,10 +42,17 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+
+# master.menu.technician ##########################################################
+
+master.menu.technician = Técnico
+master.menu.technician.list-my-maintenance-records = Lista de registros de mantenimiento
+
 # master.menu.customer ##########################################################
 
 master.menu.customer = Customer
 master.menu.customer.list-my-bookings = Listar mis reservas
+
 
 # master.menu.user-account ####################################################
 

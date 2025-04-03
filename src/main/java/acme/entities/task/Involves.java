@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.validation.Mandatory;
-import acme.realms.Technician;
+import acme.entities.maintenancerecord.MaintenanceRecord;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +21,7 @@ public class Involves extends AbstractEntity {
 	@Mandatory
 	@ManyToOne(optional = false)
 	@Valid
-	private Technician			technician;
+	private MaintenanceRecord	maintenanceRecord;
 
 	@Mandatory
 	@ManyToOne(optional = false)

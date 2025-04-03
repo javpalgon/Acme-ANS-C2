@@ -45,6 +45,11 @@
 		</acme:menu-option>
 		
 
+		<acme:menu-option code="master.menu.technician" access="hasRealm('Technician')">
+			<acme:menu-suboption code="master.menu.technician.list-my-maintenance-records" action="/technician/maintenance-record/list"/>
+		</acme:menu-option>
+		
+
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
 			<acme:menu-suboption code="master.menu.administrator.list-airlines" action="/administrator/airline/list"/>
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
@@ -63,11 +68,13 @@
 			<acme:menu-suboption code="master.menu.consumer.favourite-link" action="http://www.example.com/"/>
 		</acme:menu-option>
 		
+
 		<acme:menu-option code="master.menu.member" access="hasRealm('Member')">
 		    <acme:menu-suboption code="master.menu.member.list-completed-assignments" action="/member/assignment/list-completed"/>
 		    <acme:menu-suboption code="master.menu.member.list-planned-assignments" action="/member/assignment/list-planned"/>
 		</acme:menu-option>
 		
+
 	</acme:menu-left>
 
 	<acme:menu-right>		
