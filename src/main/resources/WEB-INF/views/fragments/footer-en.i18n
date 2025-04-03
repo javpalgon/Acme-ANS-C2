@@ -25,3 +25,10 @@ master.footer.title.languages = Languages
 master.footer.label.english = English
 master.footer.label.spanish = Spanish
 
+
+# Service messages
+service.name.label=Name
+service.promotion.label=Promo Code
+service.discount.label=Discount
+service.duration.label=Duration
+time.minutes=minutes
