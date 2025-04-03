@@ -38,10 +38,15 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		else {
 			Airline airline = leg.getAircraft().getAirline();
 			String IATAcode = airline.getIATACode();
+
 			if (!StringHelper.startsWith(leg.getFlightNumber(), IATAcode, true))
 				super.state(context, false, "legs", "acme.validation.leg.invalid-flight-number.message");
+
 			else if (leg.getArrival().before(leg.getDeparture()))
 				super.state(context, false, "legs", "acme.validation.leg.invalid-schedule.message");
+
+			else if (leg.getArrivalAirport().getId() == leg.getDepartureAirport().getId())
+				super.state(context, false, "legs", "acme.validation.leg.same-airports.message");
 			else {
 				boolean correctLeg = true;
 				List<Leg> legs = new ArrayList<>(this.repository.findAllLegsByFlightId(leg.getFlight().getId()));

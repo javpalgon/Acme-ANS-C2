@@ -33,17 +33,14 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		final Manager manager = this.repository.findOneManagerById(managerId);
 		object.setManager(manager);
+		object.setIsDraftMode(true);
 		super.getBuffer().addData(object);
 	}
 
 	@Override
 	public void bind(final Flight object) {
 		assert object != null;
-		int managerId;
-		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		final Manager manager = this.repository.findOneManagerById(managerId);
-		object.setManager(manager);
-		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
+		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
@@ -55,13 +52,14 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 	@Override
 	public void validate(final Flight flight) {
 		;
+		// validacion si es duplicado en entity
 	}
 
 	@Override
 	public void unbind(final Flight object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
+		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode", "manager");
 		super.getResponse().addData(dataset);
 	}
 }

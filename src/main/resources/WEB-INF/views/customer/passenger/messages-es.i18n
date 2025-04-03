@@ -1,0 +1,30 @@
+customer.passenger.list.title=Mis Pasajeros
+
+customer.passenger.list.label.fullName=Nombre Completo
+customer.passenger.list.label.passport=Pasaporte
+customer.passenger.list.label.email=Correo Electrónico
+customer.passenger.list.label.birth=Fecha de Nacimiento
+customer.passenger.list.label.specialNeeds=Necesidades Especiales
+
+customer.passenger.form.title= Pasajero
+customer.passenger.form.label.fullName=Nombre completo
+customer.passenger.form.label.passport=Pasaporte
+customer.passenger.form.label.email=Correo electrónico
+customer.passenger.form.label.birth=Fecha de nacimiento
+customer.passenger.form.label.specialNeeds=Necesidades especiales
+
+customer.passenger.form.error.not-draft= Este pasajero no puede ser actualizado porque no está en modo borrador.
+customer.passenger.form.error.fullName.required= El nombre completo es obligatorio y no puede estar en blanco.
+customer.passenger.form.error.fullName.length = El nombre completo no debe exceder los 255 caracteres.
+customer.passenger.form.error.email.invalid= Por favor, introduzca una dirección de correo electrónico válida.
+customer.passenger.form.error.passport.invalid= El pasaporte debe contener de 6 a 9 caracteres (letras mayúsculas o dígitos).
+customer.passenger.form.error.birth.past= La fecha de nacimiento debe ser en el pasado.
+customer.passenger.form.error.specialNeeds.length= Las necesidades especiales no deben exceder los 50 caracteres.
+customer.passenger.form.error.duplicate-passport= Este pasaporte ya está en uso por otro pasajero.
+
+customer.passenger.form.button.save = Guardar
+customer.passenger.form.button.create = Crear Pasajero
+
+customer.passenger.form.button.publish= Publicar Pasajero
+
+customer.passenger.list.form.create = Crear Pasajero

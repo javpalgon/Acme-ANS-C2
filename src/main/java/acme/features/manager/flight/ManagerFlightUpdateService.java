@@ -29,7 +29,7 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 		object = this.repository.findFlightById(id);
 		final Principal principal = super.getRequest().getPrincipal();
 		final int userAccountId = principal.getAccountId();
-		super.getResponse().setAuthorised(object.getManager().getUserAccount().getId() == userAccountId);
+		super.getResponse().setAuthorised(object.getIsDraftMode() && object.getManager().getUserAccount().getId() == userAccountId);
 	}
 
 	@Override
@@ -46,14 +46,12 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 	@Override
 	public void bind(final Flight object) {
 		assert object != null;
-		super.bind(object);
+		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
 	public void validate(final Flight object) {
 		assert object != null;
-		if (!object.getIsDraftMode())
-			super.state(object.getIsDraftMode(), "*", "manager.flight.form.error.notDraft", "isDraftMode");
 
 	}
 
