@@ -24,3 +24,10 @@ master.footer.url.iberia = https://www.iberia.com/es/?cq_src=google_ads&cq_cmp=2
 master.footer.title.languages = Lenguajes
 master.footer.label.english = Inglés
 master.footer.label.spanish = Español
+
+# Mensajes para el servicio
+service.name.label=Nombre
+service.promotion.label=Código promocional
+service.discount.label=Descuento
+service.duration.label=Duración
+time.minutes=minutos
