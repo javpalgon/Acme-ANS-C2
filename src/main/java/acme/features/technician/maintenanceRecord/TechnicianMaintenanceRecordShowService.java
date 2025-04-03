@@ -60,9 +60,7 @@ public class TechnicianMaintenanceRecordShowService extends AbstractGuiService<T
 		maintenanceRecordStatus = SelectChoices.from(MaintenanceStatus.class, maintenanceRecord.getMaintenanceStatus());
 
 		dataset = super.unbindObject(maintenanceRecord, "maintenanceTimestamp", "maintenanceStatus", "nextInspectionDate", "estimatedCost", "notes", "isDraftMode");
-		dataset.put("confirmation", false);
-		dataset.put("readonly", false);
-		dataset.put("maintenanceRecordstatus", maintenanceRecordStatus);
+		dataset.put("maintenanceStatus", maintenanceRecordStatus);
 		dataset.put("technicians", technicianChoices);
 		dataset.put("technician", technicianChoices.getSelected().getKey());
 		dataset.put("aircrafts", aircraftChoices);
