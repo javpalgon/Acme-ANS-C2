@@ -9,6 +9,8 @@ import acme.client.repositories.AbstractRepository;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
+import acme.entities.task.Involves;
+import acme.entities.task.Task;
 import acme.realms.Technician;
 
 @GuiService
@@ -31,5 +33,11 @@ public interface TechnicianMaintenanceRecordRepository extends AbstractRepositor
 
 	@Query("select a from Aircraft a")
 	Collection<Aircraft> findAllAircrafts();
+
+	@Query("select i from Involves i where i.maintenanceRecord.id = :id")
+	Collection<Involves> findAllInvolvesByMaintenanceRecord(int id);
+
+	@Query("select i.task from Involves i where i.maintenanceRecord.id = :id")
+	Collection<Task> findAllTaskByMaintenanceRecord(int id);
 
 }

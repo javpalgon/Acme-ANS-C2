@@ -20,7 +20,7 @@
     <acme:input-checkbox code="technician.maintenance-record.form.label.isDraftMode" path="isDraftMode"/>
     
     <jstl:choose>	 
-		<jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete')&& draftMode == true}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete')&& isDraftMode}">
 			<acme:submit code="technician.maintenance-record.form.button.update" action="/technician/maintenance-record/update"/>
 			<acme:submit code="technician.maintenance-record.form.button.publish" action="/technician/maintenance-record/publish"/>
 			<acme:button code="technician.maintenance-record.form.button.tasks" action="/technician/involves/list?masterId=${id}"/>

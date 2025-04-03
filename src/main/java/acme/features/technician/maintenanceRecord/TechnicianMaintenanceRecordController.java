@@ -22,12 +22,16 @@ public class TechnicianMaintenanceRecordController extends AbstractGuiController
 	@Autowired
 	protected TechnicianMaintenanceRecordShowService	showService;
 
+	@Autowired
+	protected TechnicianMaintenanceRecordDeleteService	deleteService;
+
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
+		super.addBasicCommand("delete", this.deleteService);
 
 	}
 

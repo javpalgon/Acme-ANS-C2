@@ -6,47 +6,62 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.principals.Principal;
 import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceStatus;
+import acme.entities.task.Involves;
+import acme.entities.task.Task;
 import acme.realms.Technician;
 
 @GuiService
-public class TechnicianMaintenanceRecordShowService extends AbstractGuiService<Technician, MaintenanceRecord> {
+public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService<Technician, MaintenanceRecord> {
 
 	@Autowired
-	private TechnicianMaintenanceRecordRepository rp;
+	protected TechnicianMaintenanceRecordRepository rp;
 
 
 	@Override
 	public void authorise() {
-		MaintenanceRecord object;
-		int id;
-		id = super.getRequest().getData("id", int.class);
-		object = this.rp.findMaintenanceRecordById(id);
-		final Principal principal = super.getRequest().getPrincipal();
-		final int userAccountId = principal.getAccountId();
-		super.getResponse().setAuthorised(object.getTechnician().getUserAccount().getId() == userAccountId);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		MaintenanceRecord maintenanceRecord;
-		int id;
+		MaintenanceRecord object;
+		int maintenanceId;
 
-		id = super.getRequest().getData("id", int.class);
-		maintenanceRecord = this.rp.findMaintenanceRecordById(id);
+		maintenanceId = super.getRequest().getData("id", int.class);
+		object = this.rp.findMaintenanceRecordById(maintenanceId);
+		super.getBuffer().addData(object);
+	}
 
-		super.getBuffer().addData(maintenanceRecord);
+	@Override
+	public void bind(final MaintenanceRecord object) {
+		assert object != null;
+		int technicianId;
+		technicianId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		final Technician technician = this.rp.findTechnicianById(technicianId);
+		object.setTechnician(technician);
+		super.bindObject(object, "maintenanceTimestamp", "maintenanceStatus", "nextInspectionDate", "estimatedCost", "notes", "isDraftMode");
+	}
+
+	@Override
+	public void perform(final MaintenanceRecord object) {
+		assert object != null;
+
+		Collection<Involves> allInvolves = this.rp.findAllInvolvesByMaintenanceRecord(object.getId());
+		Collection<Task> allTask = this.rp.findAllTaskByMaintenanceRecord(object.getId());
+
+		this.rp.deleteAll(allTask);
+		this.rp.deleteAll(allInvolves);
+		this.rp.delete(object);
 	}
 
 	@Override
 	public void unbind(final MaintenanceRecord maintenanceRecord) {
-
 		SelectChoices aircraftChoices;
 		SelectChoices technicianChoices;
 		SelectChoices maintenanceRecordStatus;
@@ -75,4 +90,12 @@ public class TechnicianMaintenanceRecordShowService extends AbstractGuiService<T
 
 		super.getResponse().addData(dataset);
 	}
+
+	@Override
+	public void validate(final MaintenanceRecord object) {
+		assert object != null;
+		if (!object.getIsDraftMode())
+			super.state(object.getIsDraftMode(), "*", "technician.maintenance-record.form.error.notDraft", "isDraftMode");
+	}
+
 }
