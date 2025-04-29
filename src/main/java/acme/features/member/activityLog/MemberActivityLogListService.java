@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
+import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -50,7 +50,7 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 
 		int masterId = super.getRequest().getData("masterId", int.class);
 		Assignment assignment = this.repository.findAssignmentById(masterId);
-		final boolean showCreate = assignment.getLeg().getArrival().before(MomentHelper.getCurrentMoment());
+		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 
@@ -60,19 +60,5 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 		super.getResponse().addData(dataset);
 
 	}
-
-	//	@Override
-	//	public void unbind(final Collection<ActivityLog> activityLog) {
-	//		int masterId;
-	//		Assignment assignment;
-	//		final boolean showCreate;
-	//
-	//		masterId = super.getRequest().getData("masterId", int.class);
-	//		assignment = this.repository.findAssignmentById(masterId);
-	//		showCreate = assignment.getIsDraftMode();
-	//		super.getResponse().addGlobal("masterId", masterId);
-	//		super.getResponse().addGlobal("showCreate", showCreate);
-	//
-	//	}
 
 }

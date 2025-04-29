@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = AssignmentValidator.class)
 public @interface ValidAssignment {
 
-	String message() default "{acme.validation.text.message}";
+	String message() default "{You must choose an available member}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }

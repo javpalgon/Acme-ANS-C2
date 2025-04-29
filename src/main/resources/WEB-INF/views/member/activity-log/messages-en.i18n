@@ -1,0 +1,21 @@
+# Activity Log
+member.activity-log.form.label.incidentType = Incident Type
+member.activity-log.form.label.description = Description
+member.activity-log.form.label.severityLevel = Severity Level
+member.activity-log.form.label.registeredAt = Registration Date
+
+member.activityLog.list.label.incidentType = Incident Type
+member.activityLog.list.label.description = Description
+member.activityLog.list.label.severityLevel = Severity Level
+member.activityLog.list.label.registeredAt = Registration Date
+
+member.activity-log.list.button.create = Create New Activity Log
+member.activity-log.form.button.create = Create
+member.activity-log.form.button.update = Update
+member.activity-log.form.button.publish = Publish
+member.activity-log.form.button.delete = Delete
+
+member.activity-log.list.title = Activity Logs
+member.activity-log.form.title = Activity Log Form
+
+member.activity-log.form.error.severity-range = The severity level must be between 0 and 10

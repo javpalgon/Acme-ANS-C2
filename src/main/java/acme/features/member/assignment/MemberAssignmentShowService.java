@@ -10,6 +10,7 @@ import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
 import acme.entities.assignment.Role;
+import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -43,6 +44,14 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 	public void unbind(final Assignment object) {
 		assert object != null;
 
+		int assignmentId = super.getRequest().getData("id", int.class);
+		Assignment assignment = this.repository.findOneById(assignmentId);
+
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
+		final boolean showLogs = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+
 		Dataset dataset = super.unbindObject(object, "role", "isDraftMode", "lastUpdate", "status", "remarks");
 
 		// Leg (Flight) information
@@ -66,14 +75,15 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, object.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, object.getRole());
 		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", object.getLeg());
-		SelectChoices memberChoices = SelectChoices.from(this.repository.findAllMembers(), "employeeCode", object.getMember());
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("legs", legChoices);
-		dataset.put("member", memberChoices.getSelected().getKey());
-		dataset.put("members", memberChoices);
+		dataset.put("memberKey", member.getId());
+		dataset.put("member", member.getEmployeeCode());
+
+		super.getResponse().addGlobal("showLogs", showLogs);
 
 		super.getResponse().addData(dataset);
 	}

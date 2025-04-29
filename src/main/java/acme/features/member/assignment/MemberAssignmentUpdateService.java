@@ -52,13 +52,15 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
 		Integer legId = super.getRequest().getData("leg", int.class);
-		Integer memberId = super.getRequest().getData("member", int.class);
 
 		super.bindObject(assignment, "role", "status", "remarks");
 
 		assignment.setLeg(this.repository.findLegById(legId));
-		assignment.setMember(this.repository.findMemberById(memberId));
+		assignment.setMember(member);
 	}
 
 	@Override
@@ -101,7 +103,13 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
+
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		assignment.setMember(member);
+
 		this.repository.save(assignment);
 	}
 
@@ -109,10 +117,12 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	public void unbind(final Assignment assignment) {
 		assert assignment != null;
 
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
 		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
-		SelectChoices memberChoices = SelectChoices.from(this.repository.findAllMembers(), "employeeCode", assignment.getMember());
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
 
@@ -121,8 +131,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("legs", legChoices);
-		dataset.put("member", memberChoices.getSelected().getKey());
-		dataset.put("members", memberChoices);
+		dataset.put("member", member.getEmployeeCode());
 
 		super.getResponse().addData(dataset);
 	}

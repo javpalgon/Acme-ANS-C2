@@ -19,3 +19,4 @@ member.activity-log.list.title=Registros de Actividad
 member.activity-log.form.title=Formulario de registro de actividad
 
 member.activity-log.form.error.severity-range=El nivel de severidad debe ser entre 0 y 10
+acme.validation.text.message=Campos incorrectos
