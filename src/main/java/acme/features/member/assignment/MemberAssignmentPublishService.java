@@ -104,6 +104,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assert assignment != null;
 		assignment.setIsDraftMode(false);
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		assignment.setStatus(AssignmentStatus.CONFIRMED);
 		this.repository.save(assignment);
 	}
 

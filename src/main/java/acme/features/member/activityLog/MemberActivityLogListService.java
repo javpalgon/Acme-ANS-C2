@@ -10,6 +10,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
+import acme.entities.assignment.AssignmentStatus;
 import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
@@ -25,11 +26,14 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 		boolean status;
 		int masterId;
 		Assignment assignment;
+		int memberId;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		assignment = this.repository.findAssignmentById(masterId);
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		status = assignment != null;
-		super.getResponse().setAuthorised(status);
+
+		super.getResponse().setAuthorised(status && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
 	}
 
 	@Override

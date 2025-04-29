@@ -50,7 +50,7 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Member member = this.repository.findMemberById(currentMemberId);
 
-		final boolean showLogs = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+		final boolean showLogs = assignment.getLeg().getStatus().equals(LegStatus.LANDED) && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		Dataset dataset = super.unbindObject(object, "role", "isDraftMode", "lastUpdate", "status", "remarks");
 

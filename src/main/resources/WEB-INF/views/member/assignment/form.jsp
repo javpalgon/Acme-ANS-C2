@@ -16,8 +16,6 @@
 	<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
 	
 	<acme:input-textbox code="member.assignment.form.label.member" path="member" readonly="true"/>
-	
-	
 
 
     

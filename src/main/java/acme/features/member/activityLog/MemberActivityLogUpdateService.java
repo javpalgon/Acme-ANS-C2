@@ -9,6 +9,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
+import acme.entities.assignment.AssignmentStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -28,12 +29,14 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 		int activityLogId;
 		Assignment assignment;
 		ActivityLog activityLog;
+		int memberId;
 
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		activityLogId = super.getRequest().getData("id", int.class);
-		//flightAssignment = this.repository.findFlightAssignmentByActivityLogId(activityLogId);
+		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 		activityLog = this.repository.findActivityLogById(activityLogId);
 
-		status = activityLog.getIsDraftMode();//flightAssignment != null && flightAssignment.isDraftMode();
+		status = activityLog.getIsDraftMode() && assignment != null && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}
