@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
+import acme.entities.assignment.AssignmentStatus;
+import acme.entities.assignment.Role;
 import acme.features.member.activityLog.MemberActivityLogRepository;
 import acme.realms.Member;
 
@@ -34,9 +37,9 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 		assignment = this.repository.findOneById(assignmentId);
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment != null && assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
+		status = assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
-		super.bindObject(assignment, "role", "status", "remarks", "leg", "member");
+		super.bindObject(assignment, "role", "status", "remarks", "leg");
 	}
 
 	@Override
@@ -87,8 +90,21 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	public void unbind(final Assignment assignment) {
 		assert assignment != null;
 
-		Dataset dataset;
-		dataset = super.unbindObject(assignment, "role", "status", "remarks", "isDraftMode", "leg", "member");
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
+		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
+		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
+		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+
+		dataset.put("role", roleChoices);
+		dataset.put("status", statusChoices);
+
+		dataset.put("leg", legChoices.getSelected().getKey());
+		dataset.put("legs", legChoices);
+		dataset.put("member", member.getEmployeeCode());
 
 		super.getResponse().addData(dataset);
 	}

@@ -26,7 +26,11 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(super.getRequest().getPrincipal().hasRealmOfType(Member.class));
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Member.class) && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -35,6 +39,11 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		assignment.setIsDraftMode(true);
 		assignment.setStatus(AssignmentStatus.PENDING);
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
+		assignment.setMember(member);
+
 		super.getBuffer().addData(assignment);
 	}
 
@@ -42,21 +51,27 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
-		super.bindObject(assignment, "role", "remarks", "leg", "member");
+		super.bindObject(assignment, "role", "remarks", "leg");
 	}
 
 	@Override
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		super.state(assignment.getLeg() == null || !this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
+		super.state(assignment.getMember() != null, "member", "member.assignment.form.error.member-null");
 
-		super.state(assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
+		super.state(assignment.getLeg() != null, "leg", "member.assignment.form.error.leg-null");
+
+		if (assignment.getMember() != null)
+			super.state(assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
+
+		if (assignment.getLeg() != null)
+			super.state(!this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
 
 		if (assignment.getMember() != null && assignment.getLeg() != null) {
 			Integer memberId = assignment.getMember().getId();
 			Integer legId = assignment.getLeg().getId();
-			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
+			Integer assignmentId = assignment.getId();
 
 			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
 
@@ -65,7 +80,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 			if (!duplicateAssignment && assignment.getStatus() != AssignmentStatus.CANCELLED) {
 				boolean hasConflict = this.repository.hasScheduleConflict(memberId, assignment.getLeg().getDeparture(), assignment.getLeg().getArrival(), assignmentId, AssignmentStatus.CANCELLED);
 
-				super.state(!hasConflict, "member", "member.assignment.form.error.schedule-conflict");
+				super.state(!hasConflict, "leg", "member.assignment.form.error.schedule-conflict");
 			}
 		}
 
@@ -82,6 +97,10 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		assignment.setStatus(AssignmentStatus.PENDING);
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
+		assignment.setMember(member);
 
 		this.repository.save(assignment);
 	}
@@ -92,11 +111,13 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "remarks", "isDraftMode");
 
-		List<Member> availableMembers = this.repository.findAvailableMembers(AvailabilityStatus.AVAILABLE);
+		//		List<Member> availableMembers = this.repository.findAvailableMembers(AvailabilityStatus.AVAILABLE);
+		//
+		//		SelectChoices membersChoices = SelectChoices.from(availableMembers, "employeeCode", assignment.getMember());
+		//
+		//		dataset.put("members", membersChoices);
 
-		SelectChoices membersChoices = SelectChoices.from(availableMembers, "employeeCode", assignment.getMember());
-
-		dataset.put("members", membersChoices);
+		dataset.put("member", assignment.getMember().getEmployeeCode());
 
 		dataset.put("role", SelectChoices.from(Role.class, assignment.getRole()));
 

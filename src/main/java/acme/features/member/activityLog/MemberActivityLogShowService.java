@@ -7,6 +7,8 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
+import acme.entities.assignment.Assignment;
+import acme.entities.assignment.AssignmentStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -18,18 +20,18 @@ public class MemberActivityLogShowService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
-	}
+		boolean status;
+		int activityLogId;
+		Assignment assignment;
+		int memberId;
 
-	@Override
-	public void load() {
-		ActivityLog activityLog;
-		int id;
+		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		activityLogId = super.getRequest().getData("id", int.class);
+		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 
-		id = super.getRequest().getData("id", int.class);
-		activityLog = this.repository.findActivityLogById(id);
+		status = assignment != null && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
-		super.getBuffer().addData(activityLog);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

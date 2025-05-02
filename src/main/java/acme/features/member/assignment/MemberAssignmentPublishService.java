@@ -51,10 +51,12 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assert assignment != null;
 
 		Integer legId = super.getRequest().getData("leg", int.class);
-		Integer memberId = super.getRequest().getData("member", int.class);
+
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
 
 		assignment.setLeg(this.repository.findLegById(legId));
-		assignment.setMember(this.repository.findMemberById(memberId));
+		assignment.setMember(member);
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 
 		super.bindObject(assignment, "role", "status", "remarks");
@@ -102,6 +104,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assert assignment != null;
 		assignment.setIsDraftMode(false);
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
+		assignment.setStatus(AssignmentStatus.CONFIRMED);
 		this.repository.save(assignment);
 	}
 
@@ -109,10 +112,12 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 	public void unbind(final Assignment assignment) {
 		assert assignment != null;
 
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
+
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
 		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
-		SelectChoices memberChoices = SelectChoices.from(this.repository.findAllMembers(), "employeeCode", assignment.getMember());
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
 
@@ -122,12 +127,10 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		dataset.put("readonly", false);
 
 		String selectedLeg = legChoices.getSelected().getKey();
-		String selectedMember = memberChoices.getSelected().getKey();
 
 		dataset.put("leg", selectedLeg);
 		dataset.put("legs", legChoices);
-		dataset.put("member", selectedMember);
-		dataset.put("members", memberChoices);
+		dataset.put("member", member.getEmployeeCode());
 
 		super.getResponse().addData(dataset);
 	}

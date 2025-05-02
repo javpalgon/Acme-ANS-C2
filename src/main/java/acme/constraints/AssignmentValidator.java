@@ -25,7 +25,7 @@ public class AssignmentValidator extends AbstractValidator<ValidAssignment, Assi
 
 	@Override
 	public boolean isValid(final Assignment assignment, final ConstraintValidatorContext context) {
-		if (assignment == null)
+		if (assignment == null || assignment.getMember() == null)
 			return false;
 
 		boolean memberAvailable;
