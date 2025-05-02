@@ -51,6 +51,7 @@ member.assignment.form.error.duplicate-assignment=Un miembro no puede ser asigna
 member.assignment.form.error.schedule-conflict=El miembro ya tiene una asignación activa que se solapa con este horario
 member.assignment.form.error.member-null=Debe seleccionar un miembro de la tripulación
 member.assignment.form.error.leg-null=Debe seleccionar un tramo de vuelo
+member.assignment.form.error.member-not-published=Ese tramo no ha sido publicado
 
 # Mensajes adicionales para validaciones
 member.assignment.form.error.notDraft=Solo se pueden editar asignaciones en modo borrador

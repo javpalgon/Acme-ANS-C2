@@ -4,7 +4,9 @@ package acme.entities.assignment;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -25,6 +27,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidAssignment
+@Table(name = "assignment", indexes = {
+	@Index(name = "idx_assignment_member_leg_status", columnList = "member_id,leg_id,status"), @Index(name = "idx_assignment_leg_role_status", columnList = "leg_id,role,status"),
+	@Index(name = "idx_assignment_member_status", columnList = "member_id,status"), @Index(name = "idx_assignment_status", columnList = "status")
+})
 public class Assignment extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------

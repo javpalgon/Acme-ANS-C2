@@ -35,6 +35,17 @@ public class MemberActivityLogShowService extends AbstractGuiService<Member, Act
 	}
 
 	@Override
+	public void load() {
+		ActivityLog activityLog;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		activityLog = this.repository.findActivityLogById(id);
+
+		super.getBuffer().addData(activityLog);
+	}
+
+	@Override
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
 
