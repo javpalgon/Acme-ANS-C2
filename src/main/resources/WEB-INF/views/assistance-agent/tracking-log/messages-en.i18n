@@ -1,0 +1,38 @@
+##################### LIST ##########################################
+
+assistance-agent.tracking-log.list.title = List of tracking logs
+agents.trackingLog.application.list.label.lastUpdate = Last Update
+agents.trackingLog.application.list.label.step = Step
+agents.trackingLog.application.list.label.resolutionPercentage = Resolution Percentage
+agents.trackingLog.application.list.label.status = Status
+agents.trackingLog.application.list.label.resolution = Resolution
+
+###################### FORM ##########################################
+
+assistance-agent.tracking-log.form.title = Tracking log form
+assistance-agent.tracking-log.form.label.lastUpdate = Last Update
+assistance-agent.tracking-log.form.label.step = Step
+assistance-agent.tracking-log.form.label.resolutionPercentage = Resolution Percentage
+assistance-agent.tracking-log.form.label.status = Status
+assistance-agent.tracking-log.form.label.resolution = Resolution
+assistance-agent.tracking-log.form.label.passengerEmail = Passenger email
+assistance-agent.tracking-log.form.label.description = Description
+
+######################### BUTTONS #########################################################
+
+assistance-agent.tracking-log.list.button.create = Create
+assistance-agent.tracking-log.form.button.create = Create
+assistance-agent.tracking-log.form.button.delete = Delete
+assistance-agent.tracking-log.form.button.publish = Publish
+assistance-agent.tracking-log.form.button.update = Update
+
+######################## ERRORS ######################################################3
+
+assistance-agent.tracking-log.form.error.claim-is-null = The claim is null
+assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt = You cant create a log of a Claim that is registered later
+assistance-agent.tracking-log.form.error.resolution-cant-be-null = Resolution cannot be null when resolution percentage is 100 and status is not PENDING
+assistance-agent.tracking-log.form.error.resolution-must-be-null = Resolution must be null when resolution percentage is not 100 and status is PENDING
+assistance-agent.tracking-log.form.error.resolutionPercentage = Resolution percentage must increase
+assistance-agent.tracking-log.form.error.resolutionPercentage-and-status = For the resolution percentage to be 100, the status must be different from 'PENDING', and vice versa.
+assistance-agent.tracking-log.form.error.status-must-be-the-same = The final status must be the same than the previous one
+assistance-agent.tracking-log.form.error.you-cant-create = You can´t create more tracking logs for this claim. 

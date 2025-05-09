@@ -1,5 +1,38 @@
+############################## LISTADO ##########################################33
+
+assistance-agent.tracking-log.list.title = Lista de registros de seguimiento
 agents.trackingLog.application.list.label.lastUpdate = Última actualización
 agents.trackingLog.application.list.label.step = Paso
 agents.trackingLog.application.list.label.resolutionPercentage = Porcentaje de resolución
 agents.trackingLog.application.list.label.status = Estado
 agents.trackingLog.application.list.label.resolution = Resolución
+
+########################### FORMULARIO ###########################################
+
+assistance-agent.tracking-log.form.title = Formulario de registros de seguimiento
+assistance-agent.tracking-log.form.label.lastUpdate = Última actualización
+assistance-agent.tracking-log.form.label.step = Paso
+assistance-agent.tracking-log.form.label.resolutionPercentage = Porcentaje de resolución
+assistance-agent.tracking-log.form.label.status = Estado
+assistance-agent.tracking-log.form.label.resolution = Resolución
+assistance-agent.tracking-log.form.label.passengerEmail = Correo del pasajero
+assistance-agent.tracking-log.form.label.description = Descripción
+
+########################### BOTONES ###########################################
+
+assistance-agent.tracking-log.list.button.create = Crear
+assistance-agent.tracking-log.form.button.create = Crear
+assistance-agent.tracking-log.form.button.delete = Eliminar
+assistance-agent.tracking-log.form.button.publish = Publicar
+assistance-agent.tracking-log.form.button.update = Actualizar
+
+############################ ERRORES ###############################################
+
+assistance-agent.tracking-log.form.error.claim-is-null = La reclamación es nula
+assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt = La fecha de actualización no puede ser anterior a la fecha de registro de la reclamación 
+assistance-agent.tracking-log.form.error.resolution-cant-be-null = La resolución no puede estar vacía si el porcentaje de resolución es 100 y el estado es distinto de 'PENDING'
+assistance-agent.tracking-log.form.error.resolution-must-be-null = La resolución debe ser nula si el porcentaje de resolución no es 100 y el estado es 'PENDING'
+assistance-agent.tracking-log.form.error.resolutionPercentage = El porcentaje de resolución debe aumentar
+assistance-agent.tracking-log.form.error.resolutionPercentage-and-status = Para que el porcentaje de resolución sea 100, el estado debe ser distinto de 'PENDING'  y viceversa
+assistance-agent.tracking-log.form.error.status-must-be-the-same = El estado final debe ser el mismo que el del registro anterior
+assistance-agent.tracking-log.form.error.you-cant-create = No puedes crear más registros de seguimiento para esta reclamación

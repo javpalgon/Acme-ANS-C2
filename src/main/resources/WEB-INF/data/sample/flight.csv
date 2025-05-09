@@ -21,3 +21,4 @@ flight-19,ECO-FRIENDLY-01,true,EUR 275.50,Operated with low-emission aircraft,ma
 flight-20,BUSINESS-X,false,EUR 900.00,Business-class flight with luxury seats,manager-01,true
 flight-21,EVENING-FLIGHT,true,EUR 620.00,Evening departure with complimentary snacks,manager-01,true
 flight-22,EARLYBIRD-01,false,EUR 210.00,Early morning budget flight for commuters,manager-01,true
+flight-23,AIRBUS-811,false,EUR 340.00,Amazing trip to Barcelona,manager-01,false

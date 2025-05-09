@@ -10,17 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.claim.Claim;
-import acme.entities.claim.ClaimStatus;
 import acme.entities.leg.Leg;
 
 @Repository
 public interface AssistanceAgentClaimRepository extends AbstractRepository {
 
-	@Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.accepted = :status")
-	Collection<Claim> findClaimsByStatusAndAgentId(final int agentId, ClaimStatus status);
+	@Query("select c from Claim c where c.assistanceAgent.id = :agentId")
+	Collection<Claim> findClaimsByAgentId(final int agentId);
 
-	@Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.accepted != :status")
-	Collection<Claim> findClaimsByNotStatusAgentId(final int agentId, ClaimStatus status);
+	/*
+	 * @Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.accepted != :status")
+	 * Collection<Claim> findClaimsByNotStatusAgentId(final int agentId, ClaimStatus status);
+	 */
 
 	@Query("select c from Claim c where c.id = :id")
 	Claim findClaimById(final int id);

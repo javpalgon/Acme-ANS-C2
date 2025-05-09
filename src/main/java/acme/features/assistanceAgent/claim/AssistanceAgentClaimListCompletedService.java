@@ -32,14 +32,15 @@ public class AssistanceAgentClaimListCompletedService extends AbstractGuiService
 		Collection<Claim> claims = new ArrayList<>();
 		int assistanceAgentId;
 		assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		claims = this.repository.findClaimsByNotStatusAgentId(assistanceAgentId, ClaimStatus.PENDING);
+		claims = this.repository.findClaimsByAgentId(assistanceAgentId).stream().filter(x -> x.getAccepted() != ClaimStatus.PENDING).toList();
 		super.getBuffer().addData(claims);
 	}
 
 	@Override
 	public void unbind(final Claim claim) {
 		Dataset dataset;
-		dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type", "accepted");
+		dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type");
+		dataset.put("accepted", claim.getAccepted());
 		super.getResponse().addData(dataset);
 	}
 
