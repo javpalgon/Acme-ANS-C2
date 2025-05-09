@@ -62,6 +62,8 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		super.state(assignment.getLeg() != null, "leg", "member.assignment.form.error.leg-null");
 
+		super.state(!assignment.getLeg().getIsDraftMode(), "leg", "member.assignment.form.error.member-not-published");
+
 		if (assignment.getMember() != null)
 			super.state(assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
 

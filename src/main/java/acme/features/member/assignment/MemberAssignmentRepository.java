@@ -35,8 +35,8 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT l FROM Leg l")
 	List<Leg> findAllLegs();
 
-	//	@Query("SELECT a FROM Assignment a WHERE a.member = :member AND a.role = :role AND a.isDraftMode = false")
-	//	List<Assignment> findByMemberAndRole(Member member, Role role);
+	@Query("SELECT a FROM Assignment a WHERE a.member = :member AND a.role = :role AND a.isDraftMode = false")
+	List<Assignment> findByMemberAndRole(Member member, Role role);
 
 	@Query("SELECT m FROM Member m WHERE m.id = :id")
 	Member findMemberById(int id);
@@ -47,8 +47,8 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT a FROM Assignment a WHERE a.leg.status != :status AND a.member.id = :memberId AND a.leg.isDraftMode = false")
 	Collection<Assignment> findByLegStatusNotAndMemberId(@Param("status") LegStatus status, @Param("memberId") int memberId);
 
-	//	@Query("SELECT DISTINCT a.leg FROM Assignment a WHERE a.member.id = :memberId")
-	//	Collection<Leg> findLegsByMemberId(int memberId);
+	@Query("SELECT DISTINCT a.leg FROM Assignment a WHERE a.member.id = :memberId")
+	Collection<Leg> findLegsByMemberId(int memberId);
 
 	@Query("SELECT l FROM Leg l WHERE l.id = :legId")
 	Leg findLegById(int legId);
