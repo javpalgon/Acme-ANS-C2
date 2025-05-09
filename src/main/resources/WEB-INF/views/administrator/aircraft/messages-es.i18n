@@ -1,0 +1,6 @@
+######################### LIST #####################################3
+
+administrator.aircraft.label.model = Modelo
+administrator.aircraft.label.regitrationNumber = Número de registro
+administrator.aircraft.label.capacity = Capacidad
+administrator.aircraft.label.aircraftStatus = Estado del avión
