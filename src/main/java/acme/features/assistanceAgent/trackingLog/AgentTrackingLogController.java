@@ -14,7 +14,22 @@ import acme.realms.AssistanceAgent;
 public class AgentTrackingLogController extends AbstractGuiController<AssistanceAgent, TrackingLog> {
 
 	@Autowired
-	private AgentTrackingLogListService listService;
+	private AgentTrackingLogListService		listService;
+
+	@Autowired
+	private AgentTrackingLogShowService		showService;
+
+	@Autowired
+	private AgentTrackingLogCreateService	createService;
+
+	@Autowired
+	private AgentTrackingLogDeleteService	deleteService;
+
+	@Autowired
+	private AgentTrackingLogUpdateService	updateService;
+
+	@Autowired
+	private AgentTrackingLogPublishService	publishService;
 
 	// Constructors -------------------------------------------------
 
@@ -22,5 +37,10 @@ public class AgentTrackingLogController extends AbstractGuiController<Assistance
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
+		super.addBasicCommand("show", this.showService);
+		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("update", this.updateService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

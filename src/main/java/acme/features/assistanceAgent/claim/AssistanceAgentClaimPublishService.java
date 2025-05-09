@@ -68,7 +68,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void unbind(final Claim claim) {
-		Dataset dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type", "accepted", "isDraftMode", "leg");
+		Dataset dataset = super.unbindObject(claim, "passengerEmail", "description", "type", "accepted", "isDraftMode", "leg");
 		dataset.put("type", SelectChoices.from(ClaimType.class, claim.getType()));
 		dataset.put("leg", SelectChoices.from(this.repository.findAllPublishedLegs(), "flightNumber", claim.getLeg()));
 		super.getResponse().addData(dataset);

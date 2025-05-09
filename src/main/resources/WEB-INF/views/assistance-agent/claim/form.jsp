@@ -30,6 +30,6 @@
 		</jstl:when>			
 	</jstl:choose>
 	<jstl:if test="${acme:matches(_command, 'show') }">
-		<acme:button code="assistance-agent.claim.trackingLogs" action="/assistance-agent/claim/list?masterId=${id}"/>	
+		<acme:button code="assistance-agent.claim.trackingLogs" action="/assistance-agent/tracking-log/list?masterId=${id}"/>	
 	</jstl:if>
 </acme:form>

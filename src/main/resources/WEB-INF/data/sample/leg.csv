@@ -33,4 +33,4 @@ leg-31,IBV9363,2025/04/19 06:00,2025/04/19 08:00,ON_TIME,airport-03,airport-04,f
 leg-32,IBV1465,2025/04/20 06:00,2025/04/20 08:00,ON_TIME,airport-04,airport-01,flight-20,aircraft-01,False
 leg-33,IBV1749,2025/04/21 06:00,2025/04/21 08:00,ON_TIME,airport-01,airport-02,flight-21,aircraft-01,False
 leg-34,IBV9146,2025/04/22 06:00,2025/04/22 08:00,ON_TIME,airport-02,airport-03,flight-22,aircraft-01,False
-
+leg-35,IBV9999,2024/02/07 06:00,2024/02/07 18:00,ON_TIME,airport-02,airport-03,flight-23,aircraft-01,false

@@ -1,6 +1,7 @@
 
 package acme.constraints;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -30,16 +31,11 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 	public boolean isValid(final TrackingLog value, final ConstraintValidatorContext context) {
 		assert context != null;
 		boolean res = false;
-		if (value == null)
-			super.state(context, false, "*", "javax.validation.constraints.notNull.message");
+		boolean isNull = value == null || value.getIsDraftMode() == null || value.getResolutionPercentage() == null || value.getLastUpdate() == null || value.getStatus() == null || value.getClaim() == null || value.getStep() != null;
+		if (isNull)
+			super.state(context, true, "*", "javax.validation.constraints.notNull.message");
 		else {
 			List<TrackingLog> trackingLogs = this.repository.findAllByClaimId(value.getClaim().getId());
-			{
-				//Comprobar que todos los trackingLogs tienen status== pending
-				boolean predicate;
-				predicate = trackingLogs.isEmpty() || trackingLogs.stream().allMatch(x -> x.getStatus().equals(TrackingLogStatus.PENDING));
-				super.state(context, !predicate, "status", "acme.validation.TrackingLog.statusIsFinished");
-			}
 			{
 				//Comprobar que el aumento de porcentaje es lineal
 				boolean predicate2;
@@ -51,7 +47,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 			}
 			{
 				//Comprobar que al ser status == FINISHED, resolutionPercentage == 100.
-				boolean predicate3 = value.getResolutionPercentage() == 100. && value.getStatus() != TrackingLogStatus.PENDING || value.getResolutionPercentage() != 100. && value.getStatus() == TrackingLogStatus.PENDING;
+				boolean predicate3 = value.getResolutionPercentage() == 100. && !value.getStatus().equals(TrackingLogStatus.PENDING) || value.getResolutionPercentage() != 100. && value.getStatus().equals(TrackingLogStatus.PENDING);
 				super.state(context, predicate3, "status", "acme.validation.TrackingLog.status-and-resolutionPercentage-don´t-match.");
 			}
 			{
@@ -63,6 +59,18 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 					isAfter = value.getLastUpdate().after(lastDate.getLastUpdate());
 				}
 				super.state(context, !isAfter, "lastUpdate", "acme.validation.TrackingLog.lastUpdate-must-be-later-than-the-previous-one");
+			}
+			{
+				//Comprobar que como mucho hay dos trackingLogs(contando el que añadimos) con status != pending 
+				boolean predicate4;
+				List<TrackingLog> finishedTrackingLogs = new ArrayList<>();
+				finishedTrackingLogs = trackingLogs.stream().filter(x -> !x.getStatus().equals(TrackingLogStatus.PENDING)).toList();
+				predicate4 = finishedTrackingLogs.size() <= 2;
+				super.state(context, predicate4, "status", "acme.validation.TrackingLog.you-cant-have-more-than-2-finished-tracking-logs");
+			}
+			{
+				//Comprobar que la Claim asociada está publicada
+				super.state(context, !value.getClaim().getIsDraftMode(), "*", "acme.validation.Claim.claim-is-not-published-yet");
 			}
 		}
 		res = !super.hasErrors(context);

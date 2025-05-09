@@ -1,4 +1,4 @@
-<%--
+yo <%--
 - list.jsp
 -
 - Copyright (C) 2012-2025 Rafael Corchuelo.
@@ -9,6 +9,7 @@
 - purposes.  The copyright owner does not offer any warranties or representations, nor do
 - they accept any liabilities with respect to them.
 --%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page language="java"%>
 
@@ -23,6 +24,5 @@
 		<acme:list-column code="agents.trackingLog.application.list.label.resolution" path="resolution" width="10%"/>
 	<acme:list-payload path="payload"/>
 </acme:list>
-<acme:button code="assistance-agent.claim.list.button.create" action="/assistance-agent/claim/create"/>
-
+	<acme:button code="assistance-agent.tracking-log.list.button.create" action="/assistance-agent/tracking-log/create?masterId=${masterId}"/>
 

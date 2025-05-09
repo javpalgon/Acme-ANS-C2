@@ -2,22 +2,28 @@
 package acme.entities.claim;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
-import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.SpringHelper;
+import acme.constraints.ValidClaim;
 import acme.entities.leg.Leg;
+import acme.entities.trackinglog.TrackingLog;
+import acme.entities.trackinglog.TrackingLogRepository;
+import acme.entities.trackinglog.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +31,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidClaim
 public class Claim extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
@@ -56,22 +63,37 @@ public class Claim extends AbstractEntity {
 	private ClaimType			type;
 
 	@Mandatory
-	@Valid
-	@Automapped
-	private ClaimStatus			accepted;
-
-	@Mandatory
 	@Automapped
 	private Boolean				isDraftMode;
 
-	@Optional
+	// Derived attributes -----------------------------------------------------
+
+
+	@Transient
+	public ClaimStatus getAccepted() {
+		ClaimStatus status = ClaimStatus.PENDING;
+		TrackingLogRepository repository;
+		repository = SpringHelper.getBean(TrackingLogRepository.class);
+		List<TrackingLog> trackingLogs = repository.findAllByClaimId(this.getId());
+		boolean predicate = trackingLogs.stream().allMatch(x -> x.getStatus().equals(TrackingLogStatus.PENDING));
+		if (!predicate) {
+			TrackingLog lastTrackingLog = trackingLogs.stream().filter(x -> x.getStatus() != TrackingLogStatus.PENDING).findAny().get();
+			status = ClaimStatus.valueOf(lastTrackingLog.getStatus().toString());
+		}
+		return status;
+	}
+
+	// Relationships ----------------------------------------------------------
+
+
+	@Mandatory
 	@Valid
 	@ManyToOne(optional = true)
-	private AssistanceAgent		assistanceAgent;
+	private AssistanceAgent	assistanceAgent;
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
-	private Leg					leg;
+	private Leg				leg;
 
 }
