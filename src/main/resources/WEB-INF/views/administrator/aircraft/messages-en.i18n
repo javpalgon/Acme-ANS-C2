@@ -1,6 +1,12 @@
-######################### LIST #####################################3
+######################### #####################################
 
 administrator.aircraft.label.model = Model
 administrator.aircraft.label.regitrationNumber = Registration Number
 administrator.aircraft.label.capacity = Capacity
 administrator.aircraft.label.aircraftStatus = Aircraft Status
+administrator.aircraft.label.cargoWeight = Cargo weight
+administrator.aircraft.label.details = Details
+administrator.aircraft.label.name = Name
+administrator.aircraft.label.IATACode = IATA Code
+administrator.aircraft.label.website = Website
+administrator.aircraft.list.title = Aircrafts
