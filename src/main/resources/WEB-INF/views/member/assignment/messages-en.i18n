@@ -7,7 +7,7 @@ member.assignment.list.label.role = Role
 member.assignment.list.label.lastUpdate = Last Update  
 member.assignment.list.label.status = Status  
 member.assignment.list.label.remarks = Remarks  
-member.assignment.list.label.leg = Flight Number  
+member.assignment.list.label.leg = Flight Number
 member.assignment.list.button.create = Create New Assignment  
 
 # Assignment Info
@@ -43,19 +43,23 @@ member.assignment.form.button.create = Create New Assignment
 
 # Errors
 member.assignment.form.error.lastUpdate-future = The last update date cannot be in the future
-member.assignment.form.error.leg-occurred = The selected flight has already occurred and cannot be assigned
+member.assignment.form.error.leg-occurred = The selected flight has already occurred and you can only delete its assignment, not create or modify it
 member.assignment.form.error.member-unavailable = Only available crew members can be assigned
 member.assignment.form.error.pilot-exists = Each flight can only have one pilot
 member.assignment.form.error.copilot-exists = Each flight can only have one copilot
 member.assignment.form.error.duplicate-assignment = A member cannot be assigned multiple times to the same leg
 member.assignment.form.error.schedule-conflict = The member already has an active assignment that overlaps with this schedule
+member.assignment.form.error.member-null = You must select a crew member
 
 # Additional validation messages
 member.assignment.form.error.notDraft = Only draft assignments can be edited
 member.assignment.form.error.cannot-be-cancelled = The status cannot be set to Cancelled
 member.assignment.form.error.flight-already-landed = The assignment cannot be edited because the flight has already landed
+member.assignment.form.error.leg-null=You must select a flight leg
 
 # Additional buttons
 member.assignment.form.button.update = Update Assignment
 member.assignment.form.button.publish = Publish Assignment
 member.assignment.form.button.delete = Delete Assignment
+
+member.assignment.form.button.activity-log = View Activity Log

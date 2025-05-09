@@ -15,8 +15,7 @@
 	
 	<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
 	
-	<acme:input-select code="member.assignment.form.label.member" path="member" choices="${members}" readonly="${assignment.isDraftMode}"/>
-	
+	<acme:input-textbox code="member.assignment.form.label.member" path="member" readonly="true"/>
 
 
     
@@ -58,14 +57,13 @@
     
     <!-- Conditional buttons -->
 	<jstl:choose>
-	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete') && isDraftMode == true}">
+	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete') && isDraftMode}">
 	        <acme:submit code="member.assignment.form.button.update" action="/member/assignment/update"/>
 	        <acme:submit code="member.assignment.form.button.publish" action="/member/assignment/publish"/>
 	        <acme:submit code="member.assignment.form.button.delete" action="/member/assignment/delete"/>
-	        <acme:button code="member.assignment.form.button.activity-log" action="/member/activity-log/list?masterId=${id}"/>
 	    </jstl:when>
 	    
-	    <jstl:when test="${_command == 'show' && isDraftMode == false}">
+	    <jstl:when test="${_command == 'show' && not isDraftMode && showLogs}">
  			<acme:button code="member.assignment.form.button.activity-log" action="/member/activity-log/list?masterId=${id}"/>			
  		</jstl:when>
 	    
