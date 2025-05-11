@@ -67,6 +67,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		}
 
 		super.getResponse().setAuthorised(status && validAircraft && validAirport);
+
 	}
 
 	@Override
@@ -116,9 +117,9 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		//		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture()))
 		//			super.state(false, "arrival", "acme.validation.leg.invalid-schedule.message");
 		//
-		//		// 2. Validate: departure and arrival airports must be different
-		//		if (leg.getDepartureAirport() != null && leg.getArrivalAirport() != null && leg.getDepartureAirport().getId() == leg.getArrivalAirport().getId())
-		//			super.state(false, "arrivalAirport", "acme.validation.leg.same-airports.message");
+		// 2. Validate: departure and arrival airports must be different
+		if (leg.getDepartureAirport() != null && leg.getArrivalAirport() != null && leg.getDepartureAirport().getId() == leg.getArrivalAirport().getId())
+			super.state(false, "arrivalAirport", "acme.validation.leg.same-airports.message");
 
 		assert leg != null;
 		super.state(leg.getStatus() != null, "status", "manager.leg.error.status-required");
@@ -152,7 +153,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		airports = this.repository.findAllAirports();
 		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
 		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
-
 		SelectChoices selectedAircraft;
 		Collection<Aircraft> aircrafts;
 		Collection<Aircraft> finalAircrafts = new ArrayList<>();
@@ -164,7 +164,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
-		dataset.put("isDraftMode", true);
+		dataset.put("isDraftMode", leg.getIsDraftMode());
 		dataset.put("status", choices);
 		dataset.put("departureAirports", departureAirportChoices);
 		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());
