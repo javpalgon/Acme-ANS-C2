@@ -49,7 +49,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		final Manager manager = this.repository.findOneManagerById(managerId);
 		object.setManager(manager);
-		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
+		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
