@@ -58,23 +58,61 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	@Override
 	public void validate(final Flight object) {
 		assert object != null;
-		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
-		super.state(!legs.isEmpty(), "*", "manager.project.form.error.legsEmpty");
 
-		for (Leg leg : legs) {
-			boolean isPublished = !leg.getIsDraftMode();
-			super.state(isPublished, "*", "manager.flight.form.error.LegsNotPublished");
-			if (leg.getArrival().before(leg.getDeparture()))
-				super.state(false, "legs", "acme.validation.leg.invalid-schedule.message");
-		}
+		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
+
+		// 1. Validar que el vuelo tenga al menos una leg
+		super.state(!legs.isEmpty(), "*", "manager.flight.form.error.legsEmpty");
 
 		List<Leg> sortedLegs = new ArrayList<>(legs);
 		sortedLegs.sort(Comparator.comparing(Leg::getDeparture));
-		boolean correctLeg = true;
-		for (int i = 0; i < sortedLegs.size() - 1 && correctLeg; i++)
-			if (sortedLegs.get(i).getArrival().after(sortedLegs.get(i + 1).getDeparture()) || !sortedLegs.get(i).getArrivalAirport().getCity().equals(sortedLegs.get(i + 1).getDepartureAirport().getCity()))
-				correctLeg = false;
-		super.state(correctLeg, "legs", "acme.validation.leg.invalid-legs.message");
+
+		boolean valid = true;
+
+		for (int i = 0; i < sortedLegs.size(); i++) {
+			Leg current = sortedLegs.get(i);
+
+			// 2. Todas las legs deben estar publicadas
+			if (current.getIsDraftMode()) {
+				super.state(false, "*", "manager.flight.form.error.LegsNotPublished");
+				valid = false;
+			}
+
+			// 3. Horario válido en cada leg
+			if (!current.getArrival().after(current.getDeparture())) {
+				super.state(false, "*", "acme.validation.leg.invalid-schedule.message");
+				valid = false;
+			}
+
+			// 4. Aeropuertos distintos en cada leg
+			if (current.getArrivalAirport().getId() == current.getDepartureAirport().getId()) {
+				super.state(false, "*", "acme.validation.leg.same-airports.message");
+				valid = false;
+			}
+
+			// 5. Comparación entre legs consecutivas
+			if (i < sortedLegs.size() - 1) {
+				Leg next = sortedLegs.get(i + 1);
+
+				// No se deben solapar
+				if (!current.getArrival().before(next.getDeparture())) {
+					super.state(false, "*", "acme.validation.leg.invalid-timing-sequence.message");
+					valid = false;
+				}
+
+				// Aeropuertos deben conectar
+				if (!current.getArrivalAirport().equals(next.getDepartureAirport())) {
+					super.state(false, "*", "acme.validation.leg.inconsistent-airport-connection.message");
+					valid = false;
+				}
+
+				// No puede haber dos salidas iguales
+				if (current.getDeparture().equals(next.getDeparture())) {
+					super.state(false, "*", "acme.validation.leg.same-departure.message");
+					valid = false;
+				}
+			}
+		}
 	}
 
 	@Override

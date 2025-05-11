@@ -47,29 +47,6 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		super.getBuffer().addData(leg);
 	}
 
-	//	@Override
-	//	public void bind(final Leg leg) {
-	//		int aircraftId;
-	//		Aircraft aircraft;
-	//		aircraftId = super.getRequest().getData("aircraft", int.class);
-	//		aircraft = this.repository.findAircraftById(aircraftId);
-	//
-	//		int departureAirportId;
-	//		Airport departureAirport;
-	//		departureAirportId = super.getRequest().getData("departureAirport", int.class);
-	//		departureAirport = this.repository.findAirportById(departureAirportId);
-	//
-	//		int arrivalAirportId;
-	//		Airport arrivalAirport;
-	//		arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-	//		arrivalAirport = this.repository.findAirportById(arrivalAirportId);
-	//
-	//		super.bindObject(leg, "flightNumber", "departure", "arrival", "status");
-	//		leg.setAircraft(aircraft);
-	//		leg.setDepartureAirport(departureAirport);
-	//		leg.setArrivalAirport(arrivalAirport);
-	//	}
-
 	@Override
 	public void bind(final Leg leg) {
 		int id = super.getRequest().getData("id", int.class);
@@ -111,19 +88,14 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 		Leg original = this.repository.getLegById(leg.getId());
 
-		if (!original.getIsDraftMode()) {
+		if (!original.getIsDraftMode())
 			// Solo permitimos cambiar el status
 			if (!original.getStatus().equals(leg.getStatus())) {
-				// Está cambiando status, OK
+				if (!original.getFlightNumber().equals(leg.getFlightNumber()) || !original.getDeparture().equals(leg.getDeparture()) || !original.getArrival().equals(leg.getArrival()) || original.getAircraft().getId() != leg.getAircraft().getId()
+					|| original.getDepartureAirport().getId() != leg.getDepartureAirport().getId() || original.getArrivalAirport().getId() != leg.getArrivalAirport().getId())
+					super.state(false, "*", "manager.leg.error.only-status-can-change");
 			} else
 				super.state(false, "status", "manager.leg.error.must-change-status");
-
-			// Bloqueamos cualquier otro cambio
-			if (!original.getFlightNumber().equals(leg.getFlightNumber()) || !original.getDeparture().equals(leg.getDeparture()) || !original.getArrival().equals(leg.getArrival()) || original.getAircraft().getId() != leg.getAircraft().getId()
-				|| original.getDepartureAirport().getId() != leg.getDepartureAirport().getId() || original.getArrivalAirport().getId() != leg.getArrivalAirport().getId())
-				super.state(false, "*", "manager.leg.error.only-status-can-change");
-
-		}
 	}
 
 	@Override
@@ -136,6 +108,8 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 	public void unbind(final Leg leg) {
 		//		if (leg.getIsDraftMode()) {
 		assert leg != null;
+		Leg original = this.repository.getLegById(leg.getId());
+		boolean isDraftMode = original.getIsDraftMode();
 		Dataset dataset;
 
 		SelectChoices choices;
@@ -155,7 +129,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		selectedAircraft = SelectChoices.from(aircrafts, "regitrationNumber", leg.getAircraft());
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", leg.getFlight().getId());
-		dataset.put("isDraftMode", leg.getFlight().getIsDraftMode());
+		dataset.put("isDraftMode", isDraftMode);
 		dataset.put("status", choices);
 		dataset.put("departureAirports", departureAirportChoices);
 		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());
