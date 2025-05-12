@@ -26,11 +26,11 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT a FROM Assignment a WHERE a.id = :id")
 	Assignment findOneById(int id);
 
-	@Query("SELECT m FROM Member m")
-	List<Member> findAllMembers();
+	//	@Query("SELECT m FROM Member m")
+	//	List<Member> findAllMembers();
 
-	@Query("SELECT a FROM Assignment a")
-	List<Assignment> findAllAssignments();
+	//	@Query("SELECT a FROM Assignment a")
+	//	List<Assignment> findAllAssignments();
 
 	@Query("SELECT l FROM Leg l")
 	List<Leg> findAllLegs();
@@ -56,7 +56,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT m FROM Member m WHERE m.availabilityStatus = :status")
 	List<Member> findAvailableMembers(@Param("status") AvailabilityStatus status);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight.isDraftMode = false AND l.departure > :currentDate")
+	@Query("SELECT l FROM Leg l WHERE l.departure > :currentDate AND l.isDraftMode = false")
 	List<Leg> findAllPublishedAndFutureLegs(@Param("currentDate") Date currentDate);
 
 	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Leg l WHERE l.id = :legId AND l.departure < :currentDate")

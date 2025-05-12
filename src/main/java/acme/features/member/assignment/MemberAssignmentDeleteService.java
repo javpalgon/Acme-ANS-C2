@@ -39,7 +39,7 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 
 		status = assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

@@ -1,45 +1,45 @@
 # member.assignment.list.completed ##########################################################
 
-member.assignment.list.title = Your Assignments List  
-member.assignment.form.title = Selected Assignment Details  
+member.assignment.list.title = Your assignments list
+member.assignment.form.title = Assignment details
 
 member.assignment.list.label.role = Role  
-member.assignment.list.label.lastUpdate = Last Update  
+member.assignment.list.label.lastUpdate = Last update  
 member.assignment.list.label.status = Status  
 member.assignment.list.label.remarks = Remarks  
-member.assignment.list.label.leg = Flight Number
-member.assignment.list.button.create = Create New Assignment  
+member.assignment.list.label.leg = Flight number
+member.assignment.list.button.create = Create new assignment
 
 # Assignment Info
 member.assignment.form.label.role = Role
-member.assignment.form.label.lastUpdate = Last Update
+member.assignment.form.label.lastUpdate = Last update
 member.assignment.form.label.status = Status
 member.assignment.form.label.remarks = Remarks
 
 # Flight Leg Info
-member.assignment.form.label.flightInfo = Flight Leg Information
-member.assignment.form.label.flightNumber = Flight Number
+member.assignment.form.label.flightInfo = Flight leg information
+member.assignment.form.label.flightNumber = Flight number
 member.assignment.form.label.departure = Departure
 member.assignment.form.label.arrival = Arrival
-member.assignment.form.label.legStatus = Flight Leg Status
-member.assignment.form.label.departureAirport = Departure Airport
-member.assignment.form.label.arrivalAirport = Arrival Airport
+member.assignment.form.label.legStatus = Flight leg status
+member.assignment.form.label.departureAirport = Departure airport
+member.assignment.form.label.arrivalAirport = Arrival airport
 member.assignment.form.label.aircraft = Aircraft
 
 # Member Info
-member.assignment.form.label.memberInfo = Member Information
+member.assignment.form.label.memberInfo = Member information
 member.assignment.form.label.memberName = Name
-member.assignment.form.label.employeeCode = Employee Code
-member.assignment.form.label.phoneNumber = Phone Number
+member.assignment.form.label.employeeCode = Employee code
+member.assignment.form.label.phoneNumber = Phone number
 member.assignment.form.label.languageSkills = Languages
-member.assignment.form.label.yearsOfExperience = Years of Experience
+member.assignment.form.label.yearsOfExperience = Years of experience
 member.assignment.form.label.salary = Salary
 member.assignment.form.label.availabilityStatus = Availability
 
 member.assignment.form.label.leg = Leg
 member.assignment.form.label.member = Member
-member.assignment.form.label.isDraftMode = Draft Mode
-member.assignment.form.button.create = Create New Assignment
+member.assignment.form.label.isDraftMode = Draft mode
+member.assignment.form.button.create = Create new assignment
 
 # Errors
 member.assignment.form.error.lastUpdate-future = The last update date cannot be in the future
@@ -50,17 +50,18 @@ member.assignment.form.error.copilot-exists = Each flight can only have one copi
 member.assignment.form.error.duplicate-assignment = A member cannot be assigned multiple times to the same leg
 member.assignment.form.error.schedule-conflict = The member already has an active assignment that overlaps with this schedule
 member.assignment.form.error.member-null = You must select a crew member
-member.assignment.form.error.member-not-published=That leg has not been published
+member.assignment.form.error.member-not-published = That leg has not been published
+member.assignment.form.error.flight-not-published=This leg belongs to a flight that has not yet been published
 
 # Additional validation messages
 member.assignment.form.error.notDraft = Only draft assignments can be edited
-member.assignment.form.error.cannot-be-cancelled = The status cannot be set to Cancelled
+member.assignment.form.error.cannot-be-cancelled = The status cannot be set to cancelled
 member.assignment.form.error.flight-already-landed = The assignment cannot be edited because the flight has already landed
-member.assignment.form.error.leg-null=You must select a flight leg
+member.assignment.form.error.leg-null = You must select a flight leg
 
 # Additional buttons
-member.assignment.form.button.update = Update Assignment
-member.assignment.form.button.publish = Publish Assignment
-member.assignment.form.button.delete = Delete Assignment
+member.assignment.form.button.update = Update assignment
+member.assignment.form.button.publish = Publish assignment
+member.assignment.form.button.delete = Delete assignment
 
-member.assignment.form.button.activity-log = View Activity Log
+member.assignment.form.button.activity-log = View activity log
