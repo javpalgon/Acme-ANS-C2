@@ -6,21 +6,21 @@
 <acme:form> 
 	<acme:input-textbox code="administrator.aircraft.label.model" path="model"/>
 	<acme:input-textbox code="administrator.aircraft.label.regitrationNumber" path="regitrationNumber"/>	
-	<acme:input-url code="administrator.aircraft.label.capacity" path="capacity"/>
-	<acme:input-textbox code="administrator.aircraft.label.cargoWeight" path="cargoWeight"/>
+	<acme:input-integer code="administrator.aircraft.label.capacity" path="capacity"/>
+	<acme:input-integer code="administrator.aircraft.label.cargoWeight" path="cargoWeight"/>
 	<acme:input-select code="administrator.aircraft.label.aircraftStatus" path="aircraftStatus" choices="${aircraftStatus}"/>
-	<acme:input-email code="administrator.aircraft.label.details" path="details"/>
-	<acme:input-textbox code="administrator.aircraft.label.name" path="name"/>
-	<acme:input-textbox code="administrator.aircraft.label.IATACode" path="IATACode"/>
-	<acme:input-url code="administrator.aircraft.label.website" path="website"/>
-	<jstl:choose>	 
-		<jstl:when test="${acme:anyOf(_command, 'show|update')}">			
-			<acme:input-checkbox code="administrator.airline.form.label.confirmation" path="confirmation"/>
-			<acme:submit code="administrator.airline.button.update" action="/administrator/airline/update"/>
+	<acme:input-textarea code="administrator.aircraft.label.details" path="details"/>
+	<acme:input-select code="administrator.aircraft.label.airline" path="airline" choices="${airlines}"/>
+	<acme:input-textbox code="administrator.aircraft.label.name" path="name" readonly="true"/>
+	<acme:input-url code="administrator.aircraft.label.website" path="website" readonly="true"/> 
+	<jstl:choose>
+		<jstl:when test="${acme:matches(_command,'show|update')}">			
+			<acme:input-checkbox code="administrator.aircraft.form.label.confirmation" path="confirmation"/>
+			<acme:submit code="administrator.aircraft.button.update" action="/administrator/aircraft/update"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:input-checkbox code="administrator.airline.form.label.confirmation" path="confirmation"/>
-			<acme:submit code="administrator.airline.button.create" action="/administrator/airline/create"/>
+			<acme:submit code="administrator.aircraft.button.create" action="/administrator/aircraft/create"/>
 		</jstl:when>		
 	</jstl:choose>
 </acme:form>

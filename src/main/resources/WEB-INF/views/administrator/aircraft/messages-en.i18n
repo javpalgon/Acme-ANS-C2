@@ -10,3 +10,11 @@ administrator.aircraft.label.name = Name
 administrator.aircraft.label.IATACode = IATA Code
 administrator.aircraft.label.website = Website
 administrator.aircraft.list.title = Aircrafts
+administrator.aircraft.form.title = Show Aircraft
+administrator.aircraft.form.label.confirmation = Confirm Operation
+administrator.aircraft.button.update = Update
+administrator.aircraft.button.create = Create
+administrator.aircraft.label.airline = Airline´s IATACode
+
+##################### ERRORS ##################################33
+acme.validation.IATACode = IATACode must

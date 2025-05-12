@@ -35,14 +35,15 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 	@Override
 	public void unbind(final Aircraft aircraft) {
 		assert aircraft != null;
-		SelectChoices choices;
-		choices = SelectChoices.from(AircraftStatus.class, aircraft.getAircraftStatus());
-
+		SelectChoices statusChoices;
 		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details");
-		dataset.put("aircraftStatus", choices);
+		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getAircraftStatus());
+		SelectChoices IATACodeChoices = SelectChoices.from(this.repository.findAllAirlines(), "IATACode", aircraft.getAirline());
 		dataset.put("name", aircraft.getAirline().getName());
-		dataset.put("IATACode", aircraft.getAirline().getIATACode());
 		dataset.put("website", aircraft.getAirline().getWebsite());
+		dataset.put("aircraftStatus", statusChoices);
+		dataset.put("airline", IATACodeChoices.getSelected().getKey());
+		dataset.put("airlines", IATACodeChoices);
 
 		super.getResponse().addData(dataset);
 	}
