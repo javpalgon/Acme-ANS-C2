@@ -139,9 +139,10 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		List<Leg> legs = this.repository.findAllPublishedAndFutureLegs(MomentHelper.getCurrentMoment());
 		SelectChoices legChoices = null;
 
-		legChoices = SelectChoices.from(legs, "flightNumber", assignment.getLeg());
-
-		// Add choices to dataset
+		try {
+			legChoices = SelectChoices.from(legs, "flightNumber", assignment.getLeg());
+		} catch (NullPointerException e) {
+		}
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);
 		dataset.put("legs", legChoices);
@@ -149,7 +150,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		// Handle selected leg
 		String selectedLegKey = "";
 		if (assignment.getLeg() != null) {
-			// Check if current leg is in available options
+
 			boolean isLegAvailable = legs.stream().anyMatch(leg -> leg.getFlightNumber().equals(assignment.getLeg().getFlightNumber()));
 
 			if (isLegAvailable)
