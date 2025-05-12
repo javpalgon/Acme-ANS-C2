@@ -53,7 +53,7 @@ member.assignment.form.error.schedule-conflict=El miembro ya tiene una asignaci�
 member.assignment.form.error.member-null=Debe seleccionar un miembro de la tripulación
 member.assignment.form.error.leg-null=Debe seleccionar un tramo de vuelo
 member.assignment.form.error.member-not-published=Ese tramo no ha sido publicado
-assignment.form.error.flight-not-published=No se pueden asignar miembros a tramos de vuelos no publicados
+assignment.form.error.flight-not-published=Esta etapa pertenece a un vuelo que aún no se ha publicado
 
 # Mensajes adicionales para validaciones
 member.assignment.form.error.notDraft=Solo se pueden editar asignaciones en modo borrador

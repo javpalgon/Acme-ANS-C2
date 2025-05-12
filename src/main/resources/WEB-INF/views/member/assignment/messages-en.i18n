@@ -51,7 +51,7 @@ member.assignment.form.error.duplicate-assignment = A member cannot be assigned 
 member.assignment.form.error.schedule-conflict = The member already has an active assignment that overlaps with this schedule
 member.assignment.form.error.member-null = You must select a crew member
 member.assignment.form.error.member-not-published = That leg has not been published
-member.assignment.form.error.flight-not-published=Cannot assign members to legs of unpublished flights (flight is in draft mode)
+member.assignment.form.error.flight-not-published=This leg belongs to a flight that has not yet been published
 
 # Additional validation messages
 member.assignment.form.error.notDraft = Only draft assignments can be edited
