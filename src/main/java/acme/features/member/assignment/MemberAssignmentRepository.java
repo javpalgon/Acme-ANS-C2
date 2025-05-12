@@ -41,10 +41,10 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT m FROM Member m WHERE m.id = :id")
 	Member findMemberById(int id);
 
-	@Query("SELECT a FROM Assignment a WHERE a.leg.status = :status AND a.member.id = :memberId AND a.leg.isDraftMode = false")
+	@Query("SELECT a FROM Assignment a WHERE a.leg.status = :status AND a.member.id = :memberId AND a.leg.isDraftMode = false AND a.leg.flight.isDraftMode = false")
 	Collection<Assignment> findByLegStatusAndMemberId(@Param("status") LegStatus status, @Param("memberId") int memberId);
 
-	@Query("SELECT a FROM Assignment a WHERE a.leg.status != :status AND a.member.id = :memberId AND a.leg.isDraftMode = false")
+	@Query("SELECT a FROM Assignment a WHERE a.leg.status != :status AND a.member.id = :memberId AND a.leg.isDraftMode = false AND a.leg.flight.isDraftMode = false")
 	Collection<Assignment> findByLegStatusNotAndMemberId(@Param("status") LegStatus status, @Param("memberId") int memberId);
 
 	@Query("SELECT DISTINCT a.leg FROM Assignment a WHERE a.member.id = :memberId")
@@ -56,7 +56,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT m FROM Member m WHERE m.availabilityStatus = :status")
 	List<Member> findAvailableMembers(@Param("status") AvailabilityStatus status);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight.isDraftMode = false AND l.departure > :currentDate")
+	@Query("SELECT l FROM Leg l WHERE l.departure > :currentDate AND l.isDraftMode = false AND l.flight.isDraftMode = false")
 	List<Leg> findAllPublishedAndFutureLegs(@Param("currentDate") Date currentDate);
 
 	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Leg l WHERE l.id = :legId AND l.departure < :currentDate")
