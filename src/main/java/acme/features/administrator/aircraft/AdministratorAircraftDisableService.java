@@ -12,7 +12,7 @@ import acme.entities.aircraft.Aircraft;
 import acme.entities.aircraft.AircraftStatus;
 
 @GuiService
-public class AdministratorAircraftUpdateService extends AbstractGuiService<Administrator, Aircraft> {
+public class AdministratorAircraftDisableService extends AbstractGuiService<Administrator, Aircraft> {
 
 	@Autowired
 	private AdministratorAircraftRepository repository;
@@ -36,7 +36,7 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 	@Override
 	public void bind(final Aircraft aircraft) {
-		super.bindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "details", "airline");
+
 	}
 
 	@Override
@@ -48,6 +48,7 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 	@Override
 	public void perform(final Aircraft aircraft) {
+		aircraft.setAircraftStatus(AircraftStatus.UNDER_MAINTENANCE);
 		this.repository.save(aircraft);
 	}
 

@@ -15,3 +15,4 @@ administrator.aircraft.form.label.confirmation = Confirmar Operación
 administrator.aircraft.button.update = Actualizar
 administrator.aircraft.button.create = Crear
 administrator.aircraft.label.airline = Código IATA Aerolínea
+administrator.aircraft.button.disable = Desactivar
