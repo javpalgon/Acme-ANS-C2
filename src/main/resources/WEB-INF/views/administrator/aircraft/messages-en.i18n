@@ -19,3 +19,5 @@ administrator.aircraft.label.airline = Airline´s IATACode
 ##################### ERRORS ##################################33
 acme.validation.IATACode = IATACode must
 administrator.aircraft.button.disable = Disable
+administrator.aircraft.label.enable = Is it enabled?
+administrator.aircraft.button.enable = Enable
