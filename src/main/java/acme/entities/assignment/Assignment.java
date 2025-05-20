@@ -29,7 +29,8 @@ import lombok.Setter;
 @ValidAssignment
 @Table(name = "assignment", indexes = {
 	@Index(name = "idx_assignment_member_leg_status", columnList = "member_id,leg_id,status"), @Index(name = "idx_assignment_leg_role_status", columnList = "leg_id,role,status"),
-	@Index(name = "idx_assignment_member_status", columnList = "member_id,status"), @Index(name = "idx_assignment_status", columnList = "status")
+	@Index(name = "idx_assignment_member_status", columnList = "member_id,status"), @Index(name = "idx_assignment_member_role", columnList = "member_id,role"), @Index(name = "idx_assignment_leg_status", columnList = "leg_id,status"),
+	@Index(name = "idx_assignment_draft_mode", columnList = "draftMode"), @Index(name = "idx_assignment_member_leg", columnList = "member_id,leg_id")
 })
 public class Assignment extends AbstractEntity {
 
@@ -59,7 +60,7 @@ public class Assignment extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
-	private Boolean				isDraftMode;
+	private Boolean				draftMode;
 
 	@Mandatory
 	@Valid

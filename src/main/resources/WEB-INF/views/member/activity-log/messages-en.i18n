@@ -19,3 +19,9 @@ member.activity-log.list.title = Activity Logs
 member.activity-log.form.title = Activity Log Form
 
 member.activity-log.form.error.severity-range = The severity level must be between 0 and 10
+# General error messages
+member.activitylog.form.error.readonly=Fields cannot be modified during publication
+member.activitylog.form.error.null-assignment=The activity log must be associated with an assignment
+member.activitylog.form.error.assignment-in-draft=The associated assignment must be published
+member.activitylog.form.error.leg-not-completed=The associated leg must be completed (arrival date in the past)
+member.activitylog.form.error.assignment-not-owned=You can only publish activity logs for your own assignments

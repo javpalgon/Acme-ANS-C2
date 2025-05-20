@@ -52,6 +52,7 @@ member.assignment.form.error.schedule-conflict = The member already has an activ
 member.assignment.form.error.member-null = You must select a crew member
 member.assignment.form.error.member-not-published = That leg has not been published
 member.assignment.form.error.flight-not-published=This leg belongs to a flight that has not yet been published
+member.assignment.form.error.readonly=To change values, please update the assignment first
 
 # Additional validation messages
 member.assignment.form.error.notDraft = Only draft assignments can be edited

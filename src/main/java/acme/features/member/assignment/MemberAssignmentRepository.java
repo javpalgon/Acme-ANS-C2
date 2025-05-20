@@ -35,7 +35,7 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT l FROM Leg l")
 	List<Leg> findAllLegs();
 
-	@Query("SELECT a FROM Assignment a WHERE a.member = :member AND a.role = :role AND a.isDraftMode = false")
+	@Query("SELECT a FROM Assignment a WHERE a.member = :member AND a.role = :role AND a.draftMode = false")
 	List<Assignment> findByMemberAndRole(Member member, Role role);
 
 	@Query("SELECT m FROM Member m WHERE m.id = :id")
@@ -56,8 +56,8 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT m FROM Member m WHERE m.availabilityStatus = :status")
 	List<Member> findAvailableMembers(@Param("status") AvailabilityStatus status);
 
-	@Query("SELECT l FROM Leg l WHERE l.departure > :currentDate AND l.isDraftMode = false")
-	List<Leg> findAllPublishedAndFutureLegs(@Param("currentDate") Date currentDate);
+	@Query("SELECT l FROM Leg l " + "WHERE l.departure > :currentDate " + "AND l.isDraftMode = false " + "AND l.flight.isDraftMode = false " + "AND l.aircraft.airline.id = :airlineId")
+	List<Leg> findAllPFL(@Param("currentDate") Date currentDate, @Param("airlineId") int airlineId);
 
 	@Query("SELECT CASE WHEN COUNT(l) > 0 THEN true ELSE false END FROM Leg l WHERE l.id = :legId AND l.departure < :currentDate")
 	boolean hasLegOccurred(@Param("legId") int legId, @Param("currentDate") Date currentDate);
@@ -82,7 +82,10 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 
 	@Modifying
 	@Transactional
-	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId AND al.isDraftMode = true")
+	@Query("DELETE FROM ActivityLog al WHERE al.assignment.id = :assignmentId AND al.draftMode = true")
 	void deleteActivityLogsByAssignmentId(int assignmentId);
+
+	@Query("select m from Member m where m.employeeCode = :employeeCode")
+	Member findMemberByEmployeeCode(String employeeCode);
 
 }
