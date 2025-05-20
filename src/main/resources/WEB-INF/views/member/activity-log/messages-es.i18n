@@ -20,3 +20,9 @@ member.activity-log.form.title=Formulario de registro de actividad
 
 member.activity-log.form.error.severity-range=El nivel de severidad debe ser entre 0 y 10
 acme.validation.text.message=Campos incorrectos
+
+member.activitylog.form.error.readonly=Los campos no pueden modificarse durante la publicación
+member.activitylog.form.error.null-assignment=El registro de actividad debe estar asociado a una asignación
+member.activitylog.form.error.assignment-in-draft=La asignación asociada debe estar publicada
+member.activitylog.form.error.leg-not-completed=La etapa asociada debe estar completada (fecha de llegada en el pasado)
+member.activitylog.form.error.assignment-not-owned=Solo puedes publicar registros de actividad de tus propias asignaciones

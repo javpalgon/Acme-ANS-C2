@@ -1,104 +1,53 @@
-key,key:leg,role,lastUpdate,status,key:member,remarks,is_draft_mode
+key,key:leg,role,lastUpdate,status,key:member,remarks,draft_mode
+##Member1 ariline00 aircraft01:
+#Completed:
 assignment-01,leg-35,CABIN_ATTENDANT,2024/12/31 00:00,CONFIRMED,member-01,,false
-assignment-02,leg-35,LEAD_ATTENDANT,2019/01/10 00:00,CONFIRMED,member-01,Waiting for confirmation,false
-assignment-03,leg-36,CABIN_ATTENDANT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather,false
-assignment-04,leg-37,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,member-01,On standby,false
-assignment-05,leg-38,CABIN_ATTENDANT,2023/05/15 12:30,CONFIRMED,member-01,Flight reassigned to alternate crew,false
-assignment-06,leg-39,CABIN_ATTENDANT,2021/08/21 14:00,CONFIRMED,member-01,Pending final approval,false
-assignment-07,leg-40,CABIN_ATTENDANT,2020/06/11 08:45,CONFIRMED,member-02,,false
-assignment-08,leg-41,CABIN_ATTENDANT,2019/09/19 13:20,CONFIRMED,member-02,Awaiting clearance,false
-assignment-09,leg-42,CABIN_ATTENDANT,2024/02/22 18:10,CANCELLED,member-02,Cancelled due to operational changes,true
-assignment-10,leg-43,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment,false
-assignment-11,leg-44,LEAD_ATTENDANT,2022/04/05 16:45,PENDING,member-02,Awaiting flight manifest updates,false
-assignment-12,leg-45,CABIN_ATTENDANT,2023/07/07 09:10,CONFIRMED,member-03,,true
-assignment-13,leg-46,LEAD_ATTENDANT,2021/12/14 11:35,CANCELLED,member-03,Cancelled due to maintenance issues,true
-assignment-14,leg-47,CABIN_ATTENDANT,2020/01/25 22:00,CONFIRMED,member-03,Pending crew scheduling confirmation,false
-assignment-15,leg-48,LEAD_ATTENDANT,2024/03/17 07:25,CONFIRMED,member-03,Confirmed with minor changes to schedule,true
-assignment-16,leg-49,CABIN_ATTENDANT,2023/09/09 10:00,CONFIRMED,member-03,Backup crew assigned,false
-assignment-17,leg-50,LEAD_ATTENDANT,2022/05/20 15:30,PENDING,member-03,Pending weather updates,true
-assignment-18,leg-51,LEAD_ATTENDANT,2024/01/05 06:00,CONFIRMED,member-04,,false
-assignment-19,leg-52,LEAD_ATTENDANT,2018/11/11 19:45,CONFIRMED,member-04,Awaiting aircraft assignment,false
-assignment-20,leg-53,CABIN_ATTENDANT,2021/03/29 21:10,CANCELLED,member-04,Cancelled due to crew illness,false
-assignment-21,leg-54,LEAD_ATTENDANT,2022/07/15 17:55,CONFIRMED,member-04,Confirmed standby,true
-assignment-22,leg-55,LEAD_ATTENDANT,2020/08/08 12:00,PENDING,member-04,Pending final briefing,true
-assignment-23,leg-56,CABIN_ATTENDANT,2023/04/04 09:30,CONFIRMED,member-04,Confirmed with new flight time,true
-assignment-24,leg-57,LEAD_ATTENDANT,2022/06/21 14:20,PENDING,member-04,Awaiting dispatch clearance,false
-assignment-25,leg-58,LEAD_ATTENDANT,2024/07/15 14:00,CONFIRMED,member-01,,true
-assignment-26,leg-59,LEAD_ATTENDANT,2024/06/25 10:45,PENDING,member-01,Waiting for confirmation,true
-assignment-27,leg-60,CABIN_ATTENDANT,2024/08/02 12:00,CANCELLED,member-01,Flight cancelled due to weather,true
-assignment-28,leg-35,LEAD_ATTENDANT,2024/09/15 16:00,CONFIRMED,member-01,On standby,false
-assignment-29,leg-36,LEAD_ATTENDANT,2024/05/10 08:30,CONFIRMED,member-02,,false
-assignment-30,leg-37,LEAD_ATTENDANT,2024/07/12 17:00,PENDING,member-02,Awaiting flight manifest updates,false
-assignment-31,leg-38,CABIN_ATTENDANT,2024/05/25 13:30,CONFIRMED,member-02,Standby for reassignment,false
-assignment-32,leg-39,LEAD_ATTENDANT,2024/06/18 14:30,PENDING,member-02,Pending final approval,false
-assignment-33,leg-40,LEAD_ATTENDANT,2024/09/22 19:30,CONFIRMED,member-03,,false
-assignment-34,leg-41,CABIN_ATTENDANT,2024/10/01 15:00,CONFIRMED,member-03,Flight reassigned to alternate crew,false
-assignment-35,leg-42,LEAD_ATTENDANT,2024/12/05 06:00,CONFIRMED,member-03,Confirmed with minor changes to schedule,false
-assignment-36,leg-43,LEAD_ATTENDANT,2024/06/30 20:15,CONFIRMED,member-03,Awaiting dispatch clearance,false
-assignment-37,leg-44,LEAD_ATTENDANT,2024/08/10 11:30,CONFIRMED,member-04,,false
-assignment-38,leg-45,CABIN_ATTENDANT,2024/09/05 10:00,CANCELLED,member-04,Cancelled due to crew illness,false
-assignment-39,leg-46,LEAD_ATTENDANT,2023/01/12 08:00,CONFIRMED,member-01,Regular assignment,false
-assignment-40,leg-47,LEAD_ATTENDANT,2023/01/12 08:00,CONFIRMED,member-02,First officer,false
-assignment-41,leg-48,CABIN_ATTENDANT,2023/01/12 08:00,CONFIRMED,member-03,Senior crew,false
-assignment-42,leg-49,LEAD_ATTENDANT,2023/02/08 10:00,CONFIRMED,member-04,Seasonal route,false
-assignment-43,leg-50,LEAD_ATTENDANT,2023/02/08 10:00,CONFIRMED,member-01,Training flight,false
-assignment-44,leg-51,LEAD_ATTENDANT,2023/02/08 10:00,CONFIRMED,member-02,Medical training completed,false
-assignment-45,leg-52,LEAD_ATTENDANT,2023/03/03 16:00,CONFIRMED,member-03,Night flight,false
-assignment-46,leg-53,CABIN_ATTENDANT,2023/03/03 16:00,CONFIRMED,member-04,Instrument rating,false
-assignment-47,leg-54,CABIN_ATTENDANT,2023/03/03 16:00,CONFIRMED,member-01,New crew member,false
-assignment-48,leg-55,CABIN_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-02,Long-haul,false
-assignment-49,leg-56,CABIN_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-03,First international,false
-assignment-50,leg-57,CABIN_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-04,Language specialist,false
-assignment-51,leg-58,CABIN_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-01,Weekend flight,false
-assignment-52,leg-59,CABIN_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-02,Extra hours,false
-assignment-53,leg-60,LEAD_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-03,VIP service,false
-assignment-54,leg-35,LEAD_ATTENDANT,2023/06/06 09:00,CONFIRMED,member-04,Short turn around,false
-assignment-55,leg-36,CABIN_ATTENDANT,2023/06/06 09:00,CANCELLED,member-01,Recurrent training,false
-assignment-56,leg-37,CABIN_ATTENDANT,2023/06/06 09:00,CONFIRMED,member-02,New uniform,false
-assignment-57,leg-38,CABIN_ATTENDANT,2023/07/05 15:00,CONFIRMED,member-03,Short flight,false
-assignment-58,leg-39,CABIN_ATTENDANT,2023/07/05 15:00,CONFIRMED,member-04,Weekend duty,false
-assignment-59,leg-40,CABIN_ATTENDANT,2023/07/05 15:00,CONFIRMED,member-01,Local route,false
-assignment-60,leg-41,LEAD_ATTENDANT,2023/08/14 13:00,CONFIRMED,member-02,Long route,false
-
-
-assignment-61,leg-35,CABIN_ATTENDANT,2023/03/03 16:00,CONFIRMED,member-01,New crew member,false
-assignment-62,leg-36,LEAD_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-02,Long-haul,false
-assignment-63,leg-36,LEAD_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-03,First international,false
-assignment-64,leg-36,CABIN_ATTENDANT,2023/04/10 07:00,CONFIRMED,member-04,Language specialist,false
-assignment-65,leg-37,LEAD_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-01,Weekend flight,false
-assignment-66,leg-37,CO_PILOT,2023/05/18 12:00,CONFIRMED,member-02,Extra hours,false
-assignment-67,leg-37,LEAD_ATTENDANT,2023/05/18 12:00,CONFIRMED,member-03,VIP service,false
-assignment-68,leg-38,PILOT,2023/06/06 09:00,CONFIRMED,member-04,Short turn around,false
-assignment-69,leg-38,CO_PILOT,2023/06/06 09:00,CONFIRMED,member-01,PRUEBA LOG,false
-assignment-70,leg-38,CABIN_ATTENDANT,2023/06/06 09:00,CONFIRMED,member-02,New uniform,false
-assignment-71,leg-39,PILOT,2023/07/05 15:00,CONFIRMED,member-03,Short flight,false
-assignment-72,leg-40,CO_PILOT,2023/08/02 12:00,CONFIRMED,member-04,Medical check required,false
-assignment-73,leg-40,CABIN_ATTENDANT,2023/08/02 12:00,CONFIRMED,member-01,New team member,false
-assignment-74,leg-41,PILOT,2023/08/16 10:30,CONFIRMED,member-02,Overnight flight,false
-assignment-75,leg-41,CO_PILOT,2023/08/16 10:30,CONFIRMED,member-03,Instrument training flight,false
-assignment-76,leg-42,CABIN_ATTENDANT,2023/09/12 08:45,CONFIRMED,member-04,Experienced crew,false
-assignment-77,leg-42,PILOT,2023/09/12 08:45,CONFIRMED,member-01,Flight experience update,false
-assignment-78,leg-43,CO_PILOT,2023/09/25 17:20,CONFIRMED,member-02,First international flight,false
-assignment-79,leg-43,CABIN_ATTENDANT,2023/09/25 17:20,CONFIRMED,member-03,VIP service crew,false
-assignment-80,leg-44,PILOT,2023/10/15 06:50,CONFIRMED,member-04,Recurrent training session,false
-assignment-81,leg-44,CO_PILOT,2023/10/15 06:50,CONFIRMED,member-01,First officer flight,false
-assignment-82,leg-45,CABIN_ATTENDANT,2023/11/01 14:30,CONFIRMED,member-02,Long-haul crew assignment,false
-assignment-83,leg-45,PILOT,2023/11/01 14:30,CONFIRMED,member-03,Seasonal route flight,false
-assignment-84,leg-46,CO_PILOT,2023/11/12 11:20,CONFIRMED,member-04,Backup crew assignment,false
-assignment-85,leg-46,CABIN_ATTENDANT,2023/11/12 11:20,CONFIRMED,member-01,Customer service update,false
-assignment-86,leg-47,PILOT,2023/12/03 17:10,CONFIRMED,member-02,Night flight crew training,false
-assignment-87,leg-47,CO_PILOT,2023/12/03 17:10,CONFIRMED,member-03,Recurrent training session,false
-assignment-88,leg-48,CABIN_ATTENDANT,2023/12/15 09:45,CONFIRMED,member-04,Special training required,false
-assignment-89,leg-48,PILOT,2023/12/15 09:45,CONFIRMED,member-01,Flight experience update,false
-assignment-90,leg-49,CO_PILOT,2024/01/07 08:00,CONFIRMED,member-02,First officer flight,false
-assignment-91,leg-49,CABIN_ATTENDANT,2024/01/07 08:00,CONFIRMED,member-03,Backup crew assignment,false
-assignment-92,leg-50,PILOT,2024/01/20 12:00,CONFIRMED,member-04,New route training,false
-assignment-93,leg-50,CABIN_ATTENDANT,2024/01/20 12:00,CONFIRMED,member-01,Special crew assignment,false
-assignment-94,leg-51,CABIN_ATTENDANT,2024/02/03 10:00,CONFIRMED,member-02,Customer service crew update,false
-assignment-95,leg-51,PILOT,2024/02/03 10:00,CONFIRMED,member-03,Seasonal route crew update,false
-assignment-96,leg-52,CO_PILOT,2024/02/15 11:30,CONFIRMED,member-04,Special operations update,false
-assignment-97,leg-52,CABIN_ATTENDANT,2024/02/15 11:30,CONFIRMED,member-01,Training session complete,false
-assignment-98,leg-53,PILOT,2024/03/01 13:15,CONFIRMED,member-02,Extra hours crew assignment,false
-assignment-99,leg-53,CO_PILOT,2024/03/01 13:15,CONFIRMED,member-03,Overnight crew assignment,false
-assignment-100,leg-54,CABIN_ATTENDANT,2024/03/10 14:40,CONFIRMED,member-04,VIP service crew,false
-
+assignment-02,leg-36,LEAD_ATTENDANT,2019/01/10 00:00,CONFIRMED,member-01,Waiting for confirmation,false
+assignment-03,leg-37,CABIN_ATTENDANT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather,false
+assignment-04,leg-38,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,member-01,On standby,false
+#Planned:
+assignment-05,leg-45,PILOT,2023/05/15 12:30,PENDING,member-01,Flight reassigned to alternate crew,true
+assignment-06,leg-46,CABIN_ATTENDANT,2021/08/21 14:00,PENDING,member-01,Pending final approval,true
+assignment-07,leg-47,CO_PILOT,2020/06/11 08:45,PENDING,member-01,,true
+assignment-08,leg-48,CABIN_ATTENDANT,2019/09/19 13:20,CONFIRMED,member-01,Awaiting clearance,false
+##Member2 airline00 aircraft01:
+#Completed:
+assignment-09,leg-35,PILOT,2024/02/22 18:10,CANCELLED,member-02,Cancelled due to operational changes,false
+assignment-10,leg-36,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment,false
+assignment-11,leg-37,LEAD_ATTENDANT,2022/04/05 16:45,PENDING,member-02,Awaiting flight manifest updates,false
+assignment-12,leg-38,PILOT,2023/07/07 09:10,CONFIRMED,member-02,,false
+#Planned:
+assignment-13,leg-46,LEAD_ATTENDANT,2021/12/14 11:35,CANCELLED,member-02,Cancelled due to maintenance issues,true
+assignment-14,leg-47,CABIN_ATTENDANT,2020/01/25 22:00,PENDING,member-02,Pending crew scheduling confirmation,true
+assignment-15,leg-48,LEAD_ATTENDANT,2024/03/17 07:25,CONFIRMED,member-02,Confirmed with minor changes to schedule,true
+assignment-16,leg-49,CABIN_ATTENDANT,2023/09/09 10:00,PENDING,member-02,Backup crew assigned,false
+##Member3 airline01 aircraft02:
+#Completed:
+assignment-17,leg-41,LEAD_ATTENDANT,2022/05/20 15:30,CONFIRMED,member-03,Pending weather updates,false
+assignment-18,leg-42,LEAD_ATTENDANT,2024/01/05 06:00,CONFIRMED,member-03,,false
+assignment-19,leg-43,LEAD_ATTENDANT,2018/11/11 19:45,CONFIRMED,member-03,Awaiting aircraft assignment,false
+assignment-20,leg-44,CABIN_ATTENDANT,2021/03/29 21:10,CANCELLED,member-03,Cancelled due to crew illness,false
+#Planned:
+assignment-21,leg-57,LEAD_ATTENDANT,2022/07/15 17:55,CONFIRMED,member-03,Confirmed standby,true
+assignment-22,leg-58,LEAD_ATTENDANT,2020/08/08 12:00,PENDING,member-03,Pending final briefing,true
+assignment-23,leg-59,CABIN_ATTENDANT,2023/04/04 09:30,CONFIRMED,member-03,Confirmed with new flight time,true
+assignment-24,leg-60,LEAD_ATTENDANT,2022/06/21 14:20,CONFIRMED,member-03,Awaiting dispatch clearance,false
+##Member4 airline00 aircraft01:,"","","","","","",""
+#Completed:
+assignment-25,leg-35,CO_PILOT,2024/07/15 14:00,CONFIRMED,member-04,,false
+assignment-26,leg-36,PILOT,2024/06/25 10:45,CONFIRMED,member-04,Confirmation ok,false
+assignment-27,leg-37,CABIN_ATTENDANT,2024/08/02 12:00,CANCELLED,member-04,Flight cancelled due to weather,false
+assignment-28,leg-38,LEAD_ATTENDANT,2024/09/15 16:00,CONFIRMED,member-04,On standby,false
+#Planned:
+assignment-29,leg-49,CO_PILOT,2024/05/10 08:30,CONFIRMED,member-04,,false
+assignment-30,leg-50,LEAD_ATTENDANT,2024/07/12 17:00,PENDING,member-04,Awaiting flight manifest updates,true
+assignment-31,leg-51,CABIN_ATTENDANT,2024/05/25 13:30,CONFIRMED,member-04,Standby for reassignment,true
+assignment-32,leg-52,LEAD_ATTENDANT,2024/06/18 14:30,PENDING,member-04,Pending final approval,true
+##Member5 airline00 aircraft01:
+#Completed:
+assignment-33,leg-35,LEAD_ATTENDANT,2024/09/22 19:30,CONFIRMED,member-05,,false
+assignment-34,leg-38,CABIN_ATTENDANT,2024/10/01 15:00,CONFIRMED,member-05,Flight reassigned to alternate crew,false
+assignment-35,leg-37,LEAD_ATTENDANT,2024/12/05 06:00,CONFIRMED,member-05,Confirmed with minor changes to schedule,false
+assignment-36,leg-38,LEAD_ATTENDANT,2024/06/30 20:15,CONFIRMED,member-05,Awaiting dispatch clearance,false
+#Planned:
+#Anyone because he is NOT AVAILABLE

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
@@ -52,7 +53,7 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 
 		final boolean showLogs = assignment.getLeg().getStatus().equals(LegStatus.LANDED) && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
-		Dataset dataset = super.unbindObject(object, "role", "isDraftMode", "lastUpdate", "status", "remarks");
+		Dataset dataset = super.unbindObject(object, "role", "draftMode", "lastUpdate", "status", "remarks");
 
 		// Leg (Flight) information
 		dataset.put("flightNumber", object.getLeg().getFlightNumber());
@@ -74,12 +75,18 @@ public class MemberAssignmentShowService extends AbstractGuiService<Member, Assi
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, object.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, object.getRole());
-		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", object.getLeg());
+
+		SelectChoices legChoices;
+		if (object.getDraftMode())
+			legChoices = SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", object.getLeg());
+		else
+			legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", object.getLeg());
+
+		dataset.put("leg", legChoices.getSelected());
+		dataset.put("legs", legChoices);
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);
-		dataset.put("leg", legChoices.getSelected().getKey());
-		dataset.put("legs", legChoices);
 		dataset.put("memberKey", member.getId());
 		dataset.put("member", member.getEmployeeCode());
 

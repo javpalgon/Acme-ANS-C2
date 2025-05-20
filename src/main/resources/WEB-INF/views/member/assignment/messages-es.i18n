@@ -54,6 +54,7 @@ member.assignment.form.error.member-null=Debe seleccionar un miembro de la tripu
 member.assignment.form.error.leg-null=Debe seleccionar un tramo de vuelo
 member.assignment.form.error.member-not-published=Ese tramo no ha sido publicado
 assignment.form.error.flight-not-published=Esta etapa pertenece a un vuelo que aún no se ha publicado
+member.assignment.form.error.readonly=Para cambiar valores, actualice primero la asignación
 
 # Mensajes adicionales para validaciones
 member.assignment.form.error.notDraft=Solo se pueden editar asignaciones en modo borrador

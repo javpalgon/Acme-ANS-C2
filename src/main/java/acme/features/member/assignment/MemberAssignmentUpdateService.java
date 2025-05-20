@@ -35,7 +35,24 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		assignment = this.repository.findOneById(assignmentId);
 
-		status = assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+		// BÁSICA
+		status = assignment != null && assignment.getDraftMode() && assignment.getMember().getId() == memberId && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+
+		// PARA EL HACKING
+		if (status) {
+			if (assignment.getRole() != null && !List.of(Role.values()).contains(assignment.getRole()))
+				status = false;
+
+			if (assignment.getStatus() != null && !List.of(AssignmentStatus.values()).contains(assignment.getStatus()))
+				status = false;
+
+			if (assignment.getLeg() != null) {
+				List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), assignment.getMember().getAirline().getId());
+				boolean legIsValid = availableLegs.stream().anyMatch(l -> l.getId() == assignment.getLeg().getId());
+				if (!legIsValid)
+					status = false;
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -58,18 +75,15 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Member member = this.repository.findMemberById(currentMemberId);
 
-		Integer legId = super.getRequest().getData("leg", int.class);
-
-		super.bindObject(assignment, "role", "status", "remarks");
-
-		if (legId != null)
-			assignment.setLeg(this.repository.findLegById(legId));
-		assignment.setMember(member);
+		super.bindObject(assignment, "role", "status", "remarks", "leg");
 	}
 
 	@Override
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
+
+		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Member member = this.repository.findMemberById(currentMemberId);
 
 		Assignment original = this.repository.findOneById(assignment.getId());
 
@@ -93,7 +107,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		if (assignment.getMember() != null && assignment.getLeg() != null) {
 			Integer memberId = assignment.getMember().getId();
 			Integer legId = assignment.getLeg().getId();
-			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
+			Integer assignmentId = assignment.getId();
 
 			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
 
@@ -125,7 +139,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	public void unbind(final Assignment assignment) {
 		assert assignment != null;
 
-		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 
 		// Get current member
 		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
@@ -136,7 +150,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
 
 		// Get available legs
-		List<Leg> legs = this.repository.findAllPublishedAndFutureLegs(MomentHelper.getCurrentMoment());
+		List<Leg> legs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
 		SelectChoices legChoices = null;
 
 		try {
