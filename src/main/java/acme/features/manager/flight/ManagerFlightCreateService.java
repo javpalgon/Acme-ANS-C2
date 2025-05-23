@@ -51,8 +51,8 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
+		assert flight != null;
 		;
-		// validacion si es duplicado en entity
 	}
 
 	@Override
