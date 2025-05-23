@@ -25,19 +25,19 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		Leg leg = this.repository.getLegById(id);
-
 		boolean authorised = leg != null && super.getRequest().getPrincipal().hasRealm(leg.getFlight().getManager()) && leg.getIsDraftMode();
-
 		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
 	public void bind(final Leg leg) {
+		assert leg != null;
 		;
 	}
 
 	@Override
 	public void validate(final Leg leg) {
+		assert leg != null;
 		;
 	}
 
@@ -50,11 +50,13 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void perform(final Leg leg) {
+		assert leg != null;
 		this.repository.delete(leg);
 	}
 
 	@Override
 	public void unbind(final Leg leg) {
+		assert leg != null;
 		Dataset dataset;
 
 		SelectChoices departureAirportChoices;
