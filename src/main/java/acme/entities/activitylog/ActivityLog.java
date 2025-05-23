@@ -4,7 +4,9 @@ package acme.entities.activitylog;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -23,6 +25,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "activity_log", indexes = {
+	@Index(name = "idx_activity_log_assignment", columnList = "assignment_id"), @Index(name = "idx_activity_log_draft_mode", columnList = "draftMode"), @Index(name = "idx_activity_log_registered_at", columnList = "registeredAt")
+})
 public class ActivityLog extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
@@ -60,6 +65,6 @@ public class ActivityLog extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
-	private Boolean				isDraftMode;
+	private Boolean				draftMode;
 
 }

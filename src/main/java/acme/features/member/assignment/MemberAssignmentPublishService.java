@@ -1,6 +1,8 @@
 
 package acme.features.member.assignment;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -31,7 +33,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assignment = this.repository.findOneById(masterId);
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment.getIsDraftMode() && assignment.getMember().getId() == memberId;
+		status = assignment.getDraftMode() && assignment.getMember().getId() == memberId && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -66,45 +68,48 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		Assignment original = (Integer) assignment.getId() != null ? this.repository.findOneById(assignment.getId()) : null;
+		if ((Integer) assignment.getId() != null) {
+			Assignment original = this.repository.findOneById(assignment.getId());
 
-		if (!assignment.getIsDraftMode())
-			super.state(assignment.getIsDraftMode(), "*", "member.assignment.form.error.notDraft", "isDraftMode");
+			if (original != null) {
+				boolean hasChanged = false;
+				if (assignment.getRole() != null) {
+					if (!assignment.getRole().equals(original.getRole()))
+						hasChanged = true;
+				} else if (original.getRole() != null)
+					hasChanged = true;
+				super.state(!hasChanged, "role", "member.assignment.form.error.readonly");
 
-		if (assignment.getRole() == Role.PILOT && !original.getRole().equals(assignment.getRole()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
+				if (assignment.getStatus() != null) {
+					if (!assignment.getStatus().equals(original.getStatus()))
+						hasChanged = true;
+				} else if (original.getStatus() != null)
+					hasChanged = true;
+				super.state(!hasChanged, "status", "member.assignment.form.error.readonly");
 
-		if (assignment.getRole() == Role.CO_PILOT && !original.getRole().equals(assignment.getRole()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
+				if (assignment.getLeg() != null) {
+					if (!assignment.getLeg().equals(original.getLeg()))
+						hasChanged = true;
+				} else if (original.getLeg() != null)
+					hasChanged = true;
+				super.state(!hasChanged, "leg", "member.assignment.form.error.readonly");
 
-		super.state(assignment.getLeg() == null || !this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
-
-		super.state(assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
-
-		if (assignment.getMember() != null && assignment.getLeg() != null) {
-			Integer memberId = assignment.getMember().getId();
-			Integer legId = assignment.getLeg().getId();
-			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
-
-			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
-
-			super.state(!duplicateAssignment, "member", "member.assignment.form.error.duplicate-assignment");
-
-			if (!duplicateAssignment && assignment.getStatus() != AssignmentStatus.CANCELLED) {
-				boolean hasConflict = this.repository.hasScheduleConflict(memberId, assignment.getLeg().getDeparture(), assignment.getLeg().getArrival(), assignmentId, AssignmentStatus.CANCELLED);
-
-				super.state(!hasConflict, "member", "member.assignment.form.error.schedule-conflict");
+				String remarks = assignment.getRemarks() == null || assignment.getRemarks().isEmpty() ? null : assignment.getRemarks();
+				String originalRemarks = original.getRemarks() == null || original.getRemarks().isEmpty() ? null : original.getRemarks();
+				hasChanged = !Objects.equals(remarks, originalRemarks);
+				super.state(!hasChanged, "remarks", "member.assignment.form.error.readonly");
 			}
 		}
-
 	}
 
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
-		assignment.setIsDraftMode(false);
+
+		assignment.setDraftMode(false);
 		assignment.setLastUpdate(MomentHelper.getCurrentMoment());
 		assignment.setStatus(AssignmentStatus.CONFIRMED);
+
 		this.repository.save(assignment);
 	}
 
@@ -117,9 +122,10 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
-		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+		SelectChoices legChoices = assignment.getDraftMode() ? SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg())
+			: SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
 
-		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);

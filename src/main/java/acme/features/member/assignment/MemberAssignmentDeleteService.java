@@ -37,9 +37,9 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 		assignment = this.repository.findOneById(assignmentId);
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
+		status = assignment.getDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -64,13 +64,13 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		if (!assignment.getIsDraftMode())
+		if (!assignment.getDraftMode())
 			super.state(false, "*", "member.assignment.form.error.notDraft");
 
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 		List<ActivityLog> activityLogs = this.ALrepository.findByMemberIdAndAssignmentId(memberId, assignment.getId());
-		boolean allDraft = activityLogs.stream().allMatch(ActivityLog::getIsDraftMode);
+		boolean allDraft = activityLogs.stream().allMatch(ActivityLog::getDraftMode);
 
 		if (!allDraft)
 			super.state(false, "*", "member.assignment.form.error.activityLogsNotDraft");
@@ -79,8 +79,6 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
-
-		this.repository.deleteActivityLogsByAssignmentId(assignment.getId());
 
 		this.repository.delete(assignment);
 

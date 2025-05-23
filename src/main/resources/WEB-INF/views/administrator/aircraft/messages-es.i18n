@@ -1,0 +1,20 @@
+######################### LIST #####################################3
+
+administrator.aircraft.label.model = Modelo
+administrator.aircraft.label.regitrationNumber = Número de registro
+administrator.aircraft.label.capacity = Capacidad
+administrator.aircraft.label.aircraftStatus = Estado del avión
+administrator.aircraft.label.cargoWeight = Peso de la carga
+administrator.aircraft.label.details = Detalles
+administrator.aircraft.label.name = Nombre
+administrator.aircraft.label.IATACode = Código IATA
+administrator.aircraft.label.website = Web
+administrator.aircraft.list.title = Aviones
+administrator.aircraft.form.title = Mostrar avión
+administrator.aircraft.form.label.confirmation = Confirmar Operación
+administrator.aircraft.button.update = Actualizar
+administrator.aircraft.button.create = Crear
+administrator.aircraft.label.airline = Código IATA Aerolínea
+administrator.aircraft.button.disable = Deshabilitar
+administrator.aircraft.label.enable = ¿Está habilitado?
+administrator.aircraft.button.enable = Habilitar

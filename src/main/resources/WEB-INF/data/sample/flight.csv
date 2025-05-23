@@ -22,3 +22,22 @@ flight-20,BUSINESS-X,false,EUR 900.00,Business-class flight with luxury seats,ma
 flight-21,EVENING-FLIGHT,true,EUR 620.00,Evening departure with complimentary snacks,manager-01,true
 flight-22,EARLYBIRD-01,false,EUR 210.00,Early morning budget flight for commuters,manager-01,true
 flight-23,AIRBUS-811,false,EUR 340.00,Amazing trip to Barcelona,manager-01,false
+
+
+flight-24,SKY001,false,EUR 280.00,Scenic route with window seats,manager-01,false
+flight-25,NIGHTFLYER,false,EUR 320.00,Overnight flight with reclining seats,manager-02,false
+flight-26,SUNRISE-EXP,false,EUR 295.99,Early sunrise flight with coffee service,manager-03,false
+flight-27,OCEANIC200,false,EUR 410.00,Overseas flight with ocean views,manager-04,false
+flight-28,MOUNTAIN-X,false,EUR 380.50,Mountain route with breathtaking views,manager-05,false
+flight-29,FASTLANE007,false,EUR 450.00,Express flight with priority boarding,manager-06,false
+flight-30,COASTLINER,false,EUR 315.00,Flight along the coastline,manager-07,false
+flight-31,HIGHLAND-88,false,EUR 390.00,Trip over northern highlands,manager-08,false
+flight-32,ISLE-JUMP,false,EUR 250.00,Island hopper service,manager-09,false
+flight-33,ARCTIC-GLIDE,false,EUR 670.00,Polar flight with heated cabins,manager-10,false
+flight-34,DESERT-RAIL,false,EUR 330.00,Desert route with cool beverages,manager-11,false
+flight-35,URBAN-SKY,false,EUR 260.00,Short flight between metropolitan hubs,manager-12,false
+flight-36,TROPICAL-VIEW,false,EUR 490.00,Flight above tropical regions with in-flight guide,manager-13,false
+flight-37,CANYON-FLY,false,EUR 355.50,Low altitude flight above canyons,manager-14,false
+flight-38,EVENING-JET,false,EUR 310.00,Evening jet service with soft lighting,manager-01,false
+flight-39,NORDIC-TRAIL,false,EUR 470.00,Flight path through Scandinavian airspace,manager-01,false
+flight-40,JUNGLE-ARC,false,EUR 345.00,Jungle flyover with commentary,manager-01,false

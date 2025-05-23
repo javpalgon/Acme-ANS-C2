@@ -34,7 +34,7 @@ public class MemberActivityLogCreateService extends AbstractGuiService<Member, A
 		assignment = this.repository.findAssignmentById(masterId);
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment != null && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
+		status = assignment != null && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -51,7 +51,7 @@ public class MemberActivityLogCreateService extends AbstractGuiService<Member, A
 
 		activityLog = new ActivityLog();
 		activityLog.setAssignment(assignment);
-		activityLog.setIsDraftMode(true);
+		activityLog.setDraftMode(true);
 		activityLog.setRegisteredAt(MomentHelper.getCurrentMoment());
 
 		super.getBuffer().addData(activityLog);
@@ -76,7 +76,7 @@ public class MemberActivityLogCreateService extends AbstractGuiService<Member, A
 
 		super.state(assignment != null, "*", "member.activitylog.form.error.null-assignment");
 
-		super.state(assignment != null && !assignment.getIsDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
+		super.state(assignment != null && !assignment.getDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
 
 		super.state(assignment != null && assignment.getMember().getId() == currentMemberId, "*", "member.activitylog.form.error.assignment-not-owned");
 
@@ -94,7 +94,7 @@ public class MemberActivityLogCreateService extends AbstractGuiService<Member, A
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(activityLog, "incidentType", "registeredAt", "description", "severityLevel", "isDraftMode");
+		dataset = super.unbindObject(activityLog, "incidentType", "registeredAt", "description", "severityLevel", "draftMode");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 		//dataset.put("isDraftMode", activityLog.getAssignment().getIsDraftMode());
 		dataset.put("registeredAt", MomentHelper.getCurrentMoment());
