@@ -80,8 +80,6 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
 
-		this.repository.deleteActivityLogsByAssignmentId(assignment.getId());
-
 		this.repository.delete(assignment);
 
 	}
