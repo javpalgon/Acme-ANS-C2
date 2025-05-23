@@ -32,7 +32,7 @@ assignment-21,leg-57,LEAD_ATTENDANT,2022/07/15 17:55,CONFIRMED,member-03,Confirm
 assignment-22,leg-58,LEAD_ATTENDANT,2020/08/08 12:00,PENDING,member-03,Pending final briefing,true
 assignment-23,leg-59,CABIN_ATTENDANT,2023/04/04 09:30,CONFIRMED,member-03,Confirmed with new flight time,true
 assignment-24,leg-60,LEAD_ATTENDANT,2022/06/21 14:20,CONFIRMED,member-03,Awaiting dispatch clearance,false
-##Member4 airline00 aircraft01:,"","","","","","",""
+##Member4 airline00 aircraft01:
 #Completed:
 assignment-25,leg-35,CO_PILOT,2024/07/15 14:00,CONFIRMED,member-04,,false
 assignment-26,leg-36,PILOT,2024/06/25 10:45,CONFIRMED,member-04,Confirmation ok,false
@@ -40,7 +40,7 @@ assignment-27,leg-37,CABIN_ATTENDANT,2024/08/02 12:00,CANCELLED,member-04,Flight
 assignment-28,leg-38,LEAD_ATTENDANT,2024/09/15 16:00,CONFIRMED,member-04,On standby,false
 #Planned:
 assignment-29,leg-49,CO_PILOT,2024/05/10 08:30,CONFIRMED,member-04,,false
-assignment-30,leg-50,LEAD_ATTENDANT,2024/07/12 17:00,PENDING,member-04,Awaiting flight manifest updates,true
+assignment-30,leg-50,PILOT,2024/07/12 17:00,PENDING,member-04,Awaiting flight manifest updates,true
 assignment-31,leg-51,CABIN_ATTENDANT,2024/05/25 13:30,CONFIRMED,member-04,Standby for reassignment,true
 assignment-32,leg-52,LEAD_ATTENDANT,2024/06/18 14:30,PENDING,member-04,Pending final approval,true
 ##Member5 airline00 aircraft01:

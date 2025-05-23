@@ -95,36 +95,6 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		}
 	}
 
-	//		if (assignment.getRole() == Role.PILOT && !original.getRole().equals(assignment.getRole()))
-	//			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
-	//
-	//		if (assignment.getRole() == Role.CO_PILOT && !(original.getLeg().getId() == assignment.getLeg().getId()))
-	//			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
-	//
-	//		if (assignment.getLeg() != null)
-	//			super.state(!this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
-	//
-	//		if (assignment.getLeg() != null)
-	//			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
-	//
-	//		super.state(assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
-	//
-	//		if (assignment.getMember() != null && assignment.getLeg() != null) {
-	//			Integer memberId = assignment.getMember().getId();
-	//			Integer legId = assignment.getLeg().getId();
-	//			Integer assignmentId = (Integer) assignment.getId() != null ? assignment.getId() : 0;
-	//
-	//			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
-	//
-	//			super.state(!duplicateAssignment, "leg", "member.assignment.form.error.duplicate-assignment");
-	//
-	//			if (!duplicateAssignment && assignment.getStatus() != AssignmentStatus.CANCELLED) {
-	//				boolean hasConflict = this.repository.hasScheduleConflict(memberId, assignment.getLeg().getDeparture(), assignment.getLeg().getArrival(), assignmentId, AssignmentStatus.CANCELLED);
-	//
-	//				super.state(!hasConflict, "leg", "member.assignment.form.error.schedule-conflict");
-	//			}
-	//		}
-
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
@@ -147,7 +117,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
 		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
 
-		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);
