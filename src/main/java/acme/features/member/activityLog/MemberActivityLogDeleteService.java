@@ -74,7 +74,7 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<Member, A
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "isDraftMode");
+		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");
 		dataset.put("masterId", activityLog.getAssignment().getId());
 		dataset.put("isDraftMode", activityLog.getAssignment().getDraftMode());
 
