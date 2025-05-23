@@ -87,6 +87,13 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 					hasChanged = true;
 				super.state(!hasChanged, "status", "member.assignment.form.error.readonly");
 
+				if (assignment.getLeg() != null) {
+					if (!assignment.getLeg().equals(original.getLeg()))
+						hasChanged = true;
+				} else if (original.getLeg() != null)
+					hasChanged = true;
+				super.state(!hasChanged, "leg", "member.assignment.form.error.readonly");
+
 				String remarks = assignment.getRemarks() == null || assignment.getRemarks().isEmpty() ? null : assignment.getRemarks();
 				String originalRemarks = original.getRemarks() == null || original.getRemarks().isEmpty() ? null : original.getRemarks();
 				hasChanged = !Objects.equals(remarks, originalRemarks);
@@ -115,7 +122,8 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
-		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+		SelectChoices legChoices = assignment.getDraftMode() ? SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg())
+			: SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 

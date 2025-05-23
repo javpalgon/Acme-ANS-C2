@@ -94,7 +94,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 			boolean duplicateAssignment = this.repository.existsByMemberAndLeg(memberId, legId, assignmentId, AssignmentStatus.CANCELLED);
 
-			super.state(!duplicateAssignment, "member", "member.assignment.form.error.duplicate-assignment");
+			super.state(!duplicateAssignment, "leg", "member.assignment.form.error.duplicate-assignment");
 
 			if (!duplicateAssignment && assignment.getStatus() != AssignmentStatus.CANCELLED) {
 				boolean hasConflict = this.repository.hasScheduleConflict(memberId, assignment.getLeg().getDeparture(), assignment.getLeg().getArrival(), assignmentId, AssignmentStatus.CANCELLED);

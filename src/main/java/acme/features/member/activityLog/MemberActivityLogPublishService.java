@@ -61,9 +61,6 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 		// Get original activity log from database
 		ActivityLog original = this.repository.findActivityLogById(activityLog.getId());
 
-		Assignment assignment = activityLog.getAssignment();
-		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
 		// Check if fields have changed
 		if (original != null) {
 			boolean hasChanged = false;
@@ -98,17 +95,6 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 
 			super.state(!hasChanged, "*", "member.activitylog.form.error.readonly");
 		}
-
-		//		    // Original validations
-		//		    super.state(activityLog.getSeverityLevel() != null && activityLog.getSeverityLevel() >= 0 && activityLog.getSeverityLevel() <= 10, 
-		//		               "severityLevel", "member.activity-log.form.error.severity-range", 0, 10);
-		//
-		//		    super.state(assignment != null, "*", "member.activitylog.form.error.null-assignment");
-		//		    super.state(assignment != null && !assignment.getIsDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
-		//		    super.state(assignment.getLeg() != null && assignment.getLeg().getArrival().before(MomentHelper.getCurrentMoment()), 
-		//		               "*", "member.activitylog.form.error.leg-not-completed");
-		//		    super.state(assignment != null && assignment.getMember().getId() == currentMemberId, 
-		//		               "*", "member.activitylog.form.error.assignment-not-owned");
 
 	}
 
