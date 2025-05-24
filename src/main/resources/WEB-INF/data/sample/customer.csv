@@ -1,3 +1,8 @@
 key,key:userAccount,identifier,phoneNumber,physicalAddress,city,country,earnedPoints
 customer-01,user-account-customer-01,CCG456321,15551234567,14º Main Street,Maine,United States,100
 customer-02,user-account-customer-02,SL597126,34252345167,Calle Urquiza 7,Seville,Spain,2000
+customer-03,user-account-customer-03,RLR128346,98765432123,Calle de la Luna 5,Madrid,Spain,5000
+customer-04,user-account-customer-04,AAP123456,123456,A,C,C,0
+customer-05,user-account-customer-05,MFL123456,+341234567890123,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam,SuperLargaCiudadConNombreDeCincuentaCaracteresMaxi,SuperLargoPaisConNombreDeCincuentaCaracteresMaximo,500000
+customer-06,user-account-customer-06,LM954628,+123456,Calle 1,Z,País,1
+customer-07,user-account-customer-07,CGR999999,654321,1,1,1,

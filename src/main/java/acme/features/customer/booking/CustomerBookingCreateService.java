@@ -22,30 +22,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	protected CustomerBookingRepository repository;
 
 
-	/*
-	 * @Override
-	 * public void authorise() {
-	 * boolean status;
-	 * int flightId;
-	 * Flight flight;
-	 * 
-	 * if (super.getRequest().getMethod().equals("GET"))
-	 * // Mostrar el formulario: permitido siempre
-	 * status = true;
-	 * else {
-	 * // Envío del formulario (POST)
-	 * flightId = super.getRequest().getData("flight", int.class);
-	 * flight = this.repository.findFlightById(flightId);
-	 * 
-	 * if (flightId == 0)
-	 * status = true; // Si no se ha seleccionado aún un vuelo
-	 * else
-	 * status = flight != null && !flight.getIsDraftMode() && MomentHelper.isAfterOrEqual(flight.getDeparture(), MomentHelper.getCurrentMoment());
-	 * }
-	 * 
-	 * super.getResponse().setAuthorised(status);
-	 * }
-	 */
 	@Override
 	public void authorise() {
 		boolean status;
