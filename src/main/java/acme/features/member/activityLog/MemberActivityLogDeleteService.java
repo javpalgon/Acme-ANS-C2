@@ -53,7 +53,9 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<Member, A
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
+		assert activityLog != null;
+
+		super.bindObject(activityLog, "incidentType", "description", "severityLevel");
 	}
 
 	@Override
@@ -67,11 +69,15 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<Member, A
 
 	@Override
 	public void perform(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		this.repository.delete(activityLog);
 	}
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");

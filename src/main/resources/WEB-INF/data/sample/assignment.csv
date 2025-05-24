@@ -1,6 +1,7 @@
 key,key:leg,role,lastUpdate,status,key:member,remarks,draft_mode
 ##Member1 ariline00 aircraft01 y aircraft14:
 #Completed:
+#IBV9173 LA QUE SE SOLAPA CON OTRA LEG
 assignment-01,leg-35,CABIN_ATTENDANT,2024/12/31 00:00,CONFIRMED,member-01,,false
 assignment-02,leg-36,LEAD_ATTENDANT,2019/01/10 00:00,CONFIRMED,member-01,Waiting for confirmation,false
 assignment-03,leg-37,CABIN_ATTENDANT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather,false
@@ -17,9 +18,9 @@ assignment-08,leg-35,PILOT,2024/02/22 18:10,CANCELLED,member-02,Cancelled due to
 assignment-09,leg-36,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment,false
 assignment-10,leg-37,LEAD_ATTENDANT,2022/04/05 16:45,CONFIRMED,member-02,Awaiting flight manifest updates,false
 assignment-11,leg-38,PILOT,2023/07/07 09:10,CONFIRMED,member-02,,false
-#Planned:
-assignment-12,leg-62,PILOT,2021/12/14 11:35,CANCELLED,member-02,Cancelled due to maintenance issues,true
-assignment-13,leg-63,CO_PILOT,2020/01/25 22:00,PENDING,member-02,Pending crew scheduling confirmation,true
+#Planned: IBV9174 PILOT; IBV9175 CO_PIOT
+assignment-12,leg-62,PILOT,2021/12/14 11:35,CONFIRMED,member-02,Confirmed by captain,false
+assignment-13,leg-63,CO_PILOT,2020/01/25 22:00,CONFIRMED,member-02,Crew scheduling confirmation,false
 assignment-14,leg-53,LEAD_ATTENDANT,2024/03/17 07:25,CONFIRMED,member-02,Confirmed with minor changes to schedule,true
 
 ##Member3 airline01 aircraft02 y aircraft15:

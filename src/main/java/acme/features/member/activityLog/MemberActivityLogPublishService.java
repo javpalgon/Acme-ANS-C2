@@ -51,6 +51,8 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		super.bindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 	}
 
@@ -101,12 +103,15 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 	@Override
 	public void perform(final ActivityLog activityLog) {
 		assert activityLog != null;
+
 		activityLog.setDraftMode(false);
 		this.repository.save(activityLog);
 	}
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");

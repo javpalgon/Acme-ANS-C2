@@ -47,6 +47,8 @@ public class MemberActivityLogShowService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");

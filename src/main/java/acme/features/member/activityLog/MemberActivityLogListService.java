@@ -51,9 +51,9 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset;
+		assert activityLog != null;
 
-		int masterId = super.getRequest().getData("masterId", int.class);
+		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 
@@ -64,6 +64,9 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void unbind(final Collection<ActivityLog> entities) {
+
+		assert entities != null;
+
 		int masterId = super.getRequest().getData("masterId", int.class);
 		Assignment assignment = this.repository.findAssignmentById(masterId);
 		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED) && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
