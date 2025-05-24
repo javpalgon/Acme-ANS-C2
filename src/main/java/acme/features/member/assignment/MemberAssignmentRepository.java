@@ -24,12 +24,6 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT a FROM Assignment a WHERE a.id = :id")
 	Assignment findOneById(int id);
 
-	//	@Query("SELECT m FROM Member m")
-	//	List<Member> findAllMembers();
-
-	//	@Query("SELECT a FROM Assignment a")
-	//	List<Assignment> findAllAssignments();
-
 	@Query("SELECT l FROM Leg l")
 	List<Leg> findAllLegs();
 

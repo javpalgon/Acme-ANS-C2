@@ -66,7 +66,7 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 	public void unbind(final Collection<ActivityLog> entities) {
 		int masterId = super.getRequest().getData("masterId", int.class);
 		Assignment assignment = this.repository.findAssignmentById(masterId);
-		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED) && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().addGlobal("showCreate", showCreate);
 		super.getResponse().addGlobal("masterId", masterId);

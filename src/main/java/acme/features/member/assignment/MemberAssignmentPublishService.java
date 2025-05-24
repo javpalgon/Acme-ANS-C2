@@ -68,6 +68,9 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
+		if (assignment.getLeg() != null)
+			super.state(!this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
+
 		if ((Integer) assignment.getId() != null) {
 			Assignment original = this.repository.findOneById(assignment.getId());
 

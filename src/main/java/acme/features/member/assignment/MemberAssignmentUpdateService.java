@@ -121,6 +121,9 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 			}
 		}
 
+		if (assignment.getLeg() != null)
+			super.state(!this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
+
 	}
 
 	@Override
