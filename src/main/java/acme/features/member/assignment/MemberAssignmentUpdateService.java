@@ -26,27 +26,30 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		boolean status = false;
+		boolean status = true;
 
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Member member = this.repository.findMemberById(memberId);
+
+		status = member != null && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
 		if (super.getRequest().hasData("id", int.class)) {
 			int assignmentId = super.getRequest().getData("id", int.class);
 			Assignment assignment = this.repository.findOneById(assignmentId);
 
 			if (assignment != null && member != null && assignment.getMember() != null && assignment.getLeg() != null && assignment.getLeg().getAircraft() != null && assignment.getLeg().getAircraft().getAirline() != null && member.getAirline() != null)
-				status = member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE && memberId == assignment.getMember().getId() && assignment.getLeg().getAircraft().getAirline().getId() == member.getAirline().getId();
+				status = memberId == assignment.getMember().getId() && assignment.getLeg().getAircraft().getAirline().getId() == member.getAirline().getId();
 
-			if (status && super.getRequest().hasData("leg", int.class)) {
-				Integer legId = super.getRequest().getData("leg", int.class);
-				if (legId != null && legId != 0) {
-					List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
-					boolean legIsValid = availableLegs.stream().anyMatch(l -> l.getId() == legId);
-					if (!legIsValid)
-						status = false;
+			if (super.getRequest().getMethod().equals("POST"))
+				if (status && super.getRequest().hasData("leg", int.class)) {
+					Integer legId = super.getRequest().getData("leg", int.class);
+					if (legId != null && legId != 0) {
+						List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
+						boolean legIsValid = availableLegs.stream().anyMatch(l -> l.getId() == legId);
+						if (!legIsValid)
+							status = false;
+					}
 				}
-			}
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -83,10 +86,11 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		Assignment original = this.repository.findOneById(assignment.getId());
 
 		if (assignment.getRole() == Role.PILOT && !original.getRole().equals(assignment.getRole()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
+			if (assignment.getLeg() != null)
+				super.state(!this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
 
-		if (assignment.getRole() == Role.CO_PILOT && !(original.getLeg().getId() == assignment.getLeg().getId()))
-			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
+		if (assignment.getRole() == Role.CO_PILOT && original.getLeg() != null && assignment.getLeg() != null && !(original.getLeg().getId() != assignment.getLeg().getId()))
+			super.state(!this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
 
 		if (assignment.getLeg() != null)
 			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
@@ -120,10 +124,6 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 				super.state(!hasConflict, "leg", "member.assignment.form.error.schedule-conflict");
 			}
 		}
-
-		if (assignment.getLeg() != null)
-			super.state(!this.repository.hasLegOccurred(assignment.getLeg().getId(), MomentHelper.getCurrentMoment()), "leg", "member.assignment.form.error.leg-occurred");
-
 	}
 
 	@Override

@@ -5,8 +5,7 @@ key,key:leg,role,lastUpdate,status,key:member,remarks,draft_mode
 assignment-01,leg-35,CABIN_ATTENDANT,2024/12/31 00:00,CONFIRMED,member-01,,false
 assignment-02,leg-36,LEAD_ATTENDANT,2019/01/10 00:00,CONFIRMED,member-01,Waiting for confirmation,false
 assignment-03,leg-37,CABIN_ATTENDANT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather,false
-#Past leg draftMode true assignment that only can be deleted
-assignment-04,leg-38,CABIN_ATTENDANT,2023/01/10 00:00,PENDING,member-01,On standby,true
+assignment-04,leg-38,CABIN_ATTENDANT,2023/01/10 00:00,CONFIRMED,member-01,On standby,false
 #Planned:  leg-61 IBV9173 coincide with the leg 53 SCHEDULE CONFLICT
 assignment-05,leg-53,PILOT,2023/05/15 12:30,PENDING,member-01,Flight reassigned to alternate crew,true
 assignment-06,leg-54,CABIN_ATTENDANT,2021/08/21 14:00,PENDING,member-01,Pending final approval,true

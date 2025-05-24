@@ -94,8 +94,11 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
-		SelectChoices legChoices = assignment.getDraftMode() ? SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg())
-			: SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+		SelectChoices legChoices;
+		if (assignment.getDraftMode())
+			legChoices = SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg());
+		else
+			legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 
