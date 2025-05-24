@@ -22,9 +22,51 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	protected CustomerBookingRepository repository;
 
 
+	/*
+	 * @Override
+	 * public void authorise() {
+	 * boolean status;
+	 * int flightId;
+	 * Flight flight;
+	 * 
+	 * if (super.getRequest().getMethod().equals("GET"))
+	 * // Mostrar el formulario: permitido siempre
+	 * status = true;
+	 * else {
+	 * // Envío del formulario (POST)
+	 * flightId = super.getRequest().getData("flight", int.class);
+	 * flight = this.repository.findFlightById(flightId);
+	 * 
+	 * if (flightId == 0)
+	 * status = true; // Si no se ha seleccionado aún un vuelo
+	 * else
+	 * status = flight != null && !flight.getIsDraftMode() && MomentHelper.isAfterOrEqual(flight.getDeparture(), MomentHelper.getCurrentMoment());
+	 * }
+	 * 
+	 * super.getResponse().setAuthorised(status);
+	 * }
+	 */
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int flightId;
+		Flight flight;
+
+		if (super.getRequest().getMethod().equals("GET"))
+			// Mostrar formulario → siempre permitido
+			status = true;
+		else {
+			// Envío del formulario (POST) → validación necesaria
+			flightId = super.getRequest().getData("flight", int.class);
+			flight = this.repository.findFlightById(flightId);
+
+			if (flightId == 0)
+				status = true;
+			else
+				status = flight != null && !flight.getIsDraftMode() && MomentHelper.isAfterOrEqual(flight.getDeparture(), MomentHelper.getCurrentMoment());
+		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -68,7 +110,9 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
 
 		Collection<Flight> flights = this.repository.findPublishedFlights();
-		SelectChoices flightChoices = SelectChoices.from(flights, "tag", object.getFlight());
+		Collection<Flight> availableFlights = flights.stream().filter(f -> MomentHelper.isAfterOrEqual(f.getDeparture(), MomentHelper.getCurrentMoment())).toList();
+
+		SelectChoices flightChoices = SelectChoices.from(availableFlights, "tag", object.getFlight());
 		dataset.put("flights", flightChoices);
 
 		SelectChoices choices = SelectChoices.from(Travelclass.class, object.getTravelClass());
