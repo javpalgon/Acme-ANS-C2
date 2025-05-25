@@ -7,6 +7,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.assignment.Assignment;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
@@ -42,6 +43,7 @@ public class MemberAssignmentListPlannedService extends AbstractGuiService<Membe
 		dataset = super.unbindObject(object, "role", "lastUpdate", "status", "remarks");
 		dataset.put("leg.flightNumber", object.getLeg().getFlightNumber());
 
+		super.getResponse().addGlobal("memberAvailable", object.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE));
 		super.getResponse().addData(dataset);
 	}
 }

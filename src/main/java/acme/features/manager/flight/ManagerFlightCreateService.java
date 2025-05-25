@@ -39,25 +39,21 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight object) {
-		assert object != null;
 		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
 	public void perform(final Flight object) {
-		assert object != null;
 		this.repository.save(object);
 	}
 
 	@Override
 	public void validate(final Flight flight) {
 		;
-		// validacion si es duplicado en entity
 	}
 
 	@Override
 	public void unbind(final Flight object) {
-		assert object != null;
 		Dataset dataset;
 		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode", "manager");
 		super.getResponse().addData(dataset);

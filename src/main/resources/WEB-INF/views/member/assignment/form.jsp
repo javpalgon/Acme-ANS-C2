@@ -4,16 +4,16 @@
 
 <acme:form>
     <!-- Common fields for all views -->
-	<acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}" readonly="${assignment.isDraftMode}"/>
+	<acme:input-select code="member.assignment.form.label.role" path="role" choices="${role}" readonly="${assignment.draftMode}"/>
 	
 	<jstl:if test="${_command != 'create'}">
-	    <acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}" readonly="${assignment.isDraftMode}"
+	    <acme:input-select code="member.assignment.form.label.status" path="status" choices="${status}" readonly="${assignment.draftMode}"
 	    />
 	</jstl:if>
 	
-	<acme:input-textbox code="member.assignment.form.label.remarks" path="remarks" readonly="${assignment.isDraftMode}"/>
+	<acme:input-textbox code="member.assignment.form.label.remarks" path="remarks" readonly="${assignment.draftMode}"/>
 	
-	<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.isDraftMode}"/>
+	<acme:input-select code="member.assignment.form.label.leg" path="leg" choices="${legs}" readonly="${assignment.draftMode}"/>
 	
 	<acme:input-textbox code="member.assignment.form.label.member" path="member" readonly="true"/>
 
@@ -57,13 +57,13 @@
     
     <!-- Conditional buttons -->
 	<jstl:choose>
-	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete') && isDraftMode}">
+	    <jstl:when test="${acme:anyOf(_command, 'show|update|publish|delete') && draftMode}">
 	        <acme:submit code="member.assignment.form.button.update" action="/member/assignment/update"/>
 	        <acme:submit code="member.assignment.form.button.publish" action="/member/assignment/publish"/>
 	        <acme:submit code="member.assignment.form.button.delete" action="/member/assignment/delete"/>
 	    </jstl:when>
 	    
-	    <jstl:when test="${_command == 'show' && not isDraftMode && showLogs}">
+	    <jstl:when test="${_command == 'show' && not draftMode && showLogs}">
  			<acme:button code="member.assignment.form.button.activity-log" action="/member/activity-log/list?masterId=${id}"/>			
  		</jstl:when>
 	    

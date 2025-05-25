@@ -9,6 +9,7 @@ import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.entities.assignment.Assignment;
 import acme.entities.flightcrewmember.AvailabilityStatus;
+import acme.entities.leg.LegStatus;
 import acme.features.member.assignment.MemberAssignmentRepository;
 
 @Validator
@@ -25,14 +26,23 @@ public class AssignmentValidator extends AbstractValidator<ValidAssignment, Assi
 
 	@Override
 	public boolean isValid(final Assignment assignment, final ConstraintValidatorContext context) {
-		if (assignment == null || assignment.getMember() == null)
+		if (assignment == null)
 			return false;
 
-		boolean memberAvailable;
-		memberAvailable = assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
-		super.state(context, memberAvailable, "member", "{acme.validation.Assignment.memberNotAvailable.message}");
+		boolean memberAvailable = false;
+		if (assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() != null)
+			memberAvailable = assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+		else
+			super.state(context, false, "member", "Member or availability status is null");
 
-		boolean result = !super.hasErrors(context);
-		return result;
+		boolean legLanded = false;
+		if (assignment.getLeg() != null && assignment.getLeg().getStatus() != null)
+			legLanded = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+		else
+			super.state(context, false, "leg", "Leg is null");
+
+		super.state(context, memberAvailable || legLanded, "member", "{acme.validation.Assignment.memberNotAvailable.message}");
+
+		return !super.hasErrors(context);
 	}
 }

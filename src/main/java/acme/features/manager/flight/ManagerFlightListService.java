@@ -4,8 +4,6 @@ package acme.features.manager.flight;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -17,10 +15,8 @@ import acme.realms.Manager;
 @GuiService
 public class ManagerFlightListService extends AbstractGuiService<Manager, Flight> {
 
-	private static final Logger		logger	= LoggerFactory.getLogger(ManagerFlightListService.class);
-
 	@Autowired
-	private ManagerFlightRepository	repository;
+	private ManagerFlightRepository repository;
 
 
 	@Override
@@ -40,7 +36,6 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void unbind(final Flight object) {
-		assert object != null;
 
 		Dataset dataset;
 		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");

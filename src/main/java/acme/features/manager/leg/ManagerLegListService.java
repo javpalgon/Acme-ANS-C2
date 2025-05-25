@@ -3,8 +3,6 @@ package acme.features.manager.leg;
 
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,32 +15,33 @@ import acme.realms.Manager;
 @Repository
 public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
-	private static final Logger		logger	= LoggerFactory.getLogger(ManagerLegListService.class);
-
 	@Autowired
-	private ManagerLegRepository	repository;
+	private ManagerLegRepository repository;
 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		int masterId;
+		Flight flight;
+		masterId = super.getRequest().getData("masterId", int.class);
+		flight = this.repository.findFlightById(masterId);
+		boolean isOwner = super.getRequest().getPrincipal().getAccountId() == flight.getManager().getUserAccount().getId();
+		super.getResponse().setAuthorised(isOwner);
+
 	}
 
 	@Override
 	public void load() {
 		Collection<Leg> legs;
 		int masterId;
-
 		masterId = super.getRequest().getData("masterId", int.class);
 		legs = this.repository.findLegsByFlightId(masterId);
-
 		super.getBuffer().addData(legs);
 	}
 
 	@Override
 	public void unbind(final Leg leg) {
 		Dataset dataset;
-
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival", "status");
 		dataset.put("arrivalAirport", leg.getArrivalAirport().getIATACode());
 		dataset.put("departureAirport", leg.getDepartureAirport().getIATACode());
@@ -53,16 +52,16 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 	}
 
 	@Override
-	public void unbind(final Collection<Leg> duties) {
+	public void unbind(final Collection<Leg> legs) {
 		int masterId;
 		Flight flight;
-		final boolean showCreate;
+		final boolean showCreateButton;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
-		showCreate = flight.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(flight.getManager());
+		showCreateButton = flight.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(flight.getManager());
 
 		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("showCreate", showCreate);
+		super.getResponse().addGlobal("showCreate", showCreateButton);
 	}
 }
