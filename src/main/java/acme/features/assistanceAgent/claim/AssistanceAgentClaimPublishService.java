@@ -23,11 +23,15 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 	public void authorise() {
 		boolean status;
 		Claim claim;
+		int agentId;
+		AssistanceAgent agent;
+		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		agent = this.repository.findAgentById(agentId);
 		int id;
 		id = super.getRequest().getData("id", int.class);
 		claim = this.repository.findClaimById(id);
-		status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId();
-		super.getResponse().setAuthorised(status);
+		status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId() && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		super.getResponse().setAuthorised(status && claim.getIsDraftMode());
 	}
 
 	@Override
@@ -36,27 +40,35 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		int id;
 		id = super.getRequest().getData("id", int.class);
 		claim = this.repository.findClaimById(id);
-		claim.setRegisteredAt(MomentHelper.getCurrentMoment());
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
 		assert claim != null;
-		super.bindObject(claim, "passengerEmail", "description", "type", "accepted", "leg");
+		super.bindObject(claim, "passengerEmail", "description", "type", "leg");
+		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		AssistanceAgent agent = this.repository.findAgentById(assistanceAgentId);
+		Integer legId = super.getRequest().getData("leg", int.class);
+		if (legId != null)
+			claim.setLeg(this.repository.findLegById(legId));
+		claim.setAssistanceAgent(agent);
 	}
 
 	@Override
 	public void validate(final Claim claim) {
 		assert claim != null;
 		Claim original = this.repository.findClaimById(claim.getId());
-		super.state(claim.getIsDraftMode(), "*", "assistance-agent.claim.form.error.notDraftMode", "isDraftMode");
 		if (claim.getLeg() != null) {
+			super.state(claim.getLeg().getFlightNumber() != null && claim.getLeg().getFlightNumber().equals(original.getLeg().getFlightNumber()), "leg", "assistance-agent.claim.form.error.save-changes");
 			super.state(!claim.getLeg().getIsDraftMode(), "leg", "assistance-agent.claim.form.error.leg-isDraftMode");
 			super.state(claim.getLeg().getDeparture().before(claim.getRegisteredAt()), "registeredAt", "assistance-agent.claim.form.error.registeredAt");
 			if (claim.getLeg().getFlight() != null)
 				super.state(!claim.getLeg().getFlight().getIsDraftMode(), "leg", "assistance-agent.claim.form.error.leg.flight-isDraftMode");
 		}
+		super.state(claim.getDescription() != null && claim.getDescription().equals(original.getDescription()), "description", "assistance-agent.claim.form.error.save-changes");
+		super.state(claim.getPassengerEmail() != null && claim.getPassengerEmail().equals(original.getPassengerEmail()), "passengerEmail", "assistance-agent.claim.form.error.save-changes");
+		super.state(claim.getType() != null && claim.getType().equals(original.getType()), "type", "assistance-agent.claim.form.error.save-changes");
 	}
 
 	@Override
@@ -68,9 +80,12 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void unbind(final Claim claim) {
-		Dataset dataset = super.unbindObject(claim, "passengerEmail", "description", "type", "accepted", "isDraftMode", "leg");
+		assert claim != null;
+		AssistanceAgent agent;
+		agent = (AssistanceAgent) super.getRequest().getPrincipal().getActiveRealm();
+		Dataset dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type", "accepted", "isDraftMode", "leg");
 		dataset.put("type", SelectChoices.from(ClaimType.class, claim.getType()));
-		dataset.put("leg", SelectChoices.from(this.repository.findAllPublishedLegs(), "flightNumber", claim.getLeg()));
+		dataset.put("leg", SelectChoices.from(this.repository.findPastPublishedLegsByAirline(MomentHelper.getCurrentMoment(), agent.getAirline()), "flightNumber", claim.getLeg()));
 		super.getResponse().addData(dataset);
 	}
 }

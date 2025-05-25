@@ -21,8 +21,9 @@ yo <%--
 	<acme:list-column code="agents.trackingLog.application.list.label.step" path="step" width="20%"/>
 	<acme:list-column code="agents.trackingLog.application.list.label.resolutionPercentage" path="resolutionPercentage" width="20%"/>
 	<acme:list-column code="agents.trackingLog.application.list.label.status" path="status" width="10%"/>
-		<acme:list-column code="agents.trackingLog.application.list.label.resolution" path="resolution" width="10%"/>
 	<acme:list-payload path="payload"/>
 </acme:list>
+<jstl:if test="${!dontShowCreate}">
 	<acme:button code="assistance-agent.tracking-log.list.button.create" action="/assistance-agent/tracking-log/create?masterId=${masterId}"/>
+</jstl:if>
 

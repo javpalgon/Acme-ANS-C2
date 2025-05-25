@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claim.Claim;
 import acme.entities.trackinglog.TrackingLog;
+import acme.entities.trackinglog.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -46,24 +46,24 @@ public class AgentTrackingLogListService extends AbstractGuiService<AssistanceAg
 	public void unbind(final TrackingLog trackingLog) {
 		int masterId;
 		Dataset dataset;
-
 		masterId = super.getRequest().getData("masterId", int.class);
+		List<TrackingLog> finishedTrackingLogs = new ArrayList<>();
+		finishedTrackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().filter(t -> !t.getStatus().equals(TrackingLogStatus.PENDING)).toList();
+		boolean dontShowCreate;
+		dontShowCreate = finishedTrackingLogs.stream().count() == 2;
+
 		dataset = super.unbindObject(trackingLog, "lastUpdate", "step", "resolutionPercentage", "status", "resolution");
 		super.getResponse().addData(dataset);
+
 		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("dontShowCreate", dontShowCreate);
 	}
 
 	@Override
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		int masterId;
-		Claim claim;
-		final boolean showCreate;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		claim = this.repository.findClaimById(masterId);
-		showCreate = !claim.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent());
-
 		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("showCreate", showCreate);
 	}
 }

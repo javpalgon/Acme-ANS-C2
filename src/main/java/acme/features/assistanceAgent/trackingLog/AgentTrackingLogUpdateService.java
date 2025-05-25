@@ -28,11 +28,14 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 		boolean status;
 		int trackingLogId;
 		Claim claim;
+		TrackingLog trackingLog;
 
 		trackingLogId = super.getRequest().getData("id", int.class);
+
+		trackingLog = this.repository.findTrackingLogById(trackingLogId);
 		claim = this.repository.findClaimByTrackingLogId(trackingLogId);
 
-		status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+		status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -71,7 +74,7 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 
 		super.state(claim != null, "*", "assistance-agent.tracking-log.form.error.claim-is-null");
 
-		super.state(claim != null && !trackingLog.getLastUpdate().before(claim.getRegisteredAt()), "*", "assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt");
+		super.state(claim != null && !MomentHelper.isBefore(trackingLog.getLastUpdate(), claim.getRegisteredAt()), "*", "assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt");
 
 		super.state(claim != null && !claim.getIsDraftMode(), "*", "assistance-agent.tracking-log.form.error.claim-is-not-published");
 
@@ -82,7 +85,7 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 				"assistance-agent.tracking-log.form.error.resolutionPercentage-and-status");
 
 			if (!trackingLogs.isEmpty()) {
-				TrackingLog optionalMax = trackingLogs.stream().filter(x -> x.getId() != trackingLog.getId() && !x.getIsDraftMode()).max(Comparator.comparing(TrackingLog::getResolutionPercentage)).orElse(null);
+				TrackingLog optionalMax = trackingLogs.stream().filter(x -> x.getId() != trackingLog.getId()).max(Comparator.comparing(TrackingLog::getResolutionPercentage)).orElse(null);
 				maximum = optionalMax == null ? 0.0 : optionalMax.getResolutionPercentage();
 			}
 			super.state(maximum == 0. || maximum == 100. || trackingLog.getResolutionPercentage() > maximum, "resolutionPercentage", "assistance-agent.tracking-log.form.error.resolutionPercentage");
@@ -97,7 +100,7 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 		super.state(countFinishedTrackingLogs <= 1, "status", "assistance-agent.tracking-log.form.error.you-cant-create");
 
 		if (trackingLogs != null) {
-			List<TrackingLog> finishedPublishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getIsDraftMode() && !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList();
+			List<TrackingLog> finishedPublishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList();
 			super.state(finishedPublishedTrackingLogs.isEmpty() || finishedPublishedTrackingLogs.stream().allMatch(x -> x.getStatus().equals(trackingLog.getStatus())), "status", "assistance-agent.tracking-log.form.error.status-must-be-the-same");
 		}
 	}

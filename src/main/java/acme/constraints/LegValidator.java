@@ -3,17 +3,27 @@ package acme.constraints;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.ConstraintValidatorContext;
 
-import acme.client.components.validation.AbstractValidator;
-import acme.client.helpers.MomentHelper;
-import acme.client.helpers.StringHelper;
-import acme.entities.leg.Leg;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.client.components.validation.AbstractValidator;
+import acme.client.components.validation.Validator;
+import acme.client.helpers.StringHelper;
+import acme.entities.airline.Airline;
+import acme.entities.flight.Flight;
+import acme.entities.leg.Leg;
+import acme.entities.leg.LegRepository;
+import acme.realms.Manager;
+
+@Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
+
+	@Autowired
+	private LegRepository repository;
+
 
 	@Override
 	protected void initialise(final ValidLeg annotation) {
@@ -37,6 +47,12 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				result = false;
 			}
 
+		Flight flight = leg.getFlight();
+		Manager manager = flight.getManager();
+		Airline airline = manager.getAirline();
+		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true))
+			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
+
 		// 2. Validar que la hora de llegada es posterior a la de salida
 		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture())) {
 			super.state(context, false, "arrival", "acme.validation.leg.invalid-schedule.message");
@@ -47,20 +63,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		if (leg.getArrivalAirport() != null && leg.getDepartureAirport() != null && leg.getArrivalAirport().getId() == leg.getDepartureAirport().getId()) {
 			super.state(context, false, "arrivalAirport", "acme.validation.leg.same-airports.message");
 			result = false;
-		}
-
-		if (leg.getDeparture() != null) {
-			// Get the current moment
-			Date currentMoment = MomentHelper.getCurrentMoment();
-
-			// Calculate the time 24 hours later
-			Date twentyFourHoursLater = new Date(currentMoment.getTime() + 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-
-			// Check if the departure is after the current moment and not within the next 24 hours
-			if (leg.getDeparture().after(currentMoment) && leg.getDeparture().before(twentyFourHoursLater)) {
-				super.state(context, false, "departure", "acme.validation.leg.invalid-departure-date.message");
-				result = false;
-			}
 		}
 
 		return result;

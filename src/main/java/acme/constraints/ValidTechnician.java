@@ -12,7 +12,6 @@ import javax.validation.Payload;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = TechnicianValidator.class)
-
 public @interface ValidTechnician {
 
 	// Standard validation properties -----------------------------------------
