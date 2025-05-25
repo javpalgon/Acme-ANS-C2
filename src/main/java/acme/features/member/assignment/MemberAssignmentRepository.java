@@ -54,10 +54,10 @@ public interface MemberAssignmentRepository extends AbstractRepository {
 	@Query("SELECT l FROM Leg l " + "WHERE l.departure > :currentDate " + "AND l.isDraftMode = false " + "AND l.flight.isDraftMode = false " + "AND l.aircraft.airline.id = :airlineId")
 	List<Leg> findAllPFL(@Param("currentDate") Date currentDate, @Param("airlineId") int airlineId);
 
-	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus")
+	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus AND a.draftMode = false")
 	boolean legHasPilot(@Param("legId") int legId, @Param("role") Role role, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
-	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus")
+	@Query("SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END FROM Assignment a WHERE " + "a.leg.id = :legId AND a.role = :role AND a.status != :cancelledStatus AND a.draftMode = false")
 	boolean legHasCoPilot(@Param("legId") int legId, @Param("role") Role role, @Param("cancelledStatus") AssignmentStatus cancelledStatus);
 
 	@Query("SELECT COUNT(a) > 0 FROM Assignment a WHERE " + "a.member.id = :memberId AND a.leg.id = :legId AND " + "a.id <> :excludeAssignmentId AND a.status != :cancelledStatus")

@@ -32,7 +32,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 		status = member != null && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
-		if (status && super.getRequest().getMethod().equals("POST"))
+		if (status && super.getRequest().getMethod().equals("POST")) {
 			if (super.getRequest().hasData("leg", int.class)) {
 				int legId = super.getRequest().getData("leg", int.class);
 				if ((Integer) legId != null && legId != 0) {
@@ -43,8 +43,44 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 				}
 			}
 
+			if (status && !this.validateStatus())
+				status = false;
+
+			if (status && !this.validateRole())
+				status = false;
+
+		}
+
 		super.getResponse().setAuthorised(status);
 
+	}
+
+	private boolean validateStatus() {
+		if (super.getRequest().hasData("status", String.class)) {
+			String statusStr = super.getRequest().getData("status", String.class);
+			if (statusStr != null && !statusStr.trim().isEmpty() && !statusStr.equals("0"))
+				try {
+					AssignmentStatus.valueOf(statusStr);
+					return true;
+				} catch (IllegalArgumentException ex) {
+					return false;
+				}
+		}
+		return true;
+	}
+
+	private boolean validateRole() {
+		if (super.getRequest().hasData("role", String.class)) {
+			String roleStr = super.getRequest().getData("role", String.class);
+			if (roleStr != null && !roleStr.trim().isEmpty() && !roleStr.equals("0"))
+				try {
+					Role.valueOf(roleStr);
+					return true;
+				} catch (IllegalArgumentException ex) {
+					return false;
+				}
+		}
+		return true;
 	}
 
 	@Override

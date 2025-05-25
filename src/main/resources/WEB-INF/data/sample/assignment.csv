@@ -17,7 +17,7 @@ assignment-08,leg-35,PILOT,2024/02/22 18:10,CANCELLED,member-02,Cancelled due to
 assignment-09,leg-36,LEAD_ATTENDANT,2023/11/30 05:50,CONFIRMED,member-02,Standby for reassignment,false
 assignment-10,leg-37,LEAD_ATTENDANT,2022/04/05 16:45,CONFIRMED,member-02,Awaiting flight manifest updates,false
 assignment-11,leg-38,PILOT,2023/07/07 09:10,CONFIRMED,member-02,,false
-#Planned: IBV9174 PILOT; IBV9175 CO_PIOT
+#Planned: IBV9174 PILOT y CO_PILOT
 assignment-12,leg-62,PILOT,2021/12/14 11:35,CONFIRMED,member-02,Confirmed by captain,false
 assignment-13,leg-63,CO_PILOT,2020/01/25 22:00,CONFIRMED,member-02,Crew scheduling confirmation,false
 assignment-14,leg-53,LEAD_ATTENDANT,2024/03/17 07:25,CONFIRMED,member-02,Confirmed with minor changes to schedule,true

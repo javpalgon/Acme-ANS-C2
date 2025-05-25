@@ -32,15 +32,14 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		Member member = this.repository.findMemberById(memberId);
 
 		status = member != null && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
-
 		if (super.getRequest().hasData("id", int.class)) {
 			int assignmentId = super.getRequest().getData("id", int.class);
 			Assignment assignment = this.repository.findOneById(assignmentId);
 
 			if (assignment != null && member != null && assignment.getMember() != null && assignment.getLeg() != null && assignment.getLeg().getAircraft() != null && assignment.getLeg().getAircraft().getAirline() != null && member.getAirline() != null)
-				status = memberId == assignment.getMember().getId() && assignment.getLeg().getAircraft().getAirline().getId() == member.getAirline().getId();
+				status = memberId == assignment.getMember().getId() && assignment.getLeg().getAircraft().getAirline().getId() == member.getAirline().getId() && assignment.getDraftMode();
 
-			if (super.getRequest().getMethod().equals("POST"))
+			if (super.getRequest().getMethod().equals("POST")) {
 				if (status && super.getRequest().hasData("leg", int.class)) {
 					Integer legId = super.getRequest().getData("leg", int.class);
 					if (legId != null && legId != 0) {
@@ -50,9 +49,43 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 							status = false;
 					}
 				}
+				if (status && !this.validateStatus())
+					status = false;
+
+				if (status && !this.validateRole())
+					status = false;
+			}
 		}
 
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean validateStatus() {
+		if (super.getRequest().hasData("status", String.class)) {
+			String statusStr = super.getRequest().getData("status", String.class);
+			if (statusStr != null && !statusStr.trim().isEmpty() && !statusStr.equals("0"))
+				try {
+					AssignmentStatus.valueOf(statusStr);
+					return true;
+				} catch (IllegalArgumentException ex) {
+					return false;
+				}
+		}
+		return true;
+	}
+
+	private boolean validateRole() {
+		if (super.getRequest().hasData("role", String.class)) {
+			String roleStr = super.getRequest().getData("role", String.class);
+			if (roleStr != null && !roleStr.trim().isEmpty() && !roleStr.equals("0"))
+				try {
+					Role.valueOf(roleStr);
+					return true;
+				} catch (IllegalArgumentException ex) {
+					return false;
+				}
+		}
+		return true;
 	}
 
 	@Override
@@ -89,11 +122,11 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 			if (assignment.getLeg() != null)
 				super.state(!this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
 
-		if (assignment.getRole() == Role.CO_PILOT && original.getLeg() != null && assignment.getLeg() != null && !(original.getLeg().getId() != assignment.getLeg().getId()))
+		if (assignment.getRole() == Role.CO_PILOT && !original.getRole().equals(assignment.getRole()) && original.getLeg() != null && assignment.getLeg() != null && !(original.getLeg().getId() != assignment.getLeg().getId()))
 			super.state(!this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
 
-		if (assignment.getLeg() != null)
-			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
+		//		if (assignment.getLeg() != null)
+		//			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
 
 		if (assignment.getLeg() != null)
 			super.state(!assignment.getLeg().getIsDraftMode(), "leg", "member.assignment.form.error.member-not-published");
