@@ -20,6 +20,7 @@ manager.leg.form.button.update = Update
 manager.leg.form.button.delete = Delete
 manager.leg.form.button.publish = Publish
 manager.leg.create.button = Create
+manager.leg.list.label.duration = Duration
 
 
 acme.validation.leg.invalid-scheduled-arrival.message=The scheduled arrival time must be after the scheduled departure time.
@@ -31,5 +32,6 @@ acme.validation.leg.invalid-airports.message=The previous leg's arrival airport 
 acme.validation.leg.invalid-dates.message=The time difference between two legs cannot surpass 48 hours.
 acme.validation.leg.invalid-airport.message=The arrival airport can't the same that the departure airport.
 manager.leg.error.invalid-aircraft=The aircraft is not active. Please select a different aircraft.
+acme.validation.leg.invalid-aircraft.message = The flight legs overlap. Please check scheduled arrival and departure.
 manager.leg.error.status-required=The leg status is required
 manager.leg.error.invalid-status=The leg status is invalid. The status must be one of the following: "CANCELED", "DELAYED", "LANDED", "ON_TIME"

@@ -44,7 +44,7 @@ public class Flight extends AbstractEntity {
 	private Boolean				isDraftMode;
 
 	@Mandatory
-	@ValidMoney(min = 0, max = 10000000)
+	@ValidMoney(min = 0, max = 1000000)
 	@Automapped
 	private Money				cost;
 
