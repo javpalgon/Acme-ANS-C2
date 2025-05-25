@@ -58,7 +58,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		super.state(!legs.isEmpty(), "*", "manager.project.publish.error.noLegs");
 
 		boolean allLegsPublished = legs.stream().allMatch(Leg::getIsDraftMode);
-		super.state(!allLegsPublished, "*", "manager.flight.publish.error.notAllPublished");
+		super.state(allLegsPublished, "*", "manager.flight.publish.error.notAllPublished");
 	}
 
 	@Override
