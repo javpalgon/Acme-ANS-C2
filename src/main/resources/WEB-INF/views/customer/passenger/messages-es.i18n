@@ -28,3 +28,4 @@ customer.passenger.form.button.create = Crear Pasajero
 customer.passenger.form.button.publish= Publicar Pasajero
 
 customer.passenger.list.form.create = Crear Pasajero
+customer.passenger.form.error.passport-mismatch=Ya existe un pasajero con este pasaporte, pero sus datos no coinciden. Revisa el nombre, email o fecha de nacimiento.
