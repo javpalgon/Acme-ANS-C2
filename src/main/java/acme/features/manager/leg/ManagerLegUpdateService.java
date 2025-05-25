@@ -104,14 +104,24 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-
 		super.state(leg.getStatus() != null, "status", "manager.leg.error.status-required");
-
 		boolean validDeparture = true;
-		Date scheduledDeparture = leg.getDeparture();
-		Date currentMoment = MomentHelper.getCurrentMoment();
-		validDeparture = MomentHelper.isAfter(scheduledDeparture, currentMoment);
-		super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		Date departure = leg.getDeparture();
+		Date arrival = leg.getArrival();
+		Collection<Leg> allLegs = this.repository.findAllLegs();
+		boolean isDuplicated = allLegs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()));
+		if (isDuplicated)
+			super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
+		if (arrival != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(arrival, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
+		if (departure != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(departure, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
 
 	}
 

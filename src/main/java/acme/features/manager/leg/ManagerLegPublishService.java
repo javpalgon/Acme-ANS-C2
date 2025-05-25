@@ -115,15 +115,31 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		this.validateOverlappingLegs(leg);
 		this.validateAirportSequence(leg);
 		this.validateAircraftAvailabilityIfDraft(leg);
+		this.validateFlightNumber(leg);
+	}
+
+	private void validateFlightNumber(final Leg leg) {
+		Collection<Leg> allLegs = this.repository.findAllLegs();
+		boolean isDuplicated = allLegs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()));
+		if (isDuplicated)
+			super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
 	}
 
 	private void validateScheduledDeparture(final Leg leg) {
-		Date scheduledDeparture = leg.getDeparture();
-		Date currentMoment = MomentHelper.getCurrentMoment();
-
-		boolean validScheduledDeparture = MomentHelper.isAfter(scheduledDeparture, currentMoment);
-
-		super.state(validScheduledDeparture, "scheduledDeparture", "acme.validation.leg.invalid-departure.message");
+		super.state(leg.getStatus() != null, "status", "manager.leg.error.status-required");
+		boolean validDeparture = true;
+		Date departure = leg.getDeparture();
+		Date arrival = leg.getArrival();
+		if (arrival != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(arrival, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
+		if (departure != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(departure, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
 	}
 
 	private void validateOverlappingLegs(final Leg leg) {
