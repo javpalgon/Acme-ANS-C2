@@ -1,4 +1,10 @@
 key,key:flight,key:customer,locatorCode,purchaseMoment,travelClass,lastNibble,isDraftMode
-booking-01,flight-01,customer-01,ABC123,2020/01/29 00:00,ECONOMY,2454,true
-booking-02,flight-02,customer-02,LOL893,2020/08/19 00:00,BUSINESS,1454,true
-booking-03,flight-01,customer-01,ABC244,2020/01/29 00:00,ECONOMY,2454,true
+booking-01,flight-26,customer-01,ABC123,2020/01/29 00:00,ECONOMY,2454,true
+booking-02,flight-27,customer-02,LOL893,2020/08/19 00:00,BUSINESS,1454,true
+booking-03,flight-28,customer-01,ABC244,2020/01/29 00:00,ECONOMY,2454,true
+booking-04,flight-26,customer-03,ABCDEF,2020/01/29 00:00,ECONOMY,0000,true
+booking-05,flight-29,customer-01,ABCDEFGH,2020/08/19 00:00,BUSINESS,9999,true
+booking-06,flight-23,customer-02,X1Y2Z3,2020/01/29 00:00,ECONOMY,1234,true
+booking-07,flight-31,customer-03,Z9X8C7,2020/08/19 00:00,ECONOMY,,true
+booking-08,flight-28,customer-04,LOLA22,2020/01/29 00:00,BUSINESS,5555,true
+booking-09,flight-27,customer-05,MNBVCX,2020/08/19 00:00,ECONOMY,8000,true

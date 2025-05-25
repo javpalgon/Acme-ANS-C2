@@ -26,3 +26,4 @@ customer.passenger.form.button.save = Save
 customer.passenger.form.button.create = Create Passenger
 
 customer.passenger.form.button.publish=Publish Passenger
+customer.passenger.form.error.passport-mismatch=A passenger with this passport already exists, but their data does not match. Please check the name, email, or birth date.

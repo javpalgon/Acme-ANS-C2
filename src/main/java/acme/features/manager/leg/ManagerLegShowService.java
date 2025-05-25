@@ -16,7 +16,6 @@ import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegStatus;
-import acme.features.manager.flight.ManagerFlightRepository;
 import acme.realms.Manager;
 
 @GuiService
@@ -25,23 +24,18 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerLegRepository	repository;
-
-	@Autowired
-	private ManagerFlightRepository	repositoryFlight;
+	private ManagerLegRepository repository;
 
 	// AbstractGuiService interface ------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		boolean status;
+
 		int legId = super.getRequest().getData("id", int.class);
 		Flight flight = this.repository.getFlightByLegId(legId);
-
-		status = flight != null && (!flight.getIsDraftMode() || super.getRequest().getPrincipal().hasRealm(flight.getManager()) && super.getRequest().getPrincipal().getAccountId() == flight.getManager().getUserAccount().getId());
-
-		super.getResponse().setAuthorised(status);
+		boolean isOwner = super.getRequest().getPrincipal().getAccountId() == flight.getManager().getUserAccount().getId();
+		super.getResponse().setAuthorised(isOwner);
 	}
 
 	@Override
@@ -68,40 +62,28 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		airports = this.repository.findAllAirports();
 
 		SelectChoices selectedAircraft = new SelectChoices();
-		selectedAircraft.add("0", "----", leg.getAircraft() == null);
 
-		Collection<Aircraft> aircraftsActives = this.repository.findAllAircrafts();
+		Collection<Aircraft> aircraftsActives = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
 
-		List<Aircraft> finalAircrafts = aircraftsActives.stream().filter(a -> a.getAirline().getIATACode().equals(leg.getFlight().getManager().getAirline().getIATACode()) && a.getAircraftStatus() == AircraftStatus.ACTIVE).toList();
-
-		for (Aircraft aircraft : finalAircrafts) {
-			String key = String.valueOf(aircraft.getId());
-			String label = aircraft.getRegitrationNumber();
-
-			if (aircraft.getAirline() != null)
-				label += " (" + aircraft.getAirline().getIATACode() + ")";
-
-			boolean isSelected = aircraft.equals(leg.getAircraft());
-			selectedAircraft.add(key, label, isSelected);
-		}
+		List<Aircraft> finalAircrafts = aircraftsActives.stream().filter(a -> a.getAirline().getIATACode().equals(leg.getFlight().getManager().getAirline().getIATACode())).toList();
 
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", leg.getFlight().getId());
 		dataset.put("isDraftMode", leg.getIsDraftMode());
 		dataset.put("status", choices);
+		selectedAircraft = SelectChoices.from(finalAircrafts, "regitrationNumber", leg.getAircraft());
 		dataset.put("aircrafts", selectedAircraft);
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
+		dataset.put("duration", leg.getDuration());
 		dataset.put("isDraftFlight", leg.getFlight().getIsDraftMode());
 		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
 
-		if (!airports.isEmpty()) {
-			departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
-			arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
-			dataset.put("departureAirports", departureAirportChoices);
-			dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());
-			dataset.put("arrivalAirports", arrivalAirportChoices);
-			dataset.put("arrivalAirport", arrivalAirportChoices.getSelected().getKey());
-		}
+		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
+		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
+		dataset.put("departureAirports", departureAirportChoices);
+		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());
+		dataset.put("arrivalAirports", arrivalAirportChoices);
+		dataset.put("arrivalAirport", arrivalAirportChoices.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

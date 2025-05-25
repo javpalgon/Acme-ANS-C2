@@ -3,8 +3,6 @@ package acme.features.customer.booking;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.datatypes.Money;
@@ -21,10 +19,8 @@ import acme.realms.Customer;
 @GuiService
 public class CustomerBookingUpdateService extends AbstractGuiService<Customer, Booking> {
 
-	private static final Logger			logger	= LoggerFactory.getLogger(CustomerBookingShowService.class);
-
 	@Autowired
-	protected CustomerBookingRepository	repository;
+	protected CustomerBookingRepository repository;
 
 
 	@Override
