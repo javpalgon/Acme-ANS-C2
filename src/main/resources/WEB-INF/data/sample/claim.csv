@@ -1,8 +1,31 @@
 key,registeredAt,passengerEmail,description,type,isDraftMode,key:assistanceAgent,key:leg
-claim-01,2024/11/12 10:00,elquejica@hotmail.com,a,FLIGHT_ISSUES,true,agent-01,leg-01
-claim-02,2021/03/01 9:00,canelita@gmail.com,Lorem ipsum dolor sit amet consectetur adipiscing elit Nullam vehicula nisi eget ultricies interdum felis lorem tincidunt justo ut tincidunt erat metus nec libero Integer vitae orci id mauris aliquet efficitur Proin sit amet sem et nulla pharetra vestibul,LUGGAGE_ISSUES,false,agent-02,leg-02
-claim-03,2023/05/03 22:31,d@gmail.com,Mi maleta se la quedó Ryanair,LUGGAGE_ISSUES,false,agent-01,leg-01
-claim-04,2024/05/03 20:31,boludo@gmail.com,Intentaron explotar el avión !!!,SECURITY_INCIDENT,false,agent-02,leg-02
-claim-05,2024/12/31 23:59,padel@us.es,Quiero robar el dinero de ACME-ANS!!!,OTHER_ISSUES,true,agent-01,leg-02
-claim-06,2024/05/03 20:31,lpallares@rtva.es.com,miedo??$&(!!!,SECURITY_INCIDENT,true,agent-02,leg-01
-claim-07,2024/07/10 00:00,juanabascal@a.a,blabla¡¡¡!!!,LUGGAGE_ISSUES,false,agent-01,leg-03
+claim-01,2024/11/12 10:00,ElHombreQueSeQueja@hotmail.com,a,FLIGHT_ISSUES,true,agent-01,leg-35
+claim-02,2024/05/12 9:00,canelita@gmail.com,Lorem ipsum dolor sit amet consectetur adipiscing elit Nullam vehicula nisi eget ultricies interdum felis lorem tincidunt justo ut tincidunt erat metus nec libero Integer vitae orci id mauris aliquet efficitur Proin sit amet sem et nulla pharetra vestibul,LUGGAGE_ISSUES,false,agent-01,leg-35
+claim-03,2024/04/28 22:31,david12323232@gmail.com,Mi maleta se la quedó Ryanair,LUGGAGE_ISSUES,false,agent-01,leg-35
+claim-04,2024/05/03 20:31,dario@gmail.com,Intentaron explotar el avión !!!,SECURITY_INCIDENT,false,agent-01,leg-36
+claim-05,2024/12/31 23:59,padel@us.es,Quiero robar el dinero de ACME-ANS!!!,OTHER_ISSUES,true,agent-01,leg-36
+claim-06,2024/05/03 20:31,lpallares@rtva.es.com,miedo??$&(!!!,SECURITY_INCIDENT,true,agent-01,leg-36
+claim-07,2024/07/10 00:00,juanabascal@a.a,blabla¡¡¡!!!,LUGGAGE_ISSUES,false,agent-01,leg-37
+claim-08,2024/05/12 10:10,esteesuncorreomuylargoyespecial@ejemplodominioextremadamentegrande.com,No quiero más problemas.,OTHER_ISSUES,true,agent-01,leg-37
+claim-09,2024/08/01 12:00,1@g.es,Probandö caráctères espeçiales :D,LUGGAGE_ISSUES,false,agent-01,leg-37
+claim-10,2024/12/31 00:00,guillelinares@wgrp.com,_,SECURITY_INCIDENT,true,agent-01,leg-38
+claim-11,2024/12/29 17:30,santiabregu@com,No recibo ayuda!,LUGGAGE_ISSUES,false,agent-01,leg-38
+claim-12,2024/05/15 08:35,laura.perez@example.com,No encuentro mi equipaje,LUGGAGE_ISSUES,true,agent-01,leg-38
+claim-13,2024/05/01 21:47,alejandro21@correo.com,Vuelo cancelado sin explicación,FLIGHT_ISSUES,false,agent-01,leg-35
+claim-14,2024/04/27 03:08,invitado@hotmail.com,Me cobraron de más,OTHER_ISSUES,true,agent-01,leg-36
+claim-15,2024/04/27 12:20,jessica_14@yahoo.es,Hubo turbulencias fuertes,SECURITY_INCIDENT,false,agent-01,leg-37
+claim-16,2024/07/09 23:59,tomas@hotmail.com,Se retrasó mi vuelo,FLIGHT_ISSUES,true,agent-02,leg-39
+claim-17,2024/08/20 18:42,cliente@correo.com,No me dejaron subir al avión,LUGGAGE_ISSUES,true,agent-02,leg-40
+claim-18,2024/06/03 14:10,maria88@gmail.com,Mi maleta fue dañada,LUGGAGE_ISSUES,false,agent-02,leg-41
+claim-19,2024/12/14 16:19,ruben@us.es,Equipaje perdido otra vez,OTHER_ISSUES,true,agent-02,leg-42
+claim-20,2024/10/25 10:41,nacho99@correo.org,El personal fue grosero,LUGGAGE_ISSUES,false,agent-02,leg-43
+claim-21,2024/11/09 04:00,ana_lopez@hotmail.com,Se equivocaron de destino,LUGGAGE_ISSUES,true,agent-02,leg-44
+claim-22,2024/11/25 19:18,fran@correo.es,No tenía cinturón mi asiento,SECURITY_INCIDENT,true,agent-02,leg-39
+claim-23,2024/12/01 11:24,lucia@aol.com,Perdí mi conexión,FLIGHT_ISSUES,false,agent-02,leg-40
+claim-24,2024/06/20 07:35,dani@gov.es,Retraso de 6 horas,FLIGHT_ISSUES,true,agent-02,leg-41
+claim-25,2024/09/15 06:55,miguel77@yahoo.com,No había asistencia,OTHER_ISSUES,false,agent-02,leg-42
+claim-26,2024/12/22 17:14,sara.l@live.com,Cancelación sin aviso,FLIGHT_ISSUES,true,agent-02,leg-43
+claim-27,2024/07/30 08:26,isabel23@gmail.com,Maleta robada,LUGGAGE_ISSUES,false,agent-02,leg-44
+claim-28,2024/05/12 09:12,julian@outlook.com,Intentaron abrir mi maleta,SECURITY_INCIDENT,false,agent-02,leg-39
+claim-29,2024/04/28 07:05,angel.rodriguez@correo.com,Pérdida de documentos,LUGGAGE_ISSUES,true,agent-02,leg-40
+claim-30,2024/06/11 16:11,irene_torres@gmail.com,Error con mi reserva,OTHER_ISSUES,false,agent-02,leg-41

@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.StringHelper;
+import acme.entities.airline.Airline;
+import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegRepository;
+import acme.realms.Manager;
 
 @Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
@@ -43,6 +46,12 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number.message");
 				result = false;
 			}
+
+		Flight flight = leg.getFlight();
+		Manager manager = flight.getManager();
+		Airline airline = manager.getAirline();
+		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true))
+			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
 
 		// 2. Validar que la hora de llegada es posterior a la de salida
 		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture())) {

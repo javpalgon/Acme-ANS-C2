@@ -1,14 +1,16 @@
-key,model,regitrationNumber,capacity,cargoWeight,aircraftStatus,details,enable,key:airline
-aircraft-01,Airbus A320,EC-MXY,180,20000,ACTIVE,Standard passenger aircraft,true,airline-00
-aircraft-02,Boeing 737,EC-ABC,160,22000,ACTIVE,Used for domestic flights,true,airline-01
-aircraft-03,Airbus A330,EC-DEF,250,35000,UNDER_MAINTENANCE,Long-haul aircraft undergoing inspection,false,airline-02
-aircraft-04,Embraer E190,EC-GHI,100,15000,ACTIVE,Regional jet for short-haul routes,true,airline-03
-aircraft-05,Generic-SHY,REG-SHY,150,20000,ACTIVE,Auto-generated for IATA SHY,true,airline-04
-aircraft-06,Generic-NEM,REG-NEM,150,20000,ACTIVE,Auto-generated for IATA NEM,true,airline-05
-aircraft-07,Generic-NPH,REG-NPH,150,20000,ACTIVE,Auto-generated for IATA NPH,true,airline-06
-aircraft-08,Generic-INV,REG-INV,150,20000,ACTIVE,Auto-generated for IATA INV,true,airline-07
-aircraft-09,Generic-FTA,REG-FTA,150,20000,ACTIVE,Auto-generated for IATA FTA,true,airline-08
-aircraft-10,Generic-ABC,REG-ABC,150,20000,ACTIVE,Auto-generated for IATA ABC,true,airline-09
-aircraft-11,Generic-XYZ,REG-XYZ,150,20000,ACTIVE,Auto-generated for IATA XYZ,true,airline-10
-aircraft-12,Generic-ZXY,REG-ZXY,150,20000,ACTIVE,Auto-generated for IATA ZXY,true,airline-11
-aircraft-13,Generic-AAA,REG-AAA,150,20000,ACTIVE,Auto-generated for IATA AAA,true,airline-12
+key,model,regitrationNumber,capacity,cargoWeight,aircraftStatus,details,key:airline,enable
+aircraft-01,Airbus A320,EC-MXY,180,20000,ACTIVE,Standard passenger aircraft,airline-00,true
+aircraft-14,Airbus A310,EC-GYK,180,20000,ACTIVE,Standard passenger aircraft,airline-00,true
+aircraft-15,Boeing A120,EC-GPK,180,20000,ACTIVE,Standard passenger aircraft,airline-01,true
+aircraft-02,Boeing 737,EC-ABC,160,22000,ACTIVE,Used for domestic flights,airline-01,true
+aircraft-03,Airbus A330,EC-DEF,250,35000,UNDER_MAINTENANCE,Long-haul aircraft undergoing inspection,airline-02,true
+aircraft-04,Embraer E190,EC-GHI,100,15000,ACTIVE,Regional jet for short-haul routes,airline-03,true
+aircraft-05,Generic-SHY,REG-SHY,150,20000,ACTIVE,Auto-generated for IATA SHY,airline-04,true
+aircraft-06,Generic-NEM,REG-NEM,150,20000,ACTIVE,Auto-generated for IATA NEM,airline-05,true
+aircraft-07,Generic-NPH,REG-NPH,150,20000,ACTIVE,Auto-generated for IATA NPH,airline-06,true
+aircraft-08,Generic-INV,REG-INV,150,20000,ACTIVE,Auto-generated for IATA INV,airline-07,true
+aircraft-09,Generic-FTA,REG-FTA,150,20000,ACTIVE,Auto-generated for IATA FTA,airline-08,true
+aircraft-10,Generic-ABC,REG-ABC,150,20000,ACTIVE,Auto-generated for IATA ABC,airline-09,true
+aircraft-11,Generic-XYZ,REG-XYZ,150,20000,ACTIVE,Auto-generated for IATA XYZ,airline-10,true
+aircraft-12,Generic-ZXY,REG-ZXY,150,20000,ACTIVE,Auto-generated for IATA ZXY,airline-11,true
+aircraft-13,Generic-AAA,REG-AAA,150,20000,ACTIVE,Auto-generated for IATA AAA,airline-12,true

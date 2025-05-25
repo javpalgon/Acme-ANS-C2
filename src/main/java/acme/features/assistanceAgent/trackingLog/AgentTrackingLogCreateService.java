@@ -1,6 +1,7 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -28,10 +29,16 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 		boolean status;
 		int masterId;
 		Claim claim;
+		int countFinishedTrackingLogs = 0;
+		List<TrackingLog> trackingLogs = new ArrayList<>();
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		claim = this.repository.findClaimById(masterId);
+		trackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().toList();
+		countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList().size();
 		status = super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+		if (countFinishedTrackingLogs >= 2)
+			status = false;
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -63,13 +70,13 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 		List<TrackingLog> trackingLogs = (List<TrackingLog>) this.repository.findTrackingLogsByClaimId(claim.getId());
 		long countFinishedTrackingLogs = 0;
 		if (trackingLogs != null)
-			countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getIsDraftMode() && !tl.getStatus().equals(TrackingLogStatus.PENDING)).count();
+			countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).count();
 
 		super.state(trackingLog.getResolutionPercentage() != null || trackingLog.getStatus() != null || trackingLog.getLastUpdate() != null, "*", "assistance-agent.tracking-log.form.error.value-null");
 
 		super.state(claim != null, "*", "assistance-agent.tracking-log.form.error.claim-is-null");
 
-		super.state(claim != null && !trackingLog.getLastUpdate().before(claim.getRegisteredAt()), "*", "assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt");
+		super.state(claim != null && !MomentHelper.isBefore(trackingLog.getLastUpdate(), claim.getRegisteredAt()), "*", "assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt");
 
 		super.state(trackingLog.getIsDraftMode(), "*", "assistance-agent.tracking-log.form.error.tracking-log-is-published");
 
@@ -78,10 +85,10 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 				"assistance-agent.tracking-log.form.error.resolutionPercentage-and-status");
 
 			if (!trackingLogs.isEmpty()) {
-				TrackingLog optionalMax = trackingLogs.stream().filter(x -> !x.getIsDraftMode()).max(Comparator.comparing(TrackingLog::getResolutionPercentage)).orElse(null);
+				TrackingLog optionalMax = trackingLogs.stream().max(Comparator.comparing(TrackingLog::getResolutionPercentage)).orElse(null);
 				maximum = optionalMax == null ? 0.0 : optionalMax.getResolutionPercentage();
 			}
-			super.state(maximum == 0. || maximum == 100. || trackingLog.getResolutionPercentage() > maximum, "resolutionPercentage", "assistance-agent.tracking-log.form.error.resolutionPercentage");
+			super.state(maximum == 0. || trackingLog.getResolutionPercentage() == 100. || trackingLog.getResolutionPercentage() > maximum, "resolutionPercentage", "assistance-agent.tracking-log.form.error.resolutionPercentage");
 		}
 
 		if (trackingLog.getResolutionPercentage() != null && trackingLog.getStatus() != null && trackingLog.getResolutionPercentage().equals(100.00) && !trackingLog.getStatus().equals(TrackingLogStatus.PENDING))
@@ -90,13 +97,12 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 		if (trackingLog.getResolutionPercentage() != null && trackingLog.getStatus() != null && !trackingLog.getResolutionPercentage().equals(100.00) && trackingLog.getStatus().equals(TrackingLogStatus.PENDING))
 			super.state(trackingLog.getResolution() == null || trackingLog.getResolution().isBlank(), "resolution", "assistance-agent.tracking-log.form.error.resolution-must-be-null");
 
-		super.state(countFinishedTrackingLogs <= 1, "status", "assistance-agent.tracking-log.form.error.you-cant-create");
-
 		if (trackingLogs != null) {
-			List<TrackingLog> finishedPublishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getIsDraftMode() && !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList();
+			List<TrackingLog> finishedPublishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList();
 			super.state(finishedPublishedTrackingLogs.isEmpty() || finishedPublishedTrackingLogs.stream().allMatch(x -> x.getStatus().equals(trackingLog.getStatus())), "status", "assistance-agent.tracking-log.form.error.status-must-be-the-same");
+			super.state(finishedPublishedTrackingLogs.stream().filter(x -> x.getIsDraftMode()).count() < 1, "*", "assistance-agent.tracking-log.form.error.you-cant-create");
+			//super.state(finishedPublishedTrackingLogs.stream().filter(x -> !x.getIsDraftMode()).count() < 1, "*", "assistance-agent.tracking-log.form.error.you-cant-create");
 		}
-
 	}
 
 	@Override

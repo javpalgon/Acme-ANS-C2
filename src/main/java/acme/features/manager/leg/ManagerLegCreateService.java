@@ -159,7 +159,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 		dataset.put("isDraftFlight", leg.getFlight().getIsDraftMode());
 		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
-
 		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
 		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
 		dataset.put("departureAirports", departureAirportChoices);

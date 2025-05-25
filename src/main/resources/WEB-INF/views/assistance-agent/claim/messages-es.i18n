@@ -33,5 +33,7 @@ assistance-agent.claim.form.button.create = Crear
 
 assistance-agent.claim.form.error.registeredAt = La reclamación se está haciendo sobre un vuelo que no ha salido todavía
 assistance-agent.claim.form.error.leg-isDraftMode = Debes asignar un vuelo que se haya publicado
+assistance-agent.claim.form.error.leg.flight-isDraftMode = Debes seleccionar un tramo cuyo vuelo esté publicado
+assistance-agent.claim.form.error.save-changes = Debes guardar los cambios antes
 
 assistance-agent.claim.trackingLogs = Listar registros de seguimiento

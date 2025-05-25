@@ -3,20 +3,13 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.StringHelper;
-import acme.entities.assistanceagent.AssistanceAgentRepository;
 import acme.realms.AssistanceAgent;
 
 @Validator
 public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceAgent, AssistanceAgent> {
-
-	@Autowired
-	private AssistanceAgentRepository repository;
-
 
 	@Override
 	protected void initialise(final ValidAssistanceAgent annotation) {

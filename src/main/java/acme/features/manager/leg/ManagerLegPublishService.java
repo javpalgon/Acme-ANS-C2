@@ -243,7 +243,6 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		selectedAircraft = SelectChoices.from(finalAircrafts, "regitrationNumber", leg.getAircraft());
 		dataset.put("aircrafts", selectedAircraft);
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
-		dataset.put("duration", leg.getDuration());
 		dataset.put("isDraftFlight", leg.getFlight().getIsDraftMode());
 		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
 		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
@@ -252,6 +251,10 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("departureAirport", departureAirportChoices.getSelected().getKey());
 		dataset.put("arrivalAirports", arrivalAirportChoices);
 		dataset.put("arrivalAirport", arrivalAirportChoices.getSelected().getKey());
+		if (leg.getArrival() != null && leg.getDeparture() != null)
+			dataset.put("duration", leg.getDuration());
+		else
+			dataset.put("duration", null);
 
 		super.getResponse().addData(dataset);
 	}

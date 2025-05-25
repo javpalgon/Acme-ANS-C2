@@ -31,8 +31,10 @@ import lombok.Setter;
 @Setter
 @ValidLeg
 @Table(name = "leg", indexes = {
-	@Index(name = "idx_leg_departure", columnList = "departure"), @Index(name = "idx_leg_arrival", columnList = "arrival")
+	@Index(name = "idx_leg_flight", columnList = "flight_id"), @Index(name = "idx_leg_flight_draft", columnList = "flight_id, isDraftMode"), @Index(name = "idx_leg_departure_airport", columnList = "departure_airport_id"),
+	@Index(name = "idx_leg_arrival_airport", columnList = "arrival_airport_id")
 })
+
 public class Leg extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
