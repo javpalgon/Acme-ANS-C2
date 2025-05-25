@@ -6,6 +6,7 @@ customer.booking.list.label.travelClass = Clase de Viaje
 customer.booking.list.label.lastNibble = Ultimos Dígitos
 customer.booking.list.label.isDraftMode = Modo Borrador
 customer.booking.list.label.totalPrice= Precio total
+customer.booking.list.label.flight = Vuelo
 
 customer.booking.form.title = Reserva
 customer.booking.form.label.locatorCode = Codigo Localizador
@@ -20,7 +21,7 @@ customer.booking.form.label.nopassengersCreate= No hay pasajeros para esta reser
 
 customer.booking.form.error.not-draft=Solo se pueden actualizar reservas en modo borrador.
 customer.booking.form.button.save=Guardar cambios
-customer.booking.form.error.not-draft=Solo se puede editar una reserva en borrador.
+
 customer.booking.form.error.blank-locatorCode=El localizador no puede estar vacío.
 customer.booking.form.error.invalid-locatorCode=El localizador debe tener entre 6 y 8 caracteres en mayúsculas o números.
 customer.booking.form.error.duplicate-locatorCode=Este código de localizador ya está en uso.
@@ -40,3 +41,4 @@ acme.validation.length=El valor no tiene una longitud válida.
 
 customer.booking.show.button.passengers= Ver Pasajeros
 customer.passenger.list.button.create = Crear Pasajero
+acme.validation.length= El valor no tiene una longitud válida
