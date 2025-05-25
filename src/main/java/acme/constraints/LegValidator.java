@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.StringHelper;
+import acme.entities.airline.Airline;
+import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
 import acme.entities.leg.LegRepository;
+import acme.realms.Manager;
 
 @Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
@@ -44,6 +47,12 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 				result = false;
 			}
 
+		Flight flight = leg.getFlight();
+		Manager manager = flight.getManager();
+		Airline airline = manager.getAirline();
+		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true))
+			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
+
 		// 2. Validar que la hora de llegada es posterior a la de salida
 		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture())) {
 			super.state(context, false, "arrival", "acme.validation.leg.invalid-schedule.message");
@@ -56,39 +65,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			result = false;
 		}
 
-		//		if (leg.getDeparture() != null) {
-		//			// Get the current moment
-		//			Date currentMoment = MomentHelper.getCurrentMoment();
-		//
-		//			// Calculate the time 24 hours later
-		//			Date twentyFourHoursLater = new Date(currentMoment.getTime() + 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-		//
-		//			// Check if the departure is after the current moment and not within the next 24 hours
-		//			if (leg.getDeparture().after(currentMoment) && leg.getDeparture().before(twentyFourHoursLater)) {
-		//				super.state(context, false, "departure", "acme.validation.leg.invalid-departure-date.message");
-		//				result = false;
-		//			}
-		//		}
-		//
-		//		boolean validAirports = true;
-		//		boolean validDate = true;
-		//
-		//		Collection<Leg> sortedLegs = this.repository.findPublishedLegsOfFlight(leg.getFlight().getId());
-		//		Collection<Leg> legsPublished = sortedLegs.stream().filter(l -> !l.getIsDraftMode()).toList();
-		//
-		//		for (int i = 0; i < legsPublished.size() - 1; i++) {
-		//			Leg previousLeg = legsPublished.stream().toList().get(i);
-		//			Leg nextLeg = legsPublished.stream().toList().get(i + 1);
-		//
-		//			if (previousLeg.getArrivalAirport() != null && nextLeg.getDepartureAirport() != null) {
-		//				if (!previousLeg.getArrivalAirport().equals(nextLeg.getDepartureAirport()))
-		//					validAirports = false;
-		//				if (previousLeg.getArrival() != null && nextLeg.getDeparture() != null)
-		//					validDate = MomentHelper.computeDuration(previousLeg.getArrival(), nextLeg.getDeparture()).toHours() < 48;
-		//			}
-		//		}
-		//		super.state(context, validAirports, "airport", "acme.validation.leg.invalid-aircraft.message");
-		//		super.state(context, validDate, "scheduledDeparture", "acme.validation.leg.invalid-aircraft.message");
 
 		return result;
 	}

@@ -75,8 +75,8 @@ public class Claim extends AbstractEntity {
 		TrackingLogRepository repository;
 		repository = SpringHelper.getBean(TrackingLogRepository.class);
 		List<TrackingLog> trackingLogs = repository.findAllByClaimId(this.getId());
-		boolean predicate = trackingLogs.stream().allMatch(x -> x.getStatus().equals(TrackingLogStatus.PENDING));
-		if (!predicate) {
+		boolean predicate = trackingLogs.stream().anyMatch(x -> !x.getStatus().equals(TrackingLogStatus.PENDING) && !x.getIsDraftMode());
+		if (predicate) {
 			TrackingLog lastTrackingLog = trackingLogs.stream().filter(x -> x.getStatus() != TrackingLogStatus.PENDING).findAny().get();
 			status = ClaimStatus.valueOf(lastTrackingLog.getStatus().toString());
 		}
