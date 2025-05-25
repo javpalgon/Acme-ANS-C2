@@ -51,17 +51,14 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void bind(final Flight object) {
-		assert object != null;
 		super.bindObject(object, "tag", "cost", "description", "requiresSelfTransfer");
 	}
 
 	@Override
 	public void validate(final Flight object) {
-		assert object != null;
 
 		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
 
-		// 1. Validar que el vuelo tenga al menos una leg
 		super.state(!legs.isEmpty(), "*", "manager.flight.form.error.legsEmpty");
 
 		List<Leg> sortedLegs = new ArrayList<>(legs);
@@ -72,41 +69,34 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		for (int i = 0; i < sortedLegs.size(); i++) {
 			Leg current = sortedLegs.get(i);
 
-			// 2. Todas las legs deben estar publicadas
 			if (current.getIsDraftMode()) {
 				super.state(false, "*", "manager.flight.form.error.LegsNotPublished");
 				valid = false;
 			}
 
-			// 3. Horario válido en cada leg
 			if (!current.getArrival().after(current.getDeparture())) {
 				super.state(false, "*", "acme.validation.leg.invalid-schedule.message");
 				valid = false;
 			}
 
-			// 4. Aeropuertos distintos en cada leg
 			if (current.getArrivalAirport().getId() == current.getDepartureAirport().getId()) {
 				super.state(false, "*", "acme.validation.leg.same-airports.message");
 				valid = false;
 			}
 
-			// 5. Comparación entre legs consecutivas
 			if (i < sortedLegs.size() - 1) {
 				Leg next = sortedLegs.get(i + 1);
 
-				// No se deben solapar
 				if (!current.getArrival().before(next.getDeparture())) {
 					super.state(false, "*", "acme.validation.leg.invalid-timing-sequence.message");
 					valid = false;
 				}
 
-				// Aeropuertos deben conectar
 				if (!current.getArrivalAirport().equals(next.getDepartureAirport())) {
 					super.state(false, "*", "acme.validation.leg.inconsistent-airport-connection.message");
 					valid = false;
 				}
 
-				// No puede haber dos salidas iguales
 				if (current.getDeparture().equals(next.getDeparture())) {
 					super.state(false, "*", "acme.validation.leg.same-departure.message");
 					valid = false;
@@ -117,14 +107,12 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void perform(final Flight object) {
-		assert object != null;
 		object.setIsDraftMode(false);
 		this.repository.save(object);
 	}
 
 	@Override
 	public void unbind(final Flight object) {
-		assert object != null;
 		Dataset dataset;
 		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "description", "isDraftMode");
 		super.getResponse().addData(dataset);

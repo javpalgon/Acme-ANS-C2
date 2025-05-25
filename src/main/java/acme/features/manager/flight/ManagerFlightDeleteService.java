@@ -11,13 +11,17 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
+import acme.features.manager.leg.ManagerLegRepository;
 import acme.realms.Manager;
 
 @GuiService
 public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flight> {
 
 	@Autowired
-	protected ManagerFlightRepository repository;
+	protected ManagerFlightRepository	repository;
+
+	@Autowired
+	protected ManagerLegRepository		repo;
 
 
 	@Override
@@ -44,7 +48,6 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void bind(final Flight object) {
-		assert object != null;
 		int managerId;
 		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		final Manager manager = this.repository.findOneManagerById(managerId);
@@ -54,13 +57,13 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight object) {
-		assert object != null;
-		if (!object.getIsDraftMode())
-			super.state(object.getIsDraftMode(), "*", "manager.flight.form.error.notDraft", "isDraftMode");
+		Collection<Leg> legs = this.repo.findLegsByFlightId(object.getId());
+		boolean unpublishedLegs = legs.stream().allMatch(Leg::getIsDraftMode);
+		super.state(unpublishedLegs, "*", "manager.flight.legs.published");
+
 	}
 	@Override
 	public void perform(final Flight object) {
-		assert object != null;
 		Collection<Leg> allLegs = this.repository.findLegsByFlightId(object.getId());
 		for (Leg leg : allLegs)
 			this.repository.delete(leg);
@@ -69,7 +72,6 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void unbind(final Flight object) {
-		assert object != null;
 		Dataset dataset;
 		dataset = super.unbindObject(object, "tag", "cost", "description", "requiresSelfTransfer", "isDraftMode");
 		super.getResponse().addData(dataset);
