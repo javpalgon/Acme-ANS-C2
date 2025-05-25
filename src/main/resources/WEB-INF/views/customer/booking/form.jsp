@@ -9,7 +9,12 @@
 	<acme:input-select code="customer.booking.form.label.travelClass" path="travelClass" choices="${travelClasses}"/>
 	<acme:input-money code="customer.booking.form.label.totalPrice" path="totalPrice" readonly="true"/>
 	<acme:input-textbox code="customer.booking.form.label.lastNibble" path="lastNibble"/>
-	<jstl:if test="${_command == 'create'}">
+	
+	<jstl:if test="${_command == 'show'}">
+   		 <acme:input-textbox code="customer.booking.form.label.flight" path="flight" readonly="true"/>
+	</jstl:if>
+	
+	<jstl:if test="${_command == 'create' }">
     	<acme:input-select code="customer.booking.form.label.flight" path="flight"  choices="${flights}" />
 	</jstl:if>
 	
