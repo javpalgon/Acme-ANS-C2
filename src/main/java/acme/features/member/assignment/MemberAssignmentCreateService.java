@@ -36,7 +36,12 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 			if (super.getRequest().hasData("leg", int.class)) {
 				int legId = super.getRequest().getData("leg", int.class);
-				status = this.isValidLegId(legId, member);
+				if ((Integer) legId != null && legId != 0) {
+					List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
+					boolean legIsValid = availableLegs.stream().anyMatch(l -> l.getId() == legId);
+					if (!legIsValid)
+						status = false;
+				}
 			}
 
 			if (status && super.getRequest().hasData("status")) {
@@ -51,14 +56,6 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		}
 
 		super.getResponse().setAuthorised(status);
-	}
-
-	private boolean isValidLegId(final int legId, final Member member) {
-		if (legId == 0)
-			return true;
-
-		List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
-		return availableLegs.stream().anyMatch(l -> l.getId() == legId);
 	}
 
 	private boolean isValidAssignmentStatus(final String status) {

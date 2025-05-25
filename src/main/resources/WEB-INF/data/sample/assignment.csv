@@ -2,6 +2,7 @@ key,key:leg,role,lastUpdate,status,key:member,remarks,draft_mode
 ##Member1 ariline00 aircraft01 y aircraft14:
 #Completed:
 #IBV9173 LA QUE SE SOLAPA CON OTRA LEG
+#LA CANCELLED TIENE ID 245
 assignment-01,leg-35,CABIN_ATTENDANT,2024/12/31 00:00,CONFIRMED,member-01,,false
 assignment-02,leg-36,LEAD_ATTENDANT,2019/01/10 00:00,CONFIRMED,member-01,Waiting for confirmation,false
 assignment-03,leg-37,CABIN_ATTENDANT,2022/01/10 00:00,CANCELLED,member-01,Flight cancelled due to weather,false
