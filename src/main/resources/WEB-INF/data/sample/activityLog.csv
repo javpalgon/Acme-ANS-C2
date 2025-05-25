@@ -12,3 +12,5 @@ log-10,assignment-24,2024/10/10 08:30,CREW,"Backup crew performed adequately",2,
 log-11,assignment-25,2024/10/21 10:00,WEATHER,"Weather updates received late",5,true
 log-12,assignment-27,2024/10/12 10:00,AIRCRAFT,"Aircraft assignment delayed",5,true
 log-13,assignment-27,2024/10/30 09:00,CREW,"Crew illness handled professionally",6,true
+
+#ACT LOG CON MASTER ID 212 DEBE DAR ERROR PORQUE ES UN CANCELLED

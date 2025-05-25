@@ -33,54 +33,40 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		status = member != null && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
 		if (status && super.getRequest().getMethod().equals("POST")) {
+
 			if (super.getRequest().hasData("leg", int.class)) {
 				int legId = super.getRequest().getData("leg", int.class);
-				if ((Integer) legId != null && legId != 0) {
-					List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
-					boolean legIsValid = availableLegs.stream().anyMatch(l -> l.getId() == legId);
-					if (!legIsValid)
-						status = false;
-				}
+				status = this.isValidLegId(legId, member);
 			}
 
-			if (status && !this.validateStatus())
-				status = false;
+			if (status && super.getRequest().hasData("status")) {
+				String currentStatus = super.getRequest().getData("status", String.class);
+				status = this.isValidAssignmentStatus(currentStatus);
+			}
 
-			if (status && !this.validateRole())
-				status = false;
-
+			if (status && super.getRequest().hasData("role")) {
+				String currentRole = super.getRequest().getData("role", String.class);
+				status = this.isValidRole(currentRole);
+			}
 		}
 
 		super.getResponse().setAuthorised(status);
-
 	}
 
-	private boolean validateStatus() {
-		if (super.getRequest().hasData("status", String.class)) {
-			String statusStr = super.getRequest().getData("status", String.class);
-			if (statusStr != null && !statusStr.trim().isEmpty() && !statusStr.equals("0"))
-				try {
-					AssignmentStatus.valueOf(statusStr);
-					return true;
-				} catch (IllegalArgumentException ex) {
-					return false;
-				}
-		}
-		return true;
+	private boolean isValidLegId(final int legId, final Member member) {
+		if (legId == 0)
+			return true;
+
+		List<Leg> availableLegs = this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId());
+		return availableLegs.stream().anyMatch(l -> l.getId() == legId);
 	}
 
-	private boolean validateRole() {
-		if (super.getRequest().hasData("role", String.class)) {
-			String roleStr = super.getRequest().getData("role", String.class);
-			if (roleStr != null && !roleStr.trim().isEmpty() && !roleStr.equals("0"))
-				try {
-					Role.valueOf(roleStr);
-					return true;
-				} catch (IllegalArgumentException ex) {
-					return false;
-				}
-		}
-		return true;
+	private boolean isValidAssignmentStatus(final String status) {
+		return status.equals("0") || status.equals("CONFIRMED") || status.equals("PENDING") || status.equals("CANCELLED");
+	}
+
+	private boolean isValidRole(final String role) {
+		return role.equals("0") || role.equals("PILOT") || role.equals("CO_PILOT") || role.equals("LEAD_ATTENDANT") || role.equals("CABIN_ATTENDANT");
 	}
 
 	@Override
