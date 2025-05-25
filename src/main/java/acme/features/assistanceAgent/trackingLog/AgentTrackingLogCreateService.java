@@ -37,11 +37,17 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 		trackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().toList();
 		countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList().size();
 		status = super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
-		if (countFinishedTrackingLogs >= 2)
+		if (status && countFinishedTrackingLogs >= 2)
 			status = false;
+		else if (status && super.getRequest().hasData("status"))
+			status = this.checkStatusField();
 		super.getResponse().setAuthorised(status);
 	}
 
+	private boolean checkStatusField() {
+		String logStatus = super.getRequest().getData("status", String.class);
+		return logStatus.equals("0") || logStatus.equals("PENDING") || logStatus.equals("ACCEPTED") || logStatus.equals("REJECTED");
+	}
 	@Override
 	public void load() {
 		Claim claim;

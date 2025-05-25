@@ -49,13 +49,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	private boolean checkStatusField() {
 		String claimType = super.getRequest().getData("type", String.class);
-		if (claimType != null && !claimType.equals(0))
-			try {
-				ClaimType.valueOf(claimType);
-			} catch (IllegalArgumentException e) {
-				return false;
-			}
-		return true;
+		return claimType.equals("0") || claimType.equals("FLIGHT_ISSUES") || claimType.equals("LUGGAGE_ISSUES") || claimType.equals("SECURITY_INCIDENT") || claimType.equals("OTHER_ISSUES");
 	}
 
 	@Override

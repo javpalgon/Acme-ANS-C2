@@ -36,7 +36,14 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 		claim = this.repository.findClaimByTrackingLogId(trackingLogId);
 
 		status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
+		if (status && super.getRequest().hasData("status"))
+			status = this.checkStatusField();
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean checkStatusField() {
+		String logStatus = super.getRequest().getData("status", String.class);
+		return logStatus.equals("0") || logStatus.equals("PENDING") || logStatus.equals("ACCEPTED") || logStatus.equals("REJECTED");
 	}
 
 	@Override

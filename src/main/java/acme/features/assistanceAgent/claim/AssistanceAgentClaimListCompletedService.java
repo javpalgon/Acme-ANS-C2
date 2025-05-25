@@ -38,6 +38,7 @@ public class AssistanceAgentClaimListCompletedService extends AbstractGuiService
 
 	@Override
 	public void unbind(final Claim claim) {
+		assert claim != null;
 		Dataset dataset;
 		dataset = super.unbindObject(claim, "registeredAt", "passengerEmail", "description", "type");
 		dataset.put("accepted", claim.getAccepted());
