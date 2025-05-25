@@ -33,7 +33,8 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		assignment = this.repository.findOneById(masterId);
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment.getDraftMode() && assignment.getMember().getId() == memberId && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+		status = assignment != null && assignment.getDraftMode() && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE && assignment.getMember().getId() == memberId
+			&& super.getRequest().getPrincipal().hasRealmOfType(Member.class);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -72,32 +73,24 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 			Assignment original = this.repository.findOneById(assignment.getId());
 
 			if (original != null) {
-				boolean hasChanged = false;
-				if (assignment.getRole() != null) {
-					if (!assignment.getRole().equals(original.getRole()))
-						hasChanged = true;
-				} else if (original.getRole() != null)
-					hasChanged = true;
-				super.state(!hasChanged, "role", "member.assignment.form.error.readonly");
 
-				if (assignment.getStatus() != null) {
-					if (!assignment.getStatus().equals(original.getStatus()))
-						hasChanged = true;
-				} else if (original.getStatus() != null)
-					hasChanged = true;
-				super.state(!hasChanged, "status", "member.assignment.form.error.readonly");
+				boolean roleChanged = !Objects.equals(assignment.getRole(), original.getRole());
+				super.state(!roleChanged, "role", "member.assignment.form.error.readonly");
 
-				if (assignment.getLeg() != null) {
-					if (!assignment.getLeg().equals(original.getLeg()))
-						hasChanged = true;
-				} else if (original.getLeg() != null)
-					hasChanged = true;
-				super.state(!hasChanged, "leg", "member.assignment.form.error.readonly");
+				boolean statusChanged = !Objects.equals(assignment.getStatus(), original.getStatus());
+				super.state(!statusChanged, "status", "member.assignment.form.error.readonly");
 
-				String remarks = assignment.getRemarks() == null || assignment.getRemarks().isEmpty() ? null : assignment.getRemarks();
-				String originalRemarks = original.getRemarks() == null || original.getRemarks().isEmpty() ? null : original.getRemarks();
-				hasChanged = !Objects.equals(remarks, originalRemarks);
-				super.state(!hasChanged, "remarks", "member.assignment.form.error.readonly");
+				boolean legChanged = !Objects.equals(assignment.getLeg(), original.getLeg());
+				super.state(!legChanged, "leg", "member.assignment.form.error.readonly");
+
+				String remarks = assignment.getRemarks();
+				String originalRemarks = original.getRemarks();
+				if (remarks != null && remarks.trim().isEmpty())
+					remarks = null;
+				if (originalRemarks != null && originalRemarks.trim().isEmpty())
+					originalRemarks = null;
+				boolean remarksChanged = !Objects.equals(remarks, originalRemarks);
+				super.state(!remarksChanged, "remarks", "member.assignment.form.error.readonly");
 			}
 		}
 	}
@@ -123,10 +116,7 @@ public class MemberAssignmentPublishService extends AbstractGuiService<Member, A
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
 		SelectChoices legChoices;
-		if (assignment.getDraftMode())
-			legChoices = SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg());
-		else
-			legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+		legChoices = SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg());
 
 		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 

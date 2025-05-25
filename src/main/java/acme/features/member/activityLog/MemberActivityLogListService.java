@@ -12,6 +12,7 @@ import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
@@ -34,7 +35,8 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		status = assignment != null;
 
-		super.getResponse().setAuthorised(status && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
+		super.getResponse().setAuthorised(
+			status && !assignment.getDraftMode() && assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE) && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
 	}
 
 	@Override

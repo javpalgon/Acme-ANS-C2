@@ -9,6 +9,7 @@ import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -35,7 +36,8 @@ public class MemberActivityLogDeleteService extends AbstractGuiService<Member, A
 		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 		activityLog = this.repository.findActivityLogById(activityLogId);
 
-		status = activityLog.getDraftMode() && assignment != null && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
+		status = activityLog.getDraftMode() && assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE) && assignment != null && assignment.getMember().getId() == memberId
+			&& !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}

@@ -33,7 +33,7 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 		int masterId = super.getRequest().getData("id", int.class);
 		Assignment assignment = this.repository.findOneById(masterId);
 
-		status = member != null && assignment.getMember().getId() == memberId && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+		status = member != null && assignment != null && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
 		if (status && super.getRequest().getMethod().equals("POST")) {
 
@@ -84,9 +84,6 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	public void bind(final Assignment assignment) {
 		assert assignment != null;
 
-		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Member member = this.repository.findMemberById(currentMemberId);
-
 		super.bindObject(assignment, "role", "status", "remarks", "leg");
 	}
 
@@ -94,37 +91,21 @@ public class MemberAssignmentUpdateService extends AbstractGuiService<Member, As
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Member member = this.repository.findMemberById(currentMemberId);
-
 		Assignment original = this.repository.findOneById(assignment.getId());
 
-		if (assignment.getRole() == Role.PILOT && !original.getRole().equals(assignment.getRole()))
-			if (assignment.getLeg() != null)
+		if (assignment.getLeg() != null) {
+			if (assignment.getRole() == Role.CO_PILOT && (!original.getRole().equals(assignment.getRole()) || original.getLeg().getId() != assignment.getLeg().getId()))
+				super.state(!this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
+
+			if (assignment.getRole() == Role.PILOT && (!original.getRole().equals(assignment.getRole()) || original.getLeg().getId() != assignment.getLeg().getId()))
 				super.state(!this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
-
-		if (assignment.getRole() == Role.CO_PILOT && !original.getRole().equals(assignment.getRole()) && original.getLeg() != null && assignment.getLeg() != null && !(original.getLeg().getId() != assignment.getLeg().getId()))
-			super.state(!this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
-
-		//		if (assignment.getLeg() != null)
-		//			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
-
-		if (assignment.getLeg() != null)
-			super.state(!assignment.getLeg().getIsDraftMode(), "leg", "member.assignment.form.error.member-not-published");
-
-		super.state(assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
-
-		boolean memberChanged = !(original.getMember().getId() == assignment.getMember().getId());
+		}
 
 		boolean legChanged = false;
-		if (original.getLeg() == null && assignment.getLeg() != null)
-			legChanged = true;
-		else if (original.getLeg() != null && assignment.getLeg() == null)
-			legChanged = true;
-		else if (original.getLeg() != null && assignment.getLeg() != null)
+		if (assignment.getLeg() != null)
 			legChanged = !(original.getLeg().getId() == assignment.getLeg().getId());
 
-		if ((memberChanged || legChanged) && assignment.getMember() != null && assignment.getLeg() != null) {
+		if (legChanged && assignment.getLeg() != null) {
 			Integer memberId = assignment.getMember().getId();
 			Integer legId = assignment.getLeg().getId();
 			Integer assignmentId = assignment.getId();
