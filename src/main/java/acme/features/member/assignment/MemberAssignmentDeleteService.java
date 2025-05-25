@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
@@ -37,7 +38,7 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 		assignment = this.repository.findOneById(assignmentId);
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = assignment.getIsDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
+		status = assignment.getDraftMode() && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && assignment.getMember().getId() == memberId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -64,13 +65,13 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		if (!assignment.getIsDraftMode())
+		if (!assignment.getDraftMode())
 			super.state(false, "*", "member.assignment.form.error.notDraft");
 
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 		List<ActivityLog> activityLogs = this.ALrepository.findByMemberIdAndAssignmentId(memberId, assignment.getId());
-		boolean allDraft = activityLogs.stream().allMatch(ActivityLog::getIsDraftMode);
+		boolean allDraft = activityLogs.stream().allMatch(ActivityLog::getDraftMode);
 
 		if (!allDraft)
 			super.state(false, "*", "member.assignment.form.error.activityLogsNotDraft");
@@ -79,8 +80,6 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 	@Override
 	public void perform(final Assignment assignment) {
 		assert assignment != null;
-
-		this.repository.deleteActivityLogsByAssignmentId(assignment.getId());
 
 		this.repository.delete(assignment);
 
@@ -95,9 +94,10 @@ public class MemberAssignmentDeleteService extends AbstractGuiService<Member, As
 
 		SelectChoices statusChoices = SelectChoices.from(AssignmentStatus.class, assignment.getStatus());
 		SelectChoices roleChoices = SelectChoices.from(Role.class, assignment.getRole());
-		SelectChoices legChoices = SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
+		SelectChoices legChoices = assignment.getDraftMode() ? SelectChoices.from(this.repository.findAllPFL(MomentHelper.getCurrentMoment(), member.getAirline().getId()), "flightNumber", assignment.getLeg())
+			: SelectChoices.from(this.repository.findAllLegs(), "flightNumber", assignment.getLeg());
 
-		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "isDraftMode");
+		Dataset dataset = super.unbindObject(assignment, "role", "lastUpdate", "status", "remarks", "draftMode");
 
 		dataset.put("role", roleChoices);
 		dataset.put("status", statusChoices);

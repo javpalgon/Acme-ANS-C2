@@ -14,4 +14,6 @@
     <acme:list-column code="member.assignment.list.label.leg" path="leg.flightNumber" width="20%"/>
 </acme:list>
 
-<acme:button code="member.assignment.list.button.create" action="/member/assignment/create"/>
+<jstl:if test="${memberAvailable}">
+    <acme:button code="member.assignment.list.button.create" action="/member/assignment/create"/>
+</jstl:if>

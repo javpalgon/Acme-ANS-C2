@@ -65,6 +65,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			result = false;
 		}
 
+
 		return result;
 	}
 

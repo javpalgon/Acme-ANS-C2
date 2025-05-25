@@ -34,7 +34,7 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		status = assignment != null;
 
-		super.getResponse().setAuthorised(status && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
+		super.getResponse().setAuthorised(status && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
 	}
 
 	@Override

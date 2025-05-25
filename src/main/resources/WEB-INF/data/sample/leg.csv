@@ -5,6 +5,7 @@ leg-03,VYB0002,2023/08/05 21:10,2023/08/06 00:30,CANCELLED,airport-01,airport-03
 leg-04,IBV0003,2025/06/30 08:45,2025/06/30 12:00,CANCELLED,airport-03,airport-04,flight-01,aircraft-14,true
 leg-05,VYB0004,2024/02/14 11:15,2024/02/14 14:30,LANDED,airport-04,airport-01,flight-02,aircraft-15,false
 leg-06,VYB0005,2025/09/18 19:30,2025/09/18 22:45,ON_TIME,airport-02,airport-01,flight-02,aircraft-02,false
+
 leg-07,VYB0006,2023/12/24 05:20,2023/12/24 08:40,LANDED,airport-03,airport-02,flight-02,aircraft-15,false
 leg-08,IBV0007,2025/04/01 16:10,2025/04/01 19:25,CANCELLED,airport-01,airport-02,flight-24,aircraft-14,true
 leg-09,IBV0008,2024/07/07 13:45,2024/07/07 17:00,LANDED,airport-01,airport-03,flight-25,aircraft-01,true
@@ -12,6 +13,7 @@ leg-10,VYB0009,2025/10/31 23:15,2025/11/01 02:30,ON_TIME,airport-01,airport-03,f
 leg-11,VYB0010,2025/10/31 23:15,2025/11/01 02:30,ON_TIME,airport-01,airport-03,flight-29,aircraft-02,true
 leg-12,IBV1001,2025/01/02 08:00,2025/06/01 10:00,ON_TIME,airport-01,airport-02,flight-24,aircraft-14,false
 leg-13,IBV6097,2025/04/01 06:00,2025/04/01 08:00,CANCELLED,airport-01,airport-02,flight-01,aircraft-14,false
+
 leg-14,VYB6847,2025/04/02 06:00,2025/04/02 08:00,ON_TIME,airport-02,airport-03,flight-02,aircraft-02,false
 
 leg-15,IBV1393,2025/04/03 06:00,2025/11/01 08:00,ON_TIME,airport-03,airport-04,flight-03,aircraft-01,true
@@ -35,6 +37,7 @@ leg-31,IBV9363,2025/04/19 06:00,2025/04/19 08:00,ON_TIME,airport-03,airport-04,f
 leg-32,IBV1465,2025/04/20 06:00,2025/04/20 08:00,ON_TIME,airport-04,airport-01,flight-20,aircraft-01,false
 leg-33,IBV1749,2025/04/21 06:00,2025/04/21 08:00,ON_TIME,airport-01,airport-02,flight-21,aircraft-01,false
 leg-34,IBV9146,2025/04/22 06:00,2025/04/22 08:00,ON_TIME,airport-02,airport-03,flight-22,aircraft-01,false
+
 #Used for assignments
 #Legs of manager-01
 leg-35,IBV9147,2024/04/22 06:00,2024/04/22 08:00,LANDED,airport-02,airport-03,flight-23,aircraft-01,false
@@ -66,6 +69,7 @@ leg-54,IBV9166,2025/05/11 06:00,2025/05/11 08:00,ON_TIME,airport-01,airport-02,f
 leg-55,IBV9167,2025/05/12 06:00,2025/05/12 08:00,ON_TIME,airport-02,airport-03,flight-26,aircraft-01,false
 
 leg-56,VYB9168,2025/05/13 06:00,2025/05/13 08:00,ON_TIME,airport-03,airport-04,flight-27,aircraft-02,false
+
 leg-57,VYB9169,2025/05/14 06:00,2025/05/14 08:00,ON_TIME,airport-04,airport-01,flight-28,aircraft-02,false
 leg-58,VYB9170,2025/05/15 06:00,2025/05/15 08:00,ON_TIME,airport-01,airport-02,flight-29,aircraft-15,false
 leg-59,VYB9171,2025/05/16 06:00,2025/05/16 08:00,ON_TIME,airport-02,airport-03,flight-30,aircraft-15,false

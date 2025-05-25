@@ -36,7 +36,7 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 		activityLog = this.repository.findActivityLogById(activityLogId);
 
-		status = activityLog.getIsDraftMode() && assignment != null && !assignment.getIsDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
+		status = activityLog.getDraftMode() && assignment != null && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -68,7 +68,7 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 
 		super.state(assignment != null, "*", "member.activitylog.form.error.null-assignment");
 
-		super.state(assignment != null && !assignment.getIsDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
+		super.state(assignment != null && !assignment.getDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
 
 		super.state(assignment.getLeg() != null && assignment.getLeg().getArrival().before(MomentHelper.getCurrentMoment()), "*", "member.activitylog.form.error.leg-not-completed");
 
@@ -89,10 +89,10 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "isDraftMode");
+		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");
 
 		dataset.put("masterId", activityLog.getAssignment().getId());
-		dataset.put("isDraftMode", activityLog.getAssignment().getIsDraftMode());
+		//dataset.put("isDraftMode", activityLog.getAssignment().getIsDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

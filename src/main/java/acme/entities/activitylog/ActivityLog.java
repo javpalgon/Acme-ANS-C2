@@ -3,7 +3,6 @@ package acme.entities.activitylog;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.ManyToOne;
@@ -27,10 +26,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "activity_log", indexes = {
-	@Index(name = "idx_activitylog_assignment_incident", columnList = "assignment_id,incident_type"), @Index(name = "idx_activitylog_assignment_severity", columnList = "assignment_id,severity_level"),
-	@Index(name = "idx_activitylog_draft_registered", columnList = "is_draft_mode,registered_at")
+	@Index(name = "idx_activity_log_assignment", columnList = "assignment_id"), @Index(name = "idx_activity_log_draft_mode", columnList = "draftMode"), @Index(name = "idx_activity_log_registered_at", columnList = "registeredAt")
 })
-
 public class ActivityLog extends AbstractEntity {
 
 	// Serialisation version -------------------------------------------
@@ -39,13 +36,11 @@ public class ActivityLog extends AbstractEntity {
 
 	// Attributes --------------------------------------------------------
 
-	@Column(name = "registered_at")
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				registeredAt;
 
-	@Column(name = "incident_type")
 	@Mandatory
 	@NotBlank
 	@ValidString(max = 50)
@@ -58,7 +53,6 @@ public class ActivityLog extends AbstractEntity {
 	@Automapped
 	private String				description;
 
-	@Column(name = "severity_level")
 	@Mandatory
 	@ValidNumber(min = 0, max = 10)
 	@Automapped
@@ -69,9 +63,8 @@ public class ActivityLog extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Assignment			assignment;
 
-	@Column(name = "is_draft_mode")
 	@Mandatory
 	@Automapped
-	private Boolean				isDraftMode;
+	private Boolean				draftMode;
 
 }

@@ -3,6 +3,8 @@ package acme.realms;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractRole;
@@ -19,6 +21,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidCustomer
+@Table(indexes = {
+	@Index(columnList = "user_account_id")
+})
 public class Customer extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;

@@ -24,9 +24,10 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	@Override
 	public void authorise() {
 		Booking booking;
-		int id;
-		id = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(id);
+		int bookingId;
+
+		bookingId = super.getRequest().getData("id", int.class);
+		booking = this.repository.findBookingById(bookingId);
 
 		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
 		final int customerId = booking.getCustomer().getUserAccount().getId();
@@ -50,8 +51,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "isDraftMode");
 
-		String passengerList = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).collect(Collectors.joining(", ")); // Puedes usar \n si prefieres salto de línea
-
+		String passengerList = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).collect(Collectors.joining(", "));
 		dataset.put("passengers", passengerList);
 		dataset.put("hasPassengers", !passengerList.isEmpty());
 
