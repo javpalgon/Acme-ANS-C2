@@ -24,12 +24,14 @@ customer.booking.form.button.save= Save changes
 
 customer.booking.form.error.blank-locatorCode= The locator code cannot be blank.
 customer.booking.form.error.invalid-locatorCode= The locator code must be between 6 and 8 characters in uppercase or numbers.
-customer.booking.form.error.duplicate-locatorCode= This locator code is already in use.
+customer.booking.form.error.duplicated= This locator code is already in use.
 customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in the past.
 customer.booking.form.error.travelClass-required= You must select a travel class.
 customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
 customer.booking.form.error.passenger-not-published=All passengers must be published before publishing the booking.
 customer.booking.form.error.booking-without-passenger= You must add at least one passenger to publish a booking.
+customer.booking.form.error.duplicated=The booking already exists with the same locator code and purchase moment.
+
 
 customer.booking.form.button.create= Create Booking
 customer.booking.list.button.create= Create Booking
