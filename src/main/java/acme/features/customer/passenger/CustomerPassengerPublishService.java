@@ -62,6 +62,9 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	public void validate(final Passenger object) {
 		assert object != null;
 
+		// Validar que el pasaporte no esté duplicado
+		boolean isDuplicate = this.repository.existsByPassport(object.getPassport(), object.getId());
+		super.state(!isDuplicate, "passport", "customer.passenger.form.error.duplicate-passport");
 	}
 
 	@Override
