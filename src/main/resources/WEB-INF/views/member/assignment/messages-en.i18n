@@ -43,7 +43,7 @@ member.assignment.form.button.create = Create new assignment
 
 # Errors
 member.assignment.form.error.lastUpdate-future = The last update date cannot be in the future
-member.assignment.form.error.leg-occurred = The selected flight has already occurred and you can only delete its assignment, not create or modify it
+member.assignment.form.error.leg-occurred = The selected flight has already occurred and you can only delete its assignment, not modify or publish it
 member.assignment.form.error.member-unavailable = Only available crew members can be assigned
 member.assignment.form.error.pilot-exists = Each flight can only have one pilot
 member.assignment.form.error.copilot-exists = Each flight can only have one copilot

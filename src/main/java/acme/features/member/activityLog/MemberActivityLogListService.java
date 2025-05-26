@@ -12,6 +12,7 @@ import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.entities.leg.LegStatus;
 import acme.realms.Member;
 
@@ -34,7 +35,8 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		status = assignment != null;
 
-		super.getResponse().setAuthorised(status && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
+		super.getResponse().setAuthorised(
+			status && !assignment.getDraftMode() && assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE) && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED));
 	}
 
 	@Override
@@ -51,9 +53,9 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
-		Dataset dataset;
+		assert activityLog != null;
 
-		int masterId = super.getRequest().getData("masterId", int.class);
+		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 
@@ -64,9 +66,12 @@ public class MemberActivityLogListService extends AbstractGuiService<Member, Act
 
 	@Override
 	public void unbind(final Collection<ActivityLog> entities) {
+
+		assert entities != null;
+
 		int masterId = super.getRequest().getData("masterId", int.class);
 		Assignment assignment = this.repository.findAssignmentById(masterId);
-		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+		final boolean showCreate = assignment.getLeg().getStatus().equals(LegStatus.LANDED) && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().addGlobal("showCreate", showCreate);
 		super.getResponse().addGlobal("masterId", masterId);

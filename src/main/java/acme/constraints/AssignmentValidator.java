@@ -32,14 +32,10 @@ public class AssignmentValidator extends AbstractValidator<ValidAssignment, Assi
 		boolean memberAvailable = false;
 		if (assignment.getMember() != null && assignment.getMember().getAvailabilityStatus() != null)
 			memberAvailable = assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
-		else
-			super.state(context, false, "member", "Member or availability status is null");
 
 		boolean legLanded = false;
 		if (assignment.getLeg() != null && assignment.getLeg().getStatus() != null)
 			legLanded = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
-		else
-			super.state(context, false, "leg", "Leg is null");
 
 		super.state(context, memberAvailable || legLanded, "member", "{acme.validation.Assignment.memberNotAvailable.message}");
 

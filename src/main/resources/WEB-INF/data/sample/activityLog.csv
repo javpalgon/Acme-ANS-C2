@@ -1,24 +1,16 @@
 key,key:assignment,registeredAt,incidentType,description,severityLevel,draft_mode
-log-01,assignment-01,2024/04/30 18:30,CREW,"Co-pilot training completed",3,true
-log-02,assignment-02,2024/04/24 20:15,WEATHER,"Flight cancelled due to severe weather",8,true
-log-03,assignment-03,2024/10/25 09:00,CABIN,"Standby crew performed well",1,true
-log-04,assignment-03,2024/10/15 18:45,OPERATIONAL,"Flight reassignment handled smoothly",4,true
-log-05,assignment-04,2024/10/22 10:00,ADMIN,"Pending approval due to new regulations",3,true
-log-06,assignment-09,2024/10/11 13:20,FLIGHT,"Standard flight operations",0,true
-log-07,assignment-10,2024/10/19 21:45,ADMIN,"Clearance delayed due to ATC issues",4,true
-log-08,assignment-11,2024/10/22 22:30,OPERATIONAL,"Operational changes communicated late",7,true
-log-09,assignment-12,2024/10/01 08:00,CABIN,"Lead attendant managed reassignment well",2,true
-log-10,assignment-11,2024/10/06 09:30,ADMIN,"Manifest updates completed post-flight",3,true
-log-11,assignment-17,2024/10/07 14:45,FLIGHT,"Routine flight with no incidents",0,true
-log-12,assignment-18,2024/10/14 18:20,MAINTENANCE,"Cancellation due to engine issues",7,true
-log-13,assignment-19,2024/10/26 09:00,SCHEDULING,"Crew scheduling confirmed last minute",4,true
-log-14,assignment-20,2024/10/17 12:45,CABIN,"Schedule changes accommodated",2,true
-log-15,assignment-25,2024/10/10 08:30,CREW,"Backup crew performed adequately",2,true
-log-16,assignment-26,2024/10/21 10:00,WEATHER,"Weather updates received late",5,true
-log-17,assignment-27,2024/10/05 11:30,FLIGHT,"Early morning flight completed",1,true
-log-18,assignment-28,2024/10/12 10:00,AIRCRAFT,"Aircraft assignment delayed",5,true
-log-19,assignment-20,2024/10/30 09:00,CREW,"Crew illness handled professionally",6,true
-log-20,assignment-33,2024/11/16 08:00,CABIN,"Standby crew ready but not needed",1,true
-log-21,assignment-34,2024/12/09 09:00,BRIEFING,"Final briefing completed successfully",1,true
-log-22,assignment-35,2024/10/05 10:00,SCHEDULING,"New flight time accommodated",3,true
-log-23,assignment-36,2024/11/22 09:00,DISPATCH,"Dispatch clearance obtained",3,true
+log-01,assignment-01,2024/10/30 18:30,CREW,"Co-pilot training completed",3,true
+log-02,assignment-02,2024/10/24 20:15,WEATHER,"Flight cancelled due to severe weather",8,true
+log-03,assignment-09,2024/10/19 21:45,ADMIN,"Clearance delayed due to ATC issues",4,true
+log-04,assignment-10,2024/10/22 22:30,OPERATIONAL,"Operational changes communicated late",7,true
+log-05,assignment-11,2024/10/01 08:00,CABIN,"Lead attendant managed reassignment well",2,true
+log-06,assignment-15,2024/10/06 09:30,ADMIN,"Manifest updates completed post-flight",3,true
+log-07,assignment-16,2024/10/07 14:45,FLIGHT,"Routine flight with no incidents",0,true
+log-08,assignment-17,2024/10/14 18:20,MAINTENANCE,"Cancellation due to engine issues",7,true
+log-09,assignment-19,2024/10/17 12:45,CABIN,"Schedule changes accommodated",2,true
+log-10,assignment-24,2024/10/10 08:30,CREW,"Backup crew performed adequately",2,true
+log-11,assignment-25,2024/10/21 10:00,WEATHER,"Weather updates received late",5,true
+log-12,assignment-27,2024/10/12 10:00,AIRCRAFT,"Aircraft assignment delayed",5,true
+log-13,assignment-27,2024/10/30 09:00,CREW,"Crew illness handled professionally",6,true
+
+#ACT LOG CON MASTER ID 212 DEBE DAR ERROR PORQUE ES UN CANCELLED

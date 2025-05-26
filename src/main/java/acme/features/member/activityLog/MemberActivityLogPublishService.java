@@ -11,6 +11,7 @@ import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -33,7 +34,8 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 		activityLog = this.repository.findActivityLogById(activityLogId);
 
-		status = activityLog.getDraftMode() && assignment != null && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
+		status = activityLog.getDraftMode() && assignment != null && assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE) && !assignment.getDraftMode() && assignment.getMember().getId() == memberId
+			&& !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -51,6 +53,8 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		super.bindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
 	}
 
@@ -64,13 +68,6 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 		// Check if fields have changed
 		if (original != null) {
 			boolean hasChanged = false;
-
-			// Check registeredAt
-			if (activityLog.getRegisteredAt() != null) {
-				if (!activityLog.getRegisteredAt().equals(original.getRegisteredAt()))
-					hasChanged = true;
-			} else if (original.getRegisteredAt() != null)
-				hasChanged = true;
 
 			// Check incidentType
 			if (activityLog.getIncidentType() != null) {
@@ -101,12 +98,15 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 	@Override
 	public void perform(final ActivityLog activityLog) {
 		assert activityLog != null;
+
 		activityLog.setDraftMode(false);
 		this.repository.save(activityLog);
 	}
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");
