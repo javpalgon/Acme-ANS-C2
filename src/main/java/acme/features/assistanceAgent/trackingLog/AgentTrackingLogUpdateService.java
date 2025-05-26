@@ -25,18 +25,29 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int trackingLogId;
+		boolean status = false;
+		Integer trackingLogId;
 		Claim claim;
 		TrackingLog trackingLog;
 
-		trackingLogId = super.getRequest().getData("id", int.class);
+		if (super.getRequest().hasData("id")) {
+			trackingLogId = super.getRequest().getData("id", Integer.class);
 
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
-		claim = this.repository.findClaimByTrackingLogId(trackingLogId);
+			if (trackingLogId != null) {
+				trackingLog = this.repository.findTrackingLogById(trackingLogId);
+				claim = this.repository.findClaimByTrackingLogId(trackingLogId);
 
-		status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
+				status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
+			}
+		}
+		if (status && super.getRequest().hasData("status"))
+			status = this.checkStatusField();
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean checkStatusField() {
+		String logStatus = super.getRequest().getData("status", String.class);
+		return logStatus.equals("0") || logStatus.equals("PENDING") || logStatus.equals("ACCEPTED") || logStatus.equals("REJECTED");
 	}
 
 	@Override
@@ -75,8 +86,6 @@ public class AgentTrackingLogUpdateService extends AbstractGuiService<Assistance
 		super.state(claim != null, "*", "assistance-agent.tracking-log.form.error.claim-is-null");
 
 		super.state(claim != null && !MomentHelper.isBefore(trackingLog.getLastUpdate(), claim.getRegisteredAt()), "*", "assistance-agent.tracking-log.form.error.lastUpdate-is-before-registeredAt");
-
-		super.state(claim != null && !claim.getIsDraftMode(), "*", "assistance-agent.tracking-log.form.error.claim-is-not-published");
 
 		super.state(trackingLog.getIsDraftMode(), "*", "assistance-agent.tracking-log.form.error.tracking-log-is-published");
 
