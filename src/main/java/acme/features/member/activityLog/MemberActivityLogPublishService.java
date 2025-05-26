@@ -69,13 +69,6 @@ public class MemberActivityLogPublishService extends AbstractGuiService<Member, 
 		if (original != null) {
 			boolean hasChanged = false;
 
-			// Check registeredAt
-			if (activityLog.getRegisteredAt() != null) {
-				if (!activityLog.getRegisteredAt().equals(original.getRegisteredAt()))
-					hasChanged = true;
-			} else if (original.getRegisteredAt() != null)
-				hasChanged = true;
-
 			// Check incidentType
 			if (activityLog.getIncidentType() != null) {
 				if (!activityLog.getIncidentType().equals(original.getIncidentType()))
