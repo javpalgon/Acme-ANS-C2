@@ -4,19 +4,19 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>	
-	<jstl:if test="${acme:matches(isDraftMode, 'false')}">
-		<acme:input-textbox code="assistance-agent.claim.form.label.registeredAt" path="registeredAt" readonly="true"/>
-	</jstl:if>
-	<acme:input-email code="assistance-agent.claim.form.label.passengerEmail" path="passengerEmail"/>
-	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description"/>
-	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${type}"/>
+<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
+	<acme:input-textbox code="assistance-agent.claim.form.label.registeredAt" path="registeredAt" readonly="true"/>
+</jstl:if>
+	<acme:input-email code="assistance-agent.claim.form.label.passengerEmail" path="passengerEmail" readonly="${!isDraftMode}"/>
+	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description" readonly="${!isDraftMode}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${type}" readonly="${!isDraftMode}"/>
 	<acme:input-textbox code="assistance-agent.claim.form.label.accepted" path="accepted" readonly="true"/>
-	<acme:input-select code="assistance-agent.claim.form.label.leg.flightNumber" path="leg" choices="${leg}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.leg.flightNumber" path="leg" choices="${leg}" readonly="${!isDraftMode}"/>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish')}">
 			<jstl:if test="${acme:matches(accepted,'PENDING') && acme:matches(_command, 'show')}">
-				<acme:input-textbox code="assistance-agent.claim.form.label.leg.arrival" path="arrival" readonly="true"/>	
-				<acme:input-textbox code="assistance-agent.claim.form.label.leg.departure" path="departure" readonly="true"/>				
+				<acme:input-textbox code="assistance-agent.claim.form.label.leg.departure" path="departure" readonly="true"/>
+				<acme:input-textbox code="assistance-agent.claim.form.label.leg.arrival" path="arrival" readonly="true"/>					
 				<acme:input-textbox code="assistance-agent.claim.form.label.leg.status" path="status" readonly="true"/>	
 			</jstl:if>
 			<jstl:if test="${acme:matches(isDraftMode, 'true')}">

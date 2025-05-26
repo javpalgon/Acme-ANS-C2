@@ -1,14 +1,13 @@
 
 package acme.features.customer.passenger;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.booking.Booking;
 import acme.entities.passenger.Passenger;
 import acme.realms.Customer;
 
@@ -19,13 +18,36 @@ public class CustomerPassengerUpdateService extends AbstractGuiService<Customer,
 	private CustomerPassengerRepository repository;
 
 
+	/*
+	 * @Override
+	 * public void authorise() {
+	 * int id = super.getRequest().getData("id", int.class);
+	 * Collection<Integer> customerIds = this.repository.findCustomerUserAccountIdsByPassengerId(id);
+	 * int userAccountId = super.getRequest().getPrincipal().getAccountId();
+	 * 
+	 * super.getResponse().setAuthorised(customerIds.contains(userAccountId));
+	 * }
+	 */
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Collection<Integer> customerIds = this.repository.findCustomerUserAccountIdsByPassengerId(id);
+		int passengerId = super.getRequest().getData("id", int.class);
 		int userAccountId = super.getRequest().getPrincipal().getAccountId();
 
-		super.getResponse().setAuthorised(customerIds.contains(userAccountId));
+		Passenger passenger = this.repository.findPassengerById(passengerId);
+
+		boolean isDraftPassenger = passenger != null && passenger.getIsDraftMode();
+		boolean isLinkedToEditableBooking = false;
+
+		if (isDraftPassenger) {
+			var bookings = this.repository.findBookingsInDraftModeByCustomerAccountId(userAccountId);
+			for (Booking b : bookings)
+				if (this.repository.existsRecordByBookingIdAndPassengerId(b.getId(), passengerId)) {
+					isLinkedToEditableBooking = true;
+					break;
+				}
+		}
+
+		super.getResponse().setAuthorised(isDraftPassenger && isLinkedToEditableBooking);
 	}
 
 	@Override

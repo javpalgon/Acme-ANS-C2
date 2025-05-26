@@ -1,6 +1,8 @@
 
 package acme.features.administrator.airport;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,7 +22,15 @@ public class AdministratorAirportShowService extends AbstractGuiService<Administ
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		Integer id;
+		Collection<Airport> airports = this.repository.findAllAirports();
+		if (super.getRequest().hasData("id")) {
+			id = super.getRequest().getData("id", Integer.class);
+			if (id != null && airports.stream().anyMatch(x -> id.equals(x.getId())))
+				super.getResponse().setAuthorised(status);
+		} else
+			super.getResponse().setAuthorised(false);
 	}
 
 	@Override

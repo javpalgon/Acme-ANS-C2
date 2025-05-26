@@ -20,3 +20,8 @@ administrator.airline.form.label.confirmation = Confirmation
 administrator.airline.button.update = Update
 administrator.airline.form.label = Label
 administrator.airline.button.create = Create
+acme.validation.IATACode = IATACode not valid
+administrator.airline.form.title = Show airline
+administrator.airline.list.title = List airlines
+
+administrator.airline.form.error.IATA-not-unique = IATACode is not unique

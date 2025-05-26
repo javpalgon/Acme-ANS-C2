@@ -21,14 +21,19 @@ public class AgentTrackingLogShowService extends AbstractGuiService<AssistanceAg
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int trackingLogId;
+		boolean status = false;
+		Integer trackingLogId;
 		Claim claim;
 
-		trackingLogId = super.getRequest().getData("id", int.class);
-		claim = this.repository.findClaimByTrackingLogId(trackingLogId);
+		if (super.getRequest().hasData("id")) {
+			trackingLogId = super.getRequest().getData("id", Integer.class);
 
-		status = super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+			if (trackingLogId != null) {
+				claim = this.repository.findClaimByTrackingLogId(trackingLogId);
+
+				status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+			}
+		}
 		super.getResponse().setAuthorised(status);
 	}
 

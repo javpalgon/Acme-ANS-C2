@@ -10,11 +10,11 @@
 	<acme:input-textarea code="assistance-agent.tracking-log.form.label.step" path="step" readonly="${!isDraftMode}"/>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolutionPercentage" path="resolutionPercentage" readonly="${!isDraftMode}"/>
 	<acme:input-select code="assistance-agent.tracking-log.form.label.status" path="status" choices="${status}" readonly="${!isDraftMode}"/>
-	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolution" path="resolution" readonly="${!isDraftMode}"/>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.passengerEmail" path="passengerEmail" readonly="true"/>
 	<acme:input-textbox code="assistance-agent.tracking-log.form.label.description" path="description" readonly="true"/>
+	<acme:input-textbox code="assistance-agent.tracking-log.form.label.resolution" path="resolution" readonly="${!isDraftMode}"/>
 	<jstl:choose>
-	<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+	<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish')}">
 		<!-- Solo visible si está en modo borrador -->
 		<jstl:if test="${acme:matches(isDraftMode, 'true')}">
 			<acme:submit code="assistance-agent.tracking-log.form.button.delete" action="/assistance-agent/tracking-log/delete"/>

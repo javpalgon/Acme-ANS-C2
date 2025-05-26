@@ -1,7 +1,6 @@
 
 package acme.constraints;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,43 +35,23 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 			super.state(context, true, "*", "javax.validation.constraints.notNull.message");
 		else {
 			List<TrackingLog> trackingLogs = this.repository.findAllByClaimId(value.getClaim().getId());
-			{
-				//Comprobar que el aumento de porcentaje es lineal
-				boolean predicate2;
-				double maximum = 0.;
-				if (!trackingLogs.isEmpty())
-					maximum = trackingLogs.stream().max(Comparator.comparing(TrackingLog::getResolutionPercentage)).get().getResolutionPercentage();
-				predicate2 = maximum == 0. || value.getResolutionPercentage() > maximum;
-				super.state(context, !predicate2, "resolutionPercentage", "acme.validation.TrackingLog.resolutionPercentage-under-the-previous");
-			}
-			{
-				//Comprobar que al ser status == FINISHED, resolutionPercentage == 100.
-				boolean predicate3 = value.getResolutionPercentage() == 100. && !value.getStatus().equals(TrackingLogStatus.PENDING) || value.getResolutionPercentage() != 100. && value.getStatus().equals(TrackingLogStatus.PENDING);
-				super.state(context, predicate3, "status", "acme.validation.TrackingLog.status-and-resolutionPercentage-don´t-match.");
-			}
-			{
-				//El último momento de actualización debe ser posterior al que había
-				boolean isAfter = false;
-				TrackingLog lastDate;
-				if (!trackingLogs.isEmpty()) {
-					lastDate = trackingLogs.stream().max(Comparator.comparing(TrackingLog::getLastUpdate)).get();
-					isAfter = value.getLastUpdate().after(lastDate.getLastUpdate());
-				}
-				super.state(context, !isAfter, "lastUpdate", "acme.validation.TrackingLog.lastUpdate-must-be-later-than-the-previous-one");
-			}
-			{
-				//Comprobar que como mucho hay dos trackingLogs(contando el que añadimos) con status != pending 
-				boolean predicate4;
-				List<TrackingLog> finishedTrackingLogs = new ArrayList<>();
-				finishedTrackingLogs = trackingLogs.stream().filter(x -> !x.getStatus().equals(TrackingLogStatus.PENDING)).toList();
-				predicate4 = finishedTrackingLogs.size() <= 2;
-				super.state(context, predicate4, "status", "acme.validation.TrackingLog.you-cant-have-more-than-2-finished-tracking-logs");
-			}
-			{
-				//Comprobar que la Claim asociada está publicada
+			//Comprobar que el aumento de porcentaje es lineal
+			boolean predicate2;
+			double maximum = 0.;
+			if (!trackingLogs.isEmpty())
+				maximum = trackingLogs.stream().max(Comparator.comparing(TrackingLog::getResolutionPercentage)).get().getResolutionPercentage();
+			predicate2 = maximum == 0. || value.getResolutionPercentage() > maximum;
+			super.state(context, !predicate2, "resolutionPercentage", "acme.validation.TrackingLog.resolutionPercentage-under-the-previous");
+
+			//Comprobar que al ser status == FINISHED, resolutionPercentage == 100.
+			boolean predicate3 = value.getResolutionPercentage() == 100. && !value.getStatus().equals(TrackingLogStatus.PENDING) || value.getResolutionPercentage() != 100. && value.getStatus().equals(TrackingLogStatus.PENDING);
+			super.state(context, predicate3, "status", "acme.validation.TrackingLog.status-and-resolutionPercentage-don´t-match.");
+
+			//Comprobar que la Claim asociada está publicada
+			if (!value.getIsDraftMode())
 				super.state(context, !value.getClaim().getIsDraftMode(), "*", "acme.validation.Claim.claim-is-not-published-yet");
-			}
 		}
+
 		res = !super.hasErrors(context);
 		return res;
 	}
