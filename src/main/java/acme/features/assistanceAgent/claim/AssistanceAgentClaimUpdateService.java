@@ -24,27 +24,31 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean status = false;
 		int agentId;
 		AssistanceAgent agent;
 		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		agent = this.repository.findAgentById(agentId);
 		Claim claim;
-		int id;
-		id = super.getRequest().getData("id", int.class);
-		claim = this.repository.findClaimById(id);
-		status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId() && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
-		if (status && super.getRequest().getMethod().equals("POST"))
-			if (super.getRequest().hasData("leg", int.class)) {
-				int legId = super.getRequest().getData("leg", int.class);
-				if ((Integer) legId != null && legId != 0) {
-					List<Leg> legsOk = (List<Leg>) this.repository.findPastPublishedLegsByAirline(MomentHelper.getCurrentMoment(), agent.getAirline());
-					boolean legIsOk = legsOk.stream().anyMatch(l -> l.getId() == legId);
-					if (!legIsOk || !this.checkStatusField())
-						status = false;
-				}
+		Integer id;
+		if (super.getRequest().hasData("id")) {
+			id = super.getRequest().getData("id", Integer.class);
+			if (id != null) {
+				claim = this.repository.findClaimById(id);
+				status = claim.getIsDraftMode() && claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId() && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+				if (status && super.getRequest().getMethod().equals("POST"))
+					if (super.getRequest().hasData("leg", int.class)) {
+						int legId = super.getRequest().getData("leg", int.class);
+						if ((Integer) legId != null && legId != 0) {
+							List<Leg> legsOk = (List<Leg>) this.repository.findPastPublishedLegsByAirline(MomentHelper.getCurrentMoment(), agent.getAirline());
+							boolean legIsOk = legsOk.stream().anyMatch(l -> l.getId() == legId);
+							if (!legIsOk || !this.checkStatusField())
+								status = false;
+						}
+					}
 			}
-		super.getResponse().setAuthorised(status && claim.getIsDraftMode());
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	private boolean checkStatusField() {

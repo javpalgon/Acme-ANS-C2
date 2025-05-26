@@ -25,17 +25,21 @@ public class AgentTrackingLogPublishService extends AbstractGuiService<Assistanc
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int trackingLogId;
+		boolean status = false;
+		Integer trackingLogId;
 		Claim claim;
 		TrackingLog trackingLog;
 
-		trackingLogId = super.getRequest().getData("id", int.class);
+		if (super.getRequest().hasData("id")) {
+			trackingLogId = super.getRequest().getData("id", Integer.class);
 
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
-		claim = this.repository.findClaimByTrackingLogId(trackingLogId);
+			if (trackingLogId != null) {
+				trackingLog = this.repository.findTrackingLogById(trackingLogId);
+				claim = this.repository.findClaimByTrackingLogId(trackingLogId);
 
-		status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
+				status = claim != null && super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId() && trackingLog.getIsDraftMode();
+			}
+		}
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -101,7 +105,7 @@ public class AgentTrackingLogPublishService extends AbstractGuiService<Assistanc
 		} else
 			super.state(trackingLog.getResolution().equals(original.getResolution()), "resolution", "assistance-agent.tracking-log.form.error.save-changes");
 
-		if (trackingLogs != null)
+		if (trackingLogs != null && trackingLog.getResolutionPercentage() != null)
 			super.state(trackingLogs.stream().filter(x -> x.getIsDraftMode() && x.getResolutionPercentage() < trackingLog.getResolutionPercentage()).count() == 0, "*", "assistance-agent.tracking-log.form.error.delete-or-publish-previous-logs");
 
 	}

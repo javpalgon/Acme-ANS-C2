@@ -26,17 +26,20 @@ public class AgentTrackingLogCreateService extends AbstractGuiService<Assistance
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
+		boolean status = false;
+		Integer masterId;
 		Claim claim;
 		int countFinishedTrackingLogs = 0;
 		List<TrackingLog> trackingLogs = new ArrayList<>();
-
-		masterId = super.getRequest().getData("masterId", int.class);
-		claim = this.repository.findClaimById(masterId);
-		trackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().toList();
-		countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList().size();
-		status = super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+		if (super.getRequest().hasData("masterId")) {
+			masterId = super.getRequest().getData("masterId", Integer.class);
+			if (masterId != null) {
+				claim = this.repository.findClaimById(masterId);
+				trackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().toList();
+				countFinishedTrackingLogs = trackingLogs.stream().filter(tl -> !tl.getStatus().equals(TrackingLogStatus.PENDING)).toList().size();
+				status = super.getRequest().getPrincipal().getAccountId() == claim.getAssistanceAgent().getUserAccount().getId();
+			}
+		}
 		if (status && countFinishedTrackingLogs >= 2)
 			status = false;
 		else if (status && super.getRequest().hasData("status"))
