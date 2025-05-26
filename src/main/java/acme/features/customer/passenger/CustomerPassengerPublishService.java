@@ -1,6 +1,8 @@
 
 package acme.features.customer.passenger;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,10 +22,28 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 	public void authorise() {
 		int id = super.getRequest().getData("id", int.class);
 		Passenger passenger = this.repository.findPassengerById(id);
-
 		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		super.getResponse().setAuthorised(passenger.getIsDraftMode() && this.repository.findCustomerUserAccountIdsByPassengerId(id).contains(userAccountId));
+
+		boolean authorised = false;
+
+		if (passenger != null && passenger.getIsDraftMode()) {
+			Collection<Integer> linkedCustomers = this.repository.findCustomerUserAccountIdsByPassengerId(id);
+			authorised = linkedCustomers.contains(userAccountId);
+		}
+
+		super.getResponse().setAuthorised(authorised);
 	}
+
+	/*
+	 * @Override
+	 * public void authorise() {
+	 * int id = super.getRequest().getData("id", int.class);
+	 * Passenger passenger = this.repository.findPassengerById(id);
+	 * 
+	 * int userAccountId = super.getRequest().getPrincipal().getAccountId();
+	 * super.getResponse().setAuthorised(passenger.getIsDraftMode() && this.repository.findCustomerUserAccountIdsByPassengerId(id).contains(userAccountId));
+	 * }
+	 */
 
 	@Override
 	public void load() {

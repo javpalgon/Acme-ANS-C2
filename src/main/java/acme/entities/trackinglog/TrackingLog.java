@@ -4,7 +4,9 @@ package acme.entities.trackinglog;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -25,6 +27,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(indexes = {
+	@Index(columnList = "claim_id")
+})
 @ValidTrackingLog
 public class TrackingLog extends AbstractEntity {
 
@@ -55,9 +60,6 @@ public class TrackingLog extends AbstractEntity {
 	@Automapped
 	@ValidString(max = 255)
 	private String				resolution;
-
-	//	  Si status == PENDING, resolution tiene que ser null y resolutionPercentage!== 100 y cuando status !== PENDING,
-	//	  resolution tiene q ser mandatory y ademas resolutionPercentage==100
 
 	@Mandatory
 	@ManyToOne(optional = false)
