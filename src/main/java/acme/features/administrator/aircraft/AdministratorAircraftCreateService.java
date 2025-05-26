@@ -1,6 +1,9 @@
 
 package acme.features.administrator.aircraft;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -10,6 +13,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.aircraft.AircraftStatus;
+import acme.entities.airline.Airline;
 
 @GuiService
 public class AdministratorAircraftCreateService extends AbstractGuiService<Administrator, Aircraft> {
@@ -20,8 +24,26 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 	@Override
 	public void authorise() {
-		boolean status;
-		status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+
+		if (status) {
+
+			if (super.getRequest().hasData("aircraftStatus", String.class)) {
+				String statusAir = super.getRequest().getData("aircraftStatus", String.class);
+				Set<String> validStatuses = Set.of("0", "ACTIVE", "UNDER_MAINTENANCE");
+				if (!validStatuses.contains(statusAir))
+					status = false;
+			}
+
+			if (super.getRequest().hasData("airline", String.class)) {
+				String iataCode = super.getRequest().getData("airline", String.class);
+				Set<String> validIATACodes = this.repository.findAllAirlines().stream().map(Airline::getIATACode).collect(Collectors.toSet());
+
+				if (!validIATACodes.contains(iataCode))
+					status = false;
+			}
+		}
+
 		super.getResponse().setAuthorised(status);
 	}
 

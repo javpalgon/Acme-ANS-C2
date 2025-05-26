@@ -12,6 +12,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claim.Claim;
 import acme.entities.trackinglog.TrackingLog;
+import acme.entities.trackinglog.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -23,11 +24,19 @@ public class AgentTrackingLogListService extends AbstractGuiService<AssistanceAg
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean status = false;
+		Claim claim;
 		int assistanceAgentId = super.getRequest().getPrincipal().getAccountId();
-		int claimId = super.getRequest().getData("masterId", int.class);
-		List<TrackingLog> trackingLogs = this.repository.findAllByAssistanceAgentAndClaimId(assistanceAgentId, claimId);
-		status = trackingLogs.stream().allMatch(x -> x.getClaim().getId() == claimId && x.getClaim().getAssistanceAgent().getId() == assistanceAgentId);
+		if (super.getRequest().hasData("masterId")) {
+			Integer claimId = super.getRequest().getData("masterId", Integer.class);
+			if (claimId == null)
+				status = false;
+			else {
+				claim = this.repository.findClaimById(claimId);
+				List<TrackingLog> trackingLogs = this.repository.findAllByAssistanceAgentAndClaimId(assistanceAgentId, claimId);
+				status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId();
+			}
+		}
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -46,24 +55,24 @@ public class AgentTrackingLogListService extends AbstractGuiService<AssistanceAg
 	public void unbind(final TrackingLog trackingLog) {
 		int masterId;
 		Dataset dataset;
-
 		masterId = super.getRequest().getData("masterId", int.class);
+		List<TrackingLog> finishedTrackingLogs = new ArrayList<>();
+		finishedTrackingLogs = this.repository.findTrackingLogsByClaimId(masterId).stream().filter(t -> !t.getStatus().equals(TrackingLogStatus.PENDING)).toList();
+		boolean dontShowCreate;
+		dontShowCreate = finishedTrackingLogs.stream().count() == 2;
+
 		dataset = super.unbindObject(trackingLog, "lastUpdate", "step", "resolutionPercentage", "status", "resolution");
 		super.getResponse().addData(dataset);
+
 		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("dontShowCreate", dontShowCreate);
 	}
 
 	@Override
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		int masterId;
-		Claim claim;
-		final boolean showCreate;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		claim = this.repository.findClaimById(masterId);
-		showCreate = !claim.getIsDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent());
-
 		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("showCreate", showCreate);
 	}
 }

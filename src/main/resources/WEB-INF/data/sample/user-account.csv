@@ -43,4 +43,4 @@ user-account-customer-07,true,"UserIdentity{name: 'Celia', surname: 'Gómez Ruiz
 # ASSISTANCE AGENTS
 user-account-agent-01,true,"UserIdentity{name: 'José María', surname: 'Silva Guzmán', email:'makinon12@acme.com'}",agent1,agent1
 user-account-agent-02,true,"UserIdentity{name: 'Santia', surname: 'Bregu', email:'sanbre@acme.com'}",agent2,agent2
-user-account-agent-03,true,"UserIdentity{name: '伟杰', surname: '李伟杰', email:'伟杰_李伟杰@acme.com'}",agent3,agent3
+user-account-agent-03,true,"UserIdentity{name: 'Javier', surname: 'Pallarés González', email:'javpalgon@acme.com'}",agent3,agent3

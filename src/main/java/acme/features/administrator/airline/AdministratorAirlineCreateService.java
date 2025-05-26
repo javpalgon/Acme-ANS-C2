@@ -1,6 +1,9 @@
 
 package acme.features.administrator.airline;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -24,7 +27,14 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		if (status && super.getRequest().hasData("type", String.class)) {
+			String type = super.getRequest().getData("type", String.class);
+			Set<String> validTypes = Set.of("0", "LUXURY", "STANDARD", "LOWCOS");
+			if (!validTypes.contains(type))
+				status = false;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -42,6 +52,9 @@ public class AdministratorAirlineCreateService extends AbstractGuiService<Admini
 	@Override
 	public void validate(final Airline airline) {
 		boolean confirmation;
+		List<Airline> airlines = this.repository.findAllAirlines().stream().toList();
+		if (airline.getIATACode() != null)
+			super.state(!airlines.stream().anyMatch(x -> x.getIATACode().equals(airline.getIATACode())), "IATACode", "administrator.airline.form.error.IATA-not-unique");
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}

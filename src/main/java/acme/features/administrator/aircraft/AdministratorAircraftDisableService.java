@@ -1,6 +1,8 @@
 
 package acme.features.administrator.aircraft;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,7 +22,15 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Integer id;
+		Collection<Aircraft> aircrafts = this.repository.findAllAircrafts();
+		Boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+		if (super.getRequest().hasData("id")) {
+			id = super.getRequest().getData("id", Integer.class);
+			if (id != null && aircrafts.stream().anyMatch(x -> id.equals(x.getId())))
+				super.getResponse().setAuthorised(status);
+		} else
+			super.getResponse().setAuthorised(false);
 	}
 
 	@Override

@@ -34,8 +34,8 @@ assistance-agent.claim.form.button.publish = Publish
 
 assistance-agent.claim.form.button.create = Create
 
-assistance-agent.claim.form.error.registeredAt= The claim is being made for a flight that has not arrived yet.
-assistance-agent.claim.form.error.leg-isDraftMode = You must assign a leg that is published.
-
-
+assistance-agent.claim.form.error.registeredAt= The claim is being made for a flight that has not arrived yet
+assistance-agent.claim.form.error.leg-isDraftMode = You must select a leg that is published
+assistance-agent.claim.form.error.leg.flight-isDraftMode = You must select a leg whose flight is published
+assistance-agent.claim.form.error.save-changes = You must save changes before 
 assistance-agent.claim.trackingLogs = List tracking Logs

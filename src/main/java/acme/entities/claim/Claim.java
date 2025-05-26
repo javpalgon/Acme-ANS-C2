@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -19,7 +21,6 @@ import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
-import acme.constraints.ValidClaim;
 import acme.entities.leg.Leg;
 import acme.entities.trackinglog.TrackingLog;
 import acme.entities.trackinglog.TrackingLogRepository;
@@ -31,7 +32,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@ValidClaim
+@Table(indexes = {
+	@Index(columnList = "leg_id"), @Index(columnList = "assistance_agent_id")
+})
 public class Claim extends AbstractEntity {
 
 	// Serialisation version --------------------------------------------------
@@ -75,8 +78,8 @@ public class Claim extends AbstractEntity {
 		TrackingLogRepository repository;
 		repository = SpringHelper.getBean(TrackingLogRepository.class);
 		List<TrackingLog> trackingLogs = repository.findAllByClaimId(this.getId());
-		boolean predicate = trackingLogs.stream().allMatch(x -> x.getStatus().equals(TrackingLogStatus.PENDING));
-		if (!predicate) {
+		boolean predicate = trackingLogs.stream().anyMatch(x -> !x.getStatus().equals(TrackingLogStatus.PENDING) && !x.getIsDraftMode());
+		if (predicate) {
 			TrackingLog lastTrackingLog = trackingLogs.stream().filter(x -> x.getStatus() != TrackingLogStatus.PENDING).findAny().get();
 			status = ClaimStatus.valueOf(lastTrackingLog.getStatus().toString());
 		}
