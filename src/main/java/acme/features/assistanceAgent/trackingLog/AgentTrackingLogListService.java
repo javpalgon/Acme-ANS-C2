@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claim.Claim;
 import acme.entities.trackinglog.TrackingLog;
 import acme.entities.trackinglog.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
@@ -23,11 +24,19 @@ public class AgentTrackingLogListService extends AbstractGuiService<AssistanceAg
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean status = false;
+		Claim claim;
 		int assistanceAgentId = super.getRequest().getPrincipal().getAccountId();
-		int claimId = super.getRequest().getData("masterId", int.class);
-		List<TrackingLog> trackingLogs = this.repository.findAllByAssistanceAgentAndClaimId(assistanceAgentId, claimId);
-		status = trackingLogs.stream().allMatch(x -> x.getClaim().getId() == claimId && x.getClaim().getAssistanceAgent().getId() == assistanceAgentId);
+		if (super.getRequest().hasData("masterId")) {
+			Integer claimId = super.getRequest().getData("masterId", Integer.class);
+			if (claimId == null)
+				status = false;
+			else {
+				claim = this.repository.findClaimById(claimId);
+				List<TrackingLog> trackingLogs = this.repository.findAllByAssistanceAgentAndClaimId(assistanceAgentId, claimId);
+				status = claim.getAssistanceAgent().getUserAccount().getId() == super.getRequest().getPrincipal().getAccountId();
+			}
+		}
 		super.getResponse().setAuthorised(status);
 	}
 

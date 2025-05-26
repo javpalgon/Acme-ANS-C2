@@ -26,7 +26,22 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status = false;
+
+		try {
+			int bookingId = super.getRequest().getData("bookingId", int.class);
+			Booking booking = this.repository.findBookingById(bookingId);
+
+			if (booking != null) {
+				int customerAccountId = super.getRequest().getPrincipal().getAccountId();
+				status = booking.getIsDraftMode() && booking.getCustomer().getUserAccount().getId() == customerAccountId;
+			}
+		} catch (Exception e) {
+			// En caso de fallo al leer el parámetro, lo dejamos en false
+			status = false;
+		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
