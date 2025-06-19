@@ -4,12 +4,12 @@ package acme.features.member.activityLog;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activitylog.ActivityLog;
 import acme.entities.assignment.Assignment;
 import acme.entities.assignment.AssignmentStatus;
+import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.realms.Member;
 
 @GuiService
@@ -36,7 +36,8 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 		assignment = this.repository.findAssignmentByActivityLogId(activityLogId);
 		activityLog = this.repository.findActivityLogById(activityLogId);
 
-		status = activityLog.getDraftMode() && assignment != null && !assignment.getDraftMode() && assignment.getMember().getId() == memberId && !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
+		status = activityLog.getDraftMode() && assignment != null && !assignment.getDraftMode() && assignment.getMember().getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE) && assignment.getMember().getId() == memberId
+			&& !assignment.getStatus().equals(AssignmentStatus.CANCELLED);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -54,7 +55,9 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel");
+		assert activityLog != null;
+
+		super.bindObject(activityLog, "incidentType", "description", "severityLevel");
 	}
 
 	@Override
@@ -65,28 +68,19 @@ public class MemberActivityLogUpdateService extends AbstractGuiService<Member, A
 		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 		super.state(activityLog.getSeverityLevel() != null && activityLog.getSeverityLevel() >= 0 && activityLog.getSeverityLevel() <= 10, "severityLevel", "member.activity-log.form.error.severity-range");
-
-		super.state(assignment != null, "*", "member.activitylog.form.error.null-assignment");
-
-		super.state(assignment != null && !assignment.getDraftMode(), "*", "member.activitylog.form.error.assignment-in-draft");
-
-		super.state(assignment.getLeg() != null && assignment.getLeg().getArrival().before(MomentHelper.getCurrentMoment()), "*", "member.activitylog.form.error.leg-not-completed");
-
-		super.state(assignment != null && assignment.getMember().getId() == currentMemberId, "*", "member.activitylog.form.error.assignment-not-owned");
-
 	}
 
 	@Override
 	public void perform(final ActivityLog activityLog) {
-		int actividityLogId = activityLog.getId();
-		ActivityLog original = this.repository.findActivityLogById(actividityLogId);
-		activityLog.setRegisteredAt(original.getRegisteredAt());
+		assert activityLog != null;
 
 		this.repository.save(activityLog);
 	}
 
 	@Override
 	public void unbind(final ActivityLog activityLog) {
+		assert activityLog != null;
+
 		Dataset dataset;
 
 		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");

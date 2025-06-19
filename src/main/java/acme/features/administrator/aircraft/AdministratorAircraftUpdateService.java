@@ -2,6 +2,8 @@
 package acme.features.administrator.aircraft;
 
 import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +25,34 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Integer id;
+		Collection<Aircraft> aircrafts = this.repository.findAllAircrafts();
+		boolean status = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+
+		if (status)
+			if (super.getRequest().hasData("id")) {
+				id = super.getRequest().getData("id", Integer.class);
+				if (id != null && aircrafts.stream().anyMatch(x -> id.equals(x.getId()))) {
+					if (super.getRequest().hasData("aircraftStatus", String.class)) {
+						String statusAir = super.getRequest().getData("aircraftStatus", String.class);
+						Set<String> validStatuses = Set.of("0", "ACTIVE", "UNDER_MAINTENANCE");
+						if (!validStatuses.contains(statusAir))
+							super.getResponse().setAuthorised(false);
+						else
+							super.getResponse().setAuthorised(status);
+					}
+					if (super.getRequest().hasData("airline", String.class)) {
+						String iataCode = super.getRequest().getData("airline", String.class);
+						Set<String> validIATACodes = this.repository.findAllAirlines().stream().map(Airline::getIATACode).collect(Collectors.toSet());
+
+						if (!validIATACodes.contains(iataCode))
+							status = false;
+					}
+				} else
+					status = false;
+			} else
+				status = false;
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -63,9 +92,12 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 
 		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details", "enable");
 		dataset.put("aircraftStatus", statusChoices);
-		dataset.put("airlines", SelectChoices.from(this.repository.findAllAirlines(), "IATACode", aircraft.getAirline()));
-		dataset.put("name", aircraft.getAirline().getName());
-		dataset.put("website", aircraft.getAirline().getWebsite());
+		if (aircraft.getAirline() != null) {
+			dataset.put("airlines", SelectChoices.from(this.repository.findAllAirlines(), "IATACode", aircraft.getAirline()));
+			dataset.put("name", aircraft.getAirline().getName());
+			dataset.put("website", aircraft.getAirline().getWebsite());
+		} else
+			dataset.put("airlines", SelectChoices.from(this.repository.findAllAirlines(), "IATACode", null));
 		dataset.put("confirmation", false);
 		dataset.put("readonly", false);
 		super.getResponse().addData(dataset);

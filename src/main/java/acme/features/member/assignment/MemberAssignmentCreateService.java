@@ -26,13 +26,14 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 
 	@Override
 	public void authorise() {
-		boolean status = true;
+		boolean status;
 		int memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Member member = this.repository.findMemberById(memberId);
 
-		status = member != null && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
+		status = member != null && super.getRequest().getPrincipal().hasRealmOfType(Member.class) && member.getAvailabilityStatus() == AvailabilityStatus.AVAILABLE;
 
-		if (status)
+		if (status && super.getRequest().getMethod().equals("POST")) {
+
 			if (super.getRequest().hasData("leg", int.class)) {
 				int legId = super.getRequest().getData("leg", int.class);
 				if ((Integer) legId != null && legId != 0) {
@@ -43,8 +44,17 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 				}
 			}
 
-		super.getResponse().setAuthorised(status);
+			if (status && super.getRequest().hasData("role")) {
+				String currentRole = super.getRequest().getData("role", String.class);
+				status = this.isValidRole(currentRole);
+			}
+		}
 
+		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean isValidRole(final String role) {
+		return role.equals("0") || role.equals("PILOT") || role.equals("CO_PILOT") || role.equals("LEAD_ATTENDANT") || role.equals("CABIN_ATTENDANT");
 	}
 
 	@Override
@@ -73,21 +83,7 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 	public void validate(final Assignment assignment) {
 		assert assignment != null;
 
-		int currentMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Member member = this.repository.findMemberById(currentMemberId);
-
-		super.state(assignment.getMember() != null, "member", "member.assignment.form.error.member-null");
-
-		if (assignment.getLeg() != null)
-			super.state(!assignment.getLeg().getIsDraftMode(), "leg", "member.assignment.form.error.member-not-published");
-
-		if (assignment.getLeg() != null)
-			super.state(assignment.getMember().getAvailabilityStatus() == AvailabilityStatus.AVAILABLE, "member", "member.assignment.form.error.member-unavailable");
-
-		if (assignment.getLeg() != null)
-			super.state(!assignment.getLeg().getFlight().getIsDraftMode(), "leg", "member.assignment.form.error.flight-not-published");
-
-		if (assignment.getMember() != null && assignment.getLeg() != null) {
+		if (assignment.getLeg() != null) {
 			Integer memberId = assignment.getMember().getId();
 			Integer legId = assignment.getLeg().getId();
 			Integer assignmentId = assignment.getId();
@@ -104,10 +100,12 @@ public class MemberAssignmentCreateService extends AbstractGuiService<Member, As
 		}
 
 		if (assignment.getRole() == Role.PILOT)
-			super.state(assignment.getLeg() == null || !this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
+			if (assignment.getLeg() != null)
+				super.state(!this.repository.legHasPilot(assignment.getLeg().getId(), Role.PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.pilot-exists");
 
 		if (assignment.getRole() == Role.CO_PILOT)
-			super.state(assignment.getLeg() == null || !this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
+			if (assignment.getLeg() != null)
+				super.state(!this.repository.legHasCoPilot(assignment.getLeg().getId(), Role.CO_PILOT, AssignmentStatus.CANCELLED), "role", "member.assignment.form.error.copilot-exists");
 
 	}
 

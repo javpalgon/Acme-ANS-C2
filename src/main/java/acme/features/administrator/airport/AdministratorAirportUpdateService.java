@@ -1,6 +1,9 @@
 
 package acme.features.administrator.airport;
 
+import java.util.Collection;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -20,7 +23,33 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status = false; // Valor por defecto: no autorizado
+		Collection<Airport> airports = this.repository.findAllAirports();
+		// 1. Comprobar si el usuario tiene rol de Administrator
+		boolean isAdmin = super.getRequest().getPrincipal().hasRealmOfType(Administrator.class);
+
+		if (isAdmin)
+			// 2. Comprobar si hay un parámetro "id" en la solicitud
+			if (super.getRequest().hasData("id")) {
+				Integer id = super.getRequest().getData("id", Integer.class);
+
+				// 3. Validar que el id no sea null
+				if (id != null && airports.stream().anyMatch(x -> id.equals(x.getId()))) {
+					status = true;
+					// 5. Verificar si se ha enviado el campo "operationalScope"
+					if (super.getRequest().hasData("operationalScope", String.class)) {
+						String scope = super.getRequest().getData("operationalScope", String.class);
+						Set<String> validScopes = Set.of("0", "INTERNATIONAL", "DOMESTIC", "REGIONAL");
+
+						// 6. Comprobar si el scope es válido
+						if (!validScopes.contains(scope))
+							status = false; // Todo correcto
+					}
+				}
+			}
+
+		// 7. Establecer autorización
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

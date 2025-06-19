@@ -26,7 +26,7 @@ public @interface ValidIATACode {
 
 	// Standart validation properties ---------------------------
 
-	String message() default "{acme.validation.IATACode}";
+	String message() default "IATACode not valid";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};

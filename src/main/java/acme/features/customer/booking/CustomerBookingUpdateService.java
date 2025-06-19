@@ -69,7 +69,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		super.state(!isDuplicate, "locatorCode", "customer.booking.form.error.duplicate-locatorCode");
 
 		// 5. PurchaseMoment: debe estar en el pasado
-		boolean isPast = object.getPurchaseMoment() != null && MomentHelper.isBefore(object.getPurchaseMoment(), MomentHelper.getCurrentMoment());
+		boolean isPast = object.getPurchaseMoment() != null && MomentHelper.isBeforeOrEqual(object.getPurchaseMoment(), MomentHelper.getCurrentMoment());
 		super.state(isPast, "purchaseMoment", "customer.booking.form.error.invalid-purchaseMoment");
 
 		// 6. TravelClass: obligatorio

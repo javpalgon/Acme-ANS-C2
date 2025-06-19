@@ -10,7 +10,7 @@
     <acme:input-textbox code="administrator.airport.form.label.city" path="city" />
     <acme:input-textbox code="administrator.airport.form.label.country" path="country" />
     <acme:input-url code="administrator.airport.form.label.website" path="website"  />
-    <acme:input-url code="administrator.airport.form.label.emailAddress" path="emailAddress"/>
+    <acme:input-email code="administrator.airport.form.label.emailAddress" path="emailAddress"/>
     <acme:input-textbox code="administrator.airport.form.label.phoneNumber" path="phoneNumber"/>
 
 	<jstl:choose>	 
