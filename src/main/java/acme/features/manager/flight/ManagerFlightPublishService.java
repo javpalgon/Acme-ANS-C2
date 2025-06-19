@@ -1,10 +1,7 @@
 
 package acme.features.manager.flight;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -58,51 +55,10 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	public void validate(final Flight object) {
 
 		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
+		super.state(!legs.isEmpty(), "*", "manager.project.publish.error.noLegs");
 
-		super.state(!legs.isEmpty(), "*", "manager.flight.form.error.legsEmpty");
-
-		List<Leg> sortedLegs = new ArrayList<>(legs);
-		sortedLegs.sort(Comparator.comparing(Leg::getDeparture));
-
-		boolean valid = true;
-
-		for (int i = 0; i < sortedLegs.size(); i++) {
-			Leg current = sortedLegs.get(i);
-
-			if (current.getIsDraftMode()) {
-				super.state(false, "*", "manager.flight.form.error.LegsNotPublished");
-				valid = false;
-			}
-
-			if (!current.getArrival().after(current.getDeparture())) {
-				super.state(false, "*", "acme.validation.leg.invalid-schedule.message");
-				valid = false;
-			}
-
-			if (current.getArrivalAirport().getId() == current.getDepartureAirport().getId()) {
-				super.state(false, "*", "acme.validation.leg.same-airports.message");
-				valid = false;
-			}
-
-			if (i < sortedLegs.size() - 1) {
-				Leg next = sortedLegs.get(i + 1);
-
-				if (!current.getArrival().before(next.getDeparture())) {
-					super.state(false, "*", "acme.validation.leg.invalid-timing-sequence.message");
-					valid = false;
-				}
-
-				if (!current.getArrivalAirport().equals(next.getDepartureAirport())) {
-					super.state(false, "*", "acme.validation.leg.inconsistent-airport-connection.message");
-					valid = false;
-				}
-
-				if (current.getDeparture().equals(next.getDeparture())) {
-					super.state(false, "*", "acme.validation.leg.same-departure.message");
-					valid = false;
-				}
-			}
-		}
+		boolean allLegsPublished = legs.stream().allMatch(x -> !x.getIsDraftMode());
+		super.state(allLegsPublished, "*", "manager.flight.publish.error.notAllPublished");
 	}
 
 	@Override

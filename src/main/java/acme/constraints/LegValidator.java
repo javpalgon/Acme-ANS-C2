@@ -2,6 +2,7 @@
 package acme.constraints;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 	@Override
 	public boolean isValid(final Leg leg, final ConstraintValidatorContext context) {
-		assert context != null;
 
 		if (leg == null) {
 			super.state(context, false, "*", "acme.validation.NotNull.message");
@@ -50,16 +50,24 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		Flight flight = leg.getFlight();
 		Manager manager = flight.getManager();
 		Airline airline = manager.getAirline();
-		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true))
+		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true)) {
 			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
+			result = false;
+		}
 
-		// 2. Validar que la hora de llegada es posterior a la de salida
 		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture())) {
 			super.state(context, false, "arrival", "acme.validation.leg.invalid-schedule.message");
 			result = false;
 		}
 
-		// 3. Validar que los aeropuertos son distintos
+		Integer flightNumber = leg.getFlight().getId();
+		Collection<Leg> legs = this.repository.getLegsByFlight(flightNumber);
+
+		if (legs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()))) {
+			super.state(context, false, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
+			result = false;
+		}
+
 		if (leg.getArrivalAirport() != null && leg.getDepartureAirport() != null && leg.getArrivalAirport().getId() == leg.getDepartureAirport().getId()) {
 			super.state(context, false, "arrivalAirport", "acme.validation.leg.same-airports.message");
 			result = false;

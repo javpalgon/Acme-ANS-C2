@@ -107,12 +107,23 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 	@Override
 	public void validate(final Leg leg) {
 		super.state(leg.getStatus() != null, "status", "manager.leg.error.status-required");
-		boolean validScheduledDeparture = true;
-		Date scheduledDeparture = leg.getDeparture();
-		Date currentMoment = MomentHelper.getCurrentMoment();
-		if (scheduledDeparture != null)
-			validScheduledDeparture = MomentHelper.isAfter(scheduledDeparture, currentMoment);
-		super.state(validScheduledDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		boolean validDeparture = true;
+		Date departure = leg.getDeparture();
+		Date arrival = leg.getArrival();
+		Collection<Leg> allLegs = this.repository.findAllLegs();
+		boolean isDuplicated = allLegs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()));
+		if (isDuplicated)
+			super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
+		if (arrival != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(arrival, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
+		if (departure != null) {
+			Date currentMoment = MomentHelper.getCurrentMoment();
+			validDeparture = MomentHelper.isAfter(departure, currentMoment);
+			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		}
 
 	}
 
@@ -148,7 +159,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 		dataset.put("isDraftFlight", leg.getFlight().getIsDraftMode());
 		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
-
 		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
 		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
 		dataset.put("departureAirports", departureAirportChoices);
