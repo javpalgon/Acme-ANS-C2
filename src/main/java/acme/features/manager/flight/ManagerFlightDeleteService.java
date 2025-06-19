@@ -57,9 +57,9 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight object) {
-		Collection<Leg> legs = this.repo.findLegsByFlightId(object.getId());
-		boolean unpublishedLegs = legs.stream().allMatch(Leg::getIsDraftMode);
-		super.state(unpublishedLegs, "*", "manager.flight.legs.published");
+		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
+		boolean allLegsAreDraft = legs.stream().allMatch(Leg::getIsDraftMode);
+		super.state(allLegsAreDraft, "*", "acme.validation.leg.published-legs-not-allowed.message");
 
 	}
 	@Override

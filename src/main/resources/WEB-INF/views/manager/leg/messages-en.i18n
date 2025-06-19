@@ -36,3 +36,4 @@ acme.validation.leg.invalid-aircraft.message = The aircraft is not available for
 manager.leg.error.status-required=The leg status is required
 manager.leg.error.invalid-status=The leg status is invalid. The status must be one of the following: "CANCELED", "DELAYED", "LANDED", "ON_TIME"
 acme.validation.leg.duplicate-flight-number.message = This flight number already exists.
+acme.validation.leg.invalid-flight-number-manager.message = Wrong flight number

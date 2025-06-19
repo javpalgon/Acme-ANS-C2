@@ -57,7 +57,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		Collection<Leg> legs = this.repository.findLegsByFlightId(object.getId());
 		super.state(!legs.isEmpty(), "*", "manager.project.publish.error.noLegs");
 
-		boolean allLegsPublished = legs.stream().allMatch(Leg::getIsDraftMode);
+		boolean allLegsPublished = legs.stream().allMatch(x -> !x.getIsDraftMode());
 		super.state(allLegsPublished, "*", "manager.flight.publish.error.notAllPublished");
 	}
 

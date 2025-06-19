@@ -110,8 +110,7 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Date arrival = leg.getArrival();
 		Collection<Leg> allLegs = this.repository.findAllLegs();
 		boolean isDuplicated = allLegs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()));
-		if (isDuplicated)
-			super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
+		super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
 		if (arrival != null) {
 			Date currentMoment = MomentHelper.getCurrentMoment();
 			validDeparture = MomentHelper.isAfter(arrival, currentMoment);

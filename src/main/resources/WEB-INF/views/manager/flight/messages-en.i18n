@@ -29,6 +29,7 @@ manager.flight.list.label.description = Description
 manager.flight.list.label.requiresSelfTransfer = Does it require self transfer?
 manager.flight.list.label.isDraftMode = Draft Mode
 manager.flight.legs = Flight legs
-
+manager.flight.legs.published = This flight has unpublished legs. Please publish them
 manager.project.publish.error.noLegs = This flight has no legs, so it cannot be published
 manager.flight.publish.error.notAllPublished = This flight has unpublished legs. Please publish all legs first
+acme.validation.leg.published-legs-not-allowed.message = You can't delete this flight, it already has published legs.
