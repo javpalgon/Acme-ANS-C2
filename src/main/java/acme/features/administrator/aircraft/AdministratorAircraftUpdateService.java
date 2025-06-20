@@ -90,7 +90,7 @@ public class AdministratorAircraftUpdateService extends AbstractGuiService<Admin
 		SelectChoices statusChoices;
 		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getAircraftStatus());
 
-		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details", "enable");
+		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details");
 		dataset.put("aircraftStatus", statusChoices);
 		if (aircraft.getAirline() != null) {
 			dataset.put("airlines", SelectChoices.from(this.repository.findAllAirlines(), "IATACode", aircraft.getAirline()));

@@ -1,43 +1,41 @@
 key,tag,requiresSelfTransfer,cost,description,key:manager,isDraftMode
-flight-01,IB100,true,EUR 400.00,Comfortable flight with great seating,manager-01,true
-flight-02,VY200,false,EUR 350.00,Direct flight with excellent service,manager-02,true
-flight-03,IB100,true,EUR 400.00,Newest in town,manager-02,true
-flight-04,X,false,EUR 0.00,Free demo flight with minimal setup,manager-02,true
-flight-05,ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMN,true,EUR 1000000.00,This is a maxed out tag and cost,manager-03,true
-flight-06,FLIGHT-TEST-TAG-1234567890-ABCDEFGHIJKLMNOPQRSTUVW,false,EUR 10.00,This one should be rejected due to tag length,manager-03,true
-flight-07,EDGE001,true,EUR 999999.99,A test of nearly max cost,manager-03,true
-flight-08,NO-DESC,true,EUR 800.00,,manager-08,true
-flight-09,ONLYDESC,false,EUR 550.00,Just description without anything special,manager-09,true
-flight-10,WIZ003,false,EUR 1.00,Just description without anything special,manager-10,true
-flight-11,SPC-!@#$$%^&*()_+|~`=,true,EUR 99.99,Flight with special chars in tag,manager-09,true
-flight-12,Min,true,EUR 0.01,Minimum valid cost,manager-10,true
-flight-13,Max,false,EUR 1000000.00,Maximum valid cost,manager-11,true
-flight-14,TAG50CHARSLONG-ABCDEFGHIJKLMN12345678901234567890,true,EUR 123.45,Exactly 50-char tag,manager-12,true
-flight-15,DRAFT-ONLY,true,EUR 500.00,This flight is in draft,manager-13,true
-flight-16,REAL-FLIGHT,false,EUR 750.00,Published and real,manager-14,true
-flight-17,NEWGEN-100,true,EUR 420.00,New generation airliner with improved engines,manager-01,true
-flight-18,CLASSIC200,false,EUR 300.00,A popular flight with consistent reliability,manager-01,true
-flight-19,ECO-FRIENDLY-01,true,EUR 275.50,Operated with low-emission aircraft,manager-01,true
-flight-20,BUSINESS-X,false,EUR 900.00,Business-class flight with luxury seats,manager-01,true
-flight-21,EVENING-FLIGHT,true,EUR 620.00,Evening departure with complimentary snacks,manager-01,true
-flight-22,EARLYBIRD-01,false,EUR 210.00,Early morning budget flight for commuters,manager-01,true
-flight-23,AIRBUS-811,false,EUR 340.00,Amazing trip to Barcelona,manager-01,false
 
+# FLIGHTS DE MANAGER 1
+flight-01,VYB100,true,EUR 400.00,This is a published flight,manager-01,false
+flight-02,VYB101,false,EUR 100.00,This is a draft flight with legs,manager-01,true
+flight-03,VYB102,false,EUR 0.00,This is a free draft flight with no legs,manager-01,true
 
-flight-24,SKY001,false,EUR 280.00,Scenic route with window seats,manager-01,false
-flight-25,NIGHTFLYER,false,EUR 320.00,Overnight flight with reclining seats,manager-01,false
-flight-26,SUNRISE-EXP,false,EUR 295.99,Early sunrise flight with coffee service,manager-01,false
-flight-27,OCEANIC200,false,EUR 410.00,Overseas flight with ocean views,manager-02,false
-flight-28,MOUNTAIN-X,false,EUR 380.50,Mountain route with breathtaking views,manager-02,false
-flight-29,FASTLANE007,false,EUR 450.00,Express flight with priority boarding,manager-02,false
-flight-30,COASTLINER,false,EUR 315.00,Flight along the coastline,manager-02,false
-flight-31,HIGHLAND-88,false,EUR 390.00,Trip over northern highlands,manager-02,false
-flight-32,ISLE-JUMP,false,EUR 250.00,Island hopper service,manager-02,false
-flight-33,ARCTIC-GLIDE,false,EUR 670.00,Polar flight with heated cabins,manager-02,false
-flight-34,DESERT-RAIL,false,EUR 330.00,Desert route with cool beverages,manager-03,false
-flight-35,URBAN-SKY,false,EUR 260.00,Short flight between metropolitan hubs,manager-03,false
-flight-36,TROPICAL-VIEW,false,EUR 490.00,Flight above tropical regions with in-flight guide,manager-03,false
-flight-37,CANYON-FLY,false,EUR 355.50,Low altitude flight above canyons,manager-03,false
-flight-38,EVENING-JET,false,EUR 310.00,Evening jet service with soft lighting,manager-03,false
-flight-39,NORDIC-TRAIL,false,EUR 470.00,Flight path through Scandinavian airspace,manager-03,false
-flight-40,JUNGLE-ARC,false,EUR 345.00,Jungle flyover with commentary,manager-03,false
+# TAG VARIATIONS (solo cambia el tag)
+flight-04,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOpqrstuvwx,false,EUR 50.00,Tag variation test,manager-01,true
+flight-05,<script>alert(1)</script>,false,EUR 50.00,Tag variation test,manager-01,true
+flight-06,查询航班,false,EUR 50.00,Tag variation test,manager-01,true
+flight-07,полёт-с-крыльями,false,EUR 50.00,Tag variation test,manager-01,true
+flight-08,飛行機予約,false,EUR 50.00,Tag variation test,manager-01,true
+flight-09,SELECT * FROM flights,false,EUR 50.00,Tag variation test,manager-01,true
+flight-10,DROP DATABASE flightDB;,false,EUR 50.00,Tag variation test,manager-01,true
+flight-11,D,false,EUR 50.00,Tag variation test,manager-01,true
+
+# COST VARIATIONS (solo cambia el cost)
+flight-12,COST-TEST-01,false,EUR 0.00,Cost variation test,manager-01,true
+flight-13,COST-TEST-01,false,EUR 0.01,Cost variation test,manager-01,true
+flight-14,COST-TEST-01,false,EUR 500.00,Cost variation test,manager-01,true
+flight-15,COST-TEST-01,false,EUR 999999.99,Cost variation test,manager-01,true
+flight-16,COST-TEST-01,false,EUR 1000000.00,Cost variation test,manager-01,true
+
+# DESCRIPTION VARIATIONS (solo cambia el description)
+flight-17,DESC-TEST-01,false,EUR 100.00,,manager-01,true
+flight-18,DESC-TEST-01,false,EUR 100.00,S,manager-01,true
+flight-19,DESC-TEST-01,false,EUR 100.00,null,manager-01,true
+flight-20,DESC-TEST-01,false,EUR 100.00,<img src=x onerror=alert("Hacked!")>,manager-01,true
+flight-21,DESC-TEST-01,false,EUR 100.00,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",manager-01,true
+flight-22,DESC-TEST-01,false,EUR 100.00,这是一个中文描述示例,manager-01,true
+flight-23,DESC-TEST-01,false,EUR 100.00,هذا وصف باللغة العربية,manager-01,true
+flight-24,DESC-TEST-01,false,EUR 100.00,Это описание на русском языке,manager-01,true
+flight-25,DESC-TEST-01,false,EUR 100.00,תיאור בעברית של טיסה,manager-01,true
+flight-26,DESC-TEST-01,false,EUR 100.00,これは日本語の説明です,manager-01,true
+
+# FLIGHTS DE MANAGER 2
+flight-27,AEX100,true,EUR 400.00,This is a published flight,manager-02,false
+flight-28,AEX101,false,EUR 0.00,This is a draft flight with legs,manager-02,true
+flight-29,AEX102,false,EUR 0.00,This is a free draft flight with no legs,manager-02,true
+

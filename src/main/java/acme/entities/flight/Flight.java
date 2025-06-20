@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
@@ -36,18 +35,13 @@ public class Flight extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@NotBlank
 	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				tag;
 
 	@Mandatory
 	@Automapped
-	private Boolean				requiresSelfTransfer;
-
-	@Mandatory
-	@Automapped
-	private Boolean				isDraftMode;
+	private boolean				requiresSelfTransfer;
 
 	@Mandatory
 	@ValidMoney(min = 0, max = 1000000)
@@ -59,65 +53,69 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
+	@Automapped
+	private Boolean				isDraftMode;
+
+	// Derived attributes
+
+
+	private LegRepository legRepository() {
+		return SpringHelper.getBean(LegRepository.class);
+	}
+
+	@Transient
+	public String getFlightSummary() {
+		if (!this.legRepository().hasLegs(this.getId()))
+			return "No legs";
+
+		return this.getOriginCity() + " -> " + this.getDestinationCity() + " --- " + this.getDeparture() + " // " + this.getArrival();
+	}
 
 	@Transient
 	public Date getDeparture() {
-		Date result;
-		LegRepository repository;
+		if (!this.legRepository().hasLegs(this.getId()))
+			return null;
 
-		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findDepartureByFlightId(this.getId()).stream().toList().get(0);
-
-		return result;
+		return this.legRepository().findDepartureByFlightId(this.getId()).stream().findFirst().orElse(null);
 	}
 
 	@Transient
 	public Date getArrival() {
-		Date result;
-		LegRepository repository;
+		if (!this.legRepository().hasLegs(this.getId()))
+			return null;
 
-		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findArrivalByFlightId(this.getId()).stream().toList().get(0);
-		return result;
+		return this.legRepository().findArrivalByFlightId(this.getId()).stream().findFirst().orElse(null);
 	}
 
 	@Transient
 	public String getOriginCity() {
-		String result;
-		LegRepository repository;
+		if (!this.legRepository().hasLegs(this.getId()))
+			return null;
 
-		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findOriginCityByFlightId(this.getId()).stream().toList().get(0);
-
-		return result;
+		return this.legRepository().findOriginCityByFlightId(this.getId()).stream().findFirst().orElse(null);
 	}
 
 	@Transient
 	public String getDestinationCity() {
-		String result;
-		LegRepository repository;
+		if (!this.legRepository().hasLegs(this.getId()))
+			return null;
 
-		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findDestinationCityByFlightId(this.getId()).stream().toList().get(0);
-
-		return result;
+		return this.legRepository().findDestinationCityByFlightId(this.getId()).stream().findFirst().orElse(null);
 	}
 
 	@Transient
 	public Integer getNumOfLayovers() {
-		Integer result;
-		LegRepository repository;
+		if (!this.legRepository().hasLegs(this.getId()))
+			return null;
 
-		repository = SpringHelper.getBean(LegRepository.class);
-		result = repository.findNumberOfLayovers(this.getId()) - 1;
-
-		return result;
+		return this.legRepository().findNumberOfLayovers(this.getId()) - 1;
 	}
 
 
-	@Optional
-	@ManyToOne(optional = true)
+	@Mandatory
 	@Valid
+	@ManyToOne(optional = false)
 	private Manager manager;
 
 }
