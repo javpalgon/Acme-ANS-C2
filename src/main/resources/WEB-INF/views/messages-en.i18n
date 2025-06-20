@@ -1,29 +1,25 @@
 # validation-en.i18n
+
+
+# General messages
+
+acme.validation.NotNull.message = This entity may not be null.
+
+
+
+# Student 1 messages
+
+acme.validation.manager.wrong-initials.message = Manager identifier must start with his/her/their name initials.
+acme.validation.leg.flight-number-pattern.message = Flight number must start by the airlines IATA code, followed by 4 digits
+acme.validation.leg.invalid-flight-number-manager.message = Flight number must start by the airlines IATA code
+acme.validation.leg.invalid-schedule.message = The scheduled departure must be before the scheduled arrival
+acme.validation.leg.duplicate-flight-number.message = This flight number already exists for the flight
+acme.validation.leg.same-airports.message = The departure and arrival airport must be different
+
+
+# Student X
+
 acme.validation.technician.wrong-initials.message = Technician ID must start with the correct initials
 acme.validation.technician.null-identity.message = Technician identity information is missing 
 acme.validation.Birthday.invalid-age.message = Person is under age
 acme.validation.Experience.invalid-experience.message = Can't have more experience years than years of life
-
-
-########################################################################################################
-
-acme.validation.manager.wrong-initials.message = Manager ID must start with the correct initials
-acme.validation.manager.null-identity.message = Manager identity information is missing
-acme.validation.manager.wrong-initials.message = Initials dont match user account
-acme.validation.Experience.invalid-experience.message = Impossible to have this experience.
-acme.validation.Birthday.invalid-age.message = Manager is too young to work
-acme.validation.NotNull.message = Entity can not be null
-
-############################################################################################################
-
-
-acme.validation.leg.invalid-schedule.message = Arrival time must be later than departure time
-acme.validation.leg.invalid-legs.message = Schedule incorrect comparing to other legs
-acme.validation.leg.invalid-flight-number.message = Flight number must begin with the airline's IATA code
-acme.validation.leg.same-airports.message = The departure airport and arrival airport can't be the same
-acme.validation.leg.invalid-schedule.message = Departure has to be before Arrival
-acme.validation.leg.same-airports.message = Leg can't have the same airport for departure and arrival
-acme.validation.flight.overlapping.message = Legs should have proper schedule ( one legs arrival should be before the next legs departure)
-acme.validation.leg.inconsistent-airport-connection.message = Legs arrival airport should be the same as the next legs departure airport
-acme.validation.leg.same-departure.message = Legs shouldn't have the same schedule
-acme.validation.leg.invalid-departure-date.message = Leg can't have its departure today.

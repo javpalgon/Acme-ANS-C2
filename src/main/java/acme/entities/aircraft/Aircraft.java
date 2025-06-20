@@ -61,8 +61,4 @@ public class Aircraft extends AbstractEntity {
 	@ManyToOne(optional = false)
 	private Airline				airline;
 
-	@Mandatory
-	@Automapped
-	private Boolean				enable;
-
 }

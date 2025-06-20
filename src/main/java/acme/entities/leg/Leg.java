@@ -41,7 +41,7 @@ public class Leg extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(min = 7, max = 7, pattern = "^[A-Z]{3}\\d{4}$")
+	@ValidString(min = 7, max = 7, pattern = "^[A-Z]{3}\\d{4}$", message = "{acme.validation.leg.flight-number-pattern.message}")
 	@Column(unique = true)
 	private String				flightNumber;
 
@@ -85,8 +85,13 @@ public class Leg extends AbstractEntity {
 
 
 	@Transient
-	public Long getDuration() {
-		return MomentHelper.computeDuration(this.getDeparture(), this.getArrival()).toHours();
+	public Double getDuration() {
+		Double duration = null;
+
+		if (this.getDeparture() != null && this.getArrival() != null && MomentHelper.isAfterOrEqual(this.getArrival(), this.getDeparture()))
+			duration = MomentHelper.computeDuration(this.getDeparture(), this.getArrival()).getSeconds() / 3600.;
+
+		return duration;
 	}
 
 }

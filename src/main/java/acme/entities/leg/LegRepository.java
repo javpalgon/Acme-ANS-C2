@@ -13,18 +13,6 @@ import acme.client.repositories.AbstractRepository;
 @Repository
 public interface LegRepository extends AbstractRepository {
 
-	@Query("select l from Leg l where l.flight.id = :flightId")
-	Collection<Leg> findAllLegsByFlightId(@Param("flightId") Integer flightId);
-
-	@Query("select l from Leg l")
-	Collection<Leg> findAllLegs();
-
-	@Query("select l from Leg l where l.flight.id = :flightId AND l.isDraftMode = false")
-	Collection<Leg> findPublishedLegsOfFlight(int flightId);
-
-	@Query("select l from Leg l where l.flight.id = :flightId order by l.departure")
-	Collection<Leg> getLegsByFlight(Integer flightId);
-
 	@Query("select l.departure from Leg l where l.flight.id = :flightId order by l.departure")
 	Collection<Date> findDepartureByFlightId(@Param("flightId") Integer flightId);
 
@@ -38,6 +26,12 @@ public interface LegRepository extends AbstractRepository {
 	Collection<String> findDestinationCityByFlightId(@Param("flightId") Integer flightId);
 
 	@Query("select count(l) from Leg l where l.flight.id = :flightId")
-	Integer findNumberOfLayovers(Integer flightId);
+	Integer findNumberOfLayovers(@Param("flightId") Integer flightId);
+
+	@Query("select l from Leg l where l.flight.id = :flightId order by l.departure")
+	Collection<Leg> getLegsByFlight(Integer flightId);
+
+	@Query("select case when count(l) > 0 then true else false end from Leg l where l.flight.id = :flightId")
+	boolean hasLegs(@Param("flightId") Integer flightId);
 
 }

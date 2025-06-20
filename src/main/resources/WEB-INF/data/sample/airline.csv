@@ -1,14 +1,14 @@
 key,name,IATACode,website,type,foundationMoment,email,phoneNumber
 airline-00,Iberia,IBV,https://www.iberia.com,STANDARD,2007/06/28 00:00,contact@iberia.com,+34910222222
 airline-01,Vueling,VYB,https://www.vueling.com,LUXURY,2004/03/01 00:00,contact@vueling.com,+34910330330
-airline-02,Air Europa,AEX,https://www.aireuropa.com,LOW_COST,1995/05/15 00:00,info@aireuropa.com,+34666777888
+airline-02,Air Europa,AEX,https://www.aireuropa.com,LOW_COST,2002/05/15 00:00,info@aireuropa.com,+34666777888
 airline-03,LongNameAirlineXXXXXXXXXXXXXXXXXXXXXXXXXXXXX,LNA,https://www.longname.com,STANDARD,2010/08/23 00:00,info@longname.com,+34915555555
 airline-04,Shorty,SHY,https://sh.com,LUXURY,2020/02/10 00:00,sh@sh.com,+123456
 airline-05,NoEmail,NEM,https://www.noemail.com,LOW_COST,2000/01/01 00:00,,
-airline-06,NoPhone,NPH,https://www.nophone.com,STANDARD,1990/12/31 00:00,contact@nophone.com,
+airline-06,NoPhone,NPH,https://www.nophone.com,STANDARD,2021/12/31 00:00,contact@nophone.com,
 airline-07,InvalidWebsite,INV,https://invalid-url.com,LOW_COST,2015/09/09 00:00,info@invalid.com,+34123456789
 airline-08,FutureAir,FTA,https://www.futureair.com,STANDARD,2010/07/01 00:00,info@future.com,+34911222333
 airline-09,NonUniqueIATA,ABC,https://www.duplicate.com,LUXURY,2002/06/15 00:00,duplicate@airline.com,+34916666666
 airline-10,EdgeCase,XYZ,https://www.edge.com,LOW_COST,2024/03/20 00:00,edge@case.com,+34917777777
-airline-11,MaxIATACode,ZXY,https://www.maxiata.com,LUXURY,1985/05/05 00:00,maxiata@air.com,+34665443322
-airline-12,MinIATACode,AAA,https://www.miniata.com,STANDARD,1970/01/01 00:00,,
+airline-11,MaxIATACode,ZXY,https://www.maxiata.com,LUXURY,2007/05/05 00:00,maxiata@air.com,+34665443322
+airline-12,MinIATACode,AAA,https://www.miniata.com,STANDARD,2008/01/01 00:00,,

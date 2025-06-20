@@ -20,7 +20,6 @@ import acme.entities.aircraft.AircraftStatus;
 import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
-import acme.entities.leg.LegRepository;
 import acme.entities.leg.LegStatus;
 import acme.realms.Manager;
 
@@ -30,10 +29,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ManagerLegRepository	repository;
-
-	@Autowired
-	private LegRepository			legRepository;
+	private ManagerLegRepository repository;
 
 	// AbstractGuiService interface -------------------------------------------
 
@@ -109,7 +105,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		Collection<Leg> legs = this.legRepository.getLegsByFlight(leg.getFlight().getId());
+		Collection<Leg> legs = this.repository.getLegsByFlight(leg.getFlight().getId());
 		List<Leg> legsToValidate = legs.stream().filter(l -> !l.getIsDraftMode()).collect(Collectors.toList());
 		List<Leg> legsToValidateOverlap = new ArrayList<>(legsToValidate);
 		legsToValidateOverlap.add(leg);
@@ -151,7 +147,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 	}
 
 	private void validateOverlappingLegs(final Leg leg) {
-		List<Leg> legs = new ArrayList<>(this.legRepository.getLegsByFlight(leg.getFlight().getId()));
+		List<Leg> legs = new ArrayList<>(this.repository.getLegsByFlight(leg.getFlight().getId()));
 
 		List<Leg> validLegs = legs.stream().filter(l -> !l.getIsDraftMode() || l.equals(leg)).filter(l -> l.getDeparture() != null && l.getArrival() != null).collect(Collectors.toList());
 
@@ -173,7 +169,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 	}
 
 	private void validateAirportSequence(final Leg leg) {
-		Collection<Leg> legs = this.legRepository.getLegsByFlight(leg.getFlight().getId());
+		Collection<Leg> legs = this.repository.getLegsByFlight(leg.getFlight().getId());
 
 		List<Leg> legsToValidate = legs.stream().filter(l -> !l.getIsDraftMode() || l.equals(leg)).filter(l -> l.getDeparture() != null && l.getArrival() != null).collect(Collectors.toList());
 

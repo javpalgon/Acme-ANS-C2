@@ -3,3 +3,9 @@ airport-01,Adolfo Suárez Madrid–Barajas Airport,MAD,INTERNATIONAL,Madrid,Spai
 airport-02,Barcelona El Prat Airport,BCN,INTERNATIONAL,Barcelona,Spain,https://www.aena.es,info.bcn@aena.es,+34932480411
 airport-03,Palma de Mallorca Airport,PMI,INTERNATIONAL,Palma de Mallorca,Spain,https://www.aena.es,pmi.info@aena.es,+34971715600
 airport-04,Seville Airport,SVQ,DOMESTIC,Seville,Spain,https://www.aena.es,svq.info@aena.es,+34954230111
+airport-05,Valencia Airport,VLC,DOMESTIC,Valencia,Spain,https://www.aena.es,vlc.info@aena.es,+34961059000
+airport-06,Bilbao Airport,BIO,INTERNATIONAL,Bilbao,Spain,https://www.aena.es,bio.info@aena.es,+34944448600
+airport-07,Gran Canaria Airport,LPA,INTERNATIONAL,Las Palmas,Spain,https://www.aena.es,lpa.info@aena.es,+34928157600
+airport-08,Málaga-Costa del Sol Airport,AGP,INTERNATIONAL,Málaga,Spain,https://www.aena.es,agp.info@aena.es,+34952104804
+airport-09,Santiago de Compostela Airport,SCQ,DOMESTIC,Santiago,Spain,https://www.aena.es,scq.info@aena.es,+34981547800
+airport-10,Alicante–Elche Miguel Hernández Airport,ALC,INTERNATIONAL,Alicante,Spain,https://www.aena.es,alc.info@aena.es,+34966719300

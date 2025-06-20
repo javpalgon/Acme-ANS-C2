@@ -40,21 +40,17 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		}
 
 		boolean result = true;
-
-		if (leg.getAircraft() != null && leg.getAircraft().getAirline() != null)
-			if (!StringHelper.startsWith(leg.getFlightNumber(), leg.getAircraft().getAirline().getIATACode(), true)) {
-				super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number.message");
-				result = false;
-			}
-
 		Flight flight = leg.getFlight();
 		Manager manager = flight.getManager();
 		Airline airline = manager.getAirline();
+
+		// Comprobar que el código de vuelo comienza con el código IATA de la aerolínea
 		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true)) {
 			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
 			result = false;
 		}
 
+		// Comprobar que el momento de llegada es posterior al de salida
 		if (leg.getDeparture() != null && leg.getArrival() != null && !leg.getArrival().after(leg.getDeparture())) {
 			super.state(context, false, "arrival", "acme.validation.leg.invalid-schedule.message");
 			result = false;
@@ -63,11 +59,13 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		Integer flightNumber = leg.getFlight().getId();
 		Collection<Leg> legs = this.repository.getLegsByFlight(flightNumber);
 
+		// Comprobar que el numero de vuelo es único
 		if (legs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()))) {
 			super.state(context, false, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
 			result = false;
 		}
 
+		// Comprobar que el aeropurto de llegada es diferente que el de la salida
 		if (leg.getArrivalAirport() != null && leg.getDepartureAirport() != null && leg.getArrivalAirport().getId() == leg.getDepartureAirport().getId()) {
 			super.state(context, false, "arrivalAirport", "acme.validation.leg.same-airports.message");
 			result = false;
