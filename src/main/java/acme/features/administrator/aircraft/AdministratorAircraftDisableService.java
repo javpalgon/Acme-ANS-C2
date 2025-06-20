@@ -58,7 +58,8 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 
 	@Override
 	public void perform(final Aircraft aircraft) {
-		aircraft.setEnable(!aircraft.getEnable());
+		if (aircraft.getAircraftStatus().equals(AircraftStatus.ACTIVE))
+			aircraft.setAircraftStatus(AircraftStatus.UNDER_MAINTENANCE);
 		this.repository.save(aircraft);
 	}
 
@@ -68,7 +69,7 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 		SelectChoices statusChoices;
 		statusChoices = SelectChoices.from(AircraftStatus.class, aircraft.getAircraftStatus());
 
-		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details", "enable");
+		Dataset dataset = super.unbindObject(aircraft, "model", "regitrationNumber", "capacity", "cargoWeight", "aircraftStatus", "details");
 		dataset.put("aircraftStatus", statusChoices);
 		dataset.put("airlines", SelectChoices.from(this.repository.findAllAirlines(), "IATACode", aircraft.getAirline()));
 		dataset.put("confirmation", false);
