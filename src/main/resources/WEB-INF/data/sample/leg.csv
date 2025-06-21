@@ -9,9 +9,9 @@ leg-03,VYB0002,2000/01/01 12:00,2000/01/01 13:00,ON_TIME,airport-03,airport-04,f
 leg-04,VYB0003,2000/01/01 17:00,2000/01/01 20:00,ON_TIME,airport-04,airport-05,flight-01,aircraft-04,false
 
 # some published and unpublished legs of flight 2
-leg-05,VYB0004,2027/01/01 06:00,2027/01/01 08:00,DELAYED,airport-01,airport-02,flight-01,aircraft-01,true
-leg-06,VYB0005,2027/01/01 10:00,2027/01/01 11:00,CANCELLED,airport-02,airport-03,flight-01,aircraft-02,true
-leg-07,VYB0006,2027/01/01 12:00,2027/01/01 13:00,ON_TIME,airport-03,airport-04,flight-01,aircraft-03,false
+leg-05,VYB0004,2027/01/01 06:00,2027/01/01 08:00,DELAYED,airport-01,airport-02,flight-02,aircraft-01,true
+leg-06,VYB0005,2027/01/01 10:00,2027/01/01 11:00,CANCELLED,airport-02,airport-03,flight-02,aircraft-02,true
+leg-07,VYB0006,2027/01/01 12:00,2027/01/01 13:00,ON_TIME,airport-03,airport-04,flight-02,aircraft-03,false
 
 # leg variations for other flights
 leg-08,VYB0007,2200/01/01 06:00,2200/01/01 08:00,ON_TIME,airport-10,airport-02,flight-08,aircraft-08,true
