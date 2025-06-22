@@ -2,7 +2,6 @@
 package acme.features.manager.leg;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -60,18 +59,13 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		SelectChoices arrivalAirportChoices;
 		Collection<Airport> airports;
 		airports = this.repository.findAllAirports();
-
 		SelectChoices selectedAircraft = new SelectChoices();
-
 		Collection<Aircraft> aircraftsActives = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
-
-		List<Aircraft> finalAircrafts = aircraftsActives.stream().filter(a -> a.getAirline().getIATACode().equals(leg.getFlight().getManager().getAirline().getIATACode())).toList();
-
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
 		dataset.put("masterId", leg.getFlight().getId());
 		dataset.put("isDraftMode", leg.getIsDraftMode());
 		dataset.put("status", choices);
-		selectedAircraft = SelectChoices.from(finalAircrafts, "regitrationNumber", leg.getAircraft());
+		selectedAircraft = SelectChoices.from(aircraftsActives, "regitrationNumber", leg.getAircraft());
 		dataset.put("aircrafts", selectedAircraft);
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 		dataset.put("duration", leg.getDuration());

@@ -108,7 +108,6 @@ public class Flight extends AbstractEntity {
 	public Integer getNumOfLayovers() {
 		if (!this.legRepository().hasLegs(this.getId()))
 			return null;
-
 		return this.legRepository().findNumberOfLayovers(this.getId()) - 1;
 	}
 

@@ -3,7 +3,6 @@ package acme.features.manager.leg;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,7 +48,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		Integer aircraftId = super.getRequest().getData("aircraft", int.class);
 		if (aircraftId != 0) {
 			Aircraft aircraft = this.repository.findAircraftById(aircraftId);
-			if (aircraft == null)
+			if (aircraft == null || !aircraft.getAircraftStatus().equals(AircraftStatus.ACTIVE))
 				return false;
 		}
 		return true;
@@ -106,25 +105,16 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		super.state(leg.getStatus() != null, "status", "manager.leg.error.status-required");
-		boolean validDeparture = true;
-		Date departure = leg.getDeparture();
-		Date arrival = leg.getArrival();
-		Collection<Leg> allLegs = this.repository.findAllLegs();
-		boolean isDuplicated = allLegs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()));
-		if (isDuplicated)
-			super.state(!isDuplicated, "flightNumber", "acme.validation.leg.duplicate-flight-number.message");
-		if (arrival != null) {
-			Date currentMoment = MomentHelper.getCurrentMoment();
-			validDeparture = MomentHelper.isAfter(arrival, currentMoment);
-			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		boolean validDate;
+		Date currentMoment = MomentHelper.getCurrentMoment();
+		if (leg.getDeparture() != null) {
+			validDate = MomentHelper.isAfter(leg.getDeparture(), currentMoment);
+			super.state(validDate, "departure", "acme.validation.leg.departure");
 		}
-		if (departure != null) {
-			Date currentMoment = MomentHelper.getCurrentMoment();
-			validDeparture = MomentHelper.isAfter(departure, currentMoment);
-			super.state(validDeparture, "departure", "acme.validation.leg.invalid-departure.message");
+		if (leg.getArrival() != null) {
+			validDate = MomentHelper.isAfter(leg.getArrival(), currentMoment);
+			super.state(validDate, "arrival", "acme.validation.leg.departure");
 		}
-
 	}
 
 	@Override
@@ -148,17 +138,19 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		Collection<Aircraft> aircraftsActives = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
 
-		List<Aircraft> finalAircrafts = aircraftsActives.stream().filter(a -> a.getAirline().getIATACode().equals(leg.getFlight().getManager().getAirline().getIATACode())).toList();
-
 		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
+		String iata = leg.getFlight().getManager().getAirline().getIATACode();
+		if (leg.getFlightNumber() == null || leg.getFlightNumber().isBlank())
+			dataset.put("flightNumber", iata);
+		else
+			dataset.put("flightNumber", leg.getFlightNumber());
 		dataset.put("masterId", leg.getFlight().getId());
-		dataset.put("isDraftMode", leg.getIsDraftMode());
+		dataset.put("isDraftMode", true);
 		dataset.put("status", choices);
-		selectedAircraft = SelectChoices.from(finalAircrafts, "regitrationNumber", leg.getAircraft());
+		selectedAircraft = SelectChoices.from(aircraftsActives, "regitrationNumber", leg.getAircraft());
 		dataset.put("aircrafts", selectedAircraft);
 		dataset.put("aircraft", selectedAircraft.getSelected().getKey());
 		dataset.put("isDraftFlight", leg.getFlight().getIsDraftMode());
-		dataset.put("IATACode", leg.getFlight().getManager().getAirline().getIATACode());
 		departureAirportChoices = SelectChoices.from(airports, "IATACode", leg.getDepartureAirport());
 		arrivalAirportChoices = SelectChoices.from(airports, "IATACode", leg.getArrivalAirport());
 		dataset.put("departureAirports", departureAirportChoices);

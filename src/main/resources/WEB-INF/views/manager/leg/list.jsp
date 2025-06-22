@@ -9,7 +9,8 @@
 	<acme:list-column code="manager.leg.list.label.arrival" path="arrival" width="10%" />
 	<acme:list-column code="manager.leg.list.label.status" path="status" width="10%" />	
 	<acme:list-column code="manager.leg.list.label.departureAirport" path="departureAirport" width="10%" />	
-	<acme:list-column code="manager.leg.list.label.arrivalAirport" path="arrivalAirport" width="10%" />		
+	<acme:list-column code="manager.leg.list.label.arrivalAirport" path="arrivalAirport" width="10%" />	
+	<acme:list-column code="manager.leg.list.label.aircraft" path="aircraft" width="10%" />			
 </acme:list>
 <jstl:if test="${showCreate}">
 	<acme:button code="manager.leg.create" action="/manager/leg/create?masterId=${masterId}"/>

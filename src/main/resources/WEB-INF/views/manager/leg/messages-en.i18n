@@ -20,20 +20,11 @@ manager.leg.form.button.update = Update
 manager.leg.form.button.delete = Delete
 manager.leg.form.button.publish = Publish
 manager.leg.create.button = Create
-manager.leg.list.label.duration = Duration
+manager.leg.list.label.duration = Duration (hours)
 
+# features messages
 
-acme.validation.leg.invalid-scheduled-arrival.message=The scheduled arrival time must be after the scheduled departure time
-acme.validation.leg.invalid-flight-number.message=The flight number must start with the airline's IATA code
-acme.validation.leg.duplicate-flight-number.message=The flight number is already in use. Please provide a different one
-acme.validation.leg.invalid-departure.message= When creating a *new* leg, the departure and arrival must be after than present moment
-acme.validation.leg.invalid-aircraft.message=The aircraft is not available for this schedule. Please select a different aircraft or change the scheduled time
-acme.validation.leg.invalid-airports.message=The previous leg's arrival airport must be the same as the current leg's departure airport. Please select a different airport
-acme.validation.leg.invalid-dates.message=The time difference between two legs cannot surpass 48 hours
-acme.validation.leg.invalid-airport.message=The arrival airport can't the same that the departure airport
-manager.leg.error.invalid-aircraft=The aircraft is not active. Please select a different aircraft
-acme.validation.leg.invalid-aircraft.message = The aircraft is not available for this schedule. Please select a different aircraft or change the scheduled time
-manager.leg.error.status-required=The leg status is required
-manager.leg.error.invalid-status=The leg status is invalid. The status must be one of the following: "CANCELED", "DELAYED", "LANDED", "ON_TIME"
-acme.validation.leg.duplicate-flight-number.message = This flight number already exists.
-acme.validation.leg.invalid-flight-number-manager.message = Wrong flight number
+acme.validation.leg.duplicate-flight-number.message = Flight number already exists
+acme.validation.leg.departure = For future flights, departure and arrival must be after the current moment (2025/01/01 00:00)
+acme.validation.leg.invalid-aircraft.message = Aircraft is in use by another published leg in the system. Please choose another aircraft
+acme.validation.flight.overlapping.message = Current leg schedule overlaps with another published leg of this flight. Please change departure or arrival
