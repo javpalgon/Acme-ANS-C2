@@ -1,6 +1,7 @@
 
 package acme.entities.leg;
 
+import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -41,7 +42,7 @@ public class Leg extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(min = 7, max = 7, pattern = "^[A-Z]{3}\\d{4}$", message = "{acme.validation.leg.flight-number-pattern.message}")
+	@ValidString(pattern = "^[A-Z]{3}[0-9]{4}$", message = "Flight number must start by the airlines IATA code, followed by 4 digits")
 	@Column(unique = true)
 	private String				flightNumber;
 
@@ -86,12 +87,12 @@ public class Leg extends AbstractEntity {
 
 	@Transient
 	public Double getDuration() {
-		Double duration = null;
+		Duration duration;
+		Double result;
+		duration = MomentHelper.computeDuration(this.departure, this.arrival);
+		result = duration.toMinutes() / 60.0;
+		return result;
 
-		if (this.getDeparture() != null && this.getArrival() != null && MomentHelper.isAfterOrEqual(this.getArrival(), this.getDeparture()))
-			duration = MomentHelper.computeDuration(this.getDeparture(), this.getArrival()).getSeconds() / 3600.;
-
-		return duration;
 	}
 
 }

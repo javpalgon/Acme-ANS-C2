@@ -34,4 +34,7 @@ public interface LegRepository extends AbstractRepository {
 	@Query("select case when count(l) > 0 then true else false end from Leg l where l.flight.id = :flightId")
 	boolean hasLegs(@Param("flightId") Integer flightId);
 
+	@Query("select l from Leg l")
+	Collection<Leg> getAllLegs();
+
 }

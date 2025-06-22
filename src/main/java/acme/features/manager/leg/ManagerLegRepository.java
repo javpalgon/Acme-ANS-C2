@@ -42,6 +42,7 @@ public interface ManagerLegRepository extends AbstractRepository {
 	@Query("select a from Aircraft a where a.id = :id")
 	Aircraft findAircraftById(int id);
 
+	// se usa
 	@Query("select a from Aircraft a where a.aircraftStatus = :status ")
 	Collection<Aircraft> findAllActiveAircrafts(@Param("status") AircraftStatus status);
 
@@ -67,5 +68,8 @@ public interface ManagerLegRepository extends AbstractRepository {
 
 	@Query("select l from Leg l where l.flight.id = :flightId order by l.departure")
 	Collection<Leg> getLegsByFlight(Integer flightId);
+
+	@Query("select l from Leg l where l.isDraftMode = false")
+	Collection<Leg> findAllPublishedLegs();
 
 }

@@ -1,10 +1,7 @@
 
 package acme.constraints;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -45,7 +42,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		Airline airline = manager.getAirline();
 
 		// Comprobar que el código de vuelo comienza con el código IATA de la aerolínea
-		if (!StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true)) {
+		if (leg.getFlightNumber().length() == 7 && !StringHelper.startsWith(leg.getFlightNumber(), airline.getIATACode(), true)) {
 			super.state(context, false, "flightNumber", "acme.validation.leg.invalid-flight-number-manager.message");
 			result = false;
 		}
@@ -56,8 +53,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			result = false;
 		}
 
-		Integer flightNumber = leg.getFlight().getId();
-		Collection<Leg> legs = this.repository.getLegsByFlight(flightNumber);
+		Collection<Leg> legs = this.repository.getAllLegs();
 
 		// Comprobar que el numero de vuelo es único
 		if (legs.stream().anyMatch(x -> x.getId() != leg.getId() && x.getFlightNumber().equals(leg.getFlightNumber()))) {
@@ -74,9 +70,4 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		return result;
 	}
 
-	public static List<Leg> sortLegsByDeparture(final List<Leg> legs) {
-		List<Leg> sortedLegs = new ArrayList<>(legs);
-		sortedLegs.sort(Comparator.comparing(Leg::getDeparture));
-		return sortedLegs;
-	}
 }
