@@ -45,7 +45,7 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 
 			Boolean correctName = StringHelper.startsWith(manager.getIdentifier(), initials, true);
 
-			super.state(context, correctName, "identifierNumber", "acme.validation.manager.wrong-initials.message");
+			super.state(context, correctName, "identifier", "acme.validation.manager.wrong-initials.message");
 		}
 
 		result = !super.hasErrors(context);

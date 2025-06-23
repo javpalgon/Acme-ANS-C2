@@ -8,8 +8,8 @@
 	<acme:list-column code="administrator.aircraft.label.regitrationNumber" path="regitrationNumber"/>
 	<acme:list-column code="administrator.aircraft.label.capacity" path="capacity"/>
 	<acme:list-column code="administrator.aircraft.label.aircraftStatus" path="aircraftStatus"/>
-	
-	<acme:list-payload path="payload"/>
+	<acme:list-column code="administrator.aircraft.label.cargoWeight" path="cargoWeight"/>
+	<acme:list-column code="administrator.aircraft.label.details" path="details"/>
 </acme:list>	
 
 <jstl:if test="${_command == 'list'}">

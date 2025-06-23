@@ -76,3 +76,11 @@ master.menu.member.list-planned-assignments = Listar asignaciones planeadas
 master.menu.agent = Agente
 master.menu.agent.list-completed-claims = Listar reclamaciones completadas
 master.menu.agent.list-pending-claims = Listar reclamaciones pendientes
+
+############################################################################
+
+# master.menu.manager #######################################################
+
+master.menu.manager = Gerente
+master.menu.manager.list-flights = Mis vuelos
+master.menu.manager.dashboard = Tablero del gerente

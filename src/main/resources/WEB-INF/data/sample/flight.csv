@@ -18,12 +18,12 @@ flight-11,D,false,EUR 50.00,Tag variation test,manager-01,true
 # COST VARIATIONS (solo cambia el cost)
 flight-12,COST-TEST-01,false,EUR 0.00,Cost variation test,manager-01,true
 flight-13,COST-TEST-01,false,EUR 0.01,Cost variation test,manager-01,true
-flight-14,COST-TEST-01,false,EUR 500.00,Cost variation test,manager-01,true
+flight-14,COST-TEST-01,false,USD 500.00,Cost variation test,manager-01,false
 flight-15,COST-TEST-01,false,EUR 999999.99,Cost variation test,manager-01,true
 flight-16,COST-TEST-01,false,EUR 1000000.00,Cost variation test,manager-01,true
 
 # DESCRIPTION VARIATIONS (solo cambia el description)
-flight-17,DESC-TEST-01,false,EUR 100.00,,manager-01,true
+flight-17,DESC-TEST-01,false,USD 100.00,,manager-01,false
 flight-18,DESC-TEST-01,false,EUR 100.00,S,manager-01,true
 flight-19,DESC-TEST-01,false,EUR 100.00,null,manager-01,true
 flight-20,DESC-TEST-01,false,EUR 100.00,<img src=x onerror=alert("Hacked!")>,manager-01,true
