@@ -18,6 +18,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
+import acme.constraints.ValidFlight;
 import acme.entities.leg.LegRepository;
 import acme.realms.Manager;
 import lombok.Getter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidFlight
 @Table(name = "flight", indexes = {
 	@Index(name = "idx_flight_manager", columnList = "manager_id"), @Index(name = "idx_flight_draft_mode", columnList = "isDraftMode"), @Index(name = "idx_flight_transfer_mode", columnList = "requiresSelfTransfer")
 })
