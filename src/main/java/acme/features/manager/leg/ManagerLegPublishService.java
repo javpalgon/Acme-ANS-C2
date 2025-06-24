@@ -65,6 +65,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 			Airport airport = this.repository.findAirportById(airportId);
 			if (airport == null)
 				return false;
+
 		}
 		return true;
 	}

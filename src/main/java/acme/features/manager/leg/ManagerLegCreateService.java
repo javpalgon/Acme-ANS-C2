@@ -3,6 +3,7 @@ package acme.features.manager.leg;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -138,7 +139,9 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 		Collection<Aircraft> aircraftsActives = this.repository.findAllActiveAircrafts(AircraftStatus.ACTIVE);
 
-		dataset = super.unbindObject(leg, "flightNumber", "departure", "arrival");
+		dataset = super.unbindObject(leg, "departure", "arrival");
+		String iataCode = Optional.ofNullable(leg.getFlight()).map(Flight::getManager).map(Manager::getAirline).map(a -> a.getIATACode()).orElse("");
+		dataset.put("IATACode", iataCode);
 		String iata = leg.getFlight().getManager().getAirline().getIATACode();
 		if (leg.getFlightNumber() == null || leg.getFlightNumber().isBlank())
 			dataset.put("flightNumber", iata);
