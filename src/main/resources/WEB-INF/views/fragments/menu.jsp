@@ -31,7 +31,9 @@
 		<acme:menu-option code="master.menu.news" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.contact" access="isAnonymous()"/>
-		<acme:menu-option code="master.menu.any" access="isAnonymous()" action="/any/weather-dashboard/show"/>
+		<acme:menu-option code="master.menu.weather" access="isAnonymous()" action="/any/weather-dashboard/show"/>
+		<acme:menu-option code="master.menu.flights" access="isAnonymous()" action="/any/flight/list"/>
+		
 
 		
 		<acme:menu-option code="master.menu.manager" access="hasRealm('Manager')">

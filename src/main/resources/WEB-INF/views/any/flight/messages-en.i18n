@@ -1,0 +1,22 @@
+
+# list flights messages
+
+any.flight.form.title = Flight
+any.flight.list.label.tag = Tag
+any.flight.list.label.cost = Cost
+any.flight.list.label.description = Description
+any.flight.list.label.requiresSelfTransfer = Requires self transfer
+
+# flight form messages
+
+any.flight.form.label.tag = Tag
+any.flight.form.label.cost = Cost
+any.flight.form.label.description = Description
+any.flight.form.label.requiresSelfTransfer = Requires self transfer
+any.flight.form.label.departure = Scheduled departure
+any.flight.form.label.arrival = Scheduled arrival
+any.flight.form.label.originCity = Origin city
+any.flight.form.label.destinationCity = Destination city
+any.flight.form.label.layovers = Number of layovers
+any.flight.leg  = Flight legs
+any.flight.list.title = All flights

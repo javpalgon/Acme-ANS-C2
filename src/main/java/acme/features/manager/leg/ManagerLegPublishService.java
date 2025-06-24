@@ -106,7 +106,7 @@ public class ManagerLegPublishService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-		Collection<Leg> legs = this.repository.getLegsByFlight(leg.getFlight().getId());
+		Collection<Leg> legs = this.repository.findLegsByFlightId(leg.getFlight().getId());
 		List<Leg> legsToValidate = legs.stream().filter(l -> !l.getIsDraftMode()).collect(Collectors.toList());
 		List<Leg> legsToValidateOverlap = new ArrayList<>(legsToValidate);
 		legsToValidateOverlap.add(leg);
