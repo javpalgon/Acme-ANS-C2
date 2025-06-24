@@ -1,5 +1,5 @@
 
-package acme.features.manager.leg;
+package acme.features.any.leg;
 
 import java.util.Collection;
 
@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
-import acme.realms.Manager;
+import acme.features.manager.leg.ManagerLegRepository;
 
 @Repository
-public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
+public class AnyLegListService extends AbstractGuiService<Any, Leg> {
 
 	@Autowired
 	private ManagerLegRepository repository;
@@ -25,8 +26,8 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 		Flight flight;
 		masterId = super.getRequest().getData("masterId", int.class);
 		flight = this.repository.findFlightById(masterId);
-		boolean isOwner = super.getRequest().getPrincipal().getAccountId() == flight.getManager().getUserAccount().getId();
-		super.getResponse().setAuthorised(isOwner || !flight.getIsDraftMode());
+		boolean isPublished = !flight.getIsDraftMode();
+		super.getResponse().setAuthorised(isPublished);
 
 	}
 

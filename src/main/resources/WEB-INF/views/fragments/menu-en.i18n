@@ -22,6 +22,8 @@ master.menu.products = Products
 master.menu.news = News
 master.menu.events = Events
 master.menu.contact = Contact Us
+master.menu.flights = Available flights
+master.menu.weather = Weather
 
 
 

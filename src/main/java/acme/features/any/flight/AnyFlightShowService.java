@@ -1,19 +1,20 @@
 
-package acme.features.manager.flight;
+package acme.features.any.flight;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.principals.Any;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flight.Flight;
 import acme.entities.leg.Leg;
-import acme.realms.Manager;
+import acme.features.manager.flight.ManagerFlightRepository;
 
 @GuiService
-public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight> {
+public class AnyFlightShowService extends AbstractGuiService<Any, Flight> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -27,12 +28,9 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	public void authorise() {
 		Flight flight;
 		int flightId;
-		int userAccountId;
 		flightId = super.getRequest().getData("id", int.class);
 		flight = this.repository.findFlightById(flightId);
-		userAccountId = super.getRequest().getPrincipal().getAccountId();
-		boolean canBeShown = flight.getIsDraftMode() && flight.getManager().getUserAccount().getId() == userAccountId;
-		super.getResponse().setAuthorised(canBeShown || !flight.getIsDraftMode());
+		super.getResponse().setAuthorised(!flight.getIsDraftMode());
 	}
 
 	@Override

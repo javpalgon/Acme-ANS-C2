@@ -1,0 +1,23 @@
+any.leg.list.label.flightNumber = Flight Number
+any.leg.list.label.departure = Departure
+any.leg.list.label.status = Status
+any.leg.list.label.departureAirport = Departure Airport
+any.leg.list.label.arrivalAirport = Arrival Airport
+any.leg.list.label.isDraftMode = Draft Mode
+any.leg.list.label.arrival = Arrival time
+any.leg.list.title = Legs of current flight
+
+any.leg.form.title = Leg
+any.leg.create = Create leg
+any.leg.list.label.flightNumber = Flight Number
+any.leg.list.label.departure = Departure Time
+any.leg.list.label.arrival = Arrival Time
+any.leg.list.label.status = Status
+any.leg.list.label.arrivalAirport = Arrival Airport
+any.leg.list.label.departureAirport = Departure Airport
+any.leg.list.label.aircraft = Aircraft
+any.leg.form.button.update = Update
+any.leg.form.button.delete = Delete
+any.leg.form.button.publish = Publish
+any.leg.create.button = Create
+any.leg.list.label.duration = Duration (hours)

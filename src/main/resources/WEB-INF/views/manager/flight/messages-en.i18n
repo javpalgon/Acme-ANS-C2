@@ -19,9 +19,9 @@ manager.flight.form.title = Flight
 manager.flight.list.title = My flights
 manager.flight.leg = Legs
 
-manager.flight.form.error.notDraft = You have already published this flight.
-manager.flight.form.error.LegsNotPublished = Not all legs are published.
-manager.project.form.error.legsEmpty = Flight has no legs.
+manager.flight.form.error.notDraft = You have already published this flight
+manager.flight.form.error.LegsNotPublished = Not all legs are published
+manager.project.form.error.legsEmpty = Flight has no legs
 
 manager.flight.list.label.tag = Tag
 manager.flight.list.label.cost = Cost
@@ -32,4 +32,4 @@ manager.flight.legs = Flight legs
 manager.flight.legs.published = This flight has unpublished legs. Please publish them
 manager.project.publish.error.noLegs = This flight has no legs, so it cannot be published
 manager.flight.publish.error.notAllPublished = This flight has unpublished legs. Please publish all legs first
-acme.validation.leg.published-legs-not-allowed.message = You can't delete this flight, it already has published legs.
+acme.validation.leg.published-legs-not-allowed.message = You can't delete this flight, it already has published legs

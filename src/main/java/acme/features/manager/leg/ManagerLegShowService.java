@@ -34,7 +34,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		int legId = super.getRequest().getData("id", int.class);
 		Flight flight = this.repository.getFlightByLegId(legId);
 		boolean isOwner = super.getRequest().getPrincipal().getAccountId() == flight.getManager().getUserAccount().getId();
-		super.getResponse().setAuthorised(isOwner);
+		super.getResponse().setAuthorised(isOwner || !flight.getIsDraftMode());
 	}
 
 	@Override
