@@ -1,6 +1,6 @@
 key,fullName,email,passport,birth,specialNeeds,isDraftMode
-passenger-01,Cristina Cuevas Garcia,cristinuchi133@example.com,BAC19845,2004/06/11 00:00,,true
-passenger-02,Lola Romero Díaz,lola3@example.com,PAL19945,2004/09/22 00:00,Celiaca,true
+passenger-01,Cristina Cuevas Garcia,cristinuchi133@example.com,BAC19845,2004/06/11 00:00,,false
+passenger-02,Lola Romero Díaz,lola3@example.com,PAL19945,2004/09/22 00:00,Celiaca,false
 passenger-03,Silvia Lama,silvido@example.com,ANR13045,2005/12/29 00:00,,true
 passenger-04,Antonio García,antonio.garcia@example.com,YAU2890,2003/01/01 00:00,Alérgico a los cacahuetes,true
 passenger-05,Beatriz Soler,bea.soler@example.com,F7G8H9,2006/08/10 00:00,Ninguna,true
