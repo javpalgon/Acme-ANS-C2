@@ -64,7 +64,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void bind(final Booking object) {
 		assert object != null;
-		super.bindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "flight");
+		super.bindObject(object, "locatorCode", "travelClass", "lastNibble", "flight");
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking object) {
 		Dataset dataset;
-		dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
+		dataset = super.unbindObject(object, "locatorCode", "travelClass", "lastNibble");
 
 		Collection<Flight> flights = this.repository.findPublishedFlights();
 		Collection<Flight> availableFlights = flights.stream().filter(f -> MomentHelper.isAfterOrEqual(f.getDeparture(), MomentHelper.getCurrentMoment())).toList();

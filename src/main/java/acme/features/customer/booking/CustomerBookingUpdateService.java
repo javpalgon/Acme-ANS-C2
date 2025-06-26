@@ -32,7 +32,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 		final int userAccountId = super.getRequest().getPrincipal().getAccountId();
 		final int customerId = booking.getCustomer().getUserAccount().getId();
-		super.getResponse().setAuthorised(userAccountId == customerId);
+		super.getResponse().setAuthorised(userAccountId == customerId && booking.getIsDraftMode());
 	}
 
 	@Override
@@ -68,10 +68,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		boolean isDuplicate = this.repository.existsByLocatorCode(object.getLocatorCode(), object.getId());
 		super.state(!isDuplicate, "locatorCode", "customer.booking.form.error.duplicate-locatorCode");
 
-		// 5. PurchaseMoment: debe estar en el pasado
-		boolean isPast = object.getPurchaseMoment() != null && MomentHelper.isBeforeOrEqual(object.getPurchaseMoment(), MomentHelper.getCurrentMoment());
-		super.state(isPast, "purchaseMoment", "customer.booking.form.error.invalid-purchaseMoment");
-
 		// 6. TravelClass: obligatorio
 		super.state(object.getTravelClass() != null, "travelClass", "customer.booking.form.error.travelClass-required");
 
@@ -85,6 +81,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	@Override
 	public void perform(final Booking object) {
 		assert object != null;
+		object.setPurchaseMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(object);
 	}
 
