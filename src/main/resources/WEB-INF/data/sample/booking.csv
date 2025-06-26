@@ -1,0 +1,21 @@
+key,key:flight,key:customer,locatorCode,purchaseMoment,travelClass,lastNibble,isDraftMode
+booking-01,flight-01,customer-01,ABC123,2020/01/29 00:00,ECONOMY,2454,true
+booking-02,flight-14,customer-02,LOL893,2020/08/19 00:00,BUSINESS,1454,true
+booking-03,flight-17,customer-01,ABC244,2020/01/29 00:00,ECONOMY,2454,true
+booking-04,flight-27,customer-02,ABCDEF,2020/01/29 00:00,ECONOMY,0000,true
+
+#BOOKING FOR TESTING
+#Maximum length for locatorCode is 8 characters
+booking-05,flight-29,customer-04,ABCDEFGH,2022/01/09 00:00,BUSINESS,9999,true
+
+#Minimum length for locatorCode is 6 characters
+booking-06,flight-21,customer-05,X1Y2Z3,2020/01/29 00:00,ECONOMY,1234,true
+
+#Maximum purchase moment is 2025/01/01 00:00
+booking-07,flight-22,customer-04,XYZ789,2025/01/01 00:00,BUSINESS,6789,true
+
+#Minimum purchase moment is 2000/01/01 00:00
+booking-08,flight-20,customer-06,Z9X8C7,2000/01/01 00:00,ECONOMY,5555,true
+
+#Last nibble can be empty (optional)
+booking-09,flight-15,customer-07,LOLA22,2020/01/29 00:00,BUSINESS,,true
