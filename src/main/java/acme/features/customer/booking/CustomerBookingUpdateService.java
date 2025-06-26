@@ -1,6 +1,7 @@
 
 package acme.features.customer.booking;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
 import acme.entities.booking.Travelclass;
+import acme.entities.flight.Flight;
 import acme.realms.Customer;
 
 @GuiService
@@ -88,20 +90,27 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking object) {
 		assert object != null;
-		SelectChoices choices;
 
-		choices = SelectChoices.from(Travelclass.class, object.getTravelClass());
 		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
 
+		SelectChoices travelClassChoices = SelectChoices.from(Travelclass.class, object.getTravelClass());
+
+		Collection<Flight> flights = this.repository.findPublishedFlights();
+		SelectChoices flightChoices = SelectChoices.from(flights, "tag", object.getFlight());
+
 		List<String> passengers = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).toList();
+
 		Money totalPrice = object.getPrice();
 
-		dataset.put("totalPrice", totalPrice);
-		dataset.put("travelClasses", choices);
-		dataset.put("hasPassengers", !passengers.isEmpty());
+		dataset.put("travelClasses", travelClassChoices);
+		dataset.put("flights", flightChoices);
 		dataset.put("passengers", passengers);
+		dataset.put("hasPassengers", !passengers.isEmpty());
+		dataset.put("totalPrice", totalPrice);
+		dataset.put("id", object.getId());
+		dataset.put("isDraftMode", object.getIsDraftMode());
+		dataset.put("flight", object.getFlight().getTag());
 
 		super.getResponse().addData(dataset);
 	}
-
 }

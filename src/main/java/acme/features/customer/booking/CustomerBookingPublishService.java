@@ -13,6 +13,7 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
+import acme.entities.booking.Travelclass;
 import acme.entities.flight.Flight;
 import acme.entities.passenger.Passenger;
 import acme.realms.Customer;
@@ -79,18 +80,24 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	public void unbind(final Booking object) {
 		assert object != null;
 
-		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble");
+		Dataset dataset = super.unbindObject(object, "locatorCode", "purchaseMoment", "travelClass", "lastNibble", "flight");
 
-		List<String> passengers = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).toList();
+		SelectChoices travelClassChoices = SelectChoices.from(Travelclass.class, object.getTravelClass());
 
 		Collection<Flight> flights = this.repository.findPublishedFlights();
 		SelectChoices flightChoices = SelectChoices.from(flights, "tag", object.getFlight());
 
+		List<String> passengers = this.repository.findPassengersByBooking(object.getId()).stream().map(p -> p.getFullName()).toList();
+
 		Money totalPrice = object.getPrice();
 
+		dataset.put("travelClasses", travelClassChoices);
 		dataset.put("flights", flightChoices);
-		dataset.put("totalPrice", totalPrice);
 		dataset.put("passengers", passengers);
+		dataset.put("hasPassengers", !passengers.isEmpty());
+		dataset.put("totalPrice", totalPrice);
+		dataset.put("id", object.getId());
+		dataset.put("isDraftMode", object.getIsDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

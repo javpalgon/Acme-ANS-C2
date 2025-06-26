@@ -28,7 +28,7 @@ customer.booking.form.error.duplicate-locatorCode=Este código de localizador ya
 customer.booking.form.error.invalid-purchaseMoment=La fecha de compra debe estar en el pasado.
 customer.booking.form.error.travelClass-required=Debe seleccionar una clase de viaje.
 customer.booking.form.error.invalid-lastNibble=Los últimos dígitos deben ser exactamente 4 números.
-customer.booking.form.error.passenger-not-published= Todos los pasajeros deben ser publicados antes de publicar la reserva.
+customer.booking.form.error.passenger-not-published= Todos los pasajeros deben estar publicados antes de publicar la reserva. Por favor, pulsa "Ver Pasajeros" para publicarlos.
 customer.booking.form.error.booking-without-passenger= Debes añadir al menos un pasajero para publicar una reserva.
 
 customer.booking.list.button.create=Crear reserva
