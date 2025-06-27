@@ -19,3 +19,18 @@ booking-08,flight-17,customer-06,Z9X8C7,2000/01/01 00:00,ECONOMY,5555,true
 
 #Last nibble can be empty (optional)
 booking-09,flight-27,customer-07,LOLA22,2020/01/29 00:00,BUSINESS,,true
+
+#BOOKING FOR CUSTOMER 1 DASHBOARD 
+booking-10,flight-30,customer-01,TANS33,2021/07/04 08:00,ECONOMY,1234,false
+booking-11,flight-31,customer-01,LDWNA44,2024/10/05 18:00,BUSINESS,5678,false
+booking-12,flight-32,customer-01,PALO55,2024/12/12 14:00,ECONOMY,9101,false
+booking-13,flight-33,customer-01,JABY66,2024/10/10 14:00,BUSINESS,1234,false
+booking-14,flight-34,customer-01,PASI16,2024/09/11 18:55,ECONOMY,5378,false
+
+
+#BOOKING FOR CUSTOMER 2 DASHBOARD
+booking-15,flight-35,customer-02,NAUY66,2022/05/01 06:30,BUSINESS,1234,false
+booking-16,flight-36,customer-02,HBSI16,2024/09/13 18:55,ECONOMY,5678,false
+booking-17,flight-37,customer-02,WKJ822,2024/11/17 14:00,BUSINESS,9101,false
+booking-18,flight-38,customer-02,LAOA22,2024/12/13 18:00,ECONOMY,1234,false
+booking-19,flight-39,customer-02,TAUS33,2024/12/10 22:00,BUSINESS,5628,false

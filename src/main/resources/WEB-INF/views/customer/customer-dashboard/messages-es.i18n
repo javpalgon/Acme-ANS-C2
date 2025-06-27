@@ -1,0 +1,20 @@
+customer.customer-dashboard.form.title= Panel de control del cliente
+master.menu.customer.dashboard= Panel de control del cliente
+
+customer.dashboard.form.label.lastFiveDestinations=Últimos cinco destinos
+customer.dashboard.form.label.moneySpentLastYear=Dinero gastado en el último año (por moneda)
+customer.dashboard.form.label.bookingsPerTravelClass=Reservas por clase de viaje
+customer.dashboard.form.label.costStatisticsLastFiveYears=Estadísticas de coste de reservas (últimos 5 años)
+customer.dashboard.form.label.passengersStats=Estadísticas de pasajeros por reserva
+
+customer.dashboard.form.label.averageCost=Coste medio
+customer.dashboard.form.label.minCost=Coste mínimo
+customer.dashboard.form.label.maxCost=Coste máximo
+customer.dashboard.form.label.stddevCost=Desviación estándar
+
+customer.dashboard.form.label.passengersAverage=Número medio de pasajeros
+customer.dashboard.form.label.passengersMin=Número mínimo de pasajeros
+customer.dashboard.form.label.passengersMax=Número máximo de pasajeros
+customer.dashboard.form.label.passengersStddev=Desviación estándar de pasajeros
+customer.dashboard.form.label.no-data=No hay datos disponibles
+customer.dashboard.form.label.not-available=No disponible

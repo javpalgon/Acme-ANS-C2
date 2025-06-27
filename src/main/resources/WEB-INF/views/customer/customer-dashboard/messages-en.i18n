@@ -1,0 +1,20 @@
+customer.customer-dashboard.form.title=Customer Dashboard
+master.menu.customer.dashboard= Customer Dashboard
+
+customer.dashboard.form.label.lastFiveDestinations=Last five destinations
+customer.dashboard.form.label.moneySpentLastYear=Money spent in the last year (by currency)
+customer.dashboard.form.label.bookingsPerTravelClass=Bookings per travel class
+customer.dashboard.form.label.costStatisticsLastFiveYears=Booking cost statistics (last 5 years)
+customer.dashboard.form.label.passengersStats=Passenger statistics per booking
+
+customer.dashboard.form.label.averageCost=Average cost
+customer.dashboard.form.label.minCost=Minimum cost
+customer.dashboard.form.label.maxCost=Maximum cost
+customer.dashboard.form.label.stddevCost=Standard deviation
+
+customer.dashboard.form.label.passengersAverage=Average number of passengers
+customer.dashboard.form.label.passengersMin=Minimum number of passengers
+customer.dashboard.form.label.passengersMax=Maximum number of passengers
+customer.dashboard.form.label.passengersStddev=Standard deviation of passengers
+customer.dashboard.form.label.no-data=No data available
+customer.dashboard.form.label.not-available=Not available

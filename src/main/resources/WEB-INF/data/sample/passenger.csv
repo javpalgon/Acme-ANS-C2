@@ -30,3 +30,17 @@ passenger-12,Ana María Gómez,ana.gomez@example.com,AA99999,2003/04/30 00:00,,t
 
 #Maximum length for specialNeeds is 50 characters
 passenger-13,César del Valle,cesar.valle@example.com,X1Y2Z3,2004/07/27 00:00,superLargafrasesConNombreDeCincuentaCaracteresMaxi,true
+
+#PASSENGER FOR CUSTOMER 1 DASHBOARD
+passenger-14,Juan Muñoz Abril,juanito@gmail.com,JMA12345,2004/07/04 08:00,,false
+passenger-15,Carla Castaño Peral,carla13@gmail.com,CCP67890,2003/11/05 18:55,Alérgico al polen,false
+passenger-16,María Andrade Cuevas,mar@hotmail.com,MAC98765,2004/01/22 14:00,,false
+passenger-17,Pablo Garcia Blesa,pabs@gmail.com,PGB54321,2002/05/10 08:00,,false
+passenger-18,Ana María deL Río Muñoz,anam@gmail.com,ADM12345,2001/06/15 18:55, Alérgico a los mariscos,false
+
+#PASSENGER FOR CUSTOMER 2 DASHBOARD
+passenger-19,Francisco Rodriguez Roldan,franrod@gmail.com,FRR67890,2000/07/20 14:00,,false
+passenger-20,Julio José Paniagua Mora,julio.paniagua@gmail.com,JPM45678,2012/11/12 10:30,,false
+passenger-21,Ana María Torres Luna,ana.torres@gmail.com,ATL11223,2002/04/05 09:15,,false
+passenger-22,David Ruiz Moreno,david.ruiz@gmail.com,DRM33445,2009/06/30 16:45,,false
+passenger-23,Lucía Fernández Vega,lucia.fv@gmail.com,LFV88990,2001/01/01 08:00,,false
