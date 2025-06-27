@@ -28,7 +28,7 @@ customer.booking.form.error.duplicated= This locator code is already in use.
 customer.booking.form.error.invalid-purchaseMoment= The purchase date must be in the past.
 customer.booking.form.error.travelClass-required= You must select a travel class.
 customer.booking.form.error.invalid-lastNibble= The last nibble must be exactly 4 numbers.
-customer.booking.form.error.passenger-not-published=All passengers must be published before publishing the booking.
+customer.booking.form.error.passenger-not-published=All passengers must be published before publishing the booking. Please, press "See passengers" to publish them
 customer.booking.form.error.booking-without-passenger= You must add at least one passenger to publish a booking.
 customer.booking.form.error.duplicated=The booking already exists with the same locator code and purchase moment.
 

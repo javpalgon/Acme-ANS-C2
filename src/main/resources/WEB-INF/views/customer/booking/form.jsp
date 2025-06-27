@@ -5,7 +5,9 @@
 
 <acme:form>
 	<acme:input-textbox code="customer.booking.form.label.locatorCode" path="locatorCode"/>	
-	<acme:input-textbox code="customer.booking.form.label.purchaseMoment" path="purchaseMoment"/>	
+	<jstl:if test="${_command != 'create'}">
+	    <acme:input-textbox code="customer.booking.form.label.purchaseMoment" path="purchaseMoment" readonly = "${true}"/>
+	</jstl:if>
 	<acme:input-select code="customer.booking.form.label.travelClass" path="travelClass" choices="${travelClasses}"/>
 	<acme:input-money code="customer.booking.form.label.totalPrice" path="totalPrice" readonly="true"/>
 	<acme:input-textbox code="customer.booking.form.label.lastNibble" path="lastNibble"/>
@@ -17,7 +19,9 @@
 	<jstl:if test="${_command == 'create' }">
     	<acme:input-select code="customer.booking.form.label.flight" path="flight"  choices="${flights}" />
 	</jstl:if>
-	
+	<jstl:if test="${_command == 'update' }">
+    	<acme:input-textbox code="customer.booking.form.label.flight" path="flight" readonly="true"/>
+	</jstl:if>
 
 	<jstl:if test="${hasPassengers}">
 		<acme:input-textarea code="customer.booking.form.label.passengers2" path="passengers" readonly="true"/>
@@ -30,8 +34,8 @@
 		<jstl:when test="${!hasPassengers && _command != 'create'}">
 			 <div><acme:print code="customer.booking.form.label.nopassengers" /></div>   
 		</jstl:when>
-
 	</jstl:choose>
+	
 	<jstl:choose>
 	    <jstl:when test="${(_command == 'update' || _command == 'show' || _command == 'publish') && isDraftMode}">
 	        <acme:submit code="customer.booking.form.button.save" action="/customer/booking/update"/>
@@ -43,7 +47,7 @@
 	<div> <acme:print code="customer.booking.form.label.nopassengersCreate" /> </div>
 		  <acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 	</jstl:if>
-	<jstl:if test="${_command == 'show' && isDraftMode}">
+	<jstl:if test="${(_command == 'show'|| _command == 'publish') && isDraftMode}">
     	<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create?bookingId=${id}" />  
     	
 	</jstl:if>

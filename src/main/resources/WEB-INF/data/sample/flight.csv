@@ -39,3 +39,16 @@ flight-27,AEX100,true,EUR 400.00,This is a published flight,manager-02,false
 flight-28,AEX101,false,EUR 0.00,This is a draft flight with legs,manager-02,true
 flight-29,AEX102,false,EUR 0.00,This is a free draft flight with no legs,manager-02,true
 
+# FLIGHTS FOR CUSTOMER 1 DASHBOARD
+flight-30,AEX103,false,USD 500.00,This is a great flight,manager-02, false
+flight-31,AEX104,false,USD 150.00,This is another great flight,manager-02, false
+flight-32,AEX105,false,EUR 300.00,This is a third great flight,manager-02, false
+flight-33,AEX106,false,EUR 200.00,This is a flight for customer 1,manager-02, false
+flight-34,AEX107,false,USD 400.00,This is another flight for customer 1,manager-02, false
+
+# FLIGHTS FOR CUSTOMER 2 DASHBOARD
+flight-35,VYB103,false,EUR 250.00,This is a flight for customer 2,manager-01, false
+flight-36,VYB104,false,USD 350.00,This is another flight for customer 2,manager-01, false
+flight-37,VYB105,false,EUR 450.00,This is a third flight for customer 2,manager-01, false
+flight-38,VYB106,false,EUR 550.00,This is a fourth flight for customer 2,manager-01, false
+flight-39,VYB107,false,USD 650.00,This is a fifth flight for customer 2,manager-01, false
