@@ -1,0 +1,15 @@
+administrator.passenger.list.title=My Passengers
+
+administrator.passenger.list.label.fullName=Full Name
+administrator.passenger.list.label.passport=Passport
+administrator.passenger.list.label.email=Email
+administrator.passenger.list.label.birth=Birth Date
+administrator.passenger.list.label.specialNeeds=Special Needs
+
+administrator.passenger.form.title= Passenger
+
+administrator.passenger.form.label.fullName=Full Name
+administrator.passenger.form.label.passport=Passport
+administrator.passenger.form.label.email=Email
+administrator.passenger.form.label.birth=Birth Date
+administrator.passenger.form.label.specialNeeds=Special Needs

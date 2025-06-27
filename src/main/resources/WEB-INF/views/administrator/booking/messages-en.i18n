@@ -1,0 +1,24 @@
+administrator.booking.list.title = Bookings
+
+administrator.booking.list.label.locatorCode = Locator Code
+administrator.booking.list.label.purchaseMoment = Purchase Moment
+administrator.booking.list.label.travelClass = Travel Class
+administrator.booking.list.label.lastNibble = Last Nibble
+administrator.booking.list.label.isDraftMode = Draft Mode
+administrator.booking.list.label.totalPrice= Total Price
+administrator.booking.list.label.flight = Flight
+administrator.booking.list.label.customer = Customer
+
+administrator.booking.form.title = Booking
+
+administrator.booking.form.label.locatorCode = Locator Code
+administrator.booking.form.label.purchaseMoment = Purchase Moment
+administrator.booking.form.label.travelClass = Travel Class
+administrator.booking.form.label.lastNibble = Last Nibble
+administrator.booking.form.label.isDraftMode = Draft Mode
+administrator.booking.form.label.totalPrice= Total Price
+administrator.booking.form.label.flight = Flight
+administrator.booking.form.label.customer = Customer
+administrator.booking.form.label.passengers= Passengers
+
+administrator.booking.show.button.passengers= View Passengers
