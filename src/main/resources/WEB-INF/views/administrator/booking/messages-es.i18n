@@ -1,0 +1,24 @@
+administrator.booking.list.title = Reservas
+
+administrator.booking.list.label.locatorCode = Codigo Localizador
+administrator.booking.list.label.purchaseMoment = Momento de Compra
+administrator.booking.list.label.travelClass = Clase de Viaje
+administrator.booking.list.label.lastNibble = Ultimos Dígitos
+administrator.booking.list.label.isDraftMode = Modo Borrador
+administrator.booking.list.label.totalPrice= Precio total
+administrator.booking.list.label.flight = Vuelo
+administrator.booking.list.label.customer = Cliente
+
+administrator.booking.form.title = Reserva
+
+administrator.booking.form.label.locatorCode = Codigo Localizador
+administrator.booking.form.label.purchaseMoment = Momento de Compra
+administrator.booking.form.label.travelClass = Clase de Viaje
+administrator.booking.form.label.lastNibble = Ultimos Dígitos
+administrator.booking.form.label.isDraftMode = Modo Borrador
+administrator.booking.form.label.totalPrice= Precio total
+administrator.booking.form.label.flight = Vuelo
+administrator.booking.form.label.customer = Cliente
+administrator.booking.form.label.passengers= Pasajeros
+
+administrator.booking.show.button.passengers= Ver Pasajeros

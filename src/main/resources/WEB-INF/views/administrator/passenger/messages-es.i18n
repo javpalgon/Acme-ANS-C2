@@ -1,0 +1,15 @@
+administrator.passenger.list.title=Mis Pasajeros
+
+administrator.passenger.list.label.fullName=Nombre Completo
+administrator.passenger.list.label.passport=Pasaporte
+administrator.passenger.list.label.email=Correo Electrónico
+administrator.passenger.list.label.birth=Fecha de Nacimiento
+administrator.passenger.list.label.specialNeeds=Necesidades Especiales
+
+administrator.passenger.form.title= Pasajero
+
+administrator.passenger.form.label.fullName=Nombre Completo
+administrator.passenger.form.label.passport=Pasaporte
+administrator.passenger.form.label.email=Correo Electrónico
+administrator.passenger.form.label.birth=Fecha de Nacimiento
+administrator.passenger.form.label.specialNeeds=Necesidades Especiales
