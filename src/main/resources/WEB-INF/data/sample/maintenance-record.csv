@@ -1,3 +1,0 @@
-key,maintenanceTimestamp,maintenanceStatus,nextInspectionDate,estimatedCost,notes,key:aircraft,key:technician,isDraftMode
-maintenance-record-01,2024/06/21 10:00,COMPLETED,2024/09/11 10:00,EUR 100000.0,Engine 1 has to be changed,aircraft-01,technician-01,false
-maintenance-record-02,2024/08/23 12:00,COMPLETED,2024/11/21 12:00,EUR 50000.0,Some cabin circuits has to be weld,aircraft-02,technician-01,true

@@ -1,5 +1,0 @@
-key,type,description,priority,duration,key:technician
-task-01,REPAIR,Engine 1 must be changed,10,2.5,technician-01
-task-02,INSPECTION,Engine 1 must be revised,6,0.5,technician-01
-task-03,MAINTENANCE,Review cabin circuits,4,0.5,technician-01
-task-04,REPAIR,Weld some broken cabin circuits,7,1.0,technician-01
