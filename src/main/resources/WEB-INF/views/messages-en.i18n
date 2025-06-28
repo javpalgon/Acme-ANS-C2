@@ -16,8 +16,7 @@ acme.validation.leg.invalid-schedule.message = The scheduled departure must be b
 acme.validation.leg.duplicate-flight-number.message = This flight number already exists
 acme.validation.leg.same-airports.message = The departure and arrival airport must be different
 acme.validation.flight.invalid-cost.message = The currency used is invalid. Please use a recognised ISO 4217 currency code (e.g., EUR, USD)
-
-
+acme.validation.manager.not-unique.message = The manager identifier is not unique. Please choose another sequence of numbers
 
 # Student X
 

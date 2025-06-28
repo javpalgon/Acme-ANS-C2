@@ -20,7 +20,7 @@ leg-10,VYB0009,2100/01/01 22:00,2100/01/01 23:00,CANCELLED,airport-08,airport-02
 leg-11,VYB0010,2034/01/01 00:00,2034/01/01 01:00,ON_TIME,airport-07,airport-02,flight-11,aircraft-11,true
 leg-12,VYB0011,2027/01/01 06:00,2027/01/01 08:00,DELAYED,airport-05,airport-02,flight-12,aircraft-12,true
 leg-13,VYB0012,2027/01/01 06:00,2027/01/01 08:00,DELAYED,airport-06,airport-02,flight-13,aircraft-01,true
-leg-14,VYB0013,2027/01/01 06:00,2027/01/01 08:00,ON_TIME,airport-04,airport-02,flight-14,aircraft-01,false
+leg-14,VYB0013,2024/12/30 06:00,2024/12/30 08:00,ON_TIME,airport-04,airport-02,flight-14,aircraft-01,false
 leg-15,VYB0014,2027/01/01 06:00,2027/01/01 08:00,CANCELLED,airport-01,airport-02,flight-17,aircraft-01,false
 
 # LEGS DE MANAGER 2

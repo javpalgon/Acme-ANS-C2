@@ -1,4 +1,3 @@
-
 # list flights messages
 
 any.flight.form.title = Flight
@@ -6,6 +5,13 @@ any.flight.list.label.tag = Tag
 any.flight.list.label.cost = Cost
 any.flight.list.label.description = Description
 any.flight.list.label.requiresSelfTransfer = Requires self transfer
+any.flight.list.label.flightNumber = Flight Number
+any.flight.list.label.departure = Departure
+any.flight.list.label.arrival = Arrival time
+any.flight.list.label.status = Status
+any.flight.list.label.departureAirport = Departure Airport
+any.flight.list.label.arrivalAirport = Arrival Airport
+any.flight.list.label.aircraft = Aircraft
 
 # flight form messages
 
