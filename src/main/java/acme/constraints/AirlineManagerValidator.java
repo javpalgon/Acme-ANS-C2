@@ -1,18 +1,27 @@
 
 package acme.constraints;
 
+import java.util.Collection;
+
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.StringHelper;
+import acme.entities.leg.LegRepository;
 import acme.realms.Manager;
 
 @Validator
 public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManager, Manager> {
 
+	@Autowired
+	private LegRepository repository;
+
 	// Initialization ---------------------------------------------------------
+
 
 	@Override
 	protected void initialise(final ValidAirlineManager annotation) {
@@ -47,6 +56,11 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 
 			super.state(context, correctName, "identifier", "acme.validation.manager.wrong-initials.message");
 		}
+
+		Collection<Manager> managers = this.repository.getAllManagers();
+
+		if (managers.stream().anyMatch(x -> x.getId() != manager.getId() && x.getIdentifier().equals(manager.getIdentifier())))
+			super.state(context, false, "identifier", "acme.validation.manager.not-unique.message");
 
 		result = !super.hasErrors(context);
 

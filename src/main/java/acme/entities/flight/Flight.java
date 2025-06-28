@@ -67,14 +67,6 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public String getFlightSummary() {
-		if (!this.legRepository().hasLegs(this.getId()))
-			return "No legs";
-
-		return this.getOriginCity() + " -> " + this.getDestinationCity() + " --- " + this.getDeparture() + " // " + this.getArrival();
-	}
-
-	@Transient
 	public Date getDeparture() {
 		if (!this.legRepository().hasLegs(this.getId()))
 			return null;

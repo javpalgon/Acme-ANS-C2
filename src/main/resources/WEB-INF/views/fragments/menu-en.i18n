@@ -24,7 +24,8 @@ master.menu.events = Events
 master.menu.contact = Contact Us
 master.menu.flights = Available flights
 master.menu.weather = Weather
-
+master.menu.weather.list-weathers = List all weather conditions
+master.menu.weather.list-weathers-bad = List flights under bad weather conditions
 
 
 # master.menu.administrator ###################################################
@@ -36,7 +37,8 @@ master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
 master.menu.administrator.list-airlines = List Airlines
 master.menu.administrator.list-airports = List Airports
-master.menu.administrator.list-aircrafts = List aircrafts
+master.menu.administrator.list-aircrafts = List Aircrafts
+master.menu.administrator.list-weathers = List weather conditions
 master.menu.administrator.list-booking = List bookings
 
 # master.menu.provider ########################################################
@@ -90,3 +92,20 @@ master.menu.member.list-planned-assignments = List planned assignments
 master.menu.agent = Agent
 master.menu.agent.list-completed-claims = List completed claims
 master.menu.agent.list-pending-claims = List pending claims
+
+# Weather Dashboard labels
+weather.dashboard.list.label.city = City
+weather.dashboard.list.label.timestamp = Timestamp
+weather.dashboard.list.label.weatherMain = Main
+weather.dashboard.list.label.weatherDescription = Description
+weather.dashboard.list.label.visibility = Visibility
+weather.dashboard.list.label.windSpeed = Wind Speed
+weather.dashboard.list.label.isBadWeather = Bad Weather
+
+weather.dashboard.form.label.city = City
+weather.dashboard.form.label.timestamp = Timestamp
+weather.dashboard.form.label.weatherMain = Main
+weather.dashboard.form.label.weatherDescription = Description
+weather.dashboard.form.label.visibility = Visibility
+weather.dashboard.form.label.windSpeed = Wind Speed
+weather.dashboard.form.label.isBadWeather = Bad Weather

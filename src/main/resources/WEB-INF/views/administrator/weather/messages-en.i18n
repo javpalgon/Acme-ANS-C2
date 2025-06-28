@@ -1,0 +1,6 @@
+any.weather.list.title = Weather conditions
+any.weather.form.title = Weather
+administrator.weather.create = Add new weather conditions by city
+administrator.weather.form.button.create = Get weather condition for selected city
+administrator.weather.list.title = Weather conditions
+administrator.weather.form.title = Get weather conditions

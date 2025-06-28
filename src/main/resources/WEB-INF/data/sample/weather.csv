@@ -1,0 +1,11 @@
+key,city,timestamp,weatherMain,weatherDescription,visibility,windSpeed,isBadWeather
+weather-01,Seville,2024/12/30 14:24,Rain,clear sky,10000,3.13,true
+weather-02,Lienz,2025/07/26 14:29,Rain,moderate rain,9792,3.96,true
+weather-03,Oslo,2025/07/25 09:12,Clouds,broken clouds,8000,2.75,false
+weather-04,London,2025/07/25 17:00,Rain,light rain,9000,4.50,true
+weather-05,Madrid,2025/07/24 12:00,Clear,sunny,10000,2.00,false
+weather-06,New York,2025/07/24 15:30,Thunderstorm,thunderstorm with heavy rain,6000,5.25,true
+weather-07,Tokyo,2025/07/23 22:45,Fog,fog,4000,1.80,false
+weather-08,Berlin,2025/07/22 07:15,Drizzle,light drizzle,9500,3.10,true
+weather-09,Sydney,2025/07/21 11:00,Clear,few clouds,10000,3.90,false
+weather-10,Reykjavik,2025/07/20 10:30,Snow,light snow,7000,2.60,true

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.realms.Manager;
 
 @Repository
 public interface LegRepository extends AbstractRepository {
@@ -36,5 +37,8 @@ public interface LegRepository extends AbstractRepository {
 
 	@Query("select l from Leg l")
 	Collection<Leg> getAllLegs();
+
+	@Query("select m from Manager m")
+	Collection<Manager> getAllManagers();
 
 }

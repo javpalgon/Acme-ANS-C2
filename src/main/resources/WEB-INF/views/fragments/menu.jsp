@@ -31,7 +31,10 @@
 		<acme:menu-option code="master.menu.news" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.events" access="isAnonymous()"/>
 		<acme:menu-option code="master.menu.contact" access="isAnonymous()"/>
-		<acme:menu-option code="master.menu.weather" access="isAnonymous()" action="/any/weather-dashboard/show"/>
+		<acme:menu-option code="master.menu.weather" access="isAnonymous()">
+			<acme:menu-suboption code="master.menu.weather.list-weathers" action="/any/weather/list"/>
+			<acme:menu-suboption code="master.menu.weather.list-weathers-bad" action="/any/flight/list-weather"/>
+		</acme:menu-option>
 		<acme:menu-option code="master.menu.flights" access="isAnonymous()" action="/any/flight/list"/>
 		
 
@@ -64,6 +67,7 @@
 			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" action="/administrator/user-account/list"/>
 			<acme:menu-suboption code="master.menu.administrator.list-aircrafts" action="/administrator/aircraft/list"/>
 			<acme:menu-suboption code="master.menu.administrator.list-booking" action="/administrator/booking/list"/>
+			<acme:menu-suboption code="master.menu.administrator.list-weathers" action="/administrator/weather/list"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.populate-db-initial" action="/administrator/system/populate-initial"/>
 			<acme:menu-suboption code="master.menu.administrator.populate-db-sample" action="/administrator/system/populate-sample"/>			
