@@ -24,7 +24,7 @@ customer.booking.form.button.save=Guardar cambios
 
 customer.booking.form.error.blank-locatorCode=El localizador no puede estar vacío.
 customer.booking.form.error.invalid-locatorCode=El localizador debe tener entre 6 y 8 caracteres en mayúsculas o números.
-customer.booking.form.error.duplicate-locatorCode=Este código de localizador ya está en uso.
+customer.booking.form.error.duplicated=Este código de localizador ya está en uso.
 customer.booking.form.error.invalid-purchaseMoment=La fecha de compra debe estar en el pasado.
 customer.booking.form.error.travelClass-required=Debe seleccionar una clase de viaje.
 customer.booking.form.error.invalid-lastNibble=Los últimos dígitos deben ser exactamente 4 números.

@@ -24,3 +24,15 @@ acme.validation.technician.wrong-initials.message = Technician ID must start wit
 acme.validation.technician.null-identity.message = Technician identity information is missing 
 acme.validation.Birthday.invalid-age.message = Person is under age
 acme.validation.Experience.invalid-experience.message = Can't have more experience years than years of life
+
+# Booking messages
+
+acme.validation.booking.uniqueLocatorCode.message=The locator code must be unique.
+acme.validation.booking.flight.notPublished=The selected flight must be published.
+acme.validation.booking.flight.notFuture=The selected flight must have a future departure date.
+acme.validation.booking.lastCardNibble.message=The last 4 digits of the card are required when booking is not in draft mode.
+acme.validation.booking.passengers.message=The booking must have at least one passenger when it is published.
+acme.validation.booking.travelClass.required=The travel class is mandatory.
+acme.validation.booking.flight.required=A valid flight must be selected.
+acme.validation.booking.locatorCode.pattern= The locator code must be between 6 and 8 characters long, using uppercase letters or numbers only.
+acme.validation.booking.lastNibble.pattern= The last nibble must be exactly 4 digits.

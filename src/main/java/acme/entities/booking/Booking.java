@@ -22,6 +22,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
+import acme.constraints.ValidBooking;
 import acme.entities.flight.Flight;
 import acme.realms.Customer;
 import lombok.Getter;
@@ -33,13 +34,14 @@ import lombok.Setter;
 @Table(indexes = {
 	@Index(columnList = "customer_id"), @Index(columnList = "locatorCode")
 })
+@ValidBooking
 public class Booking extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 8, min = 6, pattern = "^[A-Z0-9]{6,8}$")
+	@ValidString(max = 8, min = 6, pattern = "^[A-Z0-9]{6,8}$", message = "{acme.validation.booking.locatorCode.pattern}")
 	@Column(unique = true)
 	private String				locatorCode;
 
@@ -54,7 +56,7 @@ public class Booking extends AbstractEntity {
 	private Travelclass			travelClass;
 
 	@Optional
-	@ValidString(min = 4, max = 4, pattern = "[0-9]{4}")
+	@ValidString(min = 4, max = 4, pattern = "[0-9]{4}", message = "{acme.validation.booking.lastNibble.pattern}")
 	@Automapped
 	private String				lastNibble;
 
