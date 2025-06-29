@@ -37,3 +37,12 @@ acme.validation.booking.travelClass.required=The travel class is mandatory.
 acme.validation.booking.flight.required=A valid flight must be selected.
 acme.validation.booking.locatorCode.pattern= The locator code must be between 6 and 8 characters long, using uppercase letters or numbers only.
 acme.validation.booking.lastNibble.pattern= The last nibble must be exactly 4 digits.
+
+# Passenger messages
+acme.validation.passenger.passport.pattern = The passport must contain 6 to 9 characters (uppercase letters or digits).
+
+# Customer messages
+acme.validation.customer.identifier.pattern=Identifier must be 8 to 9 characters long and follow the format: 2–3 uppercase letters followed by 6 digits
+acme.validation.customer.phoneNumber.pattern=Phone number must be between 6 and 16 digits and may start with a plus sign
+acme.validation.customer.null-identity.message=Customer identity information is missing
+acme.validation.customer.wrong-initials.message = Customer identifier must start with his/her/their name initials

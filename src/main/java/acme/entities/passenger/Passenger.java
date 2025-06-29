@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,6 +23,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "passenger", indexes = {
+	@Index(name = "index_passenger_passport", columnList = "passport")
+})
 public class Passenger extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
@@ -36,7 +41,7 @@ public class Passenger extends AbstractEntity {
 	private String				email;
 
 	@Mandatory
-	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$")
+	@ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$", message = "{acme.validation.passenger.passport.pattern}")
 	@Column(unique = true)
 	private String				passport;
 

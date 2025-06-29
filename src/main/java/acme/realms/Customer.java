@@ -3,8 +3,6 @@ package acme.realms;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import acme.client.components.basis.AbstractRole;
@@ -21,21 +19,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidCustomer
-@Table(indexes = {
-	@Index(columnList = "user_account_id")
-})
 public class Customer extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@NotBlank
-	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$")
+	@ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$", message = "{acme.validation.customer.identifier.pattern}")
 	@Column(unique = true)
 	private String				identifier;
 
 	@Mandatory
-	@ValidString(min = 6, max = 16, pattern = "^\\+?\\d{6,15}$")
+	@ValidString(min = 6, max = 16, pattern = "^\\+?\\d{6,15}$", message = "{acme.validation.customer.phoneNumber.pattern}")
 	@Automapped
 	private String				phoneNumber;
 
