@@ -14,7 +14,7 @@ acme.validation.Experience.invalid-experience.message = No puede tener mas años
 
 acme.validation.booking.uniqueLocatorCode.message= El código de localizador debe ser único.
 acme.validation.booking.flight.notPublished= El vuelo seleccionado debe estar publicado.
-acme.validation.booking.flight.notFuture= El vuelo seleccionado debe tener una fecha de salida futura.
+acme.validation.booking.flight.notFuture=La fecha de salida del vuelo debe ser posterior o igual al momento de compra de la reserva.
 acme.validation.booking.lastCardNibble.message= Los últimos 4 dígitos de la tarjeta son obligatorios cuando la reserva no está en modo borrador.
 acme.validation.booking.passengers.message= La reserva debe tener al menos un pasajero cuando se publique.
 acme.validation.booking.travelClass.required= La clase de viaje es obligatoria.
