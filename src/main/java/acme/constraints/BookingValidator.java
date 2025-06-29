@@ -44,7 +44,7 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 			// 2. Flight must be published and in the future
 			if (booking.getFlight() != null) {
 				boolean isPublished = !booking.getFlight().getIsDraftMode();
-				boolean isFuture = booking.getFlight().getDeparture() != null && MomentHelper.isAfterOrEqual(booking.getFlight().getDeparture(), MomentHelper.getCurrentMoment());
+				boolean isFuture = booking.getFlight().getDeparture() != null && MomentHelper.isAfterOrEqual(booking.getFlight().getDeparture(), booking.getPurchaseMoment());
 				super.state(context, isPublished, "flight", "acme.validation.booking.flight.notPublished");
 				super.state(context, isFuture, "flight", "acme.validation.booking.flight.notFuture");
 			}
