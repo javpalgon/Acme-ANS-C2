@@ -21,3 +21,13 @@ acme.validation.booking.travelClass.required= La clase de viaje es obligatoria.
 acme.validation.booking.flight.required= Debe seleccionar un vuelo válido.
 acme.validation.booking.locatorCode.pattern = El código de localizador debe tener entre 6 y 8 caracteres, utilizando solo letras mayúsculas o números.
 acme.validation.booking.lastNibble.pattern = Los últimos dígitos deben ser exactamente 4 números.
+
+# Passenger messages
+acme.validation.passenger.passport.pattern = El pasaporte debe contener entre 6 y 9 caracteres (letras mayúsculas o números).
+
+
+# Customer messages
+acme.validation.customer.identifier.pattern= El identificador debe tener entre 8 y 9 caracteres y seguir el formato: 2–3 letras mayúsculas seguidas de 6 dígitos
+acme.validation.customer.phoneNumber.pattern= El número de teléfono debe tener entre 6 y 16 dígitos y puede comenzar con un signo más
+acme.validation.customer.null-identity.message= Falta la información de identidad del cliente
+acme.validation.customer.wrong-initials.message = El identificador del cliente debe empezar con las iniciales correctas

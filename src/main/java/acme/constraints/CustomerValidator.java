@@ -29,7 +29,7 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 		DefaultUserIdentity userIdentity = customer.getIdentity();
 		boolean identityIsValid = userIdentity != null && userIdentity.getName() != null && userIdentity.getSurname() != null;
 
-		super.state(context, identityIsValid, "identifierNumber", "acme.validation.manager.null-identity.message");
+		super.state(context, identityIsValid, "identifierNumber", "acme.validation.customer.null-identity.message");
 
 		if (identityIsValid) {
 			String[] surnameParts = userIdentity.getSurname().trim().split("\\s+");
@@ -42,7 +42,7 @@ public class CustomerValidator extends AbstractValidator<ValidCustomer, Customer
 
 			boolean identifierValid = StringHelper.startsWith(customer.getIdentifier(), initials, true);
 
-			super.state(context, identifierValid, "identifier", "acme.validation.manager.wrong-initials.message");
+			super.state(context, identifierValid, "identifier", "acme.validation.customer.wrong-initials.message");
 		}
 
 		return !super.hasErrors(context);
