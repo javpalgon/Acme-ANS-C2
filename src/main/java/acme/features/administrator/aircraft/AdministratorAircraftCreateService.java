@@ -39,7 +39,7 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 				String iataCode = super.getRequest().getData("airline", String.class);
 				Set<String> validIATACodes = this.repository.findAllAirlines().stream().map(Airline::getIATACode).collect(Collectors.toSet());
 
-				if (!validIATACodes.contains(iataCode))
+				if (!validIATACodes.contains(iataCode) && !iataCode.equals("0"))
 					status = false;
 			}
 		}
