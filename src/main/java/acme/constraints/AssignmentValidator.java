@@ -3,21 +3,14 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.entities.assignment.Assignment;
 import acme.entities.flightcrewmember.AvailabilityStatus;
 import acme.entities.leg.LegStatus;
-import acme.features.member.assignment.MemberAssignmentRepository;
 
 @Validator
 public class AssignmentValidator extends AbstractValidator<ValidAssignment, Assignment> {
-
-	@Autowired
-	private MemberAssignmentRepository repository;
-
 
 	@Override
 	protected void initialise(final ValidAssignment annotation) {
