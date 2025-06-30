@@ -1,1 +1,2 @@
 acme.validation.manager.identifier = Tu identificador debe comenzar con las 2-3 iniciales de tu nombre y apellidos, seguido de 6 dígitos aleatorios
+acme.validation.leg.number = El número de vuelo debe comenzar con el código IATA de la aerolínea, seguido de 4 dígitos

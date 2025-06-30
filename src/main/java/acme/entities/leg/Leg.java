@@ -40,7 +40,7 @@ public class Leg extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{3}[0-9]{4}$", message = "Flight number must start by the airlines IATA code, followed by 4 digits")
+	@ValidString(pattern = "^[A-Z]{3}[0-9]{4}$", message = "{acme.validation.leg.number}")
 	@Column(unique = true)
 	private String				flightNumber;
 
