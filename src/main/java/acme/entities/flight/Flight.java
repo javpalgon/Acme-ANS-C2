@@ -29,9 +29,8 @@ import lombok.Setter;
 @Setter
 @ValidFlight
 @Table(name = "flight", indexes = {
-	@Index(name = "idx_flight_draft_mode", columnList = "isDraftMode"), @Index(name = "idx_flight_transfer_mode", columnList = "requiresSelfTransfer")
+	@Index(name = "idx_flight_draft_mode", columnList = "isDraftMode")
 })
-
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
