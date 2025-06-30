@@ -1,0 +1,18 @@
+key,name,pictureLink,averageDwellTime,promotionCode,discount
+service-1,Web Dev 2025,https://i.pinimg.com/736x/05/0a/c2/050ac25cbb0420ae2f7ee54b6ed60e9f.jpg,45.50,WEBX-25,199.99 EUR
+service-2,AI Solutions,https://images.unsplash.com/photo-1677442135136-760c81364b88,92.75,AIXX-25,750.00 USD
+service-3,Cloud Hosting,https://images.unsplash.com/photo-1558494949-ef010cbdcc31,30.25,CLDY-25,300.00 EUR
+service-4,Cybersecurity,https://images.unsplash.com/photo-1563986768609-322da13575f3,40.50,CYBR-25,450.00 EUR
+service-5,SEO 2025,https://images.unsplash.com/photo-1467232004584-a241de8bcf5d,55.30,SEOX-25,120.00 USD
+service-6,UX/UI Design,https://images.unsplash.com/photo-1547658719-da2b51169166,55.55,UXUI-25,65.00 USD
+service-7,IT Support,https://images.unsplash.com/photo-1517430816045-df4b7de11d1d,10.00,SUPP-25,49.99 EUR
+service-8,Social Media,https://images.unsplash.com/photo-1611162616475-46b635cb6868,45.60,SOCM-25,150.00 USD
+service-9,Video Editing,https://images.unsplash.com/photo-1551269901-5c5e14c25df7,60.50,VIDE-25,350.00 EUR
+service-10,ERP Systems,https://images.unsplash.com/photo-1551288049-bebda4e38f71,50.00,ERPS-25,800.00 GBP
+service-11,DevOps 2025,https://images.unsplash.com/photo-1624953587687-daf255b6b80a,88.40,DEVO-25,420.50 USD
+service-12,Content Marketing,https://images.unsplash.com/photo-1467232004584-a241de8bcf5d,30.20,CONT-25,75.00 JPY
+service-13,E-commerce,https://images.unsplash.com/photo-1556740738-b6a63e27c4df,65.90,SHOP-25,250.00 USD
+service-14,API Development,https://images.unsplash.com/photo-1558494949-ef010cbdcc31,82.00,APID-25,300.00 GBP
+service-15,Branding 2025,https://images.unsplash.com/photo-1542744173-8e7e53415bb0,48.80,BRND-25,175.50 EUR
+service-16,Legal Tech,https://images.unsplash.com/photo-1589829545856-d10d557cf95f,60.00,LEGL-25,0.00 USD
+service-17,Beti prime,https://www.realbetisbalompie.es/media/img/graphics/new_logos/logo_horizontal.svg,10.0,BETI-25,25.00 EUR
