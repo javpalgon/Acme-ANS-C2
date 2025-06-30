@@ -30,7 +30,7 @@ public class Service extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				name;
 
@@ -51,7 +51,7 @@ public class Service extends AbstractEntity {
 	private String				promotionCode;
 
 	@Optional
-	@ValidMoney(min = 0.0, max = 1000000.0)
+	@ValidMoney(min = 0.0, max = 100.0)
 	@Automapped
 	private Money				discount;
 

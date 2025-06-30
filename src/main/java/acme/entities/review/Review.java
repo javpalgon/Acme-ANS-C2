@@ -31,7 +31,7 @@ public class Review extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				alias;
 
@@ -42,13 +42,13 @@ public class Review extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				subject;
 
 	@Mandatory
 	@NotBlank
-	@ValidString()
+	@ValidString(max = 255)
 	@Automapped
 	private String				text;
 

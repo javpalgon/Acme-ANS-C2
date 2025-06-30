@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @ValidFlight
 @Table(name = "flight", indexes = {
-	@Index(name = "idx_flight_manager", columnList = "manager_id"), @Index(name = "idx_flight_draft_mode", columnList = "isDraftMode"), @Index(name = "idx_flight_transfer_mode", columnList = "requiresSelfTransfer")
+	@Index(name = "idx_flight_draft_mode", columnList = "isDraftMode"), @Index(name = "idx_flight_transfer_mode", columnList = "requiresSelfTransfer")
 })
 
 public class Flight extends AbstractEntity {
@@ -42,8 +42,9 @@ public class Flight extends AbstractEntity {
 	private String				tag;
 
 	@Mandatory
+	@Valid
 	@Automapped
-	private boolean				requiresSelfTransfer;
+	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
 	@ValidMoney(min = 0, max = 1000000)
