@@ -1,19 +1,27 @@
-administrator.airline.label.name = Nombre
-administrator.airline.label.iata = Código IATA
-administrator.airline.label.website = Sitio Web
-administrator.airline.label.type = Tipo
-administrator.airline.label.foundationMoment = Fundación
-administrator.airline.label.email = Correo
-administrator.airline.label.phoneNumber = Teléfono
+administrator.airline.label.name = Nombre  
+administrator.airline.label.iata = Código IATA  
+administrator.airline.label.website = Sitio web  
+administrator.airline.label.type = Tipo  
+administrator.airline.label.foundationMoment = Fecha de fundación  
+administrator.airline.label.email = Correo electrónico  
+administrator.airline.label.phoneNumber = Número de teléfono  
 
 #########################################################################################
-		
-administrator.airline.form.label.confirmation = Confirmación
-administrator.airline.button.update = Actualizar
-administrator.airline.form.label = Etiqueta
-administrator.airline.button.create = Crear
-{acme.validation.IATACode} = Código IATA no válido
-administrator.airline.form.title = Mostrar aerolínea
-administrator.airline.list.title = Listar aerolíneas
 
-administrator.airline.form.error.IATA-not-unique = Código IATA no es único.
+administrator.airline.label.name = Nombre  
+administrator.airline.label.iata = Código IATA  
+administrator.airline.label.website = Sitio web  
+administrator.airline.label.type = Tipo  
+administrator.airline.label.foundationMoment = Fecha de fundación  
+administrator.airline.label.email = Correo electrónico  
+administrator.airline.label.phoneNumber = Número de teléfono  
+
+administrator.airline.form.label.confirmation = Confirmación  
+administrator.airline.button.update = Actualizar  
+administrator.airline.form.label = Etiqueta  
+administrator.airline.button.create = Crear  
+acme.validation.IATACode = Código IATA no válido  
+administrator.airline.form.title = Mostrar aerolínea  
+administrator.airline.list.title = Listar aerolíneas  
+
+administrator.airline.form.error.IATA-not-unique = El código IATA no es único  

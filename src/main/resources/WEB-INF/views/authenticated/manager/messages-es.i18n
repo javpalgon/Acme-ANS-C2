@@ -1,0 +1,10 @@
+authenticated.manager.form.label.identifier = Número de identificación  
+authenticated.manager.form.label.yearsOfExperience = Años de experiencia  
+authenticated.manager.form.label.dateOfBirth = Fecha de nacimiento  
+authenticated.manager.form.label.pictureUrl = URL de la foto  
+authenticated.manager.form.label.airline = Aerolínea para la que trabajas  
+authenticated.manager.form.title = Datos del gestor  
+
+authenticated.manager.form.button.create = Convertirse en gestor  
+
+authenticated.manager.form.button.update = Actualizar perfil  

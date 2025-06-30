@@ -1,0 +1,30 @@
+manager.leg.list.label.flightNumber = Número de vuelo  
+manager.leg.list.label.departure = Salida  
+manager.leg.list.label.status = Estado  
+manager.leg.list.label.departureAirport = Aeropuerto de salida  
+manager.leg.list.label.arrivalAirport = Aeropuerto de llegada  
+manager.leg.list.label.isDraftMode = Modo borrador  
+manager.leg.list.label.arrival = Hora de llegada  
+manager.leg.list.title = Tramos del vuelo actual  
+
+manager.leg.form.title = Tramo  
+manager.leg.create = Crear tramo  
+manager.leg.list.label.flightNumber = Número de vuelo  
+manager.leg.list.label.departure = Hora de salida  
+manager.leg.list.label.arrival = Hora de llegada  
+manager.leg.list.label.status = Estado  
+manager.leg.list.label.arrivalAirport = Aeropuerto de llegada  
+manager.leg.list.label.departureAirport = Aeropuerto de salida  
+manager.leg.list.label.aircraft = Aeronave  
+manager.leg.form.button.update = Actualizar  
+manager.leg.form.button.delete = Eliminar  
+manager.leg.form.button.publish = Publicar  
+manager.leg.create.button = Crear  
+manager.leg.list.label.duration = Duración (horas)  
+
+# mensajes de validación
+
+acme.validation.leg.duplicate-flight-number.message = El número de vuelo ya existe  
+acme.validation.leg.departure = Para vuelos futuros, la salida y la llegada deben ser posteriores al momento actual (2025/01/01 00:00)  
+acme.validation.leg.invalid-aircraft.message = La aeronave está en uso por otro tramo publicado en el sistema. Por favor, elige otra aeronave  
+acme.validation.flight.overlapping.message = El horario del tramo actual se solapa con otro tramo publicado de este vuelo. Por favor, cambia la salida o la llegada  

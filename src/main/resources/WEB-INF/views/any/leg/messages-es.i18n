@@ -1,0 +1,23 @@
+any.leg.list.label.flightNumber = Número de vuelo  
+any.leg.list.label.departure = Salida  
+any.leg.list.label.status = Estado  
+any.leg.list.label.departureAirport = Aeropuerto de salida  
+any.leg.list.label.arrivalAirport = Aeropuerto de llegada  
+any.leg.list.label.isDraftMode = Modo borrador  
+any.leg.list.label.arrival = Hora de llegada  
+any.leg.list.title = Tramos del vuelo actual  
+
+any.leg.form.title = Tramo  
+any.leg.create = Crear tramo  
+any.leg.list.label.flightNumber = Número de vuelo  
+any.leg.list.label.departure = Hora de salida  
+any.leg.list.label.arrival = Hora de llegada  
+any.leg.list.label.status = Estado  
+any.leg.list.label.arrivalAirport = Aeropuerto de llegada  
+any.leg.list.label.departureAirport = Aeropuerto de salida  
+any.leg.list.label.aircraft = Aeronave  
+any.leg.form.button.update = Actualizar  
+any.leg.form.button.delete = Eliminar  
+any.leg.form.button.publish = Publicar  
+any.leg.create.button = Crear  
+any.leg.list.label.duration = Duración (horas)  
