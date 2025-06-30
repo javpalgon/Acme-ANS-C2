@@ -25,7 +25,6 @@ master.menu.weather = Weather
 master.menu.weather.list-weathers = List all weather conditions
 master.menu.weather.list-weathers-bad = List flights under bad weather conditions
 
-
 # master.menu.administrator ###################################################
 
 master.menu.administrator = Administrator
@@ -38,6 +37,8 @@ master.menu.administrator.list-airports = List Airports
 master.menu.administrator.list-aircrafts = List Aircrafts
 master.menu.administrator.list-weathers = List weather conditions
 master.menu.administrator.list-booking = List bookings
+master.menu.administrator.dashboard = Administrator dashboard
+
 
 # master.menu.provider ########################################################
 

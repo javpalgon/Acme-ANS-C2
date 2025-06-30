@@ -19,6 +19,8 @@ master.menu.weather.list-weathers-bad = Listar vuelos con malas condiciones mete
 
 # master.menu.administrator ###################################################
 
+
+master.menu.administrator.dashboard = Tablero del Administrador
 master.menu.administrator = Administrador  
 master.menu.administrator.list-user-accounts = Listar cuentas de usuario  
 master.menu.administrator.populate-db-initial = Poblar BD (inicial)  
@@ -29,6 +31,7 @@ master.menu.administrator.list-airports = Listar aeropuertos
 master.menu.administrator.list-aircrafts = Listar aeronaves  
 master.menu.administrator.list-weathers = Listar condiciones meteorológicas  
 master.menu.administrator.list-booking = Listar reservas  
+
 
 # master.menu.provider ########################################################
 

@@ -1,0 +1,19 @@
+administrator.administrator-dashboard.form.title= Administrator Dashboard
+
+administrator.dashboard.form.label.totalAirportsByScope=Total number of airports grouped by operational scope
+administrator.dashboard.form.label.totalAirlinesByType=Total number of airlines grouped by type
+administrator.dashboard.form.label.ratioAirlinesWithEmailAndPhone=Ratio of airlines with complete contact info
+administrator.dashboard.form.label.aircraftStatusRatio=Ratio of active/inactive aircrafts
+administrator.dashboard.form.label.ratioReviewsAboveFive=Ratio of reviews with score above 5
+administrator.dashboard.form.label.active= Active
+administrator.dashboard.form.label.inactive= Inactive
+administrator.dashboard.form.label.reviewStatsLast10Weeks=Number of reviews posted weekly (last 10 weeks)
+administrator.dashboard.form.label.average= Average
+administrator.dashboard.form.label.min= Minimum
+administrator.dashboard.form.label.max= Maximum
+administrator.dashboard.form.label.stddev= Standard Deviation
+
+
+administrator.dashboard.form.label.week=Week
+administrator.dashboard.form.label.total=Total
+administrator.dashboard.form.label.no-data=No data available
