@@ -1,0 +1,6 @@
+any.weather.list.title = Condiciones meteorológicas  
+any.weather.form.title = Clima  
+administrator.weather.create = Añadir nuevas condiciones meteorológicas por ciudad  
+administrator.weather.form.button.create = Obtener condiciones meteorológicas para la ciudad seleccionada  
+administrator.weather.list.title = Condiciones meteorológicas  
+administrator.weather.form.title = Obtener condiciones meteorológicas  

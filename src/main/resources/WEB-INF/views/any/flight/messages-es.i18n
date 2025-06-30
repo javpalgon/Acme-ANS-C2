@@ -1,0 +1,28 @@
+# mensajes de listado de vuelos
+
+any.flight.form.title = Vuelo  
+any.flight.list.label.tag = Etiqueta  
+any.flight.list.label.cost = Coste  
+any.flight.list.label.description = Descripción  
+any.flight.list.label.requiresSelfTransfer = Requiere traslado por cuenta propia  
+any.flight.list.label.flightNumber = Número de vuelo  
+any.flight.list.label.departure = Salida  
+any.flight.list.label.arrival = Hora de llegada  
+any.flight.list.label.status = Estado  
+any.flight.list.label.departureAirport = Aeropuerto de salida  
+any.flight.list.label.arrivalAirport = Aeropuerto de llegada  
+any.flight.list.label.aircraft = Aeronave  
+
+# mensajes del formulario de vuelo
+
+any.flight.form.label.tag = Etiqueta  
+any.flight.form.label.cost = Coste  
+any.flight.form.label.description = Descripción  
+any.flight.form.label.requiresSelfTransfer = Requiere traslado por cuenta propia  
+any.flight.form.label.departure = Salida programada  
+any.flight.form.label.arrival = Llegada programada  
+any.flight.form.label.originCity = Ciudad de origen  
+any.flight.form.label.destinationCity = Ciudad de destino  
+any.flight.form.label.layovers = Número de escalas  
+any.flight.leg = Tramos del vuelo  
+any.flight.list.title = Todos los vuelos  
