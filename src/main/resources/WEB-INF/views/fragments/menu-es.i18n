@@ -34,6 +34,7 @@ master.menu.administrator.list-airlines = Ver Aerolineas
 master.menu.administrator.list-airports = Ver Aeropuertos
 master.menu.administrator.list-aircrafts = Ver Aviones
 master.menu.administrator.list-booking = Ver Reservas
+master.menu.administrator.dashboard = Tablero del Administrador
 
 # master.menu.provider ########################################################
 
