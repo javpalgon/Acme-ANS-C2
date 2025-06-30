@@ -26,18 +26,18 @@ public class Aircraft extends AbstractEntity {
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Automapped
 	private String				model;
 
 	@Mandatory
 	@NotBlank
-	@ValidString(max = 50)
+	@ValidString(min = 1, max = 50)
 	@Column(unique = true)
 	private String				regitrationNumber;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 900)
+	@ValidNumber(min = 1, max = 255)
 	@Automapped
 	private Integer				capacity;
 

@@ -9,7 +9,7 @@ acme.validation.NotNull.message = This entity may not be null.
 
 # Student 1 messages
 
-acme.validation.manager.wrong-initials.message = Manager identifier must start with his/her/their name initials
+acme.validation.manager.wrong-initials.message = Manager identifier must start with their name initials
 #acme.validation.leg.flight-number-pattern.message = Flight number must start by the airlines IATA code, followed by 4 digits
 acme.validation.leg.invalid-flight-number-manager.message = Flight number must start by the airlines IATA code
 acme.validation.leg.invalid-schedule.message = The scheduled departure must be before the scheduled arrival

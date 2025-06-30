@@ -32,7 +32,7 @@ public class Manager extends AbstractRole {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$", min = 8, max = 9, message = "Your identifier must start by the 2-3 initials of your name and surname/s, followed by 6 random digits")
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$", min = 8, max = 9, message = "{acme.validation.manager.identifier}")
 	@Column(unique = true)
 	private String				identifier;
 
