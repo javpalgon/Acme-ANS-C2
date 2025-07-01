@@ -1,2 +1,5 @@
 acme.validation.manager.identifier = Your identifier must start by the 2-3 initials of your name and surname/s, followed by 6 random digits
 acme.validation.leg.number = Flight number must start by the airlines IATA code, followed by 4 digits
+
+acme.validation.booking.locatorCode.pattern = El código localizador debe tener entre 6 y 8 caracteres, usando solo letras mayúsculas o números.  
+acme.validation.booking.lastNibble.pattern = Los últimos dígitos deben ser exactamente 4 números.  

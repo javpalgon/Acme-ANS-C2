@@ -19,8 +19,6 @@ acme.validation.booking.lastCardNibble.message= Los últimos 4 dígitos de la ta
 acme.validation.booking.passengers.message= La reserva debe tener al menos un pasajero cuando se publique.
 acme.validation.booking.travelClass.required= La clase de viaje es obligatoria.
 acme.validation.booking.flight.required= Debe seleccionar un vuelo válido.
-acme.validation.booking.locatorCode.pattern = El código de localizador debe tener entre 6 y 8 caracteres, utilizando solo letras mayúsculas o números.
-acme.validation.booking.lastNibble.pattern = Los últimos dígitos deben ser exactamente 4 números.
 
 # Passenger messages
 acme.validation.passenger.passport.pattern = El pasaporte debe contener entre 6 y 9 caracteres (letras mayúsculas o números).
