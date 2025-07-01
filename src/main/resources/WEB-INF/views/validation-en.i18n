@@ -3,3 +3,8 @@ acme.validation.leg.number = Flight number must start by the airlines IATA code,
 
 acme.validation.booking.locatorCode.pattern = The locator code must have between 6 and 8 characters, using only uppercase letters or digits.
 acme.validation.booking.lastNibble.pattern = The last digits must be exactly 4 digits.
+
+acme.validation.passenger.passport.pattern = The passport must contain between 6 and 9 characters (uppercase letters or digits).
+
+acme.validation.customer.identifier.pattern = The identifier must have between 8 and 9 characters and follow the format: 2–3 uppercase letters followed by 6 digits
+acme.validation.customer.phoneNumber.pattern = The phone number must have between 6 and 16 digits and may start with a plus sign

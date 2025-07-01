@@ -1,44 +1,39 @@
-# validation-es.i18n
+# validation-en.i18n
 
 # Mensajes generales
 
-acme.validation.NotNull.message = Esta entidad no puede ser nula.
+acme.validation.NotNull.message = This field cannot be empty.
 
 # Mensajes del Estudiante 1
 
-acme.validation.manager.wrong-initials.message = El identificador del gestor debe comenzar con las iniciales de su nombre  
-#acme.validation.leg.flight-number-pattern.message = El número de vuelo debe comenzar con el código IATA de la aerolínea, seguido de 4 dígitos  
-acme.validation.leg.invalid-flight-number-manager.message = El número de vuelo debe comenzar con el código IATA de la aerolínea  
-acme.validation.leg.invalid-schedule.message = La salida programada debe ser anterior a la llegada programada  
-acme.validation.leg.duplicate-flight-number.message = Este número de vuelo ya existe  
-acme.validation.leg.same-airports.message = El aeropuerto de salida y el de llegada deben ser diferentes  
-acme.validation.flight.invalid-cost.message = La moneda utilizada no es válida. Por favor, usa un código de moneda ISO 4217 reconocido (por ejemplo, EUR, USD)  
-acme.validation.manager.not-unique.message = El identificador del gestor no es único. Por favor, elige otra secuencia de números  
+acme.validation.manager.wrong-initials.message = The manager identifier must start with the correct initials
+#acme.validation.leg.flight-number-pattern.message = The flight number must start with the airline's IATA code, followed by 4 digits 
+acme.validation.leg.invalid-flight-number-manager.message = The flight number must start with the airline's IATA code, followed by 4 digits 
+acme.validation.leg.invalid-schedule.message = The arrival time must be later than the departure time
+acme.validation.leg.duplicate-flight-number.message =This flight number already exists
+acme.validation.leg.same-airports.message = The departure and arrival airports cannot be the same
+acme.validation.flight.invalid-cost.message = The currency used is not valid. Please use a recognized ISO 4217 currency code (e.g., EUR, USD)
+acme.validation.manager.not-unique.message = The manager identifier is not unique. Please choose another sequence of numbers
 
 # Estudiante X
 
-acme.validation.technician.wrong-initials.message = El ID del técnico debe comenzar con las iniciales correctas  
-acme.validation.technician.null-identity.message = Falta la información de identidad del técnico  
-acme.validation.Birthday.invalid-age.message = La persona es menor de edad  
-acme.validation.Experience.invalid-experience.message = No puede tener más años de experiencia que años de vida  
+acme.validation.technician.wrong-initials.message = The technician identifier must start with the correct initials
+acme.validation.technician.null-identity.message = Missing technician identity information
+acme.validation.Birthday.invalid-age.message = The person is underage
+acme.validation.Experience.invalid-experience.message = The person cannot have more years of experience than years of life
 
 # Mensajes de reservas
 
-acme.validation.booking.uniqueLocatorCode.message = El código localizador debe ser único.  
+acme.validation.booking.uniqueLocatorCode.message = The locator code must be unique.  
 acme.validation.booking.flight.notPublished = El vuelo seleccionado debe estar publicado.  
-acme.validation.booking.flight.notFuture = La fecha de salida del vuelo debe ser posterior o igual al momento de la compra.  
-acme.validation.booking.lastCardNibble.message = Se requieren los últimos 4 dígitos de la tarjeta cuando la reserva no está en modo borrador.  
-acme.validation.booking.passengers.message = La reserva debe tener al menos un pasajero cuando está publicada.  
-acme.validation.booking.travelClass.required = La clase de viaje es obligatoria.  
-acme.validation.booking.flight.required = Se debe seleccionar un vuelo válido.  
+acme.validation.booking.flight.notFuture = The flight departure date must be later than or equal to the booking purchase moment.
+acme.validation.booking.lastCardNibble.message = The last 4 digits of the card are required when the booking is not in draft mode.
+acme.validation.booking.passengers.message = The booking must have at least one passenger when published.
+acme.validation.booking.travelClass.required = The travel class is required.
+acme.validation.booking.flight.required = You must select a valid flight. 
 
-# Mensajes de pasajeros
-
-acme.validation.passenger.passport.pattern = El pasaporte debe contener entre 6 y 9 caracteres (letras mayúsculas o dígitos).  
 
 # Mensajes de clientes
 
-acme.validation.customer.identifier.pattern = El identificador debe tener entre 8 y 9 caracteres y seguir el formato: 2–3 letras mayúsculas seguidas de 6 dígitos  
-acme.validation.customer.phoneNumber.pattern = El número de teléfono debe tener entre 6 y 16 dígitos y puede comenzar con un signo más  
-acme.validation.customer.null-identity.message = Falta la información de identidad del cliente  
-acme.validation.customer.wrong-initials.message = El identificador del cliente debe comenzar con sus iniciales  
+acme.validation.customer.null-identity.message = Missing customer identity information
+acme.validation.customer.wrong-initials.message = The customer identifier must start with the correct initials 
