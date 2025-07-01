@@ -1,8 +1,6 @@
 
 package acme.features.customer.passenger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -12,16 +10,13 @@ import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
 import acme.entities.booking.BookingRecord;
 import acme.entities.passenger.Passenger;
-import acme.features.customer.booking.CustomerBookingListService;
 import acme.realms.Customer;
 
 @GuiService
 public class CustomerPassengerCreateService extends AbstractGuiService<Customer, Passenger> {
 
-	private static final Logger				logger	= LoggerFactory.getLogger(CustomerBookingListService.class);
-
 	@Autowired
-	protected CustomerPassengerRepository	repository;
+	protected CustomerPassengerRepository repository;
 
 
 	@Override
