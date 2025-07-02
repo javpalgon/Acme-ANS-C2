@@ -19,7 +19,7 @@ manager.flight.form.title = Vuelo
 manager.flight.list.title = Mis vuelos  
 manager.flight.leg = Tramos  
 
-manager.flight.form.error.notDraft = Ya has publicado este vuelo  
+manager.flight.form.error.notDraft = Ya ha publicado este vuelo  
 manager.flight.form.error.LegsNotPublished = No todos los tramos están publicados  
 manager.project.form.error.legsEmpty = El vuelo no tiene tramos  
 
@@ -29,7 +29,7 @@ manager.flight.list.label.description = Descripción
 manager.flight.list.label.requiresSelfTransfer = ¿Requiere traslado por cuenta propia?  
 manager.flight.list.label.isDraftMode = Modo borrador  
 manager.flight.legs = Tramos del vuelo  
-manager.flight.legs.published = Este vuelo tiene tramos sin publicar. Por favor, publícalos  
+manager.flight.legs.published = Este vuelo tiene tramos sin publicar. Por favor, publíquelos  
 manager.project.publish.error.noLegs = Este vuelo no tiene tramos, por lo tanto no puede publicarse  
-manager.flight.publish.error.notAllPublished = Este vuelo tiene tramos sin publicar. Por favor, publícalos todos primero  
-acme.validation.leg.published-legs-not-allowed.message = No puedes eliminar este vuelo, ya tiene tramos publicados  
+manager.flight.publish.error.notAllPublished = Este vuelo tiene tramos sin publicar. Por favor, publíquelos todos primero  
+acme.validation.leg.published-legs-not-allowed.message = No puede eliminar este vuelo, ya tiene tramos publicados  
