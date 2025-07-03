@@ -42,7 +42,20 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
 
+		if (super.getRequest().getMethod().equals("POST"))
+			status = status && this.validateAircraft();
+
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean validateAircraft() {
+		int aircraftId = super.getRequest().getData("airline", int.class);
+		if (aircraftId != 0) {
+			Airline aircraft = this.repository.findAirlineById(aircraftId);
+			if (aircraft == null)
+				return false;
+		}
+		return true;
 	}
 
 	@Override
