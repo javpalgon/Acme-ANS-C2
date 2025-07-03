@@ -23,7 +23,7 @@ public interface LegRepository extends AbstractRepository {
 	@Query("select l.departureAirport.city from Leg l where l.flight.id = :flightId order by l.departure")
 	Collection<String> findOriginCityByFlightId(@Param("flightId") Integer flightId);
 
-	@Query("select l.arrivalAirport.city from Leg l where l.flight.id = :flightId order by l.departure")
+	@Query("select l.arrivalAirport.city from Leg l where l.flight.id = :flightId order by l.departure desc")
 	Collection<String> findDestinationCityByFlightId(@Param("flightId") Integer flightId);
 
 	@Query("select l from Leg l where l.flight.id = :flightId order by l.departure")
