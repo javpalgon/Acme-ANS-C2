@@ -44,11 +44,3 @@ Additionally, you can check the planning and tasks assigned to the members:
 **Raquel Garcia (Student #2)**
 🔗 [Raquel Garcia's Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/10)
 
-**Guillermo Linares (Student #3)**
-🔗 [Guillermo Linares' Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/11)
-
-**Javier Pallarés (Student #4)**
-🔗 [Javier Pallarés' Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/12)
-
-**Darío Rodríguez (Student #5)**
-🔗 [Darío Rodríguez's Planning Dashboard](https://github.com/users/javpalgon/projects/1/views/13)
