@@ -25,7 +25,7 @@ acme.validation.Experience.invalid-experience.message = The person cannot have m
 # Mensajes de reservas
 
 acme.validation.booking.uniqueLocatorCode.message = The locator code must be unique.  
-acme.validation.booking.flight.notPublished = El vuelo seleccionado debe estar publicado.  
+acme.validation.booking.flight.notPublished = The selected flight must be published.  
 acme.validation.booking.flight.notFuture = The flight departure date must be later than or equal to the booking purchase moment.
 acme.validation.booking.lastCardNibble.message = The last 4 digits of the card are required when the booking is not in draft mode.
 acme.validation.booking.passengers.message = The booking must have at least one passenger when published.
