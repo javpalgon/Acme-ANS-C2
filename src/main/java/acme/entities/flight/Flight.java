@@ -29,8 +29,7 @@ import lombok.Setter;
 @Setter
 @ValidFlight
 @Table(name = "flight", indexes = {
-	@Index(name = "idx_flight_draft_manager", columnList = "isDraftMode, manager_id"), @Index(name = "idx_flight_draft", columnList = "isDraftMode"), // para findPublishedFlights
-	@Index(name = "idx_flight_manager", columnList = "manager_id") // para findFlightsByManagerId
+	@Index(name = "idx_flight_draft_manager", columnList = "isDraftMode, manager_id"), @Index(name = "idx_flight_draft", columnList = "isDraftMode") // para findFlightsByManagerId
 })
 public class Flight extends AbstractEntity {
 
