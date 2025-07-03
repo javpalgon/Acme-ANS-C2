@@ -36,7 +36,9 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 			}
 
 			if (super.getRequest().hasData("airline", String.class)) {
-				String iataCode = super.getRequest().getData("airline", String.class);
+				Integer id = super.getRequest().getData("airline", int.class);
+				Airline airline = this.repository.getAirlineById(id);
+				String iataCode = airline.getIATACode();
 				Set<String> validIATACodes = this.repository.findAllAirlines().stream().map(Airline::getIATACode).collect(Collectors.toSet());
 
 				if (!validIATACodes.contains(iataCode) && !iataCode.equals("0"))
